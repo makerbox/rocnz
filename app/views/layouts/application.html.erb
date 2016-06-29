@@ -38,9 +38,9 @@
         <li><a href=''>Polasports</a></li>
         <li><a href=''>Locello</a></li>
         <li><a href=''>Unity</a></li>
-        
+
       </ul>
-      
+
       <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
         <% if current_user.admin? %>
@@ -62,9 +62,9 @@
 </div>
 
 <div class="footer">
-terms | privacy 
+terms | privacy
 <% if !user_signed_in? %>
-| <%= link_to 'sign up', new_user_registration_path %> | <%= link_to 'log in', new_user_session_path %> 
+| <%= link_to 'sign up', new_user_registration_path %> | <%= link_to 'log in', new_user_session_path %>
 <% end %>
 | copyright &copy; <%= Time.now.year %> Roc Cloudy Pty Ltd
 </div>
