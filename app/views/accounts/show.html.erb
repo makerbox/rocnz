@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @account.user %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @account.company %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @account.address %>
+</p>
+
+<p>
+  <strong>Suburb:</strong>
+  <%= @account.suburb %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @account.state %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @account.country %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @account.phone %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @account.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @account.last_name %>
+</p>
+
+<p>
+  <strong>Seller level:</strong>
+  <%= @account.seller_level %>
+</p>
+
+<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Back', accounts_path %>
