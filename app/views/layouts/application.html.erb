@@ -49,7 +49,7 @@
         <% if current_user.approved? %>
        <li><%= link_to 'My Account', new_user_session_path %></li>
         <% else %>
-                <li>your account is pending approval</li>
+        <li style="color:red;"><a href="">your account is pending approval</a></li>
 
         <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
         <% end %>
