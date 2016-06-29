@@ -43,20 +43,25 @@
 
       <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
+        <li>You're logged in as <%= current_user.email %></li>
         <% if current_user.admin? %>
         <li><%= link_to 'Pending customers', accounts_path %></li>
         <% else %>
         <% if current_user.approved? %>
            <li><%= link_to 'My Account', new_user_session_path %></li>
         <% else %>
+        <% if !current_user.account %>
+        <li><%= link_to 'create account for approval', new_account_path(current_user) %></li>
+        <% else %>
           <li><a href="" style="color:red;">your account is pending approval</a></li>
+<% end %>
         <% end %>
-        
+
         <% end %>
                 <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
 
-        
-        
+
+
         <% else %>
         <li><%= link_to 'Log in', new_user_session_path %></li>
         <li><%= link_to 'Sign up', new_user_registration_path %></li>

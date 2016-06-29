@@ -1,12 +1,17 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
-  
-  # GET /accounts
-  # GET /accounts.json
-  def index
+  before_action :securitycheck, only: [:index, :destroy]
+
+#   check if user is admin - if not send them back home --- set which actions up top in the before_action
+  def securitycheck
     if !current_user.admin?
       redirect_to home_index_path
     end
+  end
+
+  # GET /accounts
+  # GET /accounts.json
+  def index
     @accounts = Account.all
   end
 
@@ -28,7 +33,7 @@ class AccountsController < ApplicationController
   # POST /accounts.json
   def create
     @account = Account.new(account_params)
-
+    @account.user = current_user
     respond_to do |format|
       if @account.save
         format.html { redirect_to @account, notice: 'Account was successfully created.' }
