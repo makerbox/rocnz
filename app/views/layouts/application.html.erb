@@ -44,7 +44,7 @@
       <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
         <li>You're logged in as <%= current_user.email %></li>
-        <% if current_user.email == "mattwerth@mattwerth.com" %>
+        <% if current_user.has_role? :admin %>
         <li><%= link_to 'Pending customers', accounts_path %></li>
         <% else %>
         <% if current_user.approved? %>

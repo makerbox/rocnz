@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
 
 #   check if user is admin - if not send them back home --- set which actions up top in the before_action
   def securitycheck
-    if !current_user.admin?
+    if !current_user.has_role? :admin
       redirect_to home_index_path
     end
   end
