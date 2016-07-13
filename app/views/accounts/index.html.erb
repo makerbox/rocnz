@@ -31,7 +31,11 @@
         <td><%= account.phone %></td>
         <td><%= account.first_name %></td>
         <td><%= account.last_name %></td>
-        <td><%= account.seller_level %></td>
+        <% if account.seller_level? %>
+         <td><%= account.seller_level %></td>
+         <% else %>
+         <td>pending</td>
+         <% end %>
         <td><%= link_to 'Show', account %></td>
         <td><%= link_to 'Edit', edit_account_path(account) %></td>
         <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
