@@ -22,7 +22,7 @@
   <tbody>
     <% @accounts.each do |account| %>
       <tr>
-        <td><%= account.user %></td>
+        <td><%= account.user.email %></td>
         <td><%= account.company %></td>
         <td><%= account.address %></td>
         <td><%= account.suburb %></td>

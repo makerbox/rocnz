@@ -10,7 +10,9 @@
     <%= f.input :phone %>
     <%= f.input :first_name %>
     <%= f.input :last_name %>
-    
+    <% if current_user.has_role? :admin %>
+    <%= f.input :seller_level %>
+    <% end %>
   </div>
 
   <div class="form-actions">
