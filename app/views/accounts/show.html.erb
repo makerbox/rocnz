@@ -1,11 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User:</strong>
-  <%= @account.user %>
-</p>
-
-<p>
   <strong>Company:</strong>
   <%= @account.company %>
 </p>
@@ -47,7 +42,11 @@
 
 <p>
   <strong>Seller level:</strong>
-  <%= @account.seller_level %>
+  <% if @account.seller_level  && @account.seller_level != '' %>
+    <%= @account.seller_level %>
+  <% else %>
+    Pending approval
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_account_path(@account) %> |

@@ -36,6 +36,16 @@ class AccountsController < ApplicationController
     @account.user = current_user
     respond_to do |format|
       if @account.save
+        
+        @admin_user_emails = ''
+        User.all.each do |u|
+          if u.has_role? :admin
+            @admin_user_emails << u.email + ','
+          end
+        end 
+ EmailJob.perform_async(@admin_user_emails)
+ UserEmailJob.perform_async(@account.user.email)
+
         format.html { redirect_to @account, notice: 'Account was successfully created.' }
         format.json { render :show, status: :created, location: @account }
       else

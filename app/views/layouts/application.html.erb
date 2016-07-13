@@ -44,7 +44,7 @@
       <ul class="nav navbar-nav navbar-right">
       <% if user_signed_in? %>
         <li>You're logged in as <%= current_user.email %></li>
-        <% if current_user.admin? %>
+        <% if current_user.email == "mattwerth@mattwerth.com" %>
         <li><%= link_to 'Pending customers', accounts_path %></li>
         <% else %>
         <% if current_user.approved? %>
@@ -76,7 +76,7 @@
 </div>
 
 <div class="footer">
-terms | privacy
+<%= link_to 'terms', terms_index_path %> | <%= link_to 'privacy', privacy_index_path %>
 <% if !user_signed_in? %>
 | <%= link_to 'sign up', new_user_registration_path %> | <%= link_to 'log in', new_user_session_path %>
 <% end %>
