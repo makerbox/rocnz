@@ -40,14 +40,20 @@
   <%= @account.last_name %>
 </p>
 
+<% if !current_user.account.approved? %>
+<p>
+Your account is pending approval.
+</p>
+<% end %>
+<% if current_user.has_role? :admin %>
 <p>
   <strong>Seller level:</strong>
   <% if @account.seller_level  && @account.seller_level != '' %>
     <%= @account.seller_level %>
   <% else %>
-    Pending approval
+    <%= link_to 'Please moderate', edit_account_path(@account), class: 'btn btn-warning' %>
   <% end %>
 </p>
+<% end %>
 
-<%= link_to 'Edit', edit_account_path(@account) %> |
-<%= link_to 'Back', accounts_path %>
+<%= link_to 'Edit account details', edit_account_path(@account), class: 'btn btn-default' %>

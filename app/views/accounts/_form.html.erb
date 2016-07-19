@@ -11,7 +11,13 @@
     <%= f.input :first_name %>
     <%= f.input :last_name %>
     <% if current_user.has_role? :admin %>
+    <% if !@account.seller_level || @account.seller_level == '' %>
+    <div class="highlight-field">
     <%= f.input :seller_level %>
+    </div>
+    <% else %>
+    <%= f.input :seller_level %>
+    <% end %>
     <% end %>
   </div>
 

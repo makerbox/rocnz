@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: [:show, :edit, :update, :destroy]
-  before_action :securitycheck, only: [:index, :destroy]
+  before_action :set_account, only: [:show, :edit, :update, :destroy, :approve, :unapprove]
+  before_action :securitycheck, only: [:index, :approve, :unapprove, :destroy]
 
 #   check if user is admin - if not send them back home --- set which actions up top in the before_action
   def securitycheck
@@ -9,10 +9,24 @@ class AccountsController < ApplicationController
     end
   end
 
+def approve
+  #send email to user
+  @account.update_attributes(:approved => 'approved')
+  redirect_to accounts_path, notice: 'Account approved'
+end
+def unapprove
+  #send email to user
+  @account.update_attributes(:approved => 'unapproved')
+  redirect_to accounts_path, notice: 'Account unapproved'
+end
+
   # GET /accounts
   # GET /accounts.json
   def index
     @accounts = Account.all
+    if params[:order]
+      @accounts = @accounts.order(params[:order] + ' asc')
+    end
   end
 
   # GET /accounts/1
@@ -60,7 +74,7 @@ class AccountsController < ApplicationController
   def update
     respond_to do |format|
       if @account.update(account_params)
-        format.html { redirect_to @account, notice: 'Account was successfully updated.' }
+        format.html { redirect_to accounts_path, notice: 'Account was successfully updated.' }
         format.json { render :show, status: :ok, location: @account }
       else
         format.html { render :edit }

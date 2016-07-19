@@ -3,7 +3,13 @@ Rails.application.routes.draw do
 
   get 'terms/index'
 
-  resources :accounts
+  resources :accounts do
+    member do
+      get 'approve'
+      get 'unapprove'
+    end
+  end
+  
   devise_for :users, controllers: { registrations: "registrations" }
   
   get 'home/index'

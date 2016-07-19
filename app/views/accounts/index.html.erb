@@ -2,44 +2,53 @@
 
 <h1>Listing Accounts</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>User</th>
-      <th>Company</th>
-      <th>Address</th>
-      <th>Suburb</th>
-      <th>State</th>
-      <th>Country</th>
-      <th>Phone</th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Seller level</th>
-      <th colspan="3"></th>
+      <th>Email</th>
+      <th><%= link_to 'Company', accounts_path(order: 'company') %></th>
+      <th><%= link_to 'Address', accounts_path(order: 'address') %></th>
+      <th><%= link_to 'Suburb', accounts_path(order: 'Suburb') %></th>
+      <th><%= link_to 'State', accounts_path(order: 'State') %></th>
+      <th><%= link_to 'Country', accounts_path(order: 'Country') %></th>
+      <th><%= link_to 'Phone', accounts_path(order: 'Phone') %></th>
+      <th><%= link_to 'First name', accounts_path(order: 'first_name') %></th>
+      <th><%= link_to 'Last name', accounts_path(order: 'last_name') %></th>
+      <th><%= link_to 'Seller level', accounts_path(order: 'seller_level') %></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @accounts.each do |account| %>
-      <tr>
-        <td><%= account.user.email %></td>
-        <td><%= account.company %></td>
-        <td><%= account.address %></td>
-        <td><%= account.suburb %></td>
-        <td><%= account.state %></td>
-        <td><%= account.country %></td>
-        <td><%= account.phone %></td>
-        <td><%= account.first_name %></td>
-        <td><%= account.last_name %></td>
-        <% if account.seller_level? %>
-         <td><%= account.seller_level %></td>
-         <% else %>
-         <td>pending</td>
-         <% end %>
-        <td><%= link_to 'Show', account %></td>
-        <td><%= link_to 'Edit', edit_account_path(account) %></td>
-        <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% if account.approved != 'approved' %>
+    <tr style="background:yellow;">
+    <% else %>
+    <tr>
+    <% end %>
+      <td><%= account.user.email %></td>
+      <td><%= account.company %></td>
+      <td><%= account.address %></td>
+      <td><%= account.suburb %></td>
+      <td><%= account.state %></td>
+      <td><%= account.country %></td>
+      <td><%= account.phone %></td>
+      <td><%= account.first_name %></td>
+      <td><%= account.last_name %></td>
+      <% if account.approved == 'approved' %>
+      <% if !account.seller_level? %>
+      <td>
+      <%= link_to edit_account_path(account), class: 'btn btn-warning', title: 'seller level required' do %><i class="fa fa-exclamation-triangle"></i><% end %>
+      <%= link_to unapprove_account_path(account), class: 'btn btn-primary' do %><i class="fa fa-thumbs-o-down"></i> Unapprove<% end %>
+      </td>
+      <% else %>
+      <td><%= link_to edit_account_path(account), class: 'btn btn-success' do %><i class="fa fa-sort"></i> <%= account.seller_level %><% end %> <%= link_to unapprove_account_path(account), class: 'btn btn-primary' do %><i class="fa fa-thumbs-o-down"></i> Unapprove<% end %></td>
+      <% end %>
+      <% else %>
+      <td><%= link_to approve_account_path(account), class: 'btn btn-info' do %><i class="fa fa-thumbs-o-up"></i> Approve<% end %></td>
+      <% end %>
+      <td><%= link_to account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do %><i class="fa fa-close"></i> Delete<% end %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>
