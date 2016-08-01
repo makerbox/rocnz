@@ -12,7 +12,7 @@ gem 'rails', '4.2.1'
 gem 'sqlite3', group: :development
 # gem 'activerecord-sqlserver-adapter'
 # gem 'tiny_tds'
-gem 'mysql2', '< 3.0'
+gem 'mysql2', '~> 0.3.18'
 gem 'pg', group: :production
 gem 'rails_12factor', group: :production
 # Use SCSS for stylesheets
