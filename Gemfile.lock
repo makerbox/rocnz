@@ -198,7 +198,7 @@ DEPENDENCIES
   font-awesome-sass
   jbuilder (~> 2.0)
   jquery-rails
-  mysql2
+  mysql2 (< 3.0)
   pg
   rails (= 4.2.1)
   rails_12factor
