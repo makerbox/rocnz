@@ -10,8 +10,8 @@ gem 'font-awesome-sass'
 gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: :development
-gem 'activerecord-sqlserver-adapter'
-gem 'tiny_tds'
+# gem 'activerecord-sqlserver-adapter'
+# gem 'tiny_tds'
 gem 'mysql2'
 gem 'pg', group: :production
 gem 'rails_12factor', group: :production
