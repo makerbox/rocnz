@@ -26,7 +26,11 @@ production:
 
 rocmysql:
   adapter: mysql2
+  encoding: utf8
   host: 218.214.73.21
+  pool: 5
+  port: 3306
   database: cloudy
   username: cloudy
   password: cloudy_16
+  socket: /var/run/mysqld/mysqld.sock
