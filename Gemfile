@@ -12,7 +12,10 @@ gem 'rails', '4.2.1'
 gem 'sqlite3', group: :development
 # gem 'activerecord-sqlserver-adapter'
 # gem 'tiny_tds'
-gem 'mysql2', '~> 0.3.18'
+# Use mysql as the database for Active Record
+gem 'mysql2', '>= 0.3.18', '< 0.5'
+# Use Puma as the app server
+gem 'puma', '~> 3.0'
 gem 'pg', group: :production
 gem 'rails_12factor', group: :production
 # Use SCSS for stylesheets
