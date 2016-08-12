@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-
+gem 'cloudinary'
+gem 'rails-erd'
 gem 'sucker_punch', '~> 2.0'
 gem 'devise'
 gem 'simple_form'
