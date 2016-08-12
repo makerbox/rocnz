@@ -5,12 +5,12 @@
 #   gem 'sqlite3'
 #
 default: &default
-  # adapter: sqlite3
-  adapter: odbc
-  dsn: testroc
-  username: cassy
-  password: roc
-  conn_str: DRIVER={DriverName};
+  adapter: sqlite3
+  # adapter: odbc
+  # dsn: testroc
+  # username: cassy
+  # password: roc
+  # conn_str: DRIVER={DriverName};
   pool: 5
   timeout: 5000
 

@@ -1,27 +1,37 @@
 source 'https://rubygems.org'
+#image hosting
 gem 'cloudinary'
-gem 'rails-erd'
+
+#run jobs in the background such as emailing
 gem 'sucker_punch', '~> 2.0'
+
+#authentication
 gem 'devise'
+
+#simpler forms
 gem 'simple_form'
+
+#user roles
 gem 'cancancan'
 gem 'rolify'
+
+#font awesome glyphs
 gem 'font-awesome-sass'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
+
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: :development
-# gem 'activerecord-sqlserver-adapter'
-# gem 'tiny_tds'
-# Use mysql as the database for Active Record
-# gem 'mysql2', '>= 0.3.18', '< 0.5'
+
+#windows bug fix
 gem 'tzinfo-data'
-# gem 'dbi'
-# gem 'dbd-odbc'
-gem 'ruby-odbc'
+
+
+gem 'ruby-odbc' 
 gem 'odbc-rails'
-# Use Puma as the app server
-# gem 'puma', '~> 3.0'
+gem 'rdbi-driver-odbc'
+
 gem 'pg', group: :production
 gem 'rails_12factor', group: :production
 # Use SCSS for stylesheets
