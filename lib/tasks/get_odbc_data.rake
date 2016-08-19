@@ -4,7 +4,7 @@ task get_odbc_data: :environment do
 
 
 	puts "connecting database..."
-	dbh = RDBI.connect :ODBC, :db => "roccloudy", :user => "cassy", :password => "roc", :host => "localhost:3000"
+	dbh = RDBI.connect :ODBC, :db => "roccloudy", :user => "cassy", :password => "roc", :host => "localhost"
 	puts "connected."
 
 		sth = dbh.execute("SELECT * FROM PRODUCT_MASTER")
