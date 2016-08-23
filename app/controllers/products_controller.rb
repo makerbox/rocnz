@@ -5,6 +5,9 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all
+    if params[:order]
+      @products = @products.order(params[:order] + ' asc')
+    end
   end
 
   # GET /products/1
