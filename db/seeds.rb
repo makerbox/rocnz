@@ -8,6 +8,7 @@
 require 'rdbi-driver-odbc'
 
 dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+	
 #-----------THIS WORKS, BUT ONLY FOR LOCAL HOST - EITHER: need to configure to connect to remote computer, OR need to install on database host to populate sql database using below then remotely access sql database the easy way and then bind server to heroku ip address
 products = dbh.execute("SELECT * FROM product_master")
 prodmastext = dbh.execute("select WebRecNo from prodmastext")
