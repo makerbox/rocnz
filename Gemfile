@@ -28,9 +28,9 @@ gem 'sqlite3', group: :development
 gem 'tzinfo-data'
 
 
-gem 'ruby-odbc' 
-gem 'odbc-rails'
-gem 'rdbi-driver-odbc'
+gem 'ruby-odbc', group: :development
+gem 'odbc-rails', group: :development
+gem 'rdbi-driver-odbc', group: :development
 
 gem 'pg', group: :production
 gem 'rails_12factor', group: :production
