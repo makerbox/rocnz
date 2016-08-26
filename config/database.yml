@@ -6,11 +6,8 @@
 #
 default: &default
   adapter: sqlite3
-  # adapter: odbc
-  # dsn: testroc
-  # username: cassy
-  # password: roc
-  # conn_str: DRIVER={DriverName};
+  host: http://14.202.149.199
+  port: 3000
   pool: 5
   timeout: 5000
 
