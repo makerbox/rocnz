@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Company:</strong>
-  <%= @account.company %>
+  <strong>name:</strong>
+  <%= @account.name %>
 </p>
 
 <p>
-  <strong>Address:</strong>
-  <%= @account.address %>
+  <strong>street:</strong>
+  <%= @account.street %>
 </p>
 
 <p>
@@ -32,12 +32,12 @@
 
 <p>
   <strong>First name:</strong>
-  <%= @account.first_name %>
+  <%= @account.contact %>
 </p>
 
 <p>
   <strong>Last name:</strong>
-  <%= @account.last_name %>
+  <%= @account.contact %>
 </p>
 
 <% if !current_user.account.approved? %>

@@ -6,14 +6,14 @@
   <thead>
     <tr>
       <th>Email</th>
-      <th><%= link_to 'Company', accounts_path(order: 'company') %></th>
-      <th><%= link_to 'Address', accounts_path(order: 'address') %></th>
+      <th><%= link_to 'name', accounts_path(order: 'name') %></th>
+      <th><%= link_to 'street', accounts_path(order: 'street') %></th>
       <th><%= link_to 'Suburb', accounts_path(order: 'Suburb') %></th>
       <th><%= link_to 'State', accounts_path(order: 'State') %></th>
       <th><%= link_to 'Country', accounts_path(order: 'Country') %></th>
       <th><%= link_to 'Phone', accounts_path(order: 'Phone') %></th>
-      <th><%= link_to 'First name', accounts_path(order: 'first_name') %></th>
-      <th><%= link_to 'Last name', accounts_path(order: 'last_name') %></th>
+      <th><%= link_to 'First name', accounts_path(order: 'contact') %></th>
+      <th><%= link_to 'Last name', accounts_path(order: 'contact') %></th>
       <th><%= link_to 'Seller level', accounts_path(order: 'seller_level') %></th>
       <th colspan="1"></th>
     </tr>
@@ -27,14 +27,14 @@
     <tr>
     <% end %>
       <td><%= account.user.email %></td>
-      <td><%= account.company %></td>
-      <td><%= account.address %></td>
+      <td><%= account.name %></td>
+      <td><%= account.street %></td>
       <td><%= account.suburb %></td>
       <td><%= account.state %></td>
       <td><%= account.country %></td>
       <td><%= account.phone %></td>
-      <td><%= account.first_name %></td>
-      <td><%= account.last_name %></td>
+      <td><%= account.contact %></td>
+      <td><%= account.contact %></td>
       <% if account.approved == 'approved' %>
       <% if !account.seller_level? %>
       <td>
