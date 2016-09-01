@@ -45,8 +45,9 @@ customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
 customers.each do |cust|
 	@account = Account.find_by(code: cust.Code)
 	if @account
-		if !@account.user #if the account doesn't have a user, we need to create one for them combining their company name's first 5 letters and @roccloudy.com
-			user_email = cust.Name.first(5).to_s + "@roccloudy.com"
+		if !@account.user #if the account doesn't have a user, we need to create one for them combining their company code (without spaces) and @roccloudy.com
+			user_email = cust.Code
+			user_email = user_email.to_s.strip + "@roccloudy.com"
 			User.create(email: user_email, password: "roccloudyportal", password_confirmation: "roccloudyportal")
 		@account.user = User.find_by(email: user_email)
 	end
