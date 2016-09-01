@@ -41,18 +41,17 @@ puts "-------------"
 puts "accounts:"
 puts Account.count
 
-# customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-# customers.each do |cust|
-# 	puts cust.Name
-# 	puts cust.Street
-# 	puts cust.Suburb
-# 	puts cust.Postcode
-# 	puts cust.Phone
-# 	puts cust.Contact
-# 	puts cust.Code
-# 	puts cust.PriceCat
-# 	puts cust.CurrentBal
-# end
+customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+customers.each do |cust|
+	if Account.find_by(code: cust.Code)
+	Account.find_by(code: cust.Code).update(name: cust.Name, street: cust.Street, suburb: cust.Suburb, postcode: cust.Postcode, phone: cust.Phone, contact: cust.Contact, seller_level: cust.PriceCat)
+	end
+	if cust.CurrentBal > 0
+		puts cust.CurrentBal
+	end
+end
+puts Account.all.approved
+puts Account.all.phone
 
 
 #customer_transactions file
