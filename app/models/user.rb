@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   after_create :assign_default_role
 
   def assign_default_role
-  	if self.email == 'mattwerth@mattwerth.com'
+  	if self.email == 'web@roccloudy.com'
   		self.add_role :admin
   	else
   		self.add_role :customer
