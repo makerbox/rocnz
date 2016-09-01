@@ -8,44 +8,42 @@
 require 'rdbi-driver-odbc'
 
 dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-
+	
 
 products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
 products.each do |p|
 	if p.Inactive == 0
 		if Product.find_by(code: p.Code)
-			Product.find_by(code: p.Code).update(code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+	Product.find_by(code: p.Code).update(code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
 		else
-			Product.create(code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+	Product.create(code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
 #upload image to cloudinary and store url in product.imageurl (images are stored in z:/attache/roc/images/product/*sku*.jpg)
 end
 end
 end
-customercount = 0
-activecustcodes = dbh.execute("SELECT * FROM customer_mastext WHERE InactiveCust=0").fetch(:all, :Struct)
-activecustcodes.each do |activecustomer|
-	# customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-	# customertotal = customers.length
-	# customers.find_by(code: activecustomer.Code) do |customer|
-	# 	# puts customer.Name
-	# 	# puts customer.Street
-	# 	# puts customer.Suburb
-	# 	# puts customer.Postcode
-	# 	# puts customer.Phone
-	# 	# puts customer.Fax
-	# 	# puts customer.Contact
-	# 	# puts customer.BusinessNum
-	# 	# puts customer.Code
-	# 	# puts customer.PriceCat
-	# 	# puts customer.CurrentBal
-		customercount = customercount + 1
-	# end
-end
-puts customercount
-# puts customertotal
 
+activecustomers = dbh.execute("SELECT * FROM customer_mastext WHERE InactiveCust=0").fetch(:all, :Struct)
+puts activecustcodes.length
 
+customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+# customers.each do |cust|
+# 	puts cust.Name
+# 	puts cust.Street
+# 	puts cust.Suburb
+# 	puts cust.Postcode
+# 	puts cust.Phone
+# 	puts cust.Fax
+# 	puts cust.Contact
+# 	puts cust.BusinessNum
+# 	puts cust.Code
+# 	puts cust.PriceCat
+# 	puts cust.CurrentBal
+# end
+puts customers.length
 
+activecustomers.finish
+customers.finish
+products.finish
 
 
 #customer_transactions file
