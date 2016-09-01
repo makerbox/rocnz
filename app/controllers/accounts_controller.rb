@@ -51,6 +51,7 @@ end
     respond_to do |format|
       if @account.save
         
+        # code for sending email notifications
  #        @admin_user_emails = ''
  #        User.all.each do |u|
  #          if u.has_role? :admin
