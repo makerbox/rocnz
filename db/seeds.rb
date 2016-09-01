@@ -44,6 +44,7 @@ puts custext.InactiveCust
 end
 
 #customer_transactions file
+#how to get which brands a customer can see?
 
 # CUSTOMER ORDER AS SEPARATE SCAFFOLD - EACH ORDER TRANSLATED INTO KFI FILE? CAN WE INTERACT WITH THE DATABASE DIRECTLY WITHOUT KFI?
 

@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 gem 'cloudinary'
 gem 'carrierwave'
 
+#server to handle 1024 users
+gem 'thin'
+
 #run jobs in the background such as emailing
 gem 'sucker_punch', '~> 2.0'
 
