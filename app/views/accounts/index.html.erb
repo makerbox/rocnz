@@ -5,7 +5,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <!-- <th>Email</th> -->
+      <th>Email</th>
       <th><%= link_to 'name', accounts_path(order: 'name') %></th>
       <th><%= link_to 'street', accounts_path(order: 'street') %></th>
       <th><%= link_to 'Suburb', accounts_path(order: 'Suburb') %></th>
@@ -26,7 +26,7 @@
     <% else %>
     <tr>
     <% end %>
-      <!-- <td><%= account.user.email %></td> -->
+      <td><%= account.user.email %></td>
       <td><%= account.name %></td>
       <td><%= account.street %></td>
       <td><%= account.suburb %></td>
