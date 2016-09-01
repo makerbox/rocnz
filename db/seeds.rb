@@ -23,7 +23,7 @@ end
 end
 
 activecustomers = dbh.execute("SELECT * FROM customer_mastext WHERE InactiveCust=0").fetch(:all, :Struct)
-puts activecustcodes.length
+puts activecustomers.length
 
 customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
 # customers.each do |cust|
@@ -40,10 +40,6 @@ customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
 # 	puts cust.CurrentBal
 # end
 puts customers.length
-
-activecustomers.finish
-customers.finish
-products.finish
 
 
 #customer_transactions file
