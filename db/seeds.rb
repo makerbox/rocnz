@@ -21,25 +21,34 @@ products.each do |p|
 end
 end
 end
+print "active products:"
+puts Product.count
+print "total products:"
+puts products.length
 
 activecustomers = dbh.execute("SELECT * FROM customer_mastext WHERE InactiveCust=0").fetch(:all, :Struct)
+activecustomers.each do |activecustomer|
+	if !Account.find_by(code: activecustomer.Code)
+		Account.create(code: activecustomer.Code)
+	end
+end
+print "active customers:"
 puts activecustomers.length
+print "accounts:"
+puts Account.count
 
-customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+# customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
 # customers.each do |cust|
 # 	puts cust.Name
 # 	puts cust.Street
 # 	puts cust.Suburb
 # 	puts cust.Postcode
 # 	puts cust.Phone
-# 	puts cust.Fax
 # 	puts cust.Contact
-# 	puts cust.BusinessNum
 # 	puts cust.Code
 # 	puts cust.PriceCat
 # 	puts cust.CurrentBal
 # end
-puts customers.length
 
 
 #customer_transactions file
