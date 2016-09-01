@@ -47,7 +47,7 @@ customers.each do |cust|
 	Account.find_by(code: cust.Code).update(name: cust.Name, street: cust.Street, suburb: cust.Suburb, postcode: cust.Postcode, phone: cust.Phone, contact: cust.Contact, seller_level: cust.PriceCat)
 	end
 	puts "brands: "
-	prints cust.Sort
+	print cust.Sort
 end
 
 
