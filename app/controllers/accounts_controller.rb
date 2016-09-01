@@ -101,6 +101,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:user_id, :company, :address, :suburb, :state, :country, :phone, :first_name, :last_name, :seller_level)
+      params.require(:account).permit(:user_id, :name, :street, :suburb, :postcode, :state, :country, :phone, :contact, :seller_level)
     end
 end
