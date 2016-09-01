@@ -25,7 +25,21 @@ end
 customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
 
 customers.each do |cust|
-puts cust.Name
+	puts '*****************'
+puts 'customer category'
+puts cust.Cat
+puts '-----------------'
+cust.Name
+cust.Street
+cust.Suburb
+cust.Postcode
+cust.Phone
+cust.Fax
+cust.Contact
+cust.BusinessNum
+cust.Code
+cust.PriceCat
+cust.CurrentBal
 end
 
 # CUSTOMER ORDER AS SEPARATE SCAFFOLD - EACH ORDER TRANSLATED INTO KFI FILE? CAN WE INTERACT WITH THE DATABASE DIRECTLY WITHOUT KFI?
