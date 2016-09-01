@@ -23,7 +23,7 @@ end
 end
 
 customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-customers.limit(10).each do |cust|
+customers.last(10).each do |cust|
 	puts cust.Name
 	puts cust.Street
 	puts cust.Suburb
@@ -38,7 +38,7 @@ customers.limit(10).each do |cust|
 end
 
 customerexts = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
-customerexts.limit(10).each do |custext|
+customerexts.last(10).each do |custext|
 	print "inactive? = "
 puts custext.InactiveCust
 end
