@@ -22,7 +22,7 @@ end
 end
 end
 
-customers = dbh.execute("SELECT * FROM customer").fetch(:all, :Struct)
+customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
 puts '--COLUMN NAMES--'
 customers.first do |cust|
 cust.column_names.each do |col|
