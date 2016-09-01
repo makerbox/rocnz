@@ -23,24 +23,27 @@ end
 end
 
 customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-
-customers.each do |cust|
-	puts '*****************'
-puts 'customer category'
-puts cust.Cat
-puts '-----------------'
-cust.Name
-cust.Street
-cust.Suburb
-cust.Postcode
-cust.Phone
-cust.Fax
-cust.Contact
-cust.BusinessNum
-cust.Code
-cust.PriceCat
-cust.CurrentBal
+customers.last(10) do |cust|
+	puts cust.Name
+	puts cust.Street
+	puts cust.Suburb
+	puts cust.Postcode
+	puts cust.Phone
+	puts cust.Fax
+	puts cust.Contact
+	puts cust.BusinessNum
+	puts cust.Code
+	puts cust.PriceCat
+	puts cust.CurrentBal
 end
+
+customerexts = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
+customerexts.each do |custext|
+	print "inactive? = "
+puts custext.InactiveCust
+end
+
+#customer_transactions file
 
 # CUSTOMER ORDER AS SEPARATE SCAFFOLD - EACH ORDER TRANSLATED INTO KFI FILE? CAN WE INTERACT WITH THE DATABASE DIRECTLY WITHOUT KFI?
 
