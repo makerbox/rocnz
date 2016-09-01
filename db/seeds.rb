@@ -22,6 +22,15 @@ end
 end
 end
 
+customers = dbh.execute("SELECT * FROM customer").fetch(:all, :Struct)
+puts '--COLUMN NAMES--'
+customers.first do |cust|
+cust.column_names.each do |col|
+	puts col
+	puts '---------'
+end
+end
+
 # get the fields that you need - check brief
 # populate database from the required fields
 # populate existing users
