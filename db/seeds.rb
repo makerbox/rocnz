@@ -50,7 +50,7 @@ customers.each do |cust|
 			User.create(email: user_email, password: "roccloudyportal", password_confirmation: "roccloudyportal")
 		@account.user = User.find_by(email: user_email)
 	end
-	@account(code: cust.Code).update(approved: 'approved', name: cust.Name, street: cust.Street, suburb: cust.Suburb, postcode: cust.Postcode, phone: cust.Phone, contact: cust.Contact, seller_level: cust.PriceCat)
+	@account.update(approved: 'approved', name: cust.Name, street: cust.Street, suburb: cust.Suburb, postcode: cust.Postcode, phone: cust.Phone, contact: cust.Contact, seller_level: cust.PriceCat)
 	end
 end
 
