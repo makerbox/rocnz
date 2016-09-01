@@ -43,8 +43,12 @@ puts Account.count
 
 customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
 customers.each do |cust|
-	if Account.find_by(code: cust.Code)
-	Account.find_by(code: cust.Code).update(name: cust.Name, street: cust.Street, suburb: cust.Suburb, postcode: cust.Postcode, phone: cust.Phone, contact: cust.Contact, seller_level: cust.PriceCat)
+	account = Account.find_by(code: cust.Code)
+	if account
+		if !account.user
+			account.user = User.create(email: cust.Name(5).to_s + "@roccloudy.com", password: "roccloudyportal")
+		end
+	account(code: cust.Code).update(approved: 'approved', name: cust.Name, street: cust.Street, suburb: cust.Suburb, postcode: cust.Postcode, phone: cust.Phone, contact: cust.Contact, seller_level: cust.PriceCat)
 	end
 	puts "brands: "
 	print cust.Sort
