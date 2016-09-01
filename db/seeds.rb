@@ -22,11 +22,11 @@ end
 end
 end
 customercount = 0
-activecustcodes = dbh.execute("SELECT * FROM customer_mastext WHERE InactiveCust='0'").fetch(:all, :Struct)
+activecustcodes = dbh.execute("SELECT * FROM customer_mastext WHERE InactiveCust=0").fetch(:all, :Struct)
 activecustcodes.each do |activecustomer|
-	# customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-	# customertotal = customers.all.count
-	# customers.find_by(code: activecustomer.Code) do |customer|
+	customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+	customertotal = customers.all.count
+	customers.find_by(code: activecustomer.Code) do |customer|
 		# puts customer.Name
 		# puts customer.Street
 		# puts customer.Suburb
@@ -39,10 +39,10 @@ activecustcodes.each do |activecustomer|
 		# puts customer.PriceCat
 		# puts customer.CurrentBal
 		customercount = customercount + 1
-	# end
+	end
 end
 puts customercount
-# puts customertotal
+puts customertotal
 
 
 
