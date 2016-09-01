@@ -21,37 +21,25 @@ products.each do |p|
 end
 end
 end
-puts "-------------"
-puts "active products:"
-puts Product.count
-puts "-------------"
-puts "total products:"
-puts products.length
 
 activecustomers = dbh.execute("SELECT * FROM customer_mastext WHERE InactiveCust=0").fetch(:all, :Struct)
 activecustomers.each do |activecustomer|
 	if !Account.find_by(code: activecustomer.Code)
-		Account.create(code: activecustomer.Code)
+		newuser =  User.create(email: "newuser@roccloudy.com", password: "roccloudyportal", password_confirmation: "roccloudyportal")
+		Account.create(code: activecustomer.Code, user: newuser)
 	end
 end
-puts "-------------"
-puts "active customers:"
-puts activecustomers.length
-puts "-------------"
-puts "accounts:"
-puts Account.count
 
 customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
 customers.each do |cust|
 	@account = Account.find_by(code: cust.Code)
 	if @account
-		if !@account.user #if the account doesn't have a user, we need to create one for them combining their company code (without spaces) and @roccloudy.com
+		if @account.user #if the account doesn't belong to a user, we need to create one for them combining their company code (without spaces) and @roccloudy.com
 			user_email = cust.Code
 			user_email = user_email.to_s.strip + "@roccloudy.com"
-			User.create(email: user_email, password: "roccloudyportal", password_confirmation: "roccloudyportal")
-		@account.user = User.find_by(email: user_email)
-	end
-	@account.update(approved: 'approved', name: cust.Name, street: cust.Street, suburb: cust.Suburb, postcode: cust.Postcode, phone: cust.Phone, contact: cust.Contact, seller_level: cust.PriceCat)
+			@account.user.update(email: user_email, password: "roccloudyportal", password_confirmation: "roccloudyportal")
+		end
+		@account.update(approved: 'approved', name: cust.Name, street: cust.Street, suburb: cust.Suburb, postcode: cust.Postcode, phone: cust.Phone, contact: cust.Contact, seller_level: cust.PriceCat)
 	end
 end
 
