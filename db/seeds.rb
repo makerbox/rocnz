@@ -23,7 +23,7 @@ end
 end
 
 customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-customers.last(10).each do |cust|
+customers.each do |cust|
 	puts cust.Name
 	puts cust.Street
 	puts cust.Suburb
