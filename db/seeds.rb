@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'rdbi-driver-odbc'
 
-dbh = RDBI.connect :ODBC, :db => "roccloudy"
+dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 	
 
 products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
@@ -30,6 +30,8 @@ cust.column_names.each do |col|
 	puts '---------'
 end
 end
+
+# CUSTOMER ORDER AS SEPARATE SCAFFOLD - EACH ORDER TRANSLATED INTO KFI FILE? CAN WE INTERACT WITH THE DATABASE DIRECTLY WITHOUT KFI?
 
 # get the fields that you need - check brief
 # populate database from the required fields
