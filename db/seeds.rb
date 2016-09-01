@@ -49,6 +49,8 @@ customers.each do |cust|
 	end
 end
 
+print "products: "
+puts Product.count
 print "accounts: "
 puts Account.count
 print "users: "
