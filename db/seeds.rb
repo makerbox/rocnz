@@ -25,7 +25,7 @@ customercount = 0
 activecustcodes = dbh.execute("SELECT * FROM customer_mastext WHERE InactiveCust=0").fetch(:all, :Struct)
 activecustcodes.each do |activecustomer|
 	customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-	customertotal = customers.all.count
+	customertotal = customers.length
 	customers.find_by(code: activecustomer.Code) do |customer|
 		# puts customer.Name
 		# puts customer.Street
