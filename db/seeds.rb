@@ -21,9 +21,11 @@ products.each do |p|
 end
 end
 end
-print "active products:"
+puts "-------------"
+puts "active products:"
 puts Product.count
-print "total products:"
+puts "-------------"
+puts "total products:"
 puts products.length
 
 activecustomers = dbh.execute("SELECT * FROM customer_mastext WHERE InactiveCust=0").fetch(:all, :Struct)
@@ -32,9 +34,11 @@ activecustomers.each do |activecustomer|
 		Account.create(code: activecustomer.Code)
 	end
 end
-print "active customers:"
+puts "-------------"
+puts "active customers:"
 puts activecustomers.length
-print "accounts:"
+puts "-------------"
+puts "accounts:"
 puts Account.count
 
 # customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
