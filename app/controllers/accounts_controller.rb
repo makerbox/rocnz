@@ -10,12 +10,10 @@ class AccountsController < ApplicationController
   end
 
 def approve
-  #send email to user
   @account.update_attributes(:approved => 'approved')
   redirect_to accounts_path, notice: 'Account approved'
 end
 def unapprove
-  #send email to user
   @account.update_attributes(:approved => 'unapproved')
   redirect_to accounts_path, notice: 'Account unapproved'
 end
