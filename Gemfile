@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 #image hosting
 gem 'cloudinary'
+gem 'carrierwave'
 
 #run jobs in the background such as emailing
 gem 'sucker_punch', '~> 2.0'
@@ -26,7 +27,6 @@ gem 'sqlite3', group: :development
 
 #windows bug fix
 gem 'tzinfo-data', group: :development
-
 
 gem 'ruby-odbc', group: :development
 gem 'odbc-rails', group: :development
