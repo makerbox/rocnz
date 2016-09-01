@@ -49,7 +49,16 @@ customers.each do |cust|
 	end
 end
 
-
+print "accounts: "
+puts Account.count
+print "users: "
+puts User.count
+print "admin user: "
+User.each do |test|
+	if test.has_role? :admin
+		puts test.email
+	end
+end
 #customer_transactions file
 #how to get which brands a customer can see?
 
