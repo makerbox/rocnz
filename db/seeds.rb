@@ -1,10 +1,16 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# ensure there is an admin account
+adminuser = User.find_by(email: "web@roccloudy.com")
+if !adminuser
+User.create(email: "web@roccloudy.com", password: "cloudy_16", password_confirmation: "cloudy_16")
+else
+	if !adminuser.has_role? :admin
+		adminuser.add_role :admin
+	end
+end
+
+# ----------------------------------
+
+# get data out of attache and into sql
 require 'rdbi-driver-odbc'
 
 dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
