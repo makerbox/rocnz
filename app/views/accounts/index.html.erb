@@ -5,15 +5,14 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Email</th>
+      <th>email</th>
       <th><%= link_to 'name', accounts_path(order: 'name') %></th>
       <th><%= link_to 'street', accounts_path(order: 'street') %></th>
       <th><%= link_to 'Suburb', accounts_path(order: 'Suburb') %></th>
       <th><%= link_to 'State', accounts_path(order: 'State') %></th>
-      <th><%= link_to 'Country', accounts_path(order: 'Country') %></th>
+      <th><%= link_to 'Code', accounts_path(order: 'Code') %></th>
       <th><%= link_to 'Phone', accounts_path(order: 'Phone') %></th>
-      <th><%= link_to 'First name', accounts_path(order: 'contact') %></th>
-      <th><%= link_to 'Last name', accounts_path(order: 'contact') %></th>
+      <th><%= link_to 'Contact name', accounts_path(order: 'contact') %></th>
       <th><%= link_to 'Seller level', accounts_path(order: 'seller_level') %></th>
       <th colspan="1"></th>
     </tr>
@@ -26,14 +25,17 @@
     <% else %>
     <tr>
     <% end %>
-      <td><%= "account.user.email" %></td>
+    <% if account.user %>
+      <td><%= account.user.email %></td>
+      <% else %>
+      <td>no user assoc.</td>
+      <% end %>
       <td><%= account.name %></td>
       <td><%= account.street %></td>
       <td><%= account.suburb %></td>
       <td><%= account.state %></td>
-      <td><%= account.country %></td>
+      <td><%= account.code %></td>
       <td><%= account.phone %></td>
-      <td><%= account.contact %></td>
       <td><%= account.contact %></td>
       <% if account.approved == 'approved' %>
       <% if !account.seller_level? %>

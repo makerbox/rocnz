@@ -23,7 +23,7 @@ end
   def index
     @accounts = Account.all
     if params[:order]
-      @accounts = @accounts.order(params[:order] + ' asc')
+      @accounts = @accounts.order(params[:order] + ' ASC')
     end
   end
 

@@ -13,54 +13,104 @@ end
 # get data out of attache and into sql
 require 'rdbi-driver-odbc'
 
-dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-	
+puts "connecting to database"
+# dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+dbh = RDBI.connect :ODBC, :db => "testroc2"	
 
+puts "updating products"
 products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
 products.each do |p|
+	print "."
 	if p.Inactive == 0
-		if Product.find_by(code: p.Code)
-	Product.find_by(code: p.Code).update(code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
-		else
-	Product.create(code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
-#upload image to cloudinary and store url in product.imageurl (images are stored in z:/attache/roc/images/product/*sku*.jpg)
-end
-end
-end
-
-activecustomers = dbh.execute("SELECT * FROM customer_mastext WHERE InactiveCust=0").fetch(:all, :Struct)
-activecustomers.each do |activecustomer|
-	if !Account.find_by(code: activecustomer.Code)
-		newuser =  User.create(email: "newuser@roccloudy.com", password: "roccloudyportal", password_confirmation: "roccloudyportal")
-		Account.create(code: activecustomer.Code, user: newuser)
-	end
-end
-
-customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-customers.each do |cust|
-	@account = Account.find_by(code: cust.Code)
-	if @account
-		if @account.user #if the account doesn't belong to a user, we need to create one for them combining their company code (without spaces) and @roccloudy.com
-			user_email = cust.Code
-			user_email = user_email.to_s.strip + "@roccloudy.com"
-			@account.user.update(email: user_email, password: "roccloudyportal", password_confirmation: "roccloudyportal")
+		if Product.find_by(code: p.Code) #if the product already exists, just update the details
+			Product.find_by(code: p.Code).update(code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+		else #if the product doesn't already exist, let's make it
+			Product.create(code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+			#upload image to cloudinary and store url in product.imageurl (images are stored in z:/attache/roc/images/product/*sku*.jpg)
 		end
-		@account.update(approved: 'approved', name: cust.Name, street: cust.Street, suburb: cust.Suburb, postcode: cust.Postcode, phone: cust.Phone, contact: cust.Contact, seller_level: cust.PriceCat)
 	end
 end
 
+puts "updating accounts and users"
+customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
+contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
+
+contacts.each do |contact| # populate a model of contact email addresses - had to be done to make the data searchable
+	Contact.create(code: contact.Code, email: contact.EmailAddress)
+end
+
+inactive = 0 #use this to count inactive customers
+counter = 0 #use this counter to generate an email address for some users in the loop below
+#create accounts and users for active customers only if they don't exist already
+activecustomers.each do |activecustomer|
+	@contact = Contact.find_by(code: activecustomer.Code)
+	if @contact # if there is a contact email address for this customer code, then use it
+		if @contact.email
+			email = @contact.email
+		else
+			counter = counter + 1
+			email = counter.to_s + "@wholesaleportal.com"
+		end
+	else #otherwise use the counter to generate an email address
+		counter = counter + 1
+		email = counter.to_s + "@wholesaleportal.com"
+	end
+	if Account.find_by(code: activecustomer.Code) #if there is already an account, skip it
+		puts Account.find_by(code: activecustomer.Code).code.to_s + " == " + activecustomer.Code.to_s + "account exists - skipping to next one"
+	elsif activecustomer.InactiveCust == 0 #otherwise check if it is active
+		newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
+		if newuser.save
+			newaccount = Account.new(code: activecustomer.Code, user: newuser) #create the account and associate with user
+			newaccount.save
+		else
+			puts newuser.email #if user wasn't created - show me the culprit
+			if User.find_by(email: newuser.email) #if is was a duplicate, let's do it again, but with the counter for the email address
+				puts "--DUPLICATE--USING COUNTER"
+				counter = counter + 1
+				email = counter.to_s + newuser.email
+				newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal")
+				newuser.save
+				newaccount = Account.new(code: activecustomer.Code, user: newuser)
+				newaccount.save		
+			end
+		end
+
+	else #if the account doesn't exist, but it's inactive, then skip creation
+		inactive = inactive + 1
+	end
+end
+#update accounts with full details
+customers.each do |customer| #use the data from customers to fill in the blanks in Accounts
+	account = Account.find_by(code: customer.Code)
+	if account
+		account.update(approved: 'approved', name: customer.Name, street: customer.Street, suburb: customer.Suburb, postcode: customer.Postcode, phone: customer.Phone, contact: customer.Contact, seller_level: customer.PriceCat)
+	end
+	print "."
+end
+
+#output a little bit of result data to the console - for debugging only
+puts "."
 print "products: "
 puts Product.count
-print "accounts: "
-puts Account.count
-print "users: "
+print "user keys: "
 puts User.count
 print "admin user: "
-User.each do |test|
-	if test.has_role? :admin
-		puts test.email
+User.all.each do |t|
+	if t.has_role? :admin
+		puts t.email
 	end
 end
+print "accounts: "
+puts Account.count
+print "approved accounts:"
+puts Account.where(approved: "approved").count
+print "unapproved accounts:"
+puts Account.where(approved: nil).count
+print "inactive customers:"
+puts inactive
+
+dbh.disconnect
 #customer_transactions file
 #how to get which brands a customer can see?
 
