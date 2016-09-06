@@ -1,39 +1,26 @@
 <p id="notice"><%= notice %></p>
 <h1>Listing Products</h1>
-<table id="productlist">
-  <thead>
-    <tr>
-    <th></th>
-      <th>SKU</th>
-      <th>Price</th>
+<div id="productlist">
 
-      <% if user_signed_in? %>
-        <% if current_user.has_role? :admin %>
-          <th>Group</th>
-        <% end %>
-      <% end %>
-      
-      <th></th>
-    </tr>
-  </thead>
+  <% @products.each do |product| %>
 
-  <tbody>
-
-    <% @products.each do |product| %>
-    <tr>
-    <td><%=cl_image_tag(product.code.strip, :alt => product.code.strip)%></td>
-      <td><%= product.code %></td>
-      <td>$<%= product.price1 %></td>
-      <% if user_signed_in? %>
-        <% if current_user.has_role? :admin %>
-          <td><%= product.group %></td>
-        <% end %>
-      <% end %>       
-      <td><%= link_to 'Show', product %></td>
-    </tr>
+  <%= link_to 'google.com' do %>
+  <div class="product">
+  <%= cl_image_tag(product.code.strip) %>
+    <br>
+    <%= product.code %><br>
+    $<%= product.price1 %><br>
+    <% if user_signed_in? %>
+    <% if current_user.has_role? :admin %>
+    Group : <%= product.group %>
     <% end %>
-  </tbody>
-</table>
+    <% end %> 
+  </div>
+  <% end %>
+
+  <% end %>
+
+</div>
 
 <br>
 <div class="panel panel-default">

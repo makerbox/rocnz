@@ -1,5 +1,4 @@
 class ProductsController < ApplicationController
-  skip_before_action :authenticate_user!
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
@@ -7,13 +6,13 @@ class ProductsController < ApplicationController
   def index
     group = params[:group]
     if group == 'roc'
-      @products = Product.where(group: ['R  ', 'H  ', 'J  ', 'C  '])
+      @products = Product.where(group: ['C  '])
     elsif group == 'polasports'
       @products = Product.where(group: ['L  '])
     elsif group == 'locello'
-      @products = Product.where(group: ['  ', 'LC '])
+      @products = Product.where(group: ['LC '])
     elsif group == 'unity'
-      @products = Product.where(group: ['U  '])
+      @products = Product.where(group: ['E  ', 'R  ', 'D  ', 'A  '])
     else
       if user_signed_in?
         if current_user.has_role? :admin

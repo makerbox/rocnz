@@ -67,11 +67,12 @@ h1, h2, h3, h4, h5, h6 {
 	background:transparent;
 }
 
-#productlist tr{
+.product{
 	display:inline-block;
-	margin:1em;
+	margin:2em;
 }
-#productlist img {
-max-height:10em;
-max-width:10em;
+
+.product img {
+max-height:15em;
+max-width:15em;
 }

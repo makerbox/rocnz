@@ -37,6 +37,7 @@ Roc Cloudy
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <% if user_signed_in? %>
         <ul class="nav navbar-nav">
           <li><%= link_to 'Roc', products_path(group: 'roc') %></li>
           <li><%= link_to 'Polasports', products_path(group: 'polasports') %></li>
@@ -48,6 +49,7 @@ Roc Cloudy
             <% end %>
           <% end %>
         </ul>
+        <% end %>
 
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
