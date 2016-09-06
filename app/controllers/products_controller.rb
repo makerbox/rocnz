@@ -1,18 +1,59 @@
 class ProductsController < ApplicationController
+  skip_before_action :authenticate_user!
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
-    if params[:order]
-      @products = @products.order(params[:order] + ' asc')
+    group = params[:group]
+    if group == 'roc'
+      @products = Product.where(group: ['R  ', 'H  ', 'J  ', 'C  '])
+    elsif group == 'polasports'
+      @products = Product.where(group: ['L  '])
+    elsif group == 'locello'
+      @products = Product.where(group: ['  ', 'LC '])
+    elsif group == 'unity'
+      @products = Product.where(group: ['U  '])
+    else
+      if user_signed_in?
+        if current_user.has_role? :admin
+          @products = Product.all
+        else
+          @products = Product.all
+          redirect_to home_index_url
+        end
+      else
+          @products = Product.all
+          redirect_to home_index_url
+      end
+
     end
+    if params[:order]
+      @accounts = @accounts.order(params[:order] + ' ASC')
+    end
+    @products = @products.paginate(:page => params[:page], :per_page => 30)
+
+    @totalproducts = @products.count
   end
 
   # GET /products/1
   # GET /products/1.json
   def show
+  end
+
+  #add product to order
+  def add
+    if current_user.orders.where(status: 'open')
+    #if the user has an order open, then add the product to the order
+  else
+    #otherwise, create a new order for the user
+    Order.create(user: current_user)
+    #add the product to the order (use product_order join table?)
+  end
+  end
+
+  #remove product from order
+  def remove
   end
 
   # GET /products/new

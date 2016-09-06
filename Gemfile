@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 gem 'cloudinary'
 gem 'carrierwave'
 
+#pagination - especially for product listings
+gem 'will_paginate'
+
 #server to handle 1024 users
 gem 'thin'
 

@@ -1,12 +1,17 @@
 <p id="notice"><%= notice %></p>
-   <h1>Listing Products</h1>
+<h1>Listing Products</h1>
 
 <table>
   <thead>
     <tr>
-      <th><%= link_to 'Code', products_path(order: 'code') %></th>
+      <th>SKU</th>
       <th>Price</th>
-      <th>Group</th>
+
+      <% if user_signed_in? %>
+        <% if current_user.has_role? :admin %>
+          <th>Group</th>
+        <% end %>
+      <% end %>
       
       <th colspan="3"></th>
     </tr>
@@ -16,19 +21,24 @@
 
     <% @products.each do |product| %>
 
-      <tr>
-        <td><%= product.code %></td>
-        <td>$<%= product.price1 %></td>
-        <td><%= product.group %></td>
-        
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <tr>
+      <td><%= product.code %></td>
+      <td>$<%= product.price1 %></td>
+      <% if user_signed_in? %>
+        <% if current_user.has_role? :admin %>
+          <td><%= product.group %></td>
+        <% end %>
+      <% end %>       
+      <td><%= link_to 'Show', product %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Product', new_product_path %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    Total products: <%= @totalproducts %>
+  </div>
+</div>
+<%= will_paginate @posts %>

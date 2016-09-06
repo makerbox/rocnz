@@ -27,6 +27,7 @@ products.each do |p|
 		else #if the product doesn't already exist, let's make it
 			Product.create(code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
 			#upload image to cloudinary and store url in product.imageurl (images are stored in z:/attache/roc/images/product/*sku*.jpg)
+			Cloudinary::Uploader.upload('//Z:/attache/roc/images/product/' + p.Code + '.jpg', :public_id => p.Code, :overwrite => true)
 		end
 	end
 end

@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
+  resources :orders
   resources :products
   get 'privacy/index'
 
   get 'terms/index'
+
+resources :products do
+  member do
+    get 'add'
+    get 'remove'
+  end
+end
 
   resources :accounts do
     member do
