@@ -22,7 +22,7 @@ products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
 productcounter = 0
 products.each do |p|
 	productcounter = productcounter + 1
-	print productcounter / products.length * 100 
+	print productcounter / (products.length.to_f / 100) 
 	print "%"
 	print "\r"
 	if p.Inactive == 0
