@@ -18,6 +18,5 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 15.minutes do
-	rake "db:seed"
-end
+
+#MOVED FROM WHENEVER TO TASK SCHEDULER, because Windows doesn't have crontab

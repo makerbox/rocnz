@@ -14,8 +14,8 @@ end
 require 'rdbi-driver-odbc'
 
 puts "connecting to database"
-# dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-dbh = RDBI.connect :ODBC, :db => "testroc2"	
+dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+# dbh = RDBI.connect :ODBC, :db => "testroc2"	
 
 puts "updating products"
 products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
