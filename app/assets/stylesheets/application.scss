@@ -66,3 +66,12 @@ h1, h2, h3, h4, h5, h6 {
 .btn:hover{
 	background:transparent;
 }
+
+#productlist tr{
+	display:inline-block;
+	margin:1em;
+}
+#productlist img {
+max-height:10em;
+max-width:10em;
+}
