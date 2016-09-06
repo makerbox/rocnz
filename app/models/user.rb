@@ -5,13 +5,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
   has_one :account
+  
   after_create :assign_default_role
 
   def assign_default_role
   	if self.email == 'web@roccloudy.com' || 'mattwerth@mattwerth.com'
-  		self.add_role :admin
+  		add_role(:admin)
   	else
-  		self.add_role :customer
+  		add_role(:customer)
   	end
   end
 end
