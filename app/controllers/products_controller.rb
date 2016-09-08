@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
+
   # GET /products
   # GET /products.json
   def index
@@ -33,11 +34,13 @@ class ProductsController < ApplicationController
     @products = @products.paginate(:page => params[:page], :per_page => 12)
 
     @totalproducts = @products.count
+    @order = current_user.orders.find_by(active: true)
   end
 
   # GET /products/1
   # GET /products/1.json
   def show
+    @order = current_user.orders.find_by(active: true)
   end
 
   #add product to order

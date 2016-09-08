@@ -24,7 +24,6 @@ products.each do |p|
 	productcounter = productcounter + 1
 	print productcounter / (products.length.to_f / 100) 
 	print "%"
-	print "\r"
 	if p.Inactive == 0
 		if Product.find_by(code: p.Code) #if the product already exists, just update the details
 			Product.find_by(code: p.Code).update(code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)

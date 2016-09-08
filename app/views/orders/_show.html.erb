@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+<% @order.product_orders.each do |po| %>
+	<%= po.product.code %>
+	<%= current_user.account.seller_level %>
+	<% case current_user.account.seller_level.to_i %>
+		  	<% when 1 %>
+		  		$<%= po.product.price1 %>
+		    <% when 2 %>
+		  		$<%= po.product.price2 %>
+		    <% when 3 %>
+		  		$<%= po.product.price3 %>
+		    <% when 4 %>
+		  		$<%= po.product.price4 %>
+		    <% when 5 %>
+		  		$<%= po.product.price5 %>
+		    <% when 6 %>
+		  		$<%= po.product.rrp %>
+	<% end %>
+<% end %>
+</p>

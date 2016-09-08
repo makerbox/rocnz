@@ -22,6 +22,7 @@ end
   resources :orders do
     member do
       get 'cart'
+      get 'addto'
     end
   end
   

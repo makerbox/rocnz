@@ -73,7 +73,9 @@ Roc Cloudy
 
           <% end %>
           <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-          <li><%= link_to 'View Cart', show_order_path(current_user.order.last) %></li>
+          <% if current_user.orders.any? %>
+          <li><%= link_to 'View Cart', order_path(current_user.orders.last) %></li>
+          <% end %> 
 
 
           <% else %>

@@ -9,8 +9,24 @@
         <%= cl_image_tag(product.code.strip) %>
         <br>
         <%= product.code %><br>
-        $<%= product.price1 %><br>
+
         <% if user_signed_in? %>
+        <% if current_user.account.approved == 'approved' %>
+          <% case current_user.account.seller_level.to_i %>
+            <% when 1 %>
+              $<%= product.price1 %>
+            <% when 2 %>
+              $<%= product.price2 %>
+            <% when 3 %>
+              $<%= product.price3 %>
+            <% when 4 %>
+              $<%= product.price4 %>
+            <% when 5 %>
+              $<%= product.price5 %>
+            <% when 6 %>
+              $<%= product.rrp %>
+          <% end %>
+        <% end %>
         <% if current_user.has_role? :admin %>
         Group : <%= product.group %>
         <% end %>
@@ -28,14 +44,18 @@
   </div>
   <%= will_paginate @posts %>
   </div>
+  <% if current_user.orders.any? %>
   <div class="col-md-3 cart">
     <p>
       <i class="fa fa-shopping-cart fa-2x"></i>
     </p>
     <hr>
     <p>
-      cart details and send order button
+    <% if current_user.orders.last.active == true %>
+      <%= render 'orders/show' %>
+    <% end %>
     </p>
   </div>
+  <% end %>
 </div>
 

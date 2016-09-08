@@ -13,9 +13,6 @@
 <p>
 <%= @product.description %>
 </p>
-<p>
-Enter QTY and add to cart button (product#add)
-</p>
 
 <p>
   <% if user_signed_in? %>
@@ -36,18 +33,34 @@ Enter QTY and add to cart button (product#add)
 		  		$<%= @product.rrp %>
 		  <% end %>
 	  <% end %>
+
+	  <p>
+	  QTY:
+	  </p>
+	  <% if current_user.account.approved == 'approved' %>
+	  	<% if !current_user.orders.any? || !current_user.orders.where(active: true).any? %>
+	  		
+	  		<%= link_to 'ADD TO CART', cart_order_path(product: @product), class: 'btn btn-info' %>
+	  	<% else %>
+	  		<%= link_to 'ADD TO CART', addto_order_path(product: @product), class: 'btn btn-info' %>
+	  	<% end %>
+	  <% end %>
   <% end %>
 </p>
 
 <%= link_to 'Back', products_path %>
 </div>
-<div class="col-md-3 cart">
-<p>
-<i class="fa fa-shopping-cart fa-2x"></i>
-</p>
-<hr>
-<p>
-cart details and send order button
-</p>
-</div>
+ <% if current_user.orders.any? %>
+  <div class="col-md-3 cart">
+    <p>
+      <i class="fa fa-shopping-cart fa-2x"></i>
+    </p>
+    <hr>
+    <p>
+    <% if current_user.orders.last.active == true %>
+      <%= render 'orders/show' %>
+    <% end %>
+    </p>
+  </div>
+  <% end %>
 </div>

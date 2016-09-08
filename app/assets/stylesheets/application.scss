@@ -68,12 +68,19 @@ padding-top:4em;
 .table .btn {
 	color: #FFF !important;
 }
+td{
+	border-left:1px solid #CCC;
+}
 .highlight-field input{
 	background: #FFFF00 !important;
 	box-shadow: 0 0 1em #000;
 }
+.btn {
+	border: none;
+	margin:5px;
+}
 .btn:hover{
-	background:transparent;
+	background:#00CC00;
 }
 
 .product{

@@ -1,6 +1,20 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
+def cart #if there aren't any active orders, then create one
+  product = Product.find_by(id: params[:product])
+  order = Order.create(user: current_user, active: true)
+  ProductOrder.create(order: order, product: product)
+  redirect_to product, notice: 'successfully added to order'
+end
+
+def addto
+  product = Product.find_by(id: params[:product])
+  order = current_user.orders.where(active: true).last
+  ProductOrder.create(order: order, product: product)
+  redirect_to product, notice: 'successfully added to order'
+end
+
   # GET /orders
   # GET /orders.json
   def index
