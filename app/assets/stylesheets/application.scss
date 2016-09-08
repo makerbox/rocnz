@@ -20,11 +20,13 @@
   -webkit-transition: all 1s;
 }
 
-.mycontainer{
-	padding:1em;
-}
 body {
 	font-family: 'Scope One', serif;
+}
+.navbar{
+	margin-bottom:0;
+	z-index:999;
+	box-shadow:none;
 }
 .footer {
 	text-align:center;
@@ -40,6 +42,13 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: 'Vesper Libre', serif;
 }
 
+p {
+	padding:1em;
+}
+
+.col-md-3, .col-md-4, .col-md-5{
+padding-top:4em;
+}
 .vesper {
 	font-family: 'Vesper Libre', serif;
 }
@@ -72,7 +81,32 @@ h1, h2, h3, h4, h5, h6 {
 	margin:2em;
 }
 
+img {
+	max-height:100%;
+	max-width:100%;
+}
 .product img {
 max-height:15em;
 max-width:15em;
+}
+
+.cart {
+	background: #CCC;
+	box-shadow:none;
+height:100vh;
+}
+
+@media screen and (min-device-width:800px){
+.mycontainer{
+	padding-left:1em;
+}
+}
+
+@media screen and (max-device-width:800px){
+.cart{
+	display:none;
+}
+	.mycontainer{
+	padding:0 1em 0 1em;
+	}
 }

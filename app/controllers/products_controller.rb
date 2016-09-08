@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
     if params[:order]
       @accounts = @accounts.order(params[:order] + ' ASC')
     end
-    @products = @products.paginate(:page => params[:page], :per_page => 30)
+    @products = @products.paginate(:page => params[:page], :per_page => 12)
 
     @totalproducts = @products.count
   end

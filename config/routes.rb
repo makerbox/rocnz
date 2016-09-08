@@ -19,6 +19,12 @@ end
     end
   end
   
+  resources :orders do
+    member do
+      get 'cart'
+    end
+  end
+  
   devise_for :users, controllers: { registrations: "registrations" }
   
   get 'home/index'

@@ -1,18 +1,53 @@
-<p id="notice"><%= notice %></p>
-Product description (if it's in Attache)
-<br>
-Enter QTY and add to cart button (product#add)
+
+<div class="row">
+
+<div class="col-md-5">
+<%= cl_image_tag(@product.code.strip) %>
+</div>
+
+<div class="col-md-4">
 <p>
-  <strong>Name:</strong>
+  <strong>SKU:</strong>
   <%= @product.code %>
+</p>
+<p>
+<%= @product.description %>
+</p>
+<p>
+Enter QTY and add to cart button (product#add)
 </p>
 
 <p>
-  <strong>Price:</strong>
-  show the correct price
-  <%= @product.price1 %>
+  <% if user_signed_in? %>
+	  <% if current_user.account && current_user.account.approved == 'approved' && current_user.account.seller_level %>
+	  <!-- if the user has an approved account with a seller level set, then show them their correct price -->
+		  <% case current_user.account.seller_level.to_i %>
+		  	<% when 1 %>
+		  		$<%= @product.price1 %>
+		    <% when 2 %>
+		  		$<%= @product.price2 %>
+		    <% when 3 %>
+		  		$<%= @product.price3 %>
+		    <% when 4 %>
+		  		$<%= @product.price4 %>
+		    <% when 5 %>
+		  		$<%= @product.price5 %>
+		    <% when 6 %>
+		  		$<%= @product.rrp %>
+		  <% end %>
+	  <% end %>
+  <% end %>
 </p>
-<p>
-<strong>product image</strong>
-</p>
+
 <%= link_to 'Back', products_path %>
+</div>
+<div class="col-md-3 cart">
+<p>
+<i class="fa fa-shopping-cart fa-2x"></i>
+</p>
+<hr>
+<p>
+cart details and send order button
+</p>
+</div>
+</div>
