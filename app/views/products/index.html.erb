@@ -11,21 +11,23 @@
         <%= product.code %><br>
 
         <% if user_signed_in? %>
+        <% if current_user.account %>
         <% if current_user.account.approved == 'approved' %>
-          <% case current_user.account.seller_level.to_i %>
-            <% when 1 %>
-              $<%= product.price1 %>
-            <% when 2 %>
-              $<%= product.price2 %>
-            <% when 3 %>
-              $<%= product.price3 %>
-            <% when 4 %>
-              $<%= product.price4 %>
-            <% when 5 %>
-              $<%= product.price5 %>
-            <% when 6 %>
-              $<%= product.rrp %>
-          <% end %>
+        <% case current_user.account.seller_level.to_i %>
+        <% when 1 %>
+        $<%= product.price1 %>
+        <% when 2 %>
+        $<%= product.price2 %>
+        <% when 3 %>
+        $<%= product.price3 %>
+        <% when 4 %>
+        $<%= product.price4 %>
+        <% when 5 %>
+        $<%= product.price5 %>
+        <% when 6 %>
+        $<%= product.rrp %>
+        <% end %>
+        <% end %>
         <% end %>
         <% if current_user.has_role? :admin %>
         Group : <%= product.group %>
@@ -37,12 +39,12 @@
       <% end %>
 
     </div>
-  <div class="panel panel-default">
-    <div class="panel-body">
-      Total products: <%= @totalproducts %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        Total products: <%= @totalproducts %>
+      </div>
     </div>
-  </div>
-  <%= will_paginate @posts %>
+    <%= will_paginate @posts %>
   </div>
   <% if current_user.orders.any? %>
   <div class="col-md-3 cart">
@@ -51,9 +53,9 @@
     </p>
     <hr>
     <p>
-    <% if current_user.orders.last.active == true %>
+      <% if current_user.orders.last.active == true %>
       <%= render 'orders/show' %>
-    <% end %>
+      <% end %>
     </p>
   </div>
   <% end %>

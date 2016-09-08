@@ -23,6 +23,7 @@ end
     member do
       get 'cart'
       get 'addto'
+      get 'send'
     end
   end
   

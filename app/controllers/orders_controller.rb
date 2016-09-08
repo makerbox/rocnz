@@ -15,6 +15,10 @@ def addto
   redirect_to product, notice: 'successfully added to order'
 end
 
+def send
+  order = params[:order]
+end
+
   # GET /orders
   # GET /orders.json
   def index
