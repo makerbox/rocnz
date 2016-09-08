@@ -38,10 +38,15 @@
 		  <% if current_user.account %>
 			  <% if current_user.account.approved == 'approved' %>
 			  	<% if !current_user.orders.any? || !current_user.orders.where(active: true).any? %>
-
-			  		<%= link_to 'ADD TO CART', cart_order_path(product: @product), class: 'btn btn-info' %>
+				  	<%= simple_form_for url: cart_order_path(product: @product) do |f| %>
+	    				<%= f.input :qty %>
+	    				<%= f.submit "ADD TO CART", class: 'btn btn-success' %>
+					<% end %>
 			  	<% else %>
-			  		<%= link_to 'ADD TO CART', addto_order_path(product: @product), class: 'btn btn-info' %>
+				  	<%= simple_form_for @orurl: addto_order_path(product: @product) |f| %>
+	    				<%= f.input :qty %>
+	    				<%= f.submit "ADD TO CART", class: 'btn btn-success' %>
+					<% end %>
 			  	<% end %>
 			  <% end %>
 		  <% end %>

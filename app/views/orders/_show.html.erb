@@ -18,6 +18,8 @@
 		    <% when 6 %>
 		  		$<%= po.product.rrp %>
 	<% end %>
+	x <%= po.qty %>
+	<hr>
 <% end %>
-<%= link_to 'SEND ORDER', send_order_path(order: @order), class: 'btn btn-success' %>
+<%= link_to 'SEND ORDER', class: 'btn btn-success' %>
 </p>

@@ -4,19 +4,17 @@ class OrdersController < ApplicationController
 def cart #if there aren't any active orders, then create one
   product = Product.find_by(id: params[:product])
   order = Order.create(user: current_user, active: true)
-  ProductOrder.create(order: order, product: product)
+  qty = params[:qty]
+  ProductOrder.create(order: order, product: product, qty: qty)
   redirect_to product, notice: 'successfully added to order'
 end
 
 def addto
   product = Product.find_by(id: params[:product])
   order = current_user.orders.where(active: true).last
-  ProductOrder.create(order: order, product: product)
+  qty = params[:qty]
+  ProductOrder.create(order: order, product: product, qty: qty)
   redirect_to product, notice: 'successfully added to order'
-end
-
-def send
-  order = params[:order]
 end
 
   # GET /orders
