@@ -25,8 +25,13 @@ products.each do |p|
 	print productcounter / (products.length.to_f / 100) 
 	print "%"
 	if p.Inactive == 0
-		if Product.find_by(code: p.Code) #if the product already exists, just update the details
-			Product.find_by(code: p.Code).update(code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+		@product = Product.find_by(code: p.Code)
+		if @product #if the product already exists, just update the details
+			if @product.code != p.Code || @product.description != p.Description || @product.group != p.ProductGroup || @product.price1 != p.SalePrice1 || @product.price2 != p.SalePrice2 || @product.price3 != p.SalePrice3 || @product.price4 != p.SalePrice4 || @product.price5 != p.SalePrice5 || @product.rrp != p.SalesPrice6 
+				Product.find_by(code: p.Code).update(code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+			else
+				puts "product exactly the same - skipping"
+			end
 		else #if the product doesn't already exist, let's make it
 			Product.create(code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
 			#upload image to cloudinary and store url in product.imageurl (images are stored in z:/attache/roc/images/product/*sku*.jpg)
@@ -46,7 +51,11 @@ activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Str
 contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
 
 contacts.each do |contact| # populate a model of contact email addresses - had to be done to make the data searchable
-	Contact.create(code: contact.Code, email: contact.EmailAddress)
+	if Contact.find_by(code: contact.Code)
+		puts "contact exists skipping"
+	else
+		Contact.create(code: contact.Code, email: contact.EmailAddress)
+	end
 end
 
 inactive = 0 #use this to count inactive customers
@@ -66,7 +75,7 @@ activecustomers.each do |activecustomer|
 		email = counter.to_s + "@wholesaleportal.com"
 	end
 	if Account.find_by(code: activecustomer.Code) #if there is already an account, skip it
-		puts Account.find_by(code: activecustomer.Code).code.to_s + " == " + activecustomer.Code.to_s + "account exists - skipping to next one"
+		puts "account exists - skipping to next one"
 	elsif activecustomer.InactiveCust == 0 #otherwise check if it is active
 		newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
 		if newuser.save
@@ -120,16 +129,5 @@ print "inactive customers:"
 puts inactive
 
 dbh.disconnect
-#customer_transactions file
-#how to get which brands a customer can see?
 
-# CUSTOMER ORDER AS SEPARATE SCAFFOLD - EACH ORDER TRANSLATED INTO KFI FILE? CAN WE INTERACT WITH THE DATABASE DIRECTLY WITHOUT KFI?
-
-# get the fields that you need - check brief
-# populate database from the required fields
-# populate existing users
-# make chronjob for seed
-# build front end - check pricing is correct
-# check sign up process works and is smooth
-# build ordering process - ensure it is smooth
-# build account management system for users to check invoices etc
+ActiveRecord::Base.connection.execute("BEGIN TRANSACTION; END;")

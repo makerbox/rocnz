@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
     if params[:order]
       @accounts = @accounts.order(params[:order] + ' ASC')
     end
-    @products = @products.paginate(:page => params[:page], :per_page => 12)
+    @products = @products.paginate(:page => params[:page], :per_page => 20)
 
     @totalproducts = @products.count
     @order = current_user.orders.find_by(active: true)
