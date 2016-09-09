@@ -9,7 +9,6 @@
     <%= f.input :country %>
     <%= f.input :phone %>
     <%= f.input :contact %>
-    <%= f.input :contact %>
     <% if current_user.has_role? :admin %>
     <% if !@account.seller_level || @account.seller_level == '' %>
     <div class="highlight-field">
@@ -18,6 +17,8 @@
     <% else %>
     <%= f.input :seller_level %>
     <% end %>
+    <%= f.input :sort %>
+    <br>(**NB: changes made to sort will NOT be reflected in Attache automatically)
     <% end %>
   </div>
 
