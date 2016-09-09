@@ -41,17 +41,19 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show
     @order = current_user.orders.find_by(active: true)
+    @quantity = Quantity.new
   end
 
   #add product to order
   def add
-    if current_user.orders.where(status: 'open')
-    #if the user has an order open, then add the product to the order
-  else
-    #otherwise, create a new order for the user
-    Order.create(user: current_user)
-    #add the product to the order (use product_order join table?)
-  end
+    if current_user.orders.where(active: true)
+      #if the user has an order open, then add the product to the order
+      @product_order = ProductOrder.create(order: params[:order], product: params[:product], qty: params[:qty])
+    else
+      #otherwise, create a new order for the user
+      Order.create(user: current_user)
+      #add the product to the order (use product_order join table?)
+    end
   end
 
   #remove product from order

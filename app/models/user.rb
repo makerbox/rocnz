@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable
   has_one :account
   has_many :orders
+  
   after_create :assign_default_role
 
   def assign_default_role

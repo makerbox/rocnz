@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :quantities
   resources :orders
   resources :products
   get 'privacy/index'

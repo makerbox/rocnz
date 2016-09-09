@@ -1,11 +1,13 @@
-<%= simple_form_for(@order) do |f| %>
+<%= simple_form_for(@quantity) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
 
-   
+    <%= f.input :qty %>
 
-    <%= f.association :user %>
+    <%= f.association :product %>
+
+    <%= f.association :order %>
 
   </div>
 

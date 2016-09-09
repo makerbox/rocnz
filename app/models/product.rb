@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-has_many :product_orders
-has_many :orders, through: :product_orders
+has_many :quantities
+has_many :orders, through: :quantities
 
 end

@@ -1,6 +1,7 @@
-class CreateProductOrders < ActiveRecord::Migration
+class CreateQuantities < ActiveRecord::Migration
   def change
-    create_table :product_orders do |t|
+    create_table :quantities do |t|
+      t.integer :qty
       t.references :product, index: true, foreign_key: true
       t.references :order, index: true, foreign_key: true
 

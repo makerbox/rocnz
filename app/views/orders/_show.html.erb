@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-<% @order.product_orders.each do |po| %>
+<% @order.quantities.each do |po| %>
 	<%= po.product.code %>
 	<%= current_user.account.seller_level %>
 	<% case current_user.account.seller_level.to_i %>
