@@ -31,6 +31,7 @@ end
   # GET /accounts/1.json
   def show
     @orders = Order.all.where(user: current_user)
+    @orders = @orders.paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /accounts/new

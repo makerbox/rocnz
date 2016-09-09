@@ -34,7 +34,7 @@ class QuantitiesController < ApplicationController
 
     respond_to do |format|
       if @quantity.save
-        format.html { redirect_to :back, notice: 'Quantity was successfully created.' }
+        format.html { redirect_to :back, notice: 'Successfully added to order.' }
         format.json { render :show, status: :created, location: @quantity }
       else
         format.html { render :new }

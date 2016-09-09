@@ -1,4 +1,5 @@
 <span id="notice"><%= notice %></span>
+<h1>Order started: <%= @order.created_at %></h1>
 <% @order.quantities.each do |po| %>
 <div class="po">
 	<%= link_to po.product.code, product_path(Product.find_by(code: po.product.code)) %>
@@ -19,9 +20,5 @@
 	<% end %>
 	x <%= po.qty %>
 
-<%= link_to 'remove', remove_product_path(id: po.id), class: 'btn btn-warning remove-btn' %></div>
 <% end %>
 <hr>
-<%= link_to ' SEND ORDER', send_order_path(@order), class: 'fa fa-paper-plane btn btn-info' %><hr>
-<%= link_to ' cancel', order_path(@order), method: :delete, class: 'fa fa-trash btn btn-danger' %>
-

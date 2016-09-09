@@ -106,13 +106,14 @@ min-height:100vh;
 .po {
 	border-top: 1px solid #FFF;
 	padding:1em;
-	display:inline-block;
+	display:block;
 }
 .remove-btn {
 	vertical-align:middle;
-	float:right;
 }
-
+#productlist a:hover{
+	background: transparent;
+}
 @media screen and (min-device-width:800px){
 .mycontainer{
 	padding-left:1em;
