@@ -27,7 +27,7 @@ products.each do |p|
 	if p.Inactive == 0
 		@product = Product.find_by(code: p.Code)
 		if @product #if the product already exists, just update the details
-			if @product.code != p.Code || @product.description != p.Description || @product.group != p.ProductGroup || @product.price1 != p.SalePrice1 || @product.price2 != p.SalePrice2 || @product.price3 != p.SalePrice3 || @product.price4 != p.SalePrice4 || @product.price5 != p.SalePrice5 || @product.rrp != p.SalesPrice6 
+			if @product.code != p.Code || @product.description != p.Description || @product.group != p.ProductGroup || @product.price1 != p.SalesPrice1 || @product.price2 != p.SalesPrice2 || @product.price3 != p.SalesPrice3 || @product.price4 != p.SalesPrice4 || @product.price5 != p.SalesPrice5 || @product.rrp != p.SalesPrice6 
 				Product.find_by(code: p.Code).update(code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
 			else
 				puts "product exactly the same - skipping"
