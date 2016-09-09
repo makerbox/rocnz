@@ -10,6 +10,6 @@ class User < ActiveRecord::Base
   after_create :assign_default_role
 
   def assign_default_role
-  		add_role(:customer)
+  		add_role(:user)
   end
 end

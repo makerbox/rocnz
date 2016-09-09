@@ -23,7 +23,7 @@ productcounter = 0
 products.each do |p|
 	productcounter = productcounter + 1
 	print productcounter / (products.length.to_f / 100) 
-	print "%"
+	print "%\r"
 	if p.Inactive == 0
 		@product = Product.find_by(code: p.Code)
 		if @product #if the product already exists, just update the details
@@ -79,6 +79,7 @@ activecustomers.each do |activecustomer|
 	elsif activecustomer.InactiveCust == 0 #otherwise check if it is active
 		newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
 		if newuser.save
+			newuser.add_role :user
 			newaccount = Account.new(code: activecustomer.Code, user: newuser) #create the account and associate with user
 			newaccount.save
 		else
@@ -89,6 +90,7 @@ activecustomers.each do |activecustomer|
 				email = counter.to_s + newuser.email
 				newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal")
 				newuser.save
+				newuser.add_role :user
 				newaccount = Account.new(code: activecustomer.Code, user: newuser)
 				newaccount.save		
 			end
