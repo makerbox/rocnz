@@ -1,5 +1,5 @@
-<p id="notice"><%= notice %></p>
-
+<div class="row">
+<div class="col-md-6">
 <p>
   <strong>name:</strong>
   <%= @account.name %>
@@ -57,3 +57,8 @@ Your account is pending approval.
 <% end %>
 
 <%= link_to 'Edit account details', edit_account_path(@account), class: 'btn btn-default' %>
+</div>
+<div class="col-md-6">
+<%= render 'orders/index' %>
+</div>
+</div>

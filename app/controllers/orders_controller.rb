@@ -20,7 +20,7 @@ end
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @orders = Order.all.where(user: current_user)
   end
 
   # GET /orders/1
@@ -72,7 +72,7 @@ end
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Order was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

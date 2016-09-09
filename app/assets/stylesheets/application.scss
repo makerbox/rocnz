@@ -103,6 +103,16 @@ max-width:15em;
 min-height:100vh;
 }
 
+.po {
+	border-top: 1px solid #FFF;
+	padding:1em;
+	display:inline-block;
+}
+.remove-btn {
+	vertical-align:middle;
+	float:right;
+}
+
 @media screen and (min-device-width:800px){
 .mycontainer{
 	padding-left:1em;

@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+
 <% @order.quantities.each do |po| %>
+<div class="po">
 	<%= po.product.code %>
 	<%= current_user.account.seller_level %>
 	<% case current_user.account.seller_level.to_i %>
@@ -19,7 +20,10 @@
 		  		$<%= po.product.rrp %>
 	<% end %>
 	x <%= po.qty %>
-	<hr>
+</div>
+<%= link_to 'remove', remove_product_path(id: po.id), class: 'btn btn-warning remove-btn' %>
 <% end %>
-<%= link_to 'SEND ORDER', class: 'btn btn-success' %>
-</p>
+<hr>
+<%= link_to ' SEND ORDER', send_order_path(@order), class: 'fa fa-paper-plane btn btn-info' %><hr>
+<%= link_to ' cancel', order_path(@order), method: :delete, class: 'fa fa-trash btn btn-danger' %>
+

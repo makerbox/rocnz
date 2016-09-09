@@ -30,6 +30,7 @@ end
   # GET /accounts/1
   # GET /accounts/1.json
   def show
+    @orders = Order.all.where(user: current_user)
   end
 
   # GET /accounts/new

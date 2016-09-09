@@ -45,19 +45,22 @@ class ProductsController < ApplicationController
   end
 
   #add product to order
-  def add
-    if current_user.orders.where(active: true)
-      #if the user has an order open, then add the product to the order
-      @product_order = ProductOrder.create(order: params[:order], product: params[:product], qty: params[:qty])
-    else
-      #otherwise, create a new order for the user
-      Order.create(user: current_user)
-      #add the product to the order (use product_order join table?)
-    end
-  end
+  # def add
+  #   if current_user.orders.where(active: true)
+  #     #if the user has an order open, then add the product to the order
+  #     @product_order = ProductOrder.create(order: params[:order], product: params[:product], qty: params[:qty])
+  #   else
+  #     #otherwise, create a new order for the user
+  #     Order.create(user: current_user)
+  #     #add the product to the order (use product_order join table?)
+  #   end
+  # end
 
   #remove product from order
   def remove
+    @quantity = Quantity.find_by(id: params[:id])
+    @quantity.destroy
+    redirect_to :back
   end
 
   # GET /products/new
