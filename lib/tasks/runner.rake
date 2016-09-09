@@ -37,7 +37,7 @@ namespace :runner do
 	task :attache do
 		require 'rdbi-driver-odbc'
 		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-		products = dbh.execute("SELECT * FROM product_master WHERE Code='007'").fetch(:all, :Struct)
+		products = dbh.execute("UPDATE product_master SET Inactive='0' WHERE Code='007'").fetch(:all, :Struct)
 		puts products
 	end
 
