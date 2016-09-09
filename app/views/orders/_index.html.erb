@@ -1,7 +1,8 @@
 <h1>Order history</h1>
 
     <% @orders.each do |order| %>
+    <%= link_to order do %>
     <%= order.created_at %>
-     <%= link_to 'Show', order %>
-       
+     <% end %><hr>
+       <%= will_paginate @orders %>
     <% end %>

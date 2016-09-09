@@ -21,6 +21,7 @@ end
   # GET /orders.json
   def index
     @orders = Order.all.where(user: current_user)
+    @orders = @orders.paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /orders/1
