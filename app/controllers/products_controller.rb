@@ -28,11 +28,7 @@ class ProductsController < ApplicationController
       end
 
     end
-    if params[:order]
-      @accounts = @accounts.order(params[:order] + ' ASC')
-    end
-    @products = @products.paginate(:page => params[:page], :per_page => 20)
-
+    @products = @products.order(group: 'DESC').order(code: 'ASC')
     @totalproducts = @products.count
     @order = current_user.orders.find_by(active: true)
   end

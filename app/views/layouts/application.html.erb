@@ -58,6 +58,10 @@ Roc Cloudy
         <% end %>
         <% if current_user.has_role? :admin %>
           <li><%= link_to 'All products', products_path %></li>
+              <li><%= link_to 'Roc', products_path(group: 'roc') %></li>
+              <li><%= link_to 'Polasports', products_path(group: 'polasports') %></li>
+              <li><%= link_to 'Locello', products_path(group: 'locello') %></li>
+              <li><%= link_to 'Unity', products_path(group: 'unity') %></li>
         <% end %>
       <% end %>
         </ul>
