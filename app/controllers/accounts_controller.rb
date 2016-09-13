@@ -25,6 +25,7 @@ end
     if params[:order]
       @accounts = @accounts.order(params[:order] + ' ASC')
     end
+    @accounts = @accounts.paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /accounts/1

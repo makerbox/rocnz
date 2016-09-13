@@ -48,4 +48,15 @@ namespace :runner do
 		puts products
 	end
 
+	task :acorn do
+		100.times do |h|
+			print "hi acorn \r"
+			t = h * 2
+			t.times do |p|
+				print " "
+			end
+			sleep 0.2
+		end
+	end
+
 end

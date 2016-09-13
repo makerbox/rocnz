@@ -9,7 +9,7 @@
       <th><%= link_to 'name', accounts_path(order: 'name') %></th>
       <th><%= link_to 'street', accounts_path(order: 'street') %></th>
       <th><%= link_to 'Suburb', accounts_path(order: 'Suburb') %></th>
-      <th><%= link_to 'State', accounts_path(order: 'State') %></th>
+      <th><%= link_to 'Sort', accounts_path(order: 'Sort') %></th>
       <th><%= link_to 'Code', accounts_path(order: 'Code') %></th>
       <th><%= link_to 'Phone', accounts_path(order: 'Phone') %></th>
       <th><%= link_to 'Contact name', accounts_path(order: 'contact') %></th>
@@ -22,39 +22,40 @@
     <% @accounts.each do |account| %>
     <% if account.approved != 'approved' %>
     <tr style="background:yellow;">
-    <% else %>
-    <tr>
-    <% end %>
-    <% if account.user %>
-      <td><%= account.user.email %></td>
       <% else %>
-      <td>no user assoc.</td>
+      <tr>
+        <% end %>
+        <% if account.user %>
+        <td><%= account.user.email %></td>
+        <% else %>
+        <td>no user assoc.</td>
+        <% end %>
+        <td><%= account.name %></td>
+        <td><%= account.street %></td>
+        <td><%= account.suburb %></td>
+        <td><%= account.sort %></td>
+        <td><%= account.code %></td>
+        <td><%= account.phone %></td>
+        <td><%= account.contact %></td>
+        <% if account.approved == 'approved' %>
+        <% if !account.seller_level? %>
+        <td>
+          <%= link_to edit_account_path(account), class: 'btn btn-warning', title: 'seller level required' do %><i class="fa fa-exclamation-triangle"></i><% end %>
+          <%= link_to unapprove_account_path(account), class: 'btn btn-primary' do %><i class="fa fa-thumbs-o-down"></i> Unapprove<% end %>
+        </td>
+        <% else %>
+        <td><%= link_to edit_account_path(account), class: 'btn btn-success' do %><i class="fa fa-sort"></i> <%= account.seller_level %><% end %> <%= link_to unapprove_account_path(account), class: 'btn btn-primary' do %><i class="fa fa-thumbs-o-down"></i> Unapprove<% end %></td>
+        <% end %>
+        <% else %>
+        <td><%= link_to approve_account_path(account), class: 'btn btn-info' do %><i class="fa fa-thumbs-o-up"></i> Approve<% end %></td>
+        <% end %>
+        <td><%= link_to account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do %><i class="fa fa-close"></i> Delete<% end %></td>
+      </tr>
+      
       <% end %>
-      <td><%= account.name %></td>
-      <td><%= account.street %></td>
-      <td><%= account.suburb %></td>
-      <td><%= account.state %></td>
-      <td><%= account.code %></td>
-      <td><%= account.phone %></td>
-      <td><%= account.contact %></td>
-      <% if account.approved == 'approved' %>
-      <% if !account.seller_level? %>
-      <td>
-      <%= link_to edit_account_path(account), class: 'btn btn-warning', title: 'seller level required' do %><i class="fa fa-exclamation-triangle"></i><% end %>
-      <%= link_to unapprove_account_path(account), class: 'btn btn-primary' do %><i class="fa fa-thumbs-o-down"></i> Unapprove<% end %>
-      </td>
-      <% else %>
-      <td><%= link_to edit_account_path(account), class: 'btn btn-success' do %><i class="fa fa-sort"></i> <%= account.seller_level %><% end %> <%= link_to unapprove_account_path(account), class: 'btn btn-primary' do %><i class="fa fa-thumbs-o-down"></i> Unapprove<% end %></td>
-      <% end %>
-      <% else %>
-      <td><%= link_to approve_account_path(account), class: 'btn btn-info' do %><i class="fa fa-thumbs-o-up"></i> Approve<% end %></td>
-      <% end %>
-      <td><%= link_to account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do %><i class="fa fa-close"></i> Delete<% end %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+<%= will_paginate @accounts %>
+  <br>
 
-<br>
-
-<%= link_to 'New Account', new_account_path %>
+  <%= link_to 'New Account', new_account_path %>

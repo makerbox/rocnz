@@ -1,3 +1,15 @@
-// Place all the styles related to the terms controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+ol {
+    counter-reset: item;
+}
+
+ol > li {
+    counter-increment: item;
+}
+ol ol > li {
+    display: block;
+}
+
+ol ol > li:before {
+    content: counters(item, ".") ". ";
+    margin-left: -20px;
+}
