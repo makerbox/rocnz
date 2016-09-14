@@ -31,6 +31,7 @@
         <% when 6 %>
         $<%= product.rrp %>
         <% end %>
+        <br>[RRP: $<%= product.rrp %>]
         <% end %>
         <% end %>
         <% if current_user.has_role? :admin %>
