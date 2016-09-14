@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>email</th>
-      <th><%= link_to 'name', accounts_path(order: 'name') %></th>
+      <th><%= link_to 'company', accounts_path(order: 'company') %></th>
       <th><%= link_to 'street', accounts_path(order: 'street') %></th>
       <th><%= link_to 'Suburb', accounts_path(order: 'Suburb') %></th>
       <th><%= link_to 'Sort', accounts_path(order: 'Sort') %></th>
@@ -30,7 +30,7 @@
         <% else %>
         <td>no user assoc.</td>
         <% end %>
-        <td><%= account.name %></td>
+        <td><%= account.company %></td>
         <td><%= account.street %></td>
         <td><%= account.suburb %></td>
         <td><%= account.sort %></td>
