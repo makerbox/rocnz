@@ -19,7 +19,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
 puts "updating products"
 products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
-productsext = dbh.execute("SELECT * FROM productmastext").fetch(:all, :Struct)
+productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
 
 productcounter = 0
 products.each do |p|
