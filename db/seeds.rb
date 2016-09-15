@@ -28,6 +28,7 @@ products.each do |p|
 	print "%\r"
 	if p.Inactive == 0
 		@product = Product.find_by(code: p.Code)
+		category = ''
 		productsext.each do |x| #match the extension file with this product
 			if x.Code == p.Code
 				category = x.CostCentre
@@ -112,7 +113,7 @@ end
 customers.each do |customer| #use the data from customers to fill in the blanks in Accounts
 	account = Account.find_by(code: customer.Code)
 	if account
-		account.update(approved: 'approved', name: customer.Name, street: customer.Street, suburb: customer.Suburb, postcode: customer.Postcode, phone: customer.Phone, contact: customer.Contact, seller_level: customer.PriceCat, sort: customer.Sort)
+		account.update(approved: 'approved', company: customer.Name, street: customer.Street, suburb: customer.Suburb, postcode: customer.Postcode, phone: customer.Phone, contact: customer.Contact, seller_level: customer.PriceCat, sort: customer.Sort)
 	end
 	print "."
 end
