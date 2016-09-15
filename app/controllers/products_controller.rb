@@ -7,25 +7,25 @@ class ProductsController < ApplicationController
   def index
     group = params[:group]
     if group == 'roc'
-      if current_user.account.sort == 'R'
+      if current_user.account.sort.include? 'R'
         @products = Product.where(group: ['C  '])
       else
         redirect_to home_index_path
       end
     elsif group == 'polasports'
-      if current_user.account.sort == 'P'
+      if current_user.account.sort.include? 'P'
         @products = Product.where(group: ['L  '])
       else
         redirect_to home_index_path
       end
     elsif group == 'locello'
-      if current_user.account.sort == 'P'
+      if current_user.account.sort.include? 'L'
         @products = Product.where(group: ['LC '])
       else
         redirect_to home_index_path
       end
     elsif group == 'unity'
-      if current_user.account.sort == 'P'
+      if current_user.account.sort.include? 'U'
         @products = Product.where(group: ['E  ', 'R  ', 'D  ', 'A  '])
       else
         redirect_to home_index_path
