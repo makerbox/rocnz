@@ -27,7 +27,7 @@ class QuantitiesController < ApplicationController
     @quantity = Quantity.new(quantity_params)
     if @quantity.order == nil
     #if there is not active order to add this to, we will just make one
-      @order = Order.create(user: current_user, active: true)
+      @order = Order.create(user: current_user, active: true, approved: false, complete: false)
       #and then add it to the new order
       @quantity.order = @order
     end

@@ -1,6 +1,13 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
+
+def sendorder
+  @order = Order.find_by(id: params[:id])
+  @order.update(active: false, sent: DateTime.now)
+  redirect_to account_path(current_user.account)
+end
+
 def cart #if there aren't any active orders, then create one
   product = Product.find_by(id: params[:product])
   order = Order.create(user: current_user, active: true)
@@ -43,7 +50,6 @@ end
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }

@@ -1,8 +1,27 @@
-<h1>Order history</h1>
+<h1>Pending Orders</h1>
+<% if @pendingorders.any? %>
+	<ul>
+	<% @pendingorders.each do |o| %>
+		<%= link_to o do %>
+			<li><%= o.sent.strftime("%d/%m/%y | %I:%M:%S %p") %></li>
+		<% end %>
+	<% end %>
+	</ul>
+<% else %>
+	you haven't placed any orders yet
+<% end %>
 
-    <% @orders.each do |order| %>
-    <%= link_to order do %>
-    <%= order.created_at %>
-     <% end %><hr>
-       <%= will_paginate @orders %>
-    <% end %>
+<hr>
+<% if @approvedorders.any? %>
+<h1>Approved Orders</h1>
+<% @approved.each do |order| %>
+<% end %>
+<%= will_paginate @approved %>
+<hr>
+<% end %>
+<% if @sentorders.any? %>
+<h1>Fulfilled Orders</h1>
+<% @sentorders.each do |order| %>
+<% end %>
+<%= will_paginate @sentorders %>
+<% end %>

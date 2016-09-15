@@ -53,16 +53,14 @@
 
 <%= link_to 'Back', :back %>
 </div>
- <% if current_user.orders.any? %>
+ <% if current_user.orders.any? && current_user.orders.last.active == true %>
   <div class="col-md-3 cart">
     <p>
       <i class="fa fa-shopping-cart fa-2x"></i>
     </p>
     <hr>
     <p>
-    <% if current_user.orders.last.active == true %>
-      <%= render 'orders/show' %>
-    <% end %>
+      <%= render 'orders/sidecart' %>
     </p>
   </div>
   <% end %>

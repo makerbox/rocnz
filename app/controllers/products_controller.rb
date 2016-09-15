@@ -7,13 +7,29 @@ class ProductsController < ApplicationController
   def index
     group = params[:group]
     if group == 'roc'
-      @products = Product.where(group: ['C  '])
+      if current_user.account.sort == 'R'
+        @products = Product.where(group: ['C  '])
+      else
+        redirect_to home_index_path
+      end
     elsif group == 'polasports'
-      @products = Product.where(group: ['L  '])
+      if current_user.account.sort == 'P'
+        @products = Product.where(group: ['L  '])
+      else
+        redirect_to home_index_path
+      end
     elsif group == 'locello'
-      @products = Product.where(group: ['LC '])
+      if current_user.account.sort == 'P'
+        @products = Product.where(group: ['LC '])
+      else
+        redirect_to home_index_path
+      end
     elsif group == 'unity'
-      @products = Product.where(group: ['E  ', 'R  ', 'D  ', 'A  '])
+      if current_user.account.sort == 'P'
+        @products = Product.where(group: ['E  ', 'R  ', 'D  ', 'A  '])
+      else
+        redirect_to home_index_path
+      end
     else
       if user_signed_in?
         if current_user.has_role? :admin
@@ -28,9 +44,11 @@ class ProductsController < ApplicationController
       end
 
     end
-    @products = @products.order(group: 'DESC').order(code: 'ASC')
-    @totalproducts = @products.count
-    @order = current_user.orders.find_by(active: true)
+    if @products
+      @products = @products.order(group: 'DESC').order(code: 'ASC')
+      @totalproducts = @products.count
+      @order = current_user.orders.find_by(active: true)
+    end
   end
 
   # GET /products/1

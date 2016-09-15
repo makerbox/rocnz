@@ -22,6 +22,6 @@
 <%= link_to 'remove', remove_product_path(id: po.id), class: 'btn btn-warning remove-btn' %></div>
 <% end %>
 <hr>
-<%= link_to ' SEND ORDER', send_order_path(@order), class: 'fa fa-paper-plane btn btn-info' %><hr>
+<%= link_to ' SEND ORDER', sendorder_order_path(@order), class: 'fa fa-paper-plane btn btn-info' %><hr>
 <%= link_to ' cancel', order_path(@order), method: :delete, class: 'fa fa-trash btn btn-danger' %>
 
