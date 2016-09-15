@@ -1,3 +1,14 @@
+
+
+
+
+#REALLY NEED TO MAKE THIS NEATER AND MORE EFFICIENT - BUILD METHODS AND DRY UP CODE
+
+
+
+
+
+
 # ensure there is an admin account
 adminuser = User.find_by(email: "web@roccloudy.com")
 if !adminuser
