@@ -28,7 +28,11 @@ products.each do |p|
 	print "%\r"
 	if p.Inactive == 0
 		@product = Product.find_by(code: p.Code)
-		category = productsext.find_by(Code: p.Code).CostCentre
+		productsext.each do |x| #match the extension file with this product
+			if x.Code == p.Code
+				category = x.CostCentre
+			end
+		end
 
 		if @product #if the product already exists, just update the details
 			if @product.category != category || @product.code != p.Code || @product.description != p.Description || @product.group != p.ProductGroup || @product.price1 != p.SalesPrice1 || @product.price2 != p.SalesPrice2 || @product.price3 != p.SalesPrice3 || @product.price4 != p.SalesPrice4 || @product.price5 != p.SalesPrice5 || @product.rrp != p.SalesPrice6 || @product.qty != p.QtyInStock 
