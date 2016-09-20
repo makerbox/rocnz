@@ -53,12 +53,12 @@ products.each do |p|
 				puts "already in db, skipping product"
 			end
 		else #if the product doesn't already exist, let's make it
-			p = Product.new(category: category, qty: p.QtyInStock, code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+			newproduct = Product.new(category: category, qty: p.QtyInStock, code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
 			#upload image to cloudinary and store url in product.imageurl (images are stored in z:/attache/roc/images/product/*sku*.jpg)
 			filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.strip + '.jpg'
 			if File.exist?(filename)
 				Cloudinary::Uploader.upload(filename, :public_id => p.Code.strip, :overwrite => true)
-				p.create
+				newproduct.create
 			else
 				puts "no image, skipping product"
 			end
