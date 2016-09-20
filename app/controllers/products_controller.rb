@@ -45,6 +45,7 @@ class ProductsController < ApplicationController
 
     end
     if @products
+      @products = @products.where("qty > ?", 0)
       @products = @products.order(group: 'DESC').order(code: 'ASC')
       @totalproducts = @products.count
       @order = current_user.orders.find_by(active: true)
