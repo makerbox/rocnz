@@ -1,4 +1,26 @@
-<h1>Wholesaler portal</h1>
-<p>Intro to Roc Cloudy Pty Ltd</p>
-<p>Sign up and order process details</p>
-<p>CTA</p>
+<div class="center">
+<div class="homecontainer">
+<div class='homeimg' style="background-image: url('https://cdn.shopify.com/s/files/1/0611/5541/t/24/assets/slideshow_slide_1_image.jpg?8258560488626330897');">
+<% if user_signed_in? %>
+<%= link_to 'Roc', products_path(group: 'roc'), class: "homeoverlay" %>
+<% else %>
+<%= link_to 'Roc', new_user_registration_path, class: "homeoverlay" %>
+<% end %>
+</div><div class='homeimg' style="background-image:url('https://cdn.shopify.com/s/files/1/1236/0668/t/4/assets/slideshow_3.jpg?13162898242852784564');">
+<% if user_signed_in? %>
+<%= link_to 'Polasports', products_path(group: 'polasports'), class: "homeoverlay" %>
+<% else %>
+<%= link_to 'Polasports', new_user_registration_path, class: "homeoverlay" %>
+<% end %></div><div class='homeimg' style="background-image:url('https://cdn.shopify.com/s/files/1/1030/7859/t/2/assets/hero_slide_1.jpg?3168981526881117147');">
+<% if user_signed_in? %>
+<%= link_to 'Locello', products_path(group: 'locello'), class: "homeoverlay" %>
+<% else %>
+<%= link_to 'Locello', new_user_registration_path, class: "homeoverlay" %>
+<% end %></div><div class='homeimg' style="background-image:url('http://www.unityeyewear.com.au/auto/thumbnail/auto/sb-plugin-gopix/Home/3.jpg?maxwidth=875&maxheight=415&style=cropped');">
+<% if user_signed_in? %>
+<%= link_to 'Unity', products_path(group: 'unity'), class: "homeoverlay" %>
+<% else %>
+<%= link_to 'Unity', new_user_registration_path, class: "homeoverlay" %>
+<% end %></div>
+</div>
+</div>

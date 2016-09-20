@@ -21,7 +21,9 @@
 		    <% when 6 %>
 		  		$<%= po.product.rrp %>
 	<% end %>
-	x <%= po.qty %>
+	x <%= po.qty %> ------- $<%= po.qty * @setprice %><% @order.total = @order.total + (po.qty * @setprice) %>
 
 <% end %>
+<hr>
+TOTAL (excl. freight) = $<%= @order.total %>
 <hr>
