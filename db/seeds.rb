@@ -60,7 +60,7 @@ products.each do |p|
 				Cloudinary::Uploader.upload(filename, :public_id => p.Code.strip, :overwrite => true)
 				p.create
 			else
-				"no image, skipping product"
+				puts "no image, skipping product"
 			end
 		end
 	end
