@@ -1,4 +1,5 @@
 <span id="notice"><%= notice %></span>
+<% @order.total = 0 %>
 <% @order.quantities.each do |po| %>
 <div class="po">
 	<%= link_to product_path(Product.find_by(code: po.product.code)) do %>
