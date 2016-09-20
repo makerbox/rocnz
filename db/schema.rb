@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160915053925) do
+ActiveRecord::Schema.define(version: 20160920003754) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20160915053925) do
     t.datetime "sent"
     t.boolean  "approved"
     t.boolean  "complete"
+    t.decimal  "total"
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"

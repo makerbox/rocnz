@@ -25,7 +25,13 @@ body {
 }
 a:hover{
 	color:#000;
+	background-color:transparent;
+	}
+
+a:hover .product-thumbnail{
+	border-radius: 10px;
 }
+
 .navbar{
 	margin-bottom:0;
 	z-index:999;
@@ -94,6 +100,12 @@ td{
 img {
 	max-height:100%;
 	max-width:100%;
+}
+.product-thumbnail {
+	max-width:4em;
+	display:inline-block;
+	margin-bottom:0;
+	border:5px solid #FFF;
 }
 .product {
 	width:30%;

@@ -1,7 +1,11 @@
 <span id="notice"><%= notice %></span>
 <% @order.quantities.each do |po| %>
 <div class="po">
-	<%= link_to po.product.code, product_path(Product.find_by(code: po.product.code)) %>
+	<%= link_to product_path(Product.find_by(code: po.product.code)) do %>
+		<div class="product-thumbnail">
+	<%= cl_image_tag(po.product.code.strip) %>
+	</div><%= po.product.code %>
+	<% end %>
 	<%= current_user.account.seller_level %>
 	<% case current_user.account.seller_level.to_i %>
 		  	<% when 1 %>
