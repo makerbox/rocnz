@@ -8,21 +8,21 @@ def sendorder
   redirect_to account_path(current_user.account)
 end
 
-def cart #if there aren't any active orders, then create one
-  product = Product.find_by(id: params[:product])
-  order = Order.create(user: current_user, active: true)
-  qty = params[:qty]
-  ProductOrder.create(order: order, product: product, qty: qty)
-  redirect_to product, notice: 'successfully added to order'
-end
+# def cart #if there aren't any active orders, then create one
+#   product = Product.find_by(id: params[:product])
+#   order = Order.create(user: current_user, active: true)
+#   qty = params[:qty]
+#   ProductOrder.create(order: order, product: product, qty: qty)
+#   redirect_to product, notice: 'successfully added to order'
+# end
 
-def addto
-  product = Product.find_by(id: params[:product])
-  order = current_user.orders.where(active: true).last
-  qty = params[:qty]
-  ProductOrder.create(order: order, product: product, qty: qty)
-  redirect_to product, notice: 'successfully added to order'
-end
+# def addto
+#   product = Product.find_by(id: params[:product])
+#   order = current_user.orders.where(active: true).last
+#   qty = params[:qty]
+#   ProductOrder.create(order: order, product: product, qty: qty)
+#   redirect_to product, notice: 'successfully added to order'
+# end
 
   # GET /orders
   # GET /orders.json
