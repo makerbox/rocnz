@@ -5,7 +5,22 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
+    availgroups = [] #create empty array to store the groups available to the current user
+    if current_user.account.sort.include? 'R'
+      availgroups = availgroups << 'C  '
+    end
+    if current_user.account.sort.include? 'P'
+      availgroups = availgroups << 'L  '
+    end
+    if current_user.account.sort.include? 'L'
+      availgroups = availgroups << 'LC  '
+    end
+    if current_user.account.sort.include? 'U'
+      availgroups = availgroups << ['E  ', 'R  ', 'D  ', 'A  ']
+    end
+
     group = params[:group]
+    filter = params[:filter]
     if group == 'roc'
       if current_user.account.sort.include? 'R'
         @products = Product.where(group: ['C  '])
@@ -28,11 +43,15 @@ class ProductsController < ApplicationController
       if current_user.account.sort.include? 'U'
         @products = Product.where(group: ['E  ', 'R  ', 'D  ', 'A  '])
         if params[:subcat]
-          @products = @products.where(group: params[:subcat])
+          @products = @products.where(group: params[:subcat]) #***********************SUBCATEGORY TEST******************
         end
       else
         redirect_to home_index_path
       end
+    elsif filter == 'new'
+      @products = Products.where(group: availgroups)
+      cutoff = Date.today - 30.days
+      @products = @products.where(new_date '>= ?', cutoff)
     else
       if user_signed_in?
         if current_user.has_role? :admin
