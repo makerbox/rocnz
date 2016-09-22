@@ -74,8 +74,10 @@ products.each do |p|
 				Cloudinary::Uploader.upload(filename, :public_id => p.Code.strip, :overwrite => true)
 				#now for the date of arrival
 				produdefdata.each do |pro| #for each of the rows in the product user defined data file
-					if pro.FldNo == 1 && pro.Code == p.Code #see if it is the right product and the first user defined field
+					if pro.Code == p.Code #see if it is the right product
 						onsale = pro.DateFld #if it is the right record, then take it's date and put it in the onsale variable
+					else
+						onsale = nil #otherwise just make it nil (produdefdata only contains records that are filled in)
 					end
 				end
 				Product.create(new_date: onsale, category: category, qty: p.QtyInStock, code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
