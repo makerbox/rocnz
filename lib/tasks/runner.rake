@@ -5,10 +5,6 @@ namespace :runner do
 		puts "connecting to database"
 		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 		produdefdata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
-		@products = Product.where(group: availgroups.to_a)
-		cutoff = Date.today - 30.days
-		@products = @products.where('new_date >= ?', cutoff)
-		puts @products
 	end
 
 	task :empty_users do
