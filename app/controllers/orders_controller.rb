@@ -5,6 +5,11 @@ class OrdersController < ApplicationController
 def sendorder
   @order = Order.find_by(id: params[:id])
   @order.update(active: false, sent: DateTime.now)
+  @order.quantities.each do |q|
+    oldqty = q.product.qty
+    newqty = oldqty - q.qty
+    q.product.update(qty: newqty)
+  end
   redirect_to account_path(current_user.account)
 end
 
