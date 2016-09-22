@@ -31,7 +31,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 puts "updating products"
 products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
 productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
-
+produdefdata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
 productcounter = 0
 products.each do |p|
 	productcounter = productcounter + 1
@@ -49,12 +49,18 @@ products.each do |p|
 		if @product #if the product already exists, just update the details
 			if @product.category != category || @product.code != p.Code || @product.description != p.Description || @product.group != p.ProductGroup || @product.price1 != p.SalesPrice1 || @product.price2 != p.SalesPrice2 || @product.price3 != p.SalesPrice3 || @product.price4 != p.SalesPrice4 || @product.price5 != p.SalesPrice5 || @product.rrp != p.SalesPrice6 || @product.qty != p.QtyInStock 
 				@thisproduct = Product.find_by(code: p.Code)
-				@pending_sold = 0
+				@pending_sold = 0 #set pending sold qty to zero
 				Order.where(approved: false).each do |order| #for each pending order
 					@pending_sold = @pending_sold + order.quantities.where(product_id: @thisproduct.id).sum(:qty) #find how many of this product are on it
 				end
-				current_quantity = p.QtyInStock - @pending_sold #qty available minus pending orders
-				@thisproduct.update(category: category, qty: current_quantity, code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+				current_quantity = p.QtyInStock - @pending_sold #qty is qty available minus pending orders
+				#now for the date of arrival
+				produdefdata.each do |pro| #for each of the rows in the product user defined data file
+					if pro.FldNo == 1 && pro.Code == p.Code #see if it is the right product and the first user defined field
+						onsale = pro.DateFld #if it is the right record, then take it's date and put it in the onsale variable
+					end
+				end
+				@thisproduct.update(new_date: onsale, category: category, qty: current_quantity, code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
 			else
 				puts "already in db, skipping product"
 			end
@@ -63,7 +69,13 @@ products.each do |p|
 			filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.strip + '.jpg'
 			if File.exist?(filename) # if there is an image, then create the product
 				Cloudinary::Uploader.upload(filename, :public_id => p.Code.strip, :overwrite => true)
-				Product.create(category: category, qty: p.QtyInStock, code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+				#now for the date of arrival
+				produdefdata.each do |pro| #for each of the rows in the product user defined data file
+					if pro.FldNo == 1 && pro.Code == p.Code #see if it is the right product and the first user defined field
+						onsale = pro.DateFld #if it is the right record, then take it's date and put it in the onsale variable
+					end
+				end
+				Product.create(new_date: onsale, category: category, qty: p.QtyInStock, code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
 			else
 				puts "no image, skipping product"
 			end

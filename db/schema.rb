@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920003754) do
+ActiveRecord::Schema.define(version: 20160922020820) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20160920003754) do
     t.string   "imageurl"
     t.integer  "qty"
     t.string   "category"
+    t.date     "new_date"
   end
 
   create_table "quantities", force: :cascade do |t|
