@@ -51,7 +51,7 @@ class ProductsController < ApplicationController
     elsif filter == 'new'
       @products = Product.where(group: availgroups)
       cutoff = Date.today - 30.days
-      # @products = @products.where('new_date >= ?', cutoff)
+      @products = @products.where('new_date >= ?', cutoff)
     else
       if user_signed_in?
         if current_user.has_role? :admin
