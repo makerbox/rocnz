@@ -31,7 +31,7 @@ end
   # GET /accounts/1
   # GET /accounts/1.json
   def show
-    @pendingorders = Order.where(user: current_user, active: false, approved: false)
+    @pendingorders = Order.where(user: current_user, active: false, approved: false, complete: false)
     @approvedorders = Order.where(user:current_user, active:false, approved: true, complete: false)
     @sentorders = Order.where(user:current_user, active:false, approved: true, complete: true)
     @sentorders = @sentorders.paginate(:page => params[:page], :per_page => 20)
