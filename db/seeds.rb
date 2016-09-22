@@ -12,7 +12,9 @@
 # ensure there is an admin account
 adminuser = User.find_by(email: "web@roccloudy.com")
 if !adminuser
-User.create(email: "web@roccloudy.com", password: "cloudy_16", password_confirmation: "cloudy_16")
+admin = User.create(email: "web@roccloudy.com", password: "cloudy_16", password_confirmation: "cloudy_16")
+adminaccount = Account.create(user: admin)
+adminaccount.update(sort:'U L P R')
 else
 	if !adminuser.has_role? :admin
 		adminuser.add_role :admin
