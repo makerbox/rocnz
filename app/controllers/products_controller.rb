@@ -50,7 +50,6 @@ class ProductsController < ApplicationController
       end
     elsif filter == 'new'
       @products = Product.where(group: availgroups.to_a)
-      @notice = availgroups
       cutoff = Date.today - 30.days
       @products = @products.where('new_date >= ?', cutoff)
     else
