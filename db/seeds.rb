@@ -49,7 +49,7 @@ products.each do |p|
 			end
 		end
 				#now for the date of arrival
-				onsale = '' #set onsale just in case there isn't one, because the program will skip the next loop entirely if it doesn't exist
+				onsale = Date.today - 40.days #set onsale just in case there isn't one, because the program will skip the next loop entirely if it doesn't exist
 				produdefdata.each do |pro| #for each of the rows in the product user defined data file
 					if pro.Code == p.Code #see if it is the right product
 						onsale = pro.DateFld #if it is the right record, then take it's date and put it in the onsale variable
