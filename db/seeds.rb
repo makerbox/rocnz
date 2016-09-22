@@ -48,10 +48,13 @@ products.each do |p|
 
 		if @product #if the product already exists, just update the details
 			if @product.category != category || @product.code != p.Code || @product.description != p.Description || @product.group != p.ProductGroup || @product.price1 != p.SalesPrice1 || @product.price2 != p.SalesPrice2 || @product.price3 != p.SalesPrice3 || @product.price4 != p.SalesPrice4 || @product.price5 != p.SalesPrice5 || @product.rrp != p.SalesPrice6 || @product.qty != p.QtyInStock 
-				thisproduct = Product.find_by(code: p.Code)
-				pending_sold = Order.where(approved: false).quantities.where(product_id: thisproduct.id).sum(:qty) #qty on pending orders
-				current_quantity = p.QtyInStock - pending_sold #qty available minus pending orders
-				thisproduct.update(category: category, qty: current_quantity, code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+				@thisproduct = Product.find_by(code: p.Code)
+				@pending_sold = 0
+				Order.where(approved: false).each do |order| #for each pending order
+					@pending_sold = @pending_sold + order.quantities.where(product_id: @thisproduct.id).sum(:qty) #find how many of this product are on it
+				end
+				current_quantity = p.QtyInStock - @pending_sold #qty available minus pending orders
+				@thisproduct.update(category: category, qty: current_quantity, code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
 			else
 				puts "already in db, skipping product"
 			end
