@@ -32,6 +32,7 @@ puts "updating products"
 products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
 productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
 produdefdata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+
 productcounter = 0
 products.each do |p|
 	productcounter = productcounter + 1
@@ -56,8 +57,9 @@ products.each do |p|
 				current_quantity = p.QtyInStock - @pending_sold #qty is qty available minus pending orders
 				#now for the date of arrival
 				produdefdata.each do |pro| #for each of the rows in the product user defined data file
-					if pro.FldNo == 1 && pro.Code == p.Code #see if it is the right product and the first user defined field
+					if pro.Code == p.Code #see if it is the right product and the first user defined field
 						onsale = pro.DateFld #if it is the right record, then take it's date and put it in the onsale variable
+						puts onsale
 					end
 				end
 				@thisproduct.update(new_date: onsale, category: category, qty: current_quantity, code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)

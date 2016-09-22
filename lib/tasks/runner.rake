@@ -1,5 +1,13 @@
 namespace :runner do
 
+	task :testdb do
+		require 'rdbi-driver-odbc'
+		puts "connecting to database"
+		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+		produdefdata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+		puts pro.DateFld
+	end
+
 	task :empty_users do
 		User.destroy_all
 		Account.destroy_all
