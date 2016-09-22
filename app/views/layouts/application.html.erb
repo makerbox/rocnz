@@ -41,6 +41,9 @@ Roc Cloudy
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <% if user_signed_in? %>
         <ul class="nav navbar-nav">
+        <% if @notice %>
+        <%= @notice %>
+        <% end %>
         <% if current_user.account %>
           <% if current_user.account.sort %>
             <% if current_user.account.sort.include? 'R' %>
