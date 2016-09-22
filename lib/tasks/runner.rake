@@ -5,7 +5,10 @@ namespace :runner do
 		puts "connecting to database"
 		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 		produdefdata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
-		puts pro.DateFld
+		produdefdata.each do |pro|
+			puts pro.Code
+			puts pro.DateFld
+		end
 	end
 
 	task :empty_users do
