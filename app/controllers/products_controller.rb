@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
       availgroups = availgroups << 'LC  '
     end
     if current_user.account.sort.include? 'U'
-      availgroups = availgroups << ['E  ', 'R  ', 'D  ', 'A  ']
+      availgroups = availgroups << 'E  ' << 'R  ' << 'D  ' << 'A  '
     end
 
     group = params[:group]
