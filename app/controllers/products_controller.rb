@@ -49,7 +49,7 @@ class ProductsController < ApplicationController
         redirect_to home_index_path
       end
     elsif filter == 'new'
-      @products = Products.where(group: availgroups)
+      @products = Product.where(group: availgroups)
       cutoff = Date.today - 30.days
       @products = @products.where(new_date '>= ?', cutoff)
     else
