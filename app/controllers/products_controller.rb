@@ -63,8 +63,8 @@ class ProductsController < ApplicationController
         end
 
       end
-            else
-        redirect_to home_index_path
+    else
+      redirect_to home_index_path
     end
     if @products
       @products = @products.where("qty > ?", 20)
