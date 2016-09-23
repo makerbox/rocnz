@@ -21,6 +21,7 @@ class ProductsController < ApplicationController
 
     group = params[:group]
     filter = params[:filter]
+    if current_user.sort # check that they have a sort before trying to use include? statements
     if group == 'roc'
       if current_user.account.sort.include? 'R'
         @products = Product.where(group: ['C  '])
@@ -64,6 +65,7 @@ class ProductsController < ApplicationController
       end
 
     end
+  end
     if @products
       @products = @products.where("qty > ?", 20)
       @products = @products.order(group: 'DESC').order(code: 'ASC')

@@ -18,6 +18,8 @@ adminaccount.update(sort:'U L P R')
 else
 	if !adminuser.has_role? :admin
 		adminuser.add_role :admin
+		adminaccount = adminuser.account
+		adminaccount.update(sort:'U L P R')
 	end
 end
 
