@@ -4,8 +4,9 @@ namespace :runner do
 		require 'rdbi-driver-odbc'
 		puts "connecting to database"
 		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-		prodtrans = dbh.execute("SELECT * FROM PRODUCT_TRANSACTIONS").fetch(:all, :Struct)
-		prodtrans.each do |p|
+		prodtrans = dbh.execute("SELECT * FROM product_tranasctions").fetch(:all, :Struct)
+		code = prodtrans.first.Code
+		prodtrans.where(Code: '001LO').each do |p|
 			puts p
 		end
 	end
