@@ -6,44 +6,45 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     availgroups = [] #create empty array to store the groups available to the current user
-    if current_user.account.sort.include? 'R'
-      availgroups = availgroups << 'C  '
-    end
-    if current_user.account.sort.include? 'P'
-      availgroups = availgroups << 'L  '
-    end
-    if current_user.account.sort.include? 'L'
-      availgroups = availgroups << 'LC  '
-    end
-    if current_user.account.sort.include? 'U'
-      availgroups = availgroups << 'E  ' << 'R  ' << 'D  ' << 'A  '
-    end
+
 
     group = params[:group]
     filter = params[:filter]
     if current_user.sort # check that they have a sort before trying to use include? statements
-    if group == 'roc'
       if current_user.account.sort.include? 'R'
-        @products = Product.where(group: ['C  '])
-      else
-        redirect_to home_index_path
+        availgroups = availgroups << 'C  '
       end
-    elsif group == 'polasports'
       if current_user.account.sort.include? 'P'
-        @products = Product.where(group: ['L  '])
-      else
-        redirect_to home_index_path
+        availgroups = availgroups << 'L  '
       end
-    elsif group == 'locello'
       if current_user.account.sort.include? 'L'
-        @products = Product.where(group: ['LC '])
-      else
-        redirect_to home_index_path
+        availgroups = availgroups << 'LC  '
       end
-    elsif group == 'unity'
       if current_user.account.sort.include? 'U'
-        @products = Product.where(group: ['E  ', 'R  ', 'D  ', 'A  '])
-        if params[:subcat]
+        availgroups = availgroups << 'E  ' << 'R  ' << 'D  ' << 'A  '
+      end
+      if group == 'roc'
+        if current_user.account.sort.include? 'R'
+          @products = Product.where(group: ['C  '])
+        else
+          redirect_to home_index_path
+        end
+      elsif group == 'polasports'
+        if current_user.account.sort.include? 'P'
+          @products = Product.where(group: ['L  '])
+        else
+          redirect_to home_index_path
+        end
+      elsif group == 'locello'
+        if current_user.account.sort.include? 'L'
+          @products = Product.where(group: ['LC '])
+        else
+          redirect_to home_index_path
+        end
+      elsif group == 'unity'
+        if current_user.account.sort.include? 'U'
+          @products = Product.where(group: ['E  ', 'R  ', 'D  ', 'A  '])
+          if params[:subcat]
           @products = @products.where(group: params[:subcat]) #***********************SUBCATEGORY TEST******************
         end
       else
@@ -60,19 +61,19 @@ class ProductsController < ApplicationController
           redirect_to home_index_url
         end
       else
-          @products = Product.all
-          redirect_to home_index_url
+        @products = Product.all
+        redirect_to home_index_url
       end
 
     end
   end
-    if @products
-      @products = @products.where("qty > ?", 20)
-      @products = @products.order(group: 'DESC').order(code: 'ASC')
-      @totalproducts = @products.count
-      @order = current_user.orders.find_by(active: true)
-    end
+  if @products
+    @products = @products.where("qty > ?", 20)
+    @products = @products.order(group: 'DESC').order(code: 'ASC')
+    @totalproducts = @products.count
+    @order = current_user.orders.find_by(active: true)
   end
+end
 
   # GET /products/1
   # GET /products/1.json
@@ -159,4 +160,4 @@ class ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(:name, :price)
     end
-end
+  end
