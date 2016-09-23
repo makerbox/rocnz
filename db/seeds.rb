@@ -36,6 +36,7 @@ puts "updating products"
 products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
 productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
 produdefdata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+prodtrans = dbh.execute("SELECT * FROM PRODUCT_TRANSACTIONS").fetch(:all, :Struct)
 
 productcounter = 0
 products.each do |p|
