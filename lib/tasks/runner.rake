@@ -4,11 +4,8 @@ namespace :runner do
 		require 'rdbi-driver-odbc'
 		puts "connecting to database"
 		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-		trans = dbh.execute("SELECT * FROM customer_transactions").fetch(:all, :Struct)
-		putter = trans.where(SalesRep: 'SR ').first
-		putter.each do |p|
-			puts p
-		end
+		Transaction.new = dbh.execute("SELECT * FROM customer_transactions").fetch(:all, :Struct)
+		puts Transaction.first.Code
 	end
 
 	task :empty_users do
