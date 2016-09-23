@@ -5,7 +5,10 @@ namespace :runner do
 		puts "connecting to database"
 		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 		trans = dbh.execute("SELECT * FROM customer_transactions").fetch(:all, :Struct)
-		puts trans.first
+		putter = trans.where(SalesRep: 'SR ').first
+		putter.each do |p|
+			puts p
+		end
 	end
 
 	task :empty_users do
