@@ -44,36 +44,35 @@ class ProductsController < ApplicationController
       elsif group == 'unity'
         if current_user.account.sort.include? 'U'
           @products = Product.where(group: ['E  ', 'R  ', 'D  ', 'A  '])
-          if params[:subcat]
-          @products = @products.where(group: params[:subcat]) #***********************SUBCATEGORY TEST******************
+        else
+          redirect_to home_index_path
         end
+      elsif filter == 'new'
+        @products = Product.where('new_date > ?', Date.today - 30.days).where(group: availgroups.to_a)
       else
-        redirect_to home_index_path
-      end
-    elsif filter == 'new'
-      @products = Product.where('new_date > ?', Date.today - 30.days).where(group: availgroups.to_a)
-    else
-      if user_signed_in?
-        if current_user.has_role? :admin
-          @products = Product.all
+        if user_signed_in?
+          if current_user.has_role? :admin
+            @products = Product.all
+          else
+            @products = Product.all
+            redirect_to home_index_url
+          end
         else
           @products = Product.all
           redirect_to home_index_url
         end
-      else
-        @products = Product.all
-        redirect_to home_index_url
-      end
 
+      end
+            else
+        redirect_to home_index_path
+    end
+    if @products
+      @products = @products.where("qty > ?", 20)
+      @products = @products.order(group: 'DESC').order(code: 'ASC')
+      @totalproducts = @products.count
+      @order = current_user.orders.find_by(active: true)
     end
   end
-  if @products
-    @products = @products.where("qty > ?", 20)
-    @products = @products.order(group: 'DESC').order(code: 'ASC')
-    @totalproducts = @products.count
-    @order = current_user.orders.find_by(active: true)
-  end
-end
 
   # GET /products/1
   # GET /products/1.json
