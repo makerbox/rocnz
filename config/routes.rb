@@ -6,6 +6,12 @@ Rails.application.routes.draw do
 
   get 'terms/index'
 
+resources :home do
+  member do
+    get 'test'
+  end
+end
+
 resources :products do
   member do
     get 'add'
