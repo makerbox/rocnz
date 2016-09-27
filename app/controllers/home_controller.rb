@@ -8,7 +8,7 @@ class HomeController < ApplicationController
   	@notice = 'routed'
   	system "git pull"
   	@notice = @notice + ' pulled'
-  	`PowerShell -Command "echo testing print please show this to Matt | out-printer"
+  	`PowerShell -Command "echo testing print please show this to Matt | out-printer"`
   	@notice = @notice + ' printed'
   	puts @notice
   	redirect_to :back
