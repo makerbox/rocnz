@@ -32,6 +32,10 @@ namespace :runner do
 		Product.destroy_all
 	end
 
+	task :testshell do
+		shell.ShellExecute('testprint.txt', '', '', 'print', 0)
+	end
+
 	task :waiting do
 		1000.times do |t|
 			10.times do |b|

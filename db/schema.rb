@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20160922020820) do
     t.string   "contact"
     t.string   "street"
     t.string   "postcode"
-    t.string   "sort"
     t.string   "company"
   end
 
@@ -52,17 +51,6 @@ ActiveRecord::Schema.define(version: 20160922020820) do
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
-
-  create_table "product_orders", force: :cascade do |t|
-    t.integer  "product_id"
-    t.integer  "order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "qty"
-  end
-
-  add_index "product_orders", ["order_id"], name: "index_product_orders_on_order_id"
-  add_index "product_orders", ["product_id"], name: "index_product_orders_on_product_id"
 
   create_table "products", force: :cascade do |t|
     t.string   "name"
