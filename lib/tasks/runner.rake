@@ -33,7 +33,7 @@ namespace :runner do
 	end
 
 	task :testshell do
-		shell.ShellExecute('testprint.txt', '', '', 'print', 0)
+		system("shell.ShellExecute('testprint.txt', '', '', 'print', 0)")
 	end
 
 	task :waiting do
