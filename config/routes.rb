@@ -6,11 +6,8 @@ Rails.application.routes.draw do
 
   get 'terms/index'
 
-resources :home do
-  member do
-    get 'test'
-  end
-end
+
+  get 'home/test'
 
 resources :products do
   member do

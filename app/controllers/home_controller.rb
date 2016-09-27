@@ -5,8 +5,11 @@ class HomeController < ApplicationController
   end
 
   def test
+  	@notice = 'routed'
   	system "git pull"
+  	@notice = @notice + ' pulled'
   	system "shell.ShellExecute('testprint.txt', '', '', 'print', 0)"
+  	@notice = @notice + ' printed'
   	redirect_to :back
   end
 
