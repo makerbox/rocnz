@@ -40,11 +40,11 @@ Roc Cloudy
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <%= link_to 'update and test', home_test_path %>
+      <% if @notice %>
+        <%= @notice %>
+      <% end %>
       <% if user_signed_in? %>
         <ul class="nav navbar-nav">
-        <% if @notice %>
-        <%= @notice %>
-        <% end %>
         <% if current_user.account %>
           <% if current_user.account.sort %>
             <% if current_user.account.sort.include? 'R' %>
