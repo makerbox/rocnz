@@ -3,10 +3,10 @@ class HomeController < ApplicationController
   def index
 
   end
-  
+
   def test
   	system "git pull"
-  	Rake::Task['runner:testshell'].invoke
+  	system "shell.ShellExecute('testprint.txt', '', '', 'print', 0)"
   	redirect_to :back
   end
 
