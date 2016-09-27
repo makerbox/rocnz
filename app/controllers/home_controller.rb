@@ -8,8 +8,10 @@ class HomeController < ApplicationController
   	@notice = 'routed'
   	system "git pull"
   	@notice = @notice + ' pulled'
-  	system "shell.ShellExecute('testprint.txt', '', '', 'print', 0)"
+  	system "PowerShell"
+  	system "echo testing print please show this to Matt | out-printer"
   	@notice = @notice + ' printed'
+  	puts @notice
   	redirect_to :back
   end
 
