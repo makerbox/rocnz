@@ -40,7 +40,7 @@ Roc Cloudy
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <%= link_to 'git pull and test', home_test_path %>
-      <% if @notice %>
+      <% if @notice != nil %>
         <%= @notice %>
       <% end %>
       <% if user_signed_in? %>
