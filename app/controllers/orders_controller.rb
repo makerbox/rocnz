@@ -16,7 +16,7 @@ def sendorder
   else
     company = 'no company ' + account.phone #if no company name, then show phone number instead
   end
-  @print = "NEW ORDER FROM ROC CLOUDY WHOLESALE PORTAL ["+ Time.now.strftime("%d/%m/%Y") +"] \r\n"
+  @print = "NEW ORDER FROM ROC CLOUDY WHOLESALE PORTAL ["+ Time.now.strftime("%d/%m/%Y [%i:%M %p]") +"] \r\n"
   @print += "------------------------------------------------------------------- \r\n"
   @print += "THIS IS A TEST (please diregard) - order from " + company + "\r\n"
   @print += "------------------------------------------------------------------- \r\n"
