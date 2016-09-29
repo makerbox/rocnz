@@ -34,7 +34,7 @@ end
     @pendingorders = Order.where(user: current_user, active: false, approved: false, complete: false)
     @approvedorders = Order.where(user:current_user, active:false, approved: true, complete: false)
     @sentorders = Order.where(user:current_user, active:false, approved: true, complete: true)
-    @sentorders = @sentorders.paginate(:page => params[:page], :per_page => 20)
+    # @sentorders = @sentorders.paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /accounts/new
