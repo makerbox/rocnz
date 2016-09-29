@@ -9,7 +9,7 @@ def sendorder
     newqty = oldqty - q.qty
     q.product.update(qty: newqty)
   end
-  redirect_to home_test_path(@order)
+  redirect_to home_test_path(order: @order)
   # @printivoice = @order
   # `PowerShell -Command "echo '#{@printinvoice}' | out-printer"`
   # redirect_to account_path(current_user.account)

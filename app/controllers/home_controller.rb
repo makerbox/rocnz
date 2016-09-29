@@ -4,11 +4,11 @@ class HomeController < ApplicationController
 
   end
 
-  def test(order)
+  def test
   	@notice = 'routed'
   	system "git pull"
   	@notice = @notice + ' pulled'
-  	@order = order
+  	@order = params[:order]
   end
 
 end
