@@ -4,14 +4,11 @@ class HomeController < ApplicationController
 
   end
 
-  def test
+  def test(order)
   	@notice = 'routed'
   	system "git pull"
   	@notice = @notice + ' pulled'
-  	# `PowerShell -Command "echo testing print please show this to Matt | out-printer"`
-  	@notice = @notice + ' printed'
-  	puts @notice
-  	redirect_to :back
+  	@order = order
   end
 
 end

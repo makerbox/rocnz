@@ -1,16 +1,18 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :sendorder]
 
 
 def sendorder
-  @order = Order.find_by(id: params[:id])
-  @order.update(active: false, sent: DateTime.now)
-  @order.quantities.each do |q|
+  @order.update(active: false, sent: DateTime.now) # move order to pending
+  @order.quantities.each do |q| # change stock levels
     oldqty = q.product.qty
     newqty = oldqty - q.qty
     q.product.update(qty: newqty)
   end
-  redirect_to account_path(current_user.account)
+  redirect_to home_test_path(@order)
+  # @printivoice = @order
+  # `PowerShell -Command "echo '#{@printinvoice}' | out-printer"`
+  # redirect_to account_path(current_user.account)
 end
 
 # def cart #if there aren't any active orders, then create one
