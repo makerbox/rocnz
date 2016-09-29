@@ -14,6 +14,14 @@ def pull
   def test
   	if params[:order]
       @order = params[:order]
+      @print = "new order total:"
+      @print += @order.total
+      @order.quantities.each do |q|
+        @print += q.qty
+        @print += Product.find_by(id: q.product_id).name
+        @print += q.product.name
+        @print += q.product.price
+      end
     else
       @order = "nothing came through - params empty"
     end
