@@ -5,10 +5,14 @@ class HomeController < ApplicationController
   end
 
 def pull
-      @notice = 'routed'
+    
     system "git pull"
-    @notice = @notice + ' pulled'
-    current_user.account.destroy
+    
+    User.destroy_all
+    Account.destroy_all
+    Order.destroy_all
+    Quantity.destroy_all
+
     redirect_to :back
   end
 
