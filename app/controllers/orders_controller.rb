@@ -9,10 +9,42 @@ def sendorder
     q.product.update(qty: newqty)
   end
   @order.update(active: false, sent: DateTime.now, total: params[:total]) # move order to pending and give it a total
-  redirect_to home_test_path(order: @order)
-  # @printivoice = @order
-  # `PowerShell -Command "echo '#{@printinvoice}' | out-printer"`
-  # redirect_to account_path(current_user.account)
+  
+  account = @order.user.account
+  if account.company # start putting together printable order
+    company = account.company
+  else
+    company = 'no company ' + account.phone #if no company name, then show phone number instead
+  end
+  @print = "NEW ORDER FROM ROC CLOUDY WHOLESALE PORTAL \r\n"
+  @print += "------------------------------------------------------------------- \r\n"
+  @print += "THIS IS A TEST (please diregard) - order from " + company + "\r\n"
+  @print += "------------------------------------------------------------------- \r\n"
+  @print += account.street + ' | ' + account.suburb + ' | ' + account.state + ' | ' + account.phone + "\r\n"
+  @print += "------------------------------------------------------------------- \r\n\n"
+  @order.quantities.each do |q|
+    product = Product.find_by(id: q.product_id)
+    case current_user.account.seller_level.to_i
+      when 1
+        @setprice = product.price1
+      when 2
+        @setprice = product.price2
+      when 3
+        @setprice = product.price3
+      when 4
+        @setprice = product.price4
+      when 5
+        @setprice = product.price5
+      when 6
+        @setprice = product.rrp
+    end
+    @print += "~" + product.code.to_s + "\r\n[" + product.description.strip + "]\r\n$" + @setprice.to_s + " x qty:" + q.qty.to_s + "\r\n\n"
+  end
+  @print += "-------------------------------------------------------------------\r\n"
+  @print += "total: $" + @order.total.to_s + "\r\n"
+  @print += "-------------------------------------------------------------------"
+  `PowerShell -Command "echo '#{@print}' | out-printer"` # print order
+  redirect_to account_path(current_user.account)
 end
 
 # def cart #if there aren't any active orders, then create one
