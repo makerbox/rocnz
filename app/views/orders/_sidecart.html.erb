@@ -1,6 +1,6 @@
 <span id="notice"><%= notice %></span>
 <% @order.total = 0 %>
-<% if @order.quantities.any? %>
+<% if @order.quantities.any? %><%= @order.quantities.count %>
 <% @order.quantities.each do |po| %>
 <div class="po">
 	<%= link_to product_path(Product.find_by(code: po.product.code)) do %>
@@ -37,6 +37,6 @@
 <% end %>
 <hr>
 TOTAL (excl. freight) = $<%= @order.total %>
-<%= link_to ' SEND ORDER', sendorder_order_path(@order), class: 'fa fa-paper-plane btn btn-info' %><hr>
+<%= link_to ' SEND ORDER', sendorder_order_path(@order, total: @order.total), class: 'fa fa-paper-plane btn btn-info' %><hr>
 <%= link_to ' cancel', order_path(@order), method: :delete, class: 'fa fa-trash btn btn-danger' %>
 
