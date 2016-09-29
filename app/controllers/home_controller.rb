@@ -17,9 +17,8 @@ def pull
       @print = "total:" + @order.total.to_s
       # @print += @order.total
       @order.quantities.each do |q|
-        @print += @print + @order.id.to_s
         @print += q.product.name
-        @print += q.product.price
+        @print += q.product.price.to_s
       end
     else
       @order = "nothing came through - params empty"
