@@ -18,7 +18,7 @@ def pull
       @order.quantities.each do |q|
         @print += q.product.name.to_s
         @print += q.product.price.to_s
-        @print += q
+        @print += q.to_s
       end
     else
       @order = "nothing came through - params empty"
