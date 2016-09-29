@@ -4,9 +4,13 @@ class HomeController < ApplicationController
 
   end
 
-def pull
-    system "git pull"
+  def pull
+      system "git pull"
+      redirect_to :back
+  end
 
+  def seed
+    system "rake db:seed"
     redirect_to :back
   end
 
