@@ -14,26 +14,25 @@ def pull
   def test
   	if params[:order]
       @order = Order.find_by(id: params[:order])
-      @print = "total:" + @order.total.to_s
+      @print = "total:" + @order.total.to_s + "|||"
       @order.quantities.each do |q|
         product = Product.find_by(id: q.product_id)
         case current_user.account.seller_level.to_i
         when 1
-          setprice = product.price1
+          @setprice = product.price1
         when 2
-          setprice = product.price2
+          @setprice = product.price2
         when 3
-          setprice = product.price3
+          @setprice = product.price3
         when 4
-          setprice = product.price4
+          @setprice = product.price4
         when 5
-          setprice = product.price5
+          @setprice = product.price5
         when 6
-          setprice = product.rrp
+          @setprice = product.rrp
         end
-        @print += product.name.to_s
+        @print += product.name.to_s + @setprice.to_s + '---'
         current_user.account.seller_level
-        @print += setprice.to_s
       end
     else
       @order = "nothing came through - params empty"
