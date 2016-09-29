@@ -18,7 +18,6 @@ def pull
       # @print += @order.total
       @order.quantities.each do |q|
         @print += q.qty.to_s
-        @print += Product.find_by(id: q.product_id).name
         @print += q.product.name
         # @print += q.product.price
       end
