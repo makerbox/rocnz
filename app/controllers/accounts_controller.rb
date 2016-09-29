@@ -1,4 +1,4 @@
-class AccountsController < ApplicationController
+# class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy, :approve, :unapprove]
   before_action :securitycheck, only: [:index, :approve, :unapprove, :destroy]
 
@@ -25,7 +25,7 @@ end
     if params[:order]
       @accounts = @accounts.order(params[:order] + ' ASC')
     end
-    # @accounts = @accounts.paginate(:page => params[:page], :per_page => 20)
+    @accounts = @accounts.paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /accounts/1
