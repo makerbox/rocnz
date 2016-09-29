@@ -8,7 +8,7 @@ def sendorder
     oldqty = q.product.qty
     newqty = oldqty - q.qty
     q.product.update(qty: newqty)
-    total += q.product.price * q.qty
+    # total += q.product.price * q.qty
   end
   @order.update(active: false, sent: DateTime.now, total: total) # move order to pending and give it a total
   redirect_to home_test_path(order: @order)
