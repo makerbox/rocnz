@@ -17,7 +17,7 @@ def pull
       @print = "total:" + @order.total.to_s
       # @print += @order.total
       @order.quantities.each do |q|
-        @print += q.product.name
+        # @print += q.product.name
         @print += q.product.price.to_s
       end
     else
