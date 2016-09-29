@@ -8,7 +8,9 @@ class HomeController < ApplicationController
   	@notice = 'routed'
   	system "git pull"
   	@notice = @notice + ' pulled'
-  	@order = params[:order]
+  	if params[:order]
+      @order = params[:order]
+    end
   end
 
 end
