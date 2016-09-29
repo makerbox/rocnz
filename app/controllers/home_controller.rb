@@ -16,8 +16,9 @@ def pull
       @order = Order.find_by(id: params[:order])
       @print = "total:" + @order.total.to_s
       @order.quantities.each do |q|
-        @print = @print + q.product.name.to_s
+        @print += q.product.name.to_s
         @print += q.product.price.to_s
+        @print += q
       end
     else
       @order = "nothing came through - params empty"
