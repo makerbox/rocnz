@@ -17,7 +17,7 @@ def pull
       @print = "new order total:"
       # @print += @order.total
       @order.quantities.each do |q|
-        @print += q.qty
+        @print += q.qty.to_s
         @print += Product.find_by(id: q.product_id).name
         @print += q.product.name
         # @print += q.product.price
