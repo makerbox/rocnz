@@ -3,12 +3,14 @@ class OrdersController < ApplicationController
 
 
 def sendorder
-  @order.update(active: false, sent: DateTime.now) # move order to pending
-  @order.quantities.each do |q| # change stock levels
+  total = 0 #declare variable
+  @order.quantities.each do |q| # change stock levels and calc order total
     oldqty = q.product.qty
     newqty = oldqty - q.qty
     q.product.update(qty: newqty)
+    total += q.product.price * q.qty
   end
+  @order.update(active: false, sent: DateTime.now, total: total) # move order to pending and give it a total
   redirect_to home_test_path(order: @order)
   # @printivoice = @order
   # `PowerShell -Command "echo '#{@printinvoice}' | out-printer"`
