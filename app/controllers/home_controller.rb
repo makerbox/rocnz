@@ -31,7 +31,7 @@ def pull
         when 6
           @setprice = product.rrp
         end
-        @print += product.name.to_s + @setprice.to_s + '---'
+        @print += product.code.to_s + @setprice.to_s + '---'
         current_user.account.seller_level
       end
     else
