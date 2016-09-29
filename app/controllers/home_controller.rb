@@ -14,7 +14,12 @@ def pull
   def test
   	if params[:order]
       @order = Order.find_by(id: params[:order])
-      @print = "NEW ORDER FROM " + @order.user.account.company + "`r`n"
+      if @order.user.account.company 
+        company = @order.user.account.company
+      else
+        company = @order.user.account.contact
+      end
+      @print = "NEW ORDER FROM " + company + "`r`n"
       @print += "total: $" + @order.total.to_s + " ||| "
       @order.quantities.each do |q|
         product = Product.find_by(id: q.product_id)
