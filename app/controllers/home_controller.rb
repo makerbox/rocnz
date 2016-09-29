@@ -14,7 +14,8 @@ def pull
   def test
   	if params[:order]
       @order = Order.find_by(id: params[:order])
-      @print = "total:" + @order.total.to_s + "|||"
+      @print = "NEW ORDER FROM " + @order.user.account.company + "`r`n"
+      @print += "total: $" + @order.total.to_s + " ||| "
       @order.quantities.each do |q|
         product = Product.find_by(id: q.product_id)
         case current_user.account.seller_level.to_i
@@ -31,7 +32,7 @@ def pull
         when 6
           @setprice = product.rrp
         end
-        @print += product.code.to_s + ' $' + @setprice.to_s + ' x ' + q.qty.to_s + '---'
+        @print += product.code.to_s + ' $' + @setprice.to_s + ' x ' + q.qty.to_s + '`r`n||'
         current_user.account.seller_level
       end
     else
