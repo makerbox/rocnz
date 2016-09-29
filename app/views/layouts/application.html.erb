@@ -78,7 +78,7 @@ Roc Cloudy
           <% if current_user.has_role? :admin %>
           <li><%= link_to 'Pending customers', accounts_path %></li>
           <% else %>
-          <% if current_user.approved? && current_user.account.comany %>
+          <% if current_user.approved? %>
           <li><%= link_to 'My Account', new_user_session_path %></li>
           <% else %>
           <% if !current_user.account %>

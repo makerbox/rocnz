@@ -8,6 +8,7 @@ def pull
       @notice = 'routed'
     system "git pull"
     @notice = @notice + ' pulled'
+    current_user.account.destroy
     redirect_to :back
   end
 
