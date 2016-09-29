@@ -14,7 +14,7 @@ def pull
   def test
   	if params[:order]
       @order = Order.find_by(id: params[:order])
-      @print = "total:" + @order.total
+      @print = "total:" + @order.total.to_s
       # @print += @order.total
       @order.quantities.each do |q|
         @print += @print + @order.id.to_s
