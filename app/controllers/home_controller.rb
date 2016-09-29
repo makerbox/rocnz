@@ -5,13 +5,7 @@ class HomeController < ApplicationController
   end
 
 def pull
-    
     system "git pull"
-    
-    User.destroy_all
-    Account.destroy_all
-    Order.destroy_all
-    Quantity.destroy_all
 
     redirect_to :back
   end
