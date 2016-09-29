@@ -3,11 +3,6 @@ class OrdersController < ApplicationController
 
 
 def sendorder
-  #make sure the user's account is filled out properly
-  if current_user.account.company.blank? || current_user.account.street.blank? || current_user.account.suburb.blank? || current_user.account.state.blank? || current_user.account.phone.blank?
-    redirect_to :back
-  flash[:notice] = "YOU MUST FILL OUT YOUR ACCOUNT DETAILS IN FULL BEFORE YOU CAN PLACE YOUR ORDER"
-end
   @order.quantities.each do |q| # change stock levels and calc order total
     oldqty = q.product.qty
     newqty = oldqty - q.qty
