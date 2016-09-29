@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
 
   get 'home/test'
+  get 'home/pull'
 
 resources :products do
   member do

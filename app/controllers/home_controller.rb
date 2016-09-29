@@ -4,12 +4,18 @@ class HomeController < ApplicationController
 
   end
 
+def pull
+      @notice = 'routed'
+    system "git pull"
+    @notice = @notice + ' pulled'
+    redirect_to :back
+  end
+
   def test
-  	@notice = 'routed'
-  	system "git pull"
-  	@notice = @notice + ' pulled'
   	if params[:order]
       @order = params[:order]
+    else
+      @order = "nothing came through - params empty"
     end
   end
 
