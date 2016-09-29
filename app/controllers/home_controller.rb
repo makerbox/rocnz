@@ -17,7 +17,7 @@ def pull
       if @order.user.account.company 
         company = @order.user.account.company
       else
-        company = @order.user.account.contact
+        company = 'no company'
       end
       @print = "NEW ORDER FROM " + company + "`r`n"
       @print += "total: $" + @order.total.to_s + " ||| "
