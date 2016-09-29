@@ -16,7 +16,7 @@ def pull
       @order = Order.find_by(id: params[:order])
       @print = "total:" + @order.total.to_s
       @order.quantities.each do |q|
-        @print += q.product.name.to_s
+        @print = @print + q.product.name.to_s
         @print += q.product.price.to_s
       end
     else
