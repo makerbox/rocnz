@@ -3,7 +3,7 @@
     <div id="productlist">
     <div class="panel panel-default">
       <div class="panel-body">
-        Total products: <%= @totalproducts %><%= @categories %>
+        Total products: <%= @totalproducts %><%= @categories.first %>
       </div>
     </div>
       <% @products.each do |product| %>
