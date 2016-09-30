@@ -22,7 +22,7 @@ class HomeController < ApplicationController
     @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
     @productgroups = []
     @products.each do |p|
-      @productgroups << p.Group
+      @productgroups << p.ProductGroup
     end
     @productgroups = @productgroups.uniq
   end
