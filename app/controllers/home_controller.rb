@@ -31,6 +31,7 @@ class HomeController < ApplicationController
     end
     @uniqproducts = @uniqproducts.uniq
     @uniqgenledger = @uniqgenledger.uniq
+    @test = Product.all
   end
 
 end
