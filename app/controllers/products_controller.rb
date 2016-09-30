@@ -11,39 +11,39 @@ class ProductsController < ApplicationController
     group = params[:group]
     filter = params[:filter]
     if current_user.account.sort # check that they have a sort before trying to use include? statements
-      if current_user.account.sort.include? 'R'
-        availgroups = availgroups << 'C  '
-      end
-      if current_user.account.sort.include? 'P'
-        availgroups = availgroups << 'L  '
-      end
-      if current_user.account.sort.include? 'L'
-        availgroups = availgroups << 'LC  '
-      end
-      if current_user.account.sort.include? 'U'
-        availgroups = availgroups << 'E  ' << 'R  ' << 'D  ' << 'A  '
-      end
+      # if current_user.account.sort.include? 'R'
+      #   availgroups = availgroups << 'C  '
+      # end
+      # if current_user.account.sort.include? 'P'
+      #   availgroups = availgroups << 'L  '
+      # end
+      # if current_user.account.sort.include? 'L'
+      #   availgroups = availgroups << 'LC  '
+      # end
+      # if current_user.account.sort.include? 'U'
+      #   availgroups = availgroups << 'E  ' << 'R  ' << 'D  ' << 'A  '
+      # end
       if group == 'roc'
         if current_user.account.sort.include? 'R'
-          @products = Product.where(group: ['C  '])
+          @products = Product.where(group: ['C','J'])
         else
           redirect_to home_index_path
         end
       elsif group == 'polasports'
         if current_user.account.sort.include? 'P'
-          @products = Product.where(group: ['L  '])
+          @products = Product.where(group: ['L'])
         else
           redirect_to home_index_path
         end
       elsif group == 'locello'
         if current_user.account.sort.include? 'L'
-          @products = Product.where(group: ['LC '])
+          @products = Product.where(group: ['LC'])
         else
           redirect_to home_index_path
         end
       elsif group == 'unity'
         if current_user.account.sort.include? 'U'
-          @products = Product.where(group: ['E  ', 'R  ', 'D  ', 'A  '])
+          @products = Product.where(group: ['E', 'R', 'D', 'A'])
         else
           redirect_to home_index_path
         end

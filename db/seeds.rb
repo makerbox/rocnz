@@ -60,7 +60,7 @@ products.each do |p|
 				end
 
 		if @product #if the product already exists, just update the details
-			if @product.new_date != onsale || @product.category != category || @product.code != p.Code || @product.description != p.Description || @product.group != p.ProductGroup || @product.price1 != p.SalesPrice1 || @product.price2 != p.SalesPrice2 || @product.price3 != p.SalesPrice3 || @product.price4 != p.SalesPrice4 || @product.price5 != p.SalesPrice5 || @product.rrp != p.SalesPrice6 || @product.qty != p.QtyInStock 
+			if @product.new_date != onsale || @product.category != category || @product.code != p.Code || @product.description != p.Description || @product.group != p.ProductGroup.strip || @product.price1 != p.SalesPrice1 || @product.price2 != p.SalesPrice2 || @product.price3 != p.SalesPrice3 || @product.price4 != p.SalesPrice4 || @product.price5 != p.SalesPrice5 || @product.rrp != p.SalesPrice6 || @product.qty != p.QtyInStock 
 				@thisproduct = Product.find_by(code: p.Code)
 				@pending_sold = 0 #set pending sold qty to zero
 				Order.where(approved: false).each do |order| #for each pending order
@@ -68,7 +68,7 @@ products.each do |p|
 				end
 				current_quantity = p.QtyInStock - @pending_sold #qty is qty available minus pending orders
 
-				@thisproduct.update(new_date: onsale, category: category, qty: current_quantity, code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+				@thisproduct.update(new_date: onsale, category: category, qty: current_quantity, code: p.Code, description: p.Description, group: p.ProductGroup.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
 			else
 				puts "already in db, skipping product"
 			end
@@ -84,7 +84,7 @@ products.each do |p|
 						onsale = pro.DateFld #if it is the right record, then take it's date and put it in the onsale variable
 					end
 				end
-				Product.create(new_date: onsale, category: category, qty: p.QtyInStock, code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+				Product.create(new_date: onsale, category: category, qty: p.QtyInStock, code: p.Code, description: p.Description, group: p.ProductGroup.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
 			else
 				puts "no image, skipping product"
 			end
