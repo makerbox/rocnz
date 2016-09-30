@@ -51,7 +51,7 @@ Your account is pending approval.
   <% end %>
 </p>
 <% end %>
-<% if !current_user.account.approved? || current_user.has_role? :admin %>
+<% if (!current_user.account.approved?) || (current_user.has_role? :admin) %>
 <%= link_to 'Edit account details', edit_account_path(@account), class: 'btn btn-default' %>
 <% end %>
 </div>
