@@ -49,7 +49,7 @@ products.each do |p|
 		category = ''
 		productsext.each do |x| #match the extension file with this product
 			if x.Code == p.Code
-				category = x.CostCentre
+				category = x.CostCentre.strip
 			end
 		end
 				#now for the date of arrival
