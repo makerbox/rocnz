@@ -18,9 +18,7 @@ class HomeController < ApplicationController
     require 'rdbi-driver-odbc'
     puts "connecting to database"
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-    Test.new = dbh.execute("SELECT * FROM productgroup_name").fetch(:all, :Struct)
-    @test = Test.all
-    
+    @test = dbh.execute("SELECT * FROM productgroup_name").fetch(:all, :Struct)
   end
 
 end
