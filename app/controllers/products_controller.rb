@@ -33,6 +33,9 @@ class ProductsController < ApplicationController
           if params[:cat]
             @products = @products.where(group: params[:cat])
           end
+          if params[:filter]
+            @products = @products.where(category: params[:filter])
+          end
         else
           redirect_to home_index_path
         end
@@ -41,6 +44,9 @@ class ProductsController < ApplicationController
           @products = Product.where(group: ['L'])
           if params[:cat]
             @products = @products.where(group: params[:cat])
+          end
+          if params[:filter]
+            @products = @products.where(category: params[:filter])
           end
         else
           redirect_to home_index_path
@@ -51,6 +57,9 @@ class ProductsController < ApplicationController
           if params[:cat]
             @products = @products.where(group: params[:cat])
           end
+          if params[:filter]
+            @products = @products.where(category: params[:filter])
+          end
         else
           redirect_to home_index_path
         end
@@ -59,6 +68,9 @@ class ProductsController < ApplicationController
           @products = Product.where(group: ['E', 'R', 'D', 'A'])
           if params[:cat]
             @products = @products.where(group: params[:cat])
+          end
+          if params[:filter]
+            @products = @products.where(category: params[:filter])
           end
         else
           redirect_to home_index_path
