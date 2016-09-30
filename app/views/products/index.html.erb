@@ -1,9 +1,9 @@
-<div class="row"><%= @categories %>
+<div class="row">
   <div class="col-md-9">
     <div id="productlist">
     <div class="panel panel-default">
       <div class="panel-body">
-        Total products: <%= @totalproducts %>
+        Total products: <%= @totalproducts %><%= @categories %>
       </div>
     </div>
       <% @products.each do |product| %>
