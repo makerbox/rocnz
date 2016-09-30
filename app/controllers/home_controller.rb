@@ -18,8 +18,18 @@ class HomeController < ApplicationController
     require 'rdbi-driver-odbc'
     puts "connecting to database"
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-    @test = dbh.execute("SELECT * FROM productgroup_name").fetch(:all, :Struct)
+    @genledger = dbh.execute("SELECT * FROM genledger_master").fetch(:all, :Struct)
     @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
+    @uniqproducts = []
+    @uniqgenledger = []
+    @products.each do |p|
+      @uniqproducts << p.GlSet 
+    end
+    @genledger.each do |g|
+      @uniqgenledger << g.Code
+    end
+    @uniqproducts = @uniqproducts.uniq
+    @uniqgenledger = @uniqgenledger.uniq
   end
 
 end

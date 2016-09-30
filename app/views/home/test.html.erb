@@ -12,6 +12,10 @@ Code="LC ", Description="LOCELLO "<br>
 Code="J ", Description="ROC HATS "<br>
 <hr>
 <h2>general ledger sets for each attache product</h2>
-<% @products.each do |p| %>
-<%= p.GlSet %><br>
+<% @uniqproducts.each do |p| %>
+<%= p %><br>
 <% end %>
+<% @uniqgenledger.each do |g| %>
+	<%= g %><br>
+	<% end %>
+	
