@@ -17,7 +17,7 @@
 @import "font-awesome";
 
 * {
-  -webkit-transition: all 1s;
+  -webkit-transition: all .5s;
 }
 
 body {
@@ -34,7 +34,7 @@ body {
  .navbar-nav>li:last-of-type{
      border-right: 1px solid #CCC;
  } }
-a:hover, .homeoverlay:hover + .homeimg{
+a:hover, .homeoverlay:hover{
 	color:#000;
 	background-color:transparent;
 	background-size:200%;
