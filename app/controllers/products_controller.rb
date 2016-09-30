@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
             @categories << p.category
           end
           if params[:cat]
-            @products = @products.where(category: params[:cat])
+            @products = @products.where(group: params[:cat])
           end
         else
           redirect_to home_index_path
@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
         if current_user.account.sort.include? 'P'
           @products = Product.where(group: ['L'])
           if params[:cat]
-            @products = @products.where(category: params[:cat])
+            @products = @products.where(group: params[:cat])
           end
         else
           redirect_to home_index_path
@@ -49,7 +49,7 @@ class ProductsController < ApplicationController
         if current_user.account.sort.include? 'L'
           @products = Product.where(group: ['LC'])
           if params[:cat]
-            @products = @products.where(category: params[:cat])
+            @products = @products.where(group: params[:cat])
           end
         else
           redirect_to home_index_path
@@ -58,7 +58,7 @@ class ProductsController < ApplicationController
         if current_user.account.sort.include? 'U'
           @products = Product.where(group: ['E', 'R', 'D', 'A'])
           if params[:cat]
-            @products = @products.where(category: params[:cat])
+            @products = @products.where(group: params[:cat])
           end
         else
           redirect_to home_index_path
