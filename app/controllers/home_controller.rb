@@ -25,6 +25,12 @@ class HomeController < ApplicationController
       @productgroups << p.ProductGroup
     end
     @productgroups = @productgroups.uniq
+    @dbproducts = Product.all
+    @dbgroups = []
+    @dbproducts.each do |dbp|
+      @dbgroups << dbp.group
+    end
+    @dbgroups = @dbgroups.uniq
   end
 
 end

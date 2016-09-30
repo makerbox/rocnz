@@ -1,2 +1,5 @@
-<%= @test %><hr>
-<%= @productgroups %>
+<% @test.each do |t| %>
+<%= t %><br>
+<% end %> ||||||| ALL GROUP CODES AND DESCRIPTIONS<hr>
+<%= @productgroups %> ||||||| ALL UNIQUE GROUP CODES FROM PRODUCT MASTER<hr>
+<%= @dbgroups %> ||||||| ALL UNIQUE GROUP CODES FROM DB PRODUCTS<hr>
