@@ -48,8 +48,12 @@ Roc Cloudy
         <% if current_user.account %>
           <% if current_user.account.sort %>
             <% if current_user.account.sort.include? 'R' %>
-              <li><%= link_to 'Roc', products_path(group: 'roc', cat: 'C', filter: 'all') %></li>
+              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Roc <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              <li><%= link_to 'Sunglasses', products_path(group: 'roc', cat: 'C', filter: 'all') %></li>
               <li><%= link_to 'Hats', products_path(group: 'roc', cat: 'J', filter: 'all') %></li>
+              </ul>
+              </li>
             <% end %>
             <% if current_user.account.sort.include? 'P' %>
               <li><%= link_to 'Polasports', products_path(group: 'polasports', filter: 'all') %></li>
@@ -62,7 +66,10 @@ Roc Cloudy
             <ul class="dropdown-menu">
               <li><%= link_to 'All Sunglasses', products_path(group: 'unity', cat: ['E','D'], filter: 'all') %></li>
               <li><%= link_to 'Fashion', products_path(group: 'unity', cat: 'E', filter: 'FASHION') %></li>
-              <li><%= link_to 'Kids', products_path(group: 'unity', cat: 'E', filter: 'MENS') %></li>
+              <li><%= link_to 'Mens', products_path(group: 'unity', cat: 'E', filter: 'MENS') %></li>
+              <li><%= link_to 'Mens Polarised', products_path(group: 'unity', cat: 'E', filter: 'MENS POLARISED') %></li>
+              <li><%= link_to 'Womens', products_path(group: 'unity', cat: 'E', filter: 'WOMENS') %></li>
+              <li><%= link_to 'Womens Polarised', products_path(group: 'unity', cat: 'E', filter: 'WOMENS POLARISED') %></li>
               <li><%= link_to 'Kids', products_path(group: 'unity', cat: 'D', filter: 'all') %></li>
               <li><%= link_to 'Reading', products_path(group: 'unity', cat: 'R', filter: 'all') %></li>
               <li><%= link_to 'Accesories', products_path(group: 'unity', cat: 'A', filter: 'all') %></li></ul></li>
