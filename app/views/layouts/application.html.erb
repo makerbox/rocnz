@@ -39,7 +39,7 @@ Roc Cloudy
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <%= link_to 'pull', home_pull_path %> -- -- -- <%= link_to 'seed', home_seed_path %>
+      <span style="margin-left: 5em; margin-top:1em;"><%= link_to 'pull', home_pull_path %> -- -- -- <%= link_to 'seed', home_seed_path %></span>
       <% if @notice != nil %>
         <%= @notice %>
       <% end %>
