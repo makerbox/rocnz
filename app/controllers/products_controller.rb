@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
       #   availgroups = availgroups << 'E  ' << 'R  ' << 'D  ' << 'A  '
       # end
       if group == 'roc'
-        if current_user.account.sort.include? 'R' || current_user.has_role? :admin
+        if (current_user.account.sort.include? 'R') || (current_user.has_role? :admin)
           @products = Product.where(group: ['C','J'])
           @categories = []
           @products.each do |p| # get a list of categories
@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
           redirect_to home_index_path
         end
       elsif group == 'polasports'
-        if current_user.account.sort.include? 'P' || current_user.has_role? :admin
+        if (current_user.account.sort.include? 'P') || (current_user.has_role? :admin)
           @products = Product.where(group: ['L'])
           if params[:cat]
             @products = @products.where(group: params[:cat])
@@ -46,7 +46,7 @@ class ProductsController < ApplicationController
           redirect_to home_index_path
         end
       elsif group == 'locello'
-        if current_user.account.sort.include? 'L' || current_user.has_role? :admin
+        if (current_user.account.sort.include? 'L') || (current_user.has_role? :admin)
           @products = Product.where(group: ['LC'])
           if params[:cat]
             @products = @products.where(group: params[:cat])
@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
           redirect_to home_index_path
         end
       elsif group == 'unity'
-        if current_user.account.sort.include? 'U' || current_user.has_role? :admin
+        if (current_user.account.sort.include? 'U') || (current_user.has_role? :admin)
           @products = Product.where(group: ['E', 'R', 'D', 'A'])
           if params[:cat]
             @products = @products.where(group: params[:cat])
