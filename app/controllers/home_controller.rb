@@ -15,7 +15,7 @@ class HomeController < ApplicationController
   end
 
   def test #this has a view, so you can check variables and stuff
-    Product.each do |p|
+    Product.all.each do |p|
       cat = p.category.strip
       p.update(category: cat)
     end
