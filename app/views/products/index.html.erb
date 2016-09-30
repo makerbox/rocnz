@@ -3,7 +3,7 @@
     <div id="productlist">
     <div class="panel panel-default">
       <div class="panel-body">
-        Total products: <%= @totalproducts %><%= @categories.first %>
+        Total products: <%= @totalproducts %><%= @categories %>
       </div>
     </div>
       <% @products.each do |product| %>
@@ -30,7 +30,7 @@
         <% when 6 %>
         $<%= product.rrp %>
         <% end %>
-        <br>[RRP: $<%= product.rrp %>] | [QTY: <%= product.qty %>]
+        <br>[RRP: $<%= product.rrp %>] | [QTY: <%= product.qty %>] | category <%= product.category %>
         <% end %>
         <% end %>
         <% if current_user.has_role? :admin %>
