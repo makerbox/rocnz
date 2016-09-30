@@ -21,7 +21,7 @@ end
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.all.order('created_at asc')
+    @accounts = Account.all.order('created_at desc')
     if params[:order]
       @accounts = @accounts.order(params[:order] + ' ASC')
     end
