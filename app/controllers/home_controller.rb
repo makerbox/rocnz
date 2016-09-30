@@ -15,23 +15,10 @@ class HomeController < ApplicationController
   end
 
   def test #this has a view, so you can check variables and stuff
-    require 'rdbi-driver-odbc'
-    puts "connecting to database"
-    dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-    @genledger = dbh.execute("SELECT * FROM genledger_sets").fetch(:all, :Struct)
-    @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
-    @uniqproducts = []
-    @uniqgenledger = []
-    @products.each do |p|
-      @uniqproducts << p.GlSet 
+    Product.all.each do |p|
+      cat = p.category.strip
+      p.update(category: cat)
     end
-    @genledger.each do |g|
-      @uniqgenledger << g.Code
-      @uniqgenledger << g.Name
-    end
-    @uniqproducts = @uniqproducts.uniq
-    @uniqgenledger = @uniqgenledger.uniq
-    @test = Product.all
   end
 
 end
