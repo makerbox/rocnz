@@ -11,7 +11,7 @@
       <div class="product">
         <%= cl_image_tag(product.code.strip) %>
         <br>
-        <%= product.code %> | category <%= product.category %><br>
+        <%= product.code %> | category <%= product.category %> | quantity <%= product.qty %><br>
 
         <% if user_signed_in? %>
         <% if current_user.account %>
