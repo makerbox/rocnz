@@ -26,24 +26,37 @@ class ProductsController < ApplicationController
       if group == 'roc'
         if current_user.account.sort.include? 'R'
           @products = Product.where(group: ['C','J'])
+          @catagories = @products.categories
+          if params[:cat]
+            @products = @products.where(category: params[:cat])
+          end
         else
           redirect_to home_index_path
         end
       elsif group == 'polasports'
         if current_user.account.sort.include? 'P'
           @products = Product.where(group: ['L'])
+          if params[:cat]
+            @products = @products.where(category: params[:cat])
+          end
         else
           redirect_to home_index_path
         end
       elsif group == 'locello'
         if current_user.account.sort.include? 'L'
           @products = Product.where(group: ['LC'])
+          if params[:cat]
+            @products = @products.where(category: params[:cat])
+          end
         else
           redirect_to home_index_path
         end
       elsif group == 'unity'
         if current_user.account.sort.include? 'U'
           @products = Product.where(group: ['E', 'R', 'D', 'A'])
+          if params[:cat]
+            @products = @products.where(category: params[:cat])
+          end
         else
           redirect_to home_index_path
         end
