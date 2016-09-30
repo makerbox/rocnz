@@ -27,7 +27,6 @@ class HomeController < ApplicationController
     end
     @genledger.each do |g|
       @uniqgenledger << g.Code
-      @uniqgenledger << '...'
       @uniqgenledger << g.Name
     end
     @uniqproducts = @uniqproducts.uniq

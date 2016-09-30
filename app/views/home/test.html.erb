@@ -11,10 +11,11 @@ Code="L ", Description="POLASPORTS "<br>
 Code="LC ", Description="LOCELLO "<br>
 Code="J ", Description="ROC HATS "<br>
 <hr>
-<h2>general ledger sets for each attache product</h2>
+<h2>general ledger set codes for each attache product</h2>
 <% @uniqproducts.each do |p| %>
 	<%= p %><br>
-<% end %>
+<% end %><hr>
+<h2>general ledger set codes and descriptions(names) from genledger_sets</h2>
 <% @uniqgenledger.each do |g| %>
 	<%= g %><br>
 <% end %>
