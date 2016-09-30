@@ -17,8 +17,10 @@ class HomeController < ApplicationController
   def test #this has a view, so you can check variables and stuff
    @test = Product.all
    @test.each do |p|
-      cat = p.category.strip
-      p.update(category: cat)
+      if !p.category.nil?
+        cat = p.category.strip
+        p.update(category: cat)
+      end
     end
   end
 
