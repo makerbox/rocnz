@@ -20,6 +20,11 @@ class HomeController < ApplicationController
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     @test = dbh.execute("SELECT * FROM productgroup_name").fetch(:all, :Struct)
     @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
+    @productgroups = []
+    @products.each do |p|
+      @productgroups << p.Group
+    end
+    @productgroups = @productgroups.uniq
   end
 
 end
