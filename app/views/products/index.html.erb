@@ -11,7 +11,7 @@
       <div class="product">
         <%= cl_image_tag(product.code.strip) %>
         <br>
-        <%= product.code %><br>
+        <%= product.code %> | category <%= product.category %><br>
 
         <% if user_signed_in? %>
         <% if current_user.account %>
@@ -30,7 +30,7 @@
         <% when 6 %>
         $<%= product.rrp %>
         <% end %>
-        <br>[RRP: $<%= product.rrp %>] | [QTY: <%= product.qty %>] | category <%= product.category %>
+        <br>[RRP: $<%= product.rrp %>] | [QTY: <%= product.qty %>]
         <% end %>
         <% end %>
         <% if current_user.has_role? :admin %>
