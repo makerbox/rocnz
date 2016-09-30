@@ -26,7 +26,7 @@ class HomeController < ApplicationController
       @uniqproducts << p.GlSet 
     end
     @genledger.each do |g|
-      @uniqgenledger << g.Code
+      @uniqgenledger << g
     end
     @uniqproducts = @uniqproducts.uniq
     @uniqgenledger = @uniqgenledger.uniq
