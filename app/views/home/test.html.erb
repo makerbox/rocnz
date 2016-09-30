@@ -1,2 +1,4 @@
 <%= @test %><hr>
-<%= @products %>
+<%= @products.each do |product| %>
+	<%= product.Code %><hr>
+	<% end %>
