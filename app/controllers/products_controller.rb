@@ -6,8 +6,6 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     availgroups = [] #create empty array to store the groups available to the current user
-
-
     group = params[:group]
     filter = params[:filter]
     if current_user.account.sort # check that they have a sort before trying to use include? statements
