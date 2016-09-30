@@ -34,7 +34,7 @@ body {
  .navbar-nav>li:last-of-type{
      border-right: 1px solid #CCC;
  } }
-a:hover, .homeoverlay:hover .homeimg{
+a:hover, .homeoverlay:hover + .homeimg{
 	color:#000;
 	background-color:transparent;
 	background-size:200%;
