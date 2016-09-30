@@ -58,10 +58,11 @@ Roc Cloudy
               <li><%= link_to 'Locello', products_path(group: 'locello', filter: 'all') %></li>
             <% end %>
             <% if current_user.account.sort.include? 'U' %>
+            <li><ul>
               <li><%= link_to 'Unity', products_path(group: 'unity', cat: 'E', filter: 'all') %></li>
               <li><%= link_to 'Kids', products_path(group: 'unity', cat: 'D', filter: 'all') %></li>
               <li><%= link_to 'Reading', products_path(group: 'unity', cat: 'R', filter: 'all') %></li>
-              <li><%= link_to 'Accesories', products_path(group: 'unity', cat: 'A', filter: 'all') %></li>
+              <li><%= link_to 'Accesories', products_path(group: 'unity', cat: 'A', filter: 'all') %></li></ul></li>
             <% end %>
             <li><%= link_to 'New arrivals', products_path(group: 'all', filter: 'new') %></li>
           <% end %>
