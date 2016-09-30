@@ -26,6 +26,7 @@ class ProductsController < ApplicationController
       if group == 'roc'
         if current_user.account.sort.include? 'R'
           @products = Product.where(group: ['C','J'])
+          @catagories = []
           @products.each do |p| # get a list of categories
             @catagories << p.category
           end
