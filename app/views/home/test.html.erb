@@ -1,5 +1,17 @@
-<% @test.each do |t| %>
-<%= t %><br>
-<% end %> ||||||| ALL GROUP CODES AND DESCRIPTIONS<hr>
-<%= @productgroups %> ||||||| ALL UNIQUE GROUP CODES FROM PRODUCT MASTER<hr>
-<%= @dbgroups %> ||||||| ALL UNIQUE GROUP CODES FROM DB PRODUCTS<hr>
+
+<h2>group codes in database being used by active products</h2>
+Code="A ", Description="ACCESSORIES "<br>
+Code="C ", Description="ROC SUNGLASSES "<br>
+Code="R ", Description="READING GLASSES "<br>
+Code="D ", Description="CHILD SUNGLASSES "<br>
+Code="S ", Description="STANDS "<br>
+Code="E ", Description="UNITY SUNGLASSES "<br>
+Code="I ", Description="PRODUCTS DEVLOPMENT "<br>
+Code="L ", Description="POLASPORTS "<br>
+Code="LC ", Description="LOCELLO "<br>
+Code="J ", Description="ROC HATS "<br>
+<hr>
+<h2>general ledger sets for each attache product</h2>
+<% @products.each do |p| %>
+<%= p.GlSet %><br>
+<% end %>
