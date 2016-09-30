@@ -48,7 +48,8 @@ Roc Cloudy
         <% if current_user.account %>
           <% if current_user.account.sort %>
             <% if current_user.account.sort.include? 'R' %>
-              <li><%= link_to 'Roc', products_path(group: 'roc', filter: 'all') %></li>
+              <li><%= link_to 'Roc', products_path(group: 'roc', cat: 'C', filter: 'all') %></li>
+              <li><%= link_to 'Hats', products_path(group: 'roc', cat: 'J', filter: 'all') %></li>
             <% end %>
             <% if current_user.account.sort.include? 'P' %>
               <li><%= link_to 'Polasports', products_path(group: 'polasports', filter: 'all') %></li>
