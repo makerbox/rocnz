@@ -31,14 +31,10 @@
 </p>
 
 <p>
-  <strong>First name:</strong>
+  <strong>Contact name:</strong>
   <%= @account.contact %>
 </p>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @account.contact %>
-</p>
 
 <% if !current_user.account.approved? %>
 <p>
@@ -55,8 +51,9 @@ Your account is pending approval.
   <% end %>
 </p>
 <% end %>
-
+<% if !current_user.account.approved? || current_user.has_role? :admin %>
 <%= link_to 'Edit account details', edit_account_path(@account), class: 'btn btn-default' %>
+<% end %>
 </div>
 <div class="col-md-6">
 <%= render 'orders/index' %>
