@@ -20,7 +20,6 @@ class HomeController < ApplicationController
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     @test = dbh.execute("SELECT * FROM productgroup_name").fetch(:all, :Struct)
     @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
-    @products = @products.first[10]
   end
 
 end
