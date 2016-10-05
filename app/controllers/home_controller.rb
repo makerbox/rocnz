@@ -31,7 +31,6 @@ class HomeController < ApplicationController
       Product.delay.populate
        }
 
-    end
   end
 
 end #end of class
