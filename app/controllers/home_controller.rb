@@ -21,10 +21,11 @@ class HomeController < ApplicationController
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     @transactions = dbh.execute("SELECT * FROM customer_transactions").fetch(:all, :Struct)
 
-strip inactive, pictureless, etc odbc items
-    for each odbc item
-      see if it exists
-        see if it needs updating
+# strip inactive, pictureless, etc odbc items
+#     for each odbc item
+#       see if it exists
+#         see if it needs updating
+
    # @test = Product.all
    # @test.each do |p|
    #    if p.category != nil
