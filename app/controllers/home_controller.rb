@@ -19,21 +19,19 @@ class HomeController < ApplicationController
   end
 
   def test #this has a view, so you can check variables and stuff
-require File.expand_path('../../config/boot', __FILE__)
+    require File.expand_path('../../config/boot', __FILE__)
 
-require File.expand_path('../../config/environment', __FILE__)
+    require File.expand_path('../../config/environment', __FILE__)
 
-require 'clockwork'
+    require 'clockwork'
 
-include Clockwork
+    include Clockwork
 
-module Clockwork
+    every(20.minutes, 'populate') { 
+      Product.delay.populate
+       }
 
-every(20.minutes, 'populate') { 
-  Product.delay.populate
-   }
-
-end
+    end
   end
 
 end #end of class
