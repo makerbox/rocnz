@@ -6,8 +6,6 @@ class HomeController < ApplicationController
 
   def pull
       system "git pull"
-      system "bundle"
-      system "rake db:migrate"
       redirect_to :back
   end
 
