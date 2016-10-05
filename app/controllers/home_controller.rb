@@ -34,5 +34,4 @@ class HomeController < ApplicationController
    #    end
    #  end
   end
-handle_asynchronously :test
 end
