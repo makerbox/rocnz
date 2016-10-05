@@ -20,11 +20,11 @@ class HomeController < ApplicationController
 
   def test #this has a view, so you can check variables and stuff
 
-      require 'rdbi-driver-odbc'
-      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-      @transactions = dbh.execute("SELECT * FROM customer_transactions").fetch(:first, :Struct)
-
-      dbh.disconnect
+      # require 'rdbi-driver-odbc'
+      # dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      # @transactions = dbh.execute("SELECT * FROM customer_transactions").fetch(:first, :Struct)
+      # dbh.disconnect
+      Product.delay.populate
 # strip inactive, pictureless, etc odbc items
 #     for each odbc item
 #       see if it exists
