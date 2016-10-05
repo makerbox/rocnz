@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160922020820) do
+ActiveRecord::Schema.define(version: 20161005004605) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20160922020820) do
     t.string   "contact"
     t.string   "street"
     t.string   "postcode"
+    t.string   "sort"
     t.string   "company"
   end
 
@@ -38,6 +39,22 @@ ActiveRecord::Schema.define(version: 20160922020820) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
@@ -51,6 +68,17 @@ ActiveRecord::Schema.define(version: 20160922020820) do
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+
+  create_table "product_orders", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "qty"
+  end
+
+  add_index "product_orders", ["order_id"], name: "index_product_orders_on_order_id"
+  add_index "product_orders", ["product_id"], name: "index_product_orders_on_product_id"
 
   create_table "products", force: :cascade do |t|
     t.string   "name"
