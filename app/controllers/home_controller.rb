@@ -20,13 +20,10 @@ class HomeController < ApplicationController
 
   def test #this has a view, so you can check variables and stuff
 
-      def async
       require 'rdbi-driver-odbc'
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-      @transactions = dbh.execute("SELECT * FROM customer_transactions").fetch(:all, :Struct)
+      @transactions = dbh.execute("SELECT * FROM customer_transactions").fetch(:first, :Struct)
       dbh.disconnect
-      end
-      delay.async
 # strip inactive, pictureless, etc odbc items
 #     for each odbc item
 #       see if it exists
