@@ -6,7 +6,7 @@ class HomeController < ApplicationController
 
   def pull
       system "git pull"
-      system "bundle"
+      system "bundle update"
       system "rake db:migrate"
       system "rails restart -b 0.0.0.0"
       system "rake jobs:work"
