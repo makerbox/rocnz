@@ -7,8 +7,8 @@ class HomeController < ApplicationController
   def pull
       system "git pull"
       # system "bundle update"
-      system "rake db:migrate"
-      system "rails restart -b 0.0.0.0"
+      # system "rake db:migrate"
+      # system "rails restart -b 0.0.0.0"
       # system "rake jobs:work"
       redirect_to :back
   end
@@ -23,6 +23,7 @@ class HomeController < ApplicationController
       require 'rdbi-driver-odbc'
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       @transactions = dbh.execute("SELECT * FROM customer_transactions").fetch(:first, :Struct)
+
       dbh.disconnect
 # strip inactive, pictureless, etc odbc items
 #     for each odbc item
