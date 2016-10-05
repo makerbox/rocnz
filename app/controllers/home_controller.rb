@@ -15,14 +15,17 @@ class HomeController < ApplicationController
   end
 
   def test #this has a view, so you can check variables and stuff
-   
-   @test = Product.all
-   @test.each do |p|
-      if p.category != nil
-        cat = p.category.strip
-        p.update(category: cat)
-      end
-    end
+    require 'rdbi-driver-odbc'
+    dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+    @transactions = dbh.execute("SELECT * FROM customer_transactions").fetch(:all, :Struct)
+
+   # @test = Product.all
+   # @test.each do |p|
+   #    if p.category != nil
+   #      cat = p.category.strip
+   #      p.update(category: cat)
+   #    end
+   #  end
   end
 
 end

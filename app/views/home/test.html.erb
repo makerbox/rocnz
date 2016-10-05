@@ -1,5 +1,5 @@
 
-<h2>group codes in database being used by active products</h2>
+<!-- <h2>group codes in database being used by active products</h2>
 Code="A ", Description="ACCESSORIES "<br>
 Code="C ", Description="ROC SUNGLASSES "<br>
 Code="R ", Description="READING GLASSES "<br>
@@ -11,6 +11,9 @@ Code="LC ", Description="LOCELLO "<br>
 Code="J ", Description="ROC HATS "<br>
 <hr>
 <h2>general ledger set codes for each attache product</h2>
-<% @test.each do |p| %>
-***<%= p.category %>***<br>
+<% # @test.each do |p| %>
+***<%= # p.category %>***<br>
+<% # end %> -->
+<% @transactions.each do |t| %>
+<%= t %>
 <% end %>
