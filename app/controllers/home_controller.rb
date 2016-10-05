@@ -8,6 +8,7 @@ class HomeController < ApplicationController
       system "git pull"
       system "bundle"
       system "rake jobs:work"
+      system "rails restart -b 0.0.0.0"
       redirect_to :back
   end
 
