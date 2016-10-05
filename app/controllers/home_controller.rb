@@ -20,7 +20,7 @@ class HomeController < ApplicationController
     require 'rdbi-driver-odbc'
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     @transactions = dbh.execute("SELECT * FROM customer_transactions").fetch(:all, :Struct)
-
+    dbh.disconnect
 # strip inactive, pictureless, etc odbc items
 #     for each odbc item
 #       see if it exists
@@ -34,5 +34,5 @@ class HomeController < ApplicationController
    #    end
    #  end
   end
-
+handle_asynchronously :test
 end
