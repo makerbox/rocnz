@@ -13,6 +13,7 @@ gem 'thin'
 #run jobs in the background such as emailing
 gem 'sucker_punch', '~> 2.0'
 gem 'delayed_job_active_record'
+gem 'daemons'
 
 #chronjobs for database upkeep etc
 gem 'whenever', :require => false

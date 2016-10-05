@@ -6,6 +6,7 @@ class HomeController < ApplicationController
 
   def pull
       system "git pull"
+      system "bundle"
       redirect_to :back
   end
 
@@ -15,10 +16,13 @@ class HomeController < ApplicationController
   end
 
   def test #this has a view, so you can check variables and stuff
-    require 'rdbi-driver-odbc'
-    dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-    @transactions = dbh.execute("SELECT * FROM customer_transactions").fetch(:all, :Struct)
-    dbh.disconnect
+    def asyncrunner
+      require 'rdbi-driver-odbc'
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      @transactions = dbh.execute("SELECT * FROM customer_transactions").fetch(:all, :Struct)
+      dbh.disconnect
+    end
+
 # strip inactive, pictureless, etc odbc items
 #     for each odbc item
 #       see if it exists
