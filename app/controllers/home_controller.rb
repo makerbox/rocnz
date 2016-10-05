@@ -7,6 +7,7 @@ class HomeController < ApplicationController
   def pull
       system "git pull"
       system "bundle"
+      system "rake jobs:work"
       redirect_to :back
   end
 
