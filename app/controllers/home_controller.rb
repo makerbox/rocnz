@@ -7,8 +7,8 @@ class HomeController < ApplicationController
   def pull
       system "git pull"
       system "bundle"
-      system "rake jobs:work"
       system "rails restart -b 0.0.0.0"
+      system "rake jobs:work"
       redirect_to :back
   end
 
