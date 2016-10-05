@@ -63,6 +63,5 @@ def self.populate
 		end
 	end
 end
-handle_asynchronously :populate
 
 end #end of class
