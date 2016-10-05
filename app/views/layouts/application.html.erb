@@ -45,7 +45,7 @@ Roc Cloudy
       <% if user_signed_in? %>
         <ul class="nav navbar-nav">
         <% if current_user.has_role? :admin %>
-      <span style="margin-left: 5em; margin-top:1em;"><%= link_to 'pull', home_pull_path %> -- -- -- <%= link_to 'seed', home_seed_path %></span>
+      <span style="margin-left: 5em; margin-top:1em;"><%= link_to 'test', home_test_path %> | <%= link_to 'pull', home_pull_path %> | <%= link_to 'seed', home_seed_path %></span>
       <% end %>
         <% if current_user.account %>
           <% if current_user.account.sort %>

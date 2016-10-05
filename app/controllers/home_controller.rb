@@ -15,6 +15,7 @@ class HomeController < ApplicationController
   end
 
   def test #this has a view, so you can check variables and stuff
+   
    @test = Product.all
    @test.each do |p|
       if p.category != nil
