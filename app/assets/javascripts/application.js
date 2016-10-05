@@ -16,5 +16,3 @@
 //= require_tree .
 
 
-
-Turbolinks.ProgressBar.enable();
