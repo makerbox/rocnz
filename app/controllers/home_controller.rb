@@ -22,7 +22,7 @@ class HomeController < ApplicationController
       @transactions = dbh.execute("SELECT * FROM customer_transactions").fetch(:all, :Struct)
       dbh.disconnect
     end
-
+handle_asynchronously :asyncrunner
 # strip inactive, pictureless, etc odbc items
 #     for each odbc item
 #       see if it exists
