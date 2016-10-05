@@ -18,7 +18,7 @@ class HomeController < ApplicationController
     require 'rdbi-driver-odbc'
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     @transactions = dbh.execute("SELECT * FROM customer_transactions").fetch(:all, :Struct)
-
+    
    # @test = Product.all
    # @test.each do |p|
    #    if p.category != nil
