@@ -52,6 +52,9 @@ GEM
       mime-types (>= 1.16)
       mimemagic (>= 0.3.0)
     chronic (0.10.2)
+    clockwork (2.0.0)
+      activesupport
+      tzinfo
     cloudinary (1.2.3)
       aws_cf_signer
       rest-client
@@ -258,6 +261,7 @@ DEPENDENCIES
   byebug
   cancancan
   carrierwave
+  clockwork
   cloudinary
   coffee-rails (~> 4.1.0)
   country_select

@@ -6,7 +6,7 @@ class HomeController < ApplicationController
 
   def pull
       system "git pull"
-      # system "bundle update"
+      system "bundle"
       # system "rake db:migrate"
       # system "rails restart -b 0.0.0.0"
       # system "rake jobs:work"
@@ -19,23 +19,21 @@ class HomeController < ApplicationController
   end
 
   def test #this has a view, so you can check variables and stuff
+require File.expand_path('../../config/boot', __FILE__)
 
-      # require 'rdbi-driver-odbc'
-      # dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-      # @transactions = dbh.execute("SELECT * FROM customer_transactions").fetch(:first, :Struct)
-      # dbh.disconnect
-      Product.delay.populate
-# strip inactive, pictureless, etc odbc items
-#     for each odbc item
-#       see if it exists
-#         see if it needs updating
+require File.expand_path('../../config/environment', __FILE__)
 
-   # @test = Product.all
-   # @test.each do |p|
-   #    if p.category != nil
-   #      cat = p.category.strip
-   #      p.update(category: cat)
-   #    end
-   #  end
-  end
+require 'clockwork'
+
+include Clockwork
+
+module Clockwork
+
+every(20.minutes, 'populate') { 
+  Product.delay.populate
+   }
+
 end
+  end
+
+end #end of class
