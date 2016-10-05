@@ -12,6 +12,7 @@ gem 'thin'
 
 #run jobs in the background such as emailing
 gem 'sucker_punch', '~> 2.0'
+gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'clockwork'
 

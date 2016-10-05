@@ -19,11 +19,8 @@ class HomeController < ApplicationController
   end
 
   def test #this has a view, so you can check variables and stuff
-
-    every(20.minutes, 'populate') { 
-      Product.delay.populate
-       }
-
+    system "rake jobs:work"
+    system "clockwork clock.rb"
   end
 
 end #end of class

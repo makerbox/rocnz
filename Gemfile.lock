@@ -265,6 +265,7 @@ DEPENDENCIES
   cloudinary
   coffee-rails (~> 4.1.0)
   country_select
+  daemons
   delayed_job_active_record
   devise
   font-awesome-sass

@@ -1,11 +1,7 @@
 namespace :runner do
 
 	task :testdb do
-		require 'rdbi-driver-odbc'
-		puts "connecting to database"
-		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-		Transaction.new = dbh.execute("SELECT * FROM customer_transactions").fetch(:all, :Struct)
-		puts Transaction.first.Code
+		puts 'hi'
 	end
 
 	task :empty_users do
