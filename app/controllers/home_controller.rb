@@ -8,7 +8,7 @@ class HomeController < ApplicationController
       system "git pull"
       system "bundle"
       # system "rake db:migrate"
-      # system "rails restart -b 0.0.0.0"
+      system "rails restart -b 0.0.0.0"
       # system "rake jobs:work"
       redirect_to :back
   end
@@ -19,8 +19,8 @@ class HomeController < ApplicationController
   end
 
   def test #this has a view, so you can check variables and stuff
-    system "rake jobs:work"
-    system "clockwork clock.rb"
+    # system "rake jobs:work"
+    # system "clockwork clock.rb"
   end
 
 end #end of class
