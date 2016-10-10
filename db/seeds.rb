@@ -28,13 +28,11 @@
 # # get data out of attache and into sql
 # require 'rdbi-driver-odbc'
 
-# puts "connecting to database"
-# dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
-# puts "updating accounts and users"
-# customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-# activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
-# contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
+customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
+contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
 
 # contacts.each do |contact| # populate a model of contact email addresses - had to be done to make the data searchable
 # 	if Contact.find_by(code: contact.Code)
