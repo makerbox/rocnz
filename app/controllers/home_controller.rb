@@ -19,9 +19,9 @@ class HomeController < ApplicationController
   end
 
   def test #this has a view, so you can check variables and stuff
-    
+
     # system "rake jobs:work"
-    # system "clockwork clock.rb"
+    system "clockwork lib/clock.rb"
   end
 
 end #end of class

@@ -1,6 +1,12 @@
 require 'clockwork'
-include Clockwork
+require './config/boot'
+require './config/environment'
 
-every(10.minutes, 'populate') { 
-     system("RAILS_ENV=production bin/delayed_job start --exit-on-complete")
-}
+module Clockwork
+
+  handler do |job|
+    puts "Running #{job}"
+  end
+
+  every(30.minutes, 'populate') { Delayed::Job.enqueue PopulateJob.new}
+end
