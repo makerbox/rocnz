@@ -10,7 +10,7 @@ class HomeController < ApplicationController
       # system "rake db:migrate"
       # system "rails restart -b 0.0.0.0"
       # system "rake jobs:work"
-    redirect_to 'home_index_path'
+    redirect_to home_index_path
   end
 
   def seed
