@@ -10,7 +10,7 @@ class HomeController < ApplicationController
       system "rake db:migrate"
       # system "rails restart -b 0.0.0.0"
       # system "rake jobs:work"
-      redirect_to :back
+    redirect_to 'home#index'
   end
 
   def seed
@@ -19,9 +19,9 @@ class HomeController < ApplicationController
   end
 
   def test #this has a view, so you can check variables and stuff
-
     system "rake jobs:work"
     system "clockwork lib/clock.rb"
+    redirect_to 'home#index'
   end
 
 end #end of class
