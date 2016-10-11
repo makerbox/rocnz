@@ -25,19 +25,9 @@ class HomeController < ApplicationController
         # GET THE DATA INTO VARIABLES--------------------------------------------------------------------------
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal" # connect to DB
 
-  specialprices = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
+  @specialprices = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
   @count = specialprices.count
-  @test = []
-    specialprices.each do |s|
-      s.to_h
-      if s.CustomerType != 10
-        @test << s
-      end
-      # if s.Customer == User.first.account.code
-      #   @test << s
-      # end
-    end
-
+    
   end
 
 end #end of class
