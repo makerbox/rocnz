@@ -2,5 +2,8 @@
 <% @test.each do |t| %>
 <br>
 <br>
-<%= t %>
+<% t.each do |line| %>
+<%= line %>
+<br>
+<% end %>
 <% end %>
