@@ -6,8 +6,8 @@ class HomeController < ApplicationController
 
   def pull
       system "git pull"
-      system "bundle"
-      system "rake db:migrate"
+      # system "bundle"
+      # system "rake db:migrate"
       # system "rails restart -b 0.0.0.0"
       # system "rake jobs:work"
     redirect_to 'home#index'
