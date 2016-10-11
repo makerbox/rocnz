@@ -2,7 +2,7 @@
 <%= @count %>
 **************************************************************************************
 <% @specialprices.each do |t| %>
-<% if t.DiscPerc1 > 0 || t.DiscPerc2 > 0 || t.DiscPerc3 > 0 || t.DiscPerc4 > 0 %>
+<% if t.DiscPerc1 > 100 || t.DiscPerc2 > 100 %>
 
 **************************************************************************************
 <%= number_to_percentage(t.DiscPerc1) %><%= number_to_percentage(t.DiscPerc2) %>
