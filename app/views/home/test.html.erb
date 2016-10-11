@@ -3,7 +3,7 @@
 <% @test.each do |t| %>
 **************************************************************************************
 <%= t.to_h %>
-<% t.each do |line| %>
+<% t.CustomerType.uniq.each do |line| %>
 <%= line %>
 <hr>
 <% end %>
