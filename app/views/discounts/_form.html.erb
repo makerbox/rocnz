@@ -1,0 +1,21 @@
+<%= simple_form_for(@discount) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+
+    <%= f.input :customertype %>
+
+    <%= f.input :producttype %>
+
+    <%= f.input :customer %>
+
+    <%= f.input :product %>
+
+    <%= f.input :discount %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
