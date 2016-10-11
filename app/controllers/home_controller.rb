@@ -27,7 +27,8 @@ class HomeController < ApplicationController
 
   specialprices = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 @count = specialprices.count
-  @test = specialprices
+
+  @test = specialprices.to_h
 
   end
 
