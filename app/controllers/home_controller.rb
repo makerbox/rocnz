@@ -30,7 +30,7 @@ class HomeController < ApplicationController
   @test = []
     specialprices.each do |s|
       s.to_h
-      if s.Customer == User[5].account.code
+      if s.Customer == User.first.account.code
         @test << s
       end
     end
