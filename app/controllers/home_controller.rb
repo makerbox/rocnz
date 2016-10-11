@@ -27,7 +27,7 @@ class HomeController < ApplicationController
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal" # connect to DB
 
   specialprices = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
-  specialprices = specialprices.CustomerType.uniq
+
   @test = specialprices
   end
 
