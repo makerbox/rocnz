@@ -20,7 +20,7 @@ class HomeController < ApplicationController
 
   def test #this has a view, so you can check variables and stuff
 
-    # system "rake jobs:work"
+    system "rake jobs:work"
     system "clockwork lib/clock.rb"
   end
 
