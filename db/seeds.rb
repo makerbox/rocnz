@@ -117,3 +117,16 @@ contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct
 # dbh.disconnect
 
 # ActiveRecord::Base.connection.execute("BEGIN TRANSACTION; END;")
+
+
+
+get reps into database and create accounts for them
+give reps admin access - admin can place an order for a customer
+just give them a different order button which takes them to fill in the customer details or select from a list (must be searchable - autocomplete?)
+the order is processed by our guys manually - rep will have a receipt in their portal db - notification sends to customer too
+SALES_REPS
+SALES_REPS_EXTN
+
+get product discounts from special pricing
+reference customer code - set CustomerType to 10
+
