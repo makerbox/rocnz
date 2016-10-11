@@ -29,7 +29,7 @@ production:
   timeout: 5000
   host: 218.214.73.21
   port: 3000
-  database: "database name"
+  database: "default"
 # rocwholesale:
 #   adapter: sqlite3
 #   host: 218.214.73.21
