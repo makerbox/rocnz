@@ -26,9 +26,14 @@ class HomeController < ApplicationController
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal" # connect to DB
 
   specialprices = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
-@count = specialprices.count
-
-  @test = specialprices.to_h
+  @count = specialprices.count
+  @test = []
+    specialprices.each do |s|
+      s.to_h
+      if s.Customer == current_user
+        @test << s
+      end
+    end
 
   end
 
