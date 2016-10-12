@@ -1,13 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
-def disc(p)
-  d = Discount.where(product: p.group)
-  if discount
-    return d.discount
-  end
-end
-
   # GET /products
   # GET /products.json
   def index
