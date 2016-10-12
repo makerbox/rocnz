@@ -35,7 +35,7 @@ activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Str
 contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
 discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
-discount.each do |d|
+discounts.each do |d|
 	percent = d.DiscPerc1 + d.DiscPerc2
 	if d.CustomerType == 10 # affect discounts for customer codes
 		if d.ProductType == 10 # affect discounts for product codes
