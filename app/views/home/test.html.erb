@@ -1,12 +1,11 @@
 
 <%= @count %>
 **************************************************************************************
-<% @specialprices.each do |t| %>
-<% if t.DiscPerc1 > 0 && t.DiscPerc2 > 0 %>
-
+<% Discount.each do |t| %>
 **************************************************************************************
-<%= t.Customer %>--<%= t.Product %>--
-<%= number_to_percentage(t.DiscPerc1) %><%= number_to_percentage(t.DiscPerc2) %>
+<%= t.discount %>--<hr>
+<%= t.customertype %>--<%= t.customer %><br>
+<%= t.producttype %>--<%= t.product %><br>
 **************************************************************************************<br>
 <% end %>
 <% end %>
