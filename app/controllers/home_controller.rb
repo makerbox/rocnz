@@ -18,15 +18,7 @@ class HomeController < ApplicationController
   end
 
   def test #this has a view, so you can check variables and stuff
-    # system "rake jobs:work"
-    # system "clockwork lib/clock.rb"
-    # redirect_to 'home#index'
 
-        # GET THE DATA INTO VARIABLES--------------------------------------------------------------------------
-    dbh = RDBI.connect :ODBC, :db => "wholesaleportal" # connect to DB
-
-  @specialprices = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
-  @count = @specialprices.count
     
   end
 
