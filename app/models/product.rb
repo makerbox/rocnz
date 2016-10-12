@@ -4,6 +4,8 @@ has_many :orders, through: :quantities
 
 def discount
 if Discount.find_by(product: self.group).discount
+	Discount.find_by(product: self.group).discount
+end
 end
 
 end #end of class
