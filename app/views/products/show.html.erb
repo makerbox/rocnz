@@ -20,15 +20,15 @@
 	  <!-- if the user has an approved account with a seller level set, then show them their correct price -->
 		  <% case current_user.account.seller_level.to_i %>
 		  	<% when 1 %>
-		  		$<%= @product.price1 - (@product.disc) %>
+		  		$<%= @product.price1 - (disc(@product)) %>
 		    <% when 2 %>
-		  		$<%= @product.price2 - (@product.disc) %>
+		  		$<%= @product.price2 - (disc(@product)) %>
 		    <% when 3 %>
-		  		$<%= @product.price3 - (@product.disc) %>
+		  		$<%= @product.price3 - (disc(@product)) %>
 		    <% when 4 %>
-		  		$<%= @product.price4 - (@product.disc) %>
+		  		$<%= @product.price4 - (disc(@product)) %>
 		    <% when 5 %>
-		  		$<%= @product.price5 - (@product.disc) %>
+		  		$<%= @product.price5 - (disc(@product)) %>
 		    <% when 6 %>
 		  		$<%= @product.rrp %>
 		  <% end %>

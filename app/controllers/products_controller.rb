@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
-def self.disc
-  d = Discount.where(product: self.group)
+def disc(p)
+  d = Discount.where(product: p.group)
   if discount
     return d.discount
   end
