@@ -1,7 +1,7 @@
 
 <% Discount.all.each do |t| %>
 	<%= t.discount %><hr>
-	<%= t.customertype %>--<%= t.customer %><br>
-	<%= t.producttype %>--<%= t.product %><br>
+	cust <%= t.customertype %>--<%= t.customer %><br>
+	prod <%= t.producttype %>--<%= t.product %><br>
 	<hr><hr>
 <% end %>
