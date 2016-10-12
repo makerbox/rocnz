@@ -39,13 +39,13 @@ discounts.each do |d|
 	percent = d.DiscPerc1 + d.DiscPerc2
 	if d.CustomerType == 10 # affect discounts for customer codes
 		if d.ProductType == 10 # affect discounts for product codes
-			if Dicount.find_by(customertype: 'code', producttype: 'code', customer: d.Customer, product: d.Product) # does it exist already?
+			if Discount.find_by(customertype: 'code', producttype: 'code', customer: d.Customer, product: d.Product) # does it exist already?
 				puts 'exists'
 			else
 				Discount.create(customertype: 'code', producttype: 'code', customer: d.Customer, product: d.Product)
 			end
 		elsif d.ProductType == 30 # affect discounts for product groups
-			if Dicount.find_by(customertype: 'code', producttype: 'group', customer: d.Customer, product: d.Product) # does it exist already?
+			if Discount.find_by(customertype: 'code', producttype: 'group', customer: d.Customer, product: d.Product) # does it exist already?
 				puts 'exists'
 			else
 				Discount.create(customertype: 'code', producttype: 'group', customer: d.Customer, product: d.Product)
@@ -53,13 +53,13 @@ discounts.each do |d|
 		end
 	elsif d.CustomerType == 30 # affect discounts for customer groups
 		if d.ProductType == 10 # affect discounts for product codes
-			if Dicount.find_by(customertype: 'group', producttype: 'code', customer: d.Customer, product: d.Product) # does it exist already?
+			if Discount.find_by(customertype: 'group', producttype: 'code', customer: d.Customer, product: d.Product) # does it exist already?
 				puts 'exists'
 			else
 				Discount.create(customertype: 'group', producttype: 'code', customer: d.Customer, product: d.Product)
 			end
 		elsif d.ProductType == 30 # affect discounts for product groups
-			if Dicount.find_by(customertype: 'group', producttype: 'group', customer: d.Customer, product: d.Product) # does it exist already?
+			if Discount.find_by(customertype: 'group', producttype: 'group', customer: d.Customer, product: d.Product) # does it exist already?
 				puts 'exists'
 			else
 				Discount.create(customertype: 'group', producttype: 'group', customer: d.Customer, product: d.Product)
