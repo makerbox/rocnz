@@ -7,7 +7,7 @@ def discount
   # if discount
     # return d.discount
   # end
-  return 15
+  15
 end
 
 end #end of class
