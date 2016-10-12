@@ -3,11 +3,7 @@ has_many :quantities
 has_many :orders, through: :quantities
 
 def discount
-  # d = Discount.where(product: p.group)
-  # if discount
-    # return d.discount
-  # end
-  15
+Discount.where(product: self.group).discount
 end
 
 end #end of class
