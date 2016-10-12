@@ -22,13 +22,13 @@
 		  	<% when 1 %>
 		  		$<%= @product.price1 - (@product.discount) %>
 		    <% when 2 %>
-		  		$<%= @product.price2 %>
+		  		$<%= @product.price2 - (@product.discount) %>
 		    <% when 3 %>
-		  		$<%= @product.price3 %>
+		  		$<%= @product.price3 - (@product.discount) %>
 		    <% when 4 %>
-		  		$<%= @product.price4 %>
+		  		$<%= @product.price4 - (@product.discount) %>
 		    <% when 5 %>
-		  		$<%= @product.price5 %>
+		  		$<%= @product.price5 - (@product.discount) %>
 		    <% when 6 %>
 		  		$<%= @product.rrp %>
 		  <% end %>
