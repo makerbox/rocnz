@@ -3,7 +3,7 @@ has_many :quantities
 has_many :orders, through: :quantities
 
 def discount
-if Discount.find_by(product: self.group).discount
+if Discount.find_by(product: self.group).exists?
 	Discount.find_by(product: self.group).discount
 end
 end
