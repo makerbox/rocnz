@@ -1,6 +1,12 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
+def self.disc
+  d = Discount.where(product: self.group)
+  if discount
+    return d.discount
+  end
+end
 
   # GET /products
   # GET /products.json
