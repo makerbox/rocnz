@@ -3,7 +3,7 @@ has_many :quantities
 has_many :orders, through: :quantities
 
 def discount
-Discount.where(product: self.group).discount
+Discount.find_by(product: self.group).discount
 end
 
 end #end of class
