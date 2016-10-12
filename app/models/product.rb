@@ -1,11 +1,13 @@
 class Product < ActiveRecord::Base
 has_many :quantities
 has_many :orders, through: :quantities
-def discount(p)
-  d = Discount.where(product: p.group)
-  if discount
-    return d.discount
-  end
+
+def discount
+  # d = Discount.where(product: p.group)
+  # if discount
+    # return d.discount
+  # end
+  return 5
 end
 
 end #end of class
