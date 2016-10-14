@@ -18,11 +18,12 @@ class HomeController < ApplicationController
   end
 
   def test #this has a view, so you can check variables and stuff
-    Discount.all.each do |d|
-      newcustomer = d.customer.strip
-      newproduct = d.product.strip
-      d.update(product: newproduct, customer: newcustomer)
-    end    
+    # Discount.all.each do |d|
+    #   newcustomer = d.customer.strip
+    #   newproduct = d.product.strip
+    #   d.update(product: newproduct, customer: newcustomer)
+    # end
+    current_user.account.update(discount: 'A')    
   end
 
 end #end of class
