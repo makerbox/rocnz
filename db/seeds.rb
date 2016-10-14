@@ -130,7 +130,7 @@ customers.each do |customer| #use the data from customers to fill in the blanks 
 		else
 			discount = nil
 		end
-		account.update(approved: 'approved', company: customer.Name, street: customer.Street, suburb: customer.Suburb, postcode: customer.Postcode, phone: customer.Phone, contact: customer.Contact, seller_level: customer.PriceCat, sort: customer.Sort, discount: discount)
+		account.update(approved: 'tapproved', company: customer.Name, street: customer.Street, suburb: customer.Suburb, postcode: customer.Postcode, phone: customer.Phone, contact: customer.Contact, seller_level: customer.PriceCat, sort: customer.Sort, discount: discount)
 	end
 end
 
