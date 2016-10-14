@@ -122,6 +122,7 @@ end
 #update accounts with full details
 customers.each do |customer| #use the data from customers to fill in the blanks in Accounts
 	account = Account.find_by(code: customer.Code)
+	puts customer.SpecialPriceCat
 	if account
 		account.update(approved: 'approved', discount: customer.SpecialPriceCat, company: customer.Name, street: customer.Street, suburb: customer.Suburb, postcode: customer.Postcode, phone: customer.Phone, contact: customer.Contact, seller_level: customer.PriceCat, sort: customer.Sort)
 	end
