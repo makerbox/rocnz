@@ -16,7 +16,7 @@ def discount(user)
 		Discount.find_by(producttype: 'code', product: self.code, customertype: 'group', customer: user.account.discount)
 	end
 	# user.account.discount
-	'current user' + user.account.code
+	'|' + user.account.code + '|' + self.group
 end
 
 end #end of class
