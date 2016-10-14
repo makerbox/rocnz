@@ -7,7 +7,7 @@ def discount
 	if Discount.find_by(product: 'LC')
 		Discount.find_by(product: 'LC').discount
 	else
-		15
+		Discount.where(producttype: 'group').first.product
 	end
 end
 
