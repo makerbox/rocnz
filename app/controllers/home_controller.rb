@@ -19,9 +19,9 @@ class HomeController < ApplicationController
 
   def test #this has a view, so you can check variables and stuff
     Discount.each do |d|
-      customer = d.customer.strip
-      product = d.product.strip
-      d.update (product: product, customer: customer)
+      newcustomer = d.customer.strip
+      newproduct = d.product.strip
+      d.update(product: newproduct, customer: newcustomer)
     end    
   end
 
