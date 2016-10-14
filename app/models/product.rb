@@ -3,16 +3,16 @@ has_many :quantities
 has_many :orders, through: :quantities
 
 def discount(user)
-	if Discount.find_by(producttype: 'group', product: self.group, customertype: 'code', customer: user.account.code).discount
+	if Discount.find_by(producttype: 'group', product: self.group, customertype: 'code', customer: user.account.code)
 		Discount.find_by(producttype: 'group', product: self.group, customertype: 'code', customer: user.account.code).discount
 	end
-	if Discount.find_by(producttype: 'group', product: self.group, customertype: 'group', customer: user.account.discount).discount
+	if Discount.find_by(producttype: 'group', product: self.group, customertype: 'group', customer: user.account.discount)
 		Discount.find_by(producttype: 'group', product: self.group, customertype: 'group', customer: user.account.discount).discount
 	end
-	if Discount.find_by(producttype: 'code', product: self.code, customertype: 'code', customer: user.account.code).discount
+	if Discount.find_by(producttype: 'code', product: self.code, customertype: 'code', customer: user.account.code)
 		Discount.find_by(producttype: 'code', product: self.code, customertype: 'code', customer: user.account.code).discount
 	end
-	if Discount.find_by(producttype: 'code', product: self.code, customertype: 'group', customer: user.account.discount).discount
+	if Discount.find_by(producttype: 'code', product: self.code, customertype: 'group', customer: user.account.discount)
 		Discount.find_by(producttype: 'code', product: self.code, customertype: 'group', customer: user.account.discount).discount
 	end
 end
