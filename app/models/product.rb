@@ -3,17 +3,18 @@ has_many :quantities
 has_many :orders, through: :quantities
 
 def discount(user)
-	if disc = Discount.find_by(producttype: 'group', product: self.group)
-		if (disc.customer == user.account.code) || (disc.customer == user.account.discount)
-			Discount.find_by(product: self.group).discount
-		end
+	if Discount.find_by(producttype: 'group', product: self.group, customertype: 'code', customer: user.account.code)
+		Discount.find_by(producttype: 'group', product: self.group, customertype: 'code', customer: user.account.code)
 	end
-	if disc = Discount.find_by(producttype: 'code', product: self.code)
-		if (disc.customer == user.account.code) || (disc.customer == user.account.discount)
-			Discount.find_by(product: self.code).discount
-		end
+	if Discount.find_by(producttype: 'group', product: self.group, customertype: 'group', customer: user.account.discount)
+		Discount.find_by(producttype: 'group', product: self.group, customertype: 'group', customer: user.account.discount)
 	end
-	user.account.code
+	if Discount.find_by(producttype: 'code', product: self.code, customertype: 'code', customer: user.account.code)
+		Discount.find_by(producttype: 'code', product: self.code, customertype: 'code', customer: user.account.code)
+	end
+	if Discount.find_by(producttype: 'code', product: self.code, customertype: 'group', customer: user.account.discount)
+		Discount.find_by(producttype: 'code', product: self.code, customertype: 'group', customer: user.account.discount)
+	end
 end
 
 end #end of class
