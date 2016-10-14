@@ -126,7 +126,7 @@ customers.each do |customer| #use the data from customers to fill in the blanks 
 	discount = ''
 	if account
 		if customer.SpecialPriceCat
-			discount = customer.SpecialPriceCat
+			discount = customer.SpecialPriceCat.strip
 			puts discount
 		else
 			discount = nil
