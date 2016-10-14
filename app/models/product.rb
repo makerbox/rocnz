@@ -6,8 +6,8 @@ def discount
 	if Discount.find_by(product: self.group)
 		Discount.find_by(product: self.group).discount
 	else
-		0
-		
+		self.group
+		Discount.find_by(product: self.group)
 	end
 end
 
