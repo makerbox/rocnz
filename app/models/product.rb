@@ -6,7 +6,7 @@ def discount
 	if Discount.find_by(product: self.group)
 		Discount.find_by(product: self.group).discount
 	else
-		Discount.where(producttype: 'group').last.product
+		0
 	end
 end
 
