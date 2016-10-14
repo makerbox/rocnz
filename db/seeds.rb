@@ -128,7 +128,7 @@ customers.each do |customer| #use the data from customers to fill in the blanks 
 		puts '---'
 		if customer.SpecialPriceCat
 			discount = customer.SpecialPriceCat.strip
-			puts discount
+			puts discount + '<'
 			puts '^^^^^^'
 		end
 	end
