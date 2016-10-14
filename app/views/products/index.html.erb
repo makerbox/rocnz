@@ -16,18 +16,17 @@
         <% if user_signed_in? %>
         <% if current_user.account %>
         <% if current_user.account.approved == 'approved' %>
-        **<%= product.discount(current_user) %>**
         <% case current_user.account.seller_level.to_i %>
         <% when 1 %>
-        $<%= product.price1 %>
+        $<%= product.price1 / 100 * product.discount(current_user) %>
         <% when 2 %>
-        $<%= product.price2 %>
+        $<%= product.price2 / 100 * product.discount(current_user) %>
         <% when 3 %>
-        $<%= product.price3 %>
+        $<%= product.price3 / 100 * product.discount(current_user) %>
         <% when 4 %>
-        $<%= product.price4 %>
+        $<%= product.price4 / 100 * product.discount(current_user) %>
         <% when 5 %>
-        $<%= product.price5 %>
+        $<%= product.price5 / 100 * product.discount(current_user) %>
         <% when 6 %>
         $<%= product.rrp %>
         <% end %>

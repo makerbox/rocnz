@@ -4,17 +4,16 @@ has_many :orders, through: :quantities
 
 def discount(user)
 	if !Discount.find_by(producttype: 'group', product: self.group, customertype: 'code', customer: user.account.code).discount.nil?
-		disc = 100 - Discount.find_by(producttype: 'group', product: self.group, customertype: 'code', customer: user.account.code).discount
+		100 - Discount.find_by(producttype: 'group', product: self.group, customertype: 'code', customer: user.account.code).discount
 	elsif !Discount.find_by(producttype: 'group', product: self.group, customertype: 'group', customer: user.account.discount).discount.nil?
-		disc = 100 - Discount.find_by(producttype: 'group', product: self.group, customertype: 'group', customer: user.account.discount).discount
+		100 - Discount.find_by(producttype: 'group', product: self.group, customertype: 'group', customer: user.account.discount).discount
 	elsif !Discount.find_by(producttype: 'code', product: self.code, customertype: 'code', customer: user.account.code).discount.nil?
-		disc = 100 - Discount.find_by(producttype: 'code', product: self.code, customertype: 'code', customer: user.account.code).discount
+		100 - Discount.find_by(producttype: 'code', product: self.code, customertype: 'code', customer: user.account.code).discount
 	elsif !Discount.find_by(producttype: 'code', product: self.code, customertype: 'group', customer: user.account.discount).discount.nil?
-		disc = 100 - Discount.find_by(producttype: 'code', product: self.code, customertype: 'group', customer: user.account.discount).discount
+		100 - Discount.find_by(producttype: 'code', product: self.code, customertype: 'group', customer: user.account.discount).discount
 	else
-		disc = 0
+		100
 	end
-	number_to_percentage(disc)
 end
 
 end #end of class
