@@ -123,7 +123,9 @@ end
 #update accounts with full details
 customers.each do |customer| #use the data from customers to fill in the blanks in Accounts
 	account = Account.find_by(code: customer.Code)
-	puts account.code
+	if account
+		puts account.code
+	end
 	if customer.SpecialPriceCat
 		discount = customer.SpecialPriceCat.strip
 		print discount
