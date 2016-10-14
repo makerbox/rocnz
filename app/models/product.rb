@@ -13,7 +13,7 @@ def discount(user)
 			Discount.find_by(product: self.code).discount
 		end
 	end
-	user.email
+	user.account.code
 end
 
 end #end of class
