@@ -124,9 +124,8 @@ customers.each do |customer| #use the data from customers to fill in the blanks 
 	account = Account.find_by(code: customer.Code)
 	puts customer.SpecialPriceCat
 	if account
-		account.update(approved: 'approved', discount: customer.SpecialPriceCat, company: customer.Name, street: customer.Street, suburb: customer.Suburb, postcode: customer.Postcode, phone: customer.Phone, contact: customer.Contact, seller_level: customer.PriceCat, sort: customer.Sort)
+		account.update(approved: 'approved', discount: customer.SpecialPriceCat.strip, company: customer.Name, street: customer.Street, suburb: customer.Suburb, postcode: customer.Postcode, phone: customer.Phone, contact: customer.Contact, seller_level: customer.PriceCat, sort: customer.Sort)
 	end
-	print "."
 end
 
 # #output a little bit of result data to the console - for debugging only
