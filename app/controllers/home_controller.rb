@@ -9,7 +9,7 @@ class HomeController < ApplicationController
       # system "bundle"
       # system "rails restart -b 0.0.0.0"
       # system "rake jobs:work"
-      # system "rake db:seed"
+      system "rake db:seed"
   end
 
   def seed
