@@ -3,9 +3,11 @@ has_many :quantities
 has_many :orders, through: :quantities
 
 def discount
-if Discount.find_by(product: self.group).present?
-	Discount.find_by(product: self.group).discount
-end
+	if Discount.find_by(product: 'G')
+		Discount.find_by(product: 'G').discount
+	else
+		15
+	end
 end
 
 end #end of class
