@@ -2,7 +2,7 @@ class Product < ActiveRecord::Base
 has_many :quantities
 has_many :orders, through: :quantities
 
-def discount
+def discount(user)
 	if disc = Discount.find_by(producttype: 'group', product: self.group)
 		if (disc.customer == current_user.account.code) || (disc.customer == current_user.account.discount)
 			Discount.find_by(product: self.group).discount

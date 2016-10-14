@@ -7,11 +7,9 @@ class HomeController < ApplicationController
   def pull
       system "git pull"
       # system "bundle"
-      system "rake db:migrate"
       # system "rails restart -b 0.0.0.0"
       # system "rake jobs:work"
-      Discount.destroy_all
-      system "rake db:seed"
+      # system "rake db:seed"
   end
 
   def seed
