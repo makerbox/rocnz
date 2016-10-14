@@ -29,7 +29,7 @@ end
       matching = []
       Account.all.each do |account|
         if account.code.include? params[:search] 
-          matching << test.code
+          matching << account.code
         end
         @accounts = @accounts.where(code: matching)
       end
