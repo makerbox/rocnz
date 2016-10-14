@@ -25,6 +25,9 @@ end
     if params[:order]
       @accounts = @accounts.order(params[:order] + ' ASC')
     end
+    if params[:search]
+      @accounts = @accounts.where(code: params[:search])
+    end
     @accounts = @accounts.paginate(:page => params[:page], :per_page => 20)
   end
 

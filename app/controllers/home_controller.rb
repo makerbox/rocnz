@@ -23,7 +23,6 @@ class HomeController < ApplicationController
     #   newproduct = d.product.strip
     #   d.update(product: newproduct, customer: newcustomer)
     # end
-    current_user.account.update(discount: 'A')    
   end
 
 end #end of class
