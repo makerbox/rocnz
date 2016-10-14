@@ -5,15 +5,14 @@ has_many :orders, through: :quantities
 def discount(user)
 	if !Discount.find_by(producttype: 'group', product: self.group, customertype: 'code', customer: user.account.code).discount.nil?
 		Discount.find_by(producttype: 'group', product: self.group, customertype: 'code', customer: user.account.code).discount
-	end
-	if !Discount.find_by(producttype: 'group', product: self.group, customertype: 'group', customer: user.account.discount).discount.nil?
+	elsif !Discount.find_by(producttype: 'group', product: self.group, customertype: 'group', customer: user.account.discount).discount.nil?
 		Discount.find_by(producttype: 'group', product: self.group, customertype: 'group', customer: user.account.discount).discount
-	end
-	if !Discount.find_by(producttype: 'code', product: self.code, customertype: 'code', customer: user.account.code).discount.nil?
+	elsif !Discount.find_by(producttype: 'code', product: self.code, customertype: 'code', customer: user.account.code).discount.nil?
 		Discount.find_by(producttype: 'code', product: self.code, customertype: 'code', customer: user.account.code).discount
-	end
-	if !Discount.find_by(producttype: 'code', product: self.code, customertype: 'group', customer: user.account.discount).discount.nil?
+	elsif !Discount.find_by(producttype: 'code', product: self.code, customertype: 'group', customer: user.account.discount).discount.nil?
 		Discount.find_by(producttype: 'code', product: self.code, customertype: 'group', customer: user.account.discount).discount
+	else
+		0
 	end
 end
 
