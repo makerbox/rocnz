@@ -125,6 +125,7 @@ customers.each do |customer| #use the data from customers to fill in the blanks 
 	account = Account.find_by(code: customer.Code)
 	if account
 		puts account.code
+		print '---'
 	end
 	if customer.SpecialPriceCat
 		discount = customer.SpecialPriceCat.strip
