@@ -27,8 +27,8 @@ end
     end
     if params[:search]
       matching = []
-      @accounts.each do |test|
-        if test.code.include? params[:search] 
+      Account.all.each do |account|
+        if account.code.include? params[:search] 
           matching << test.code
         end
         @accounts = @accounts.where(code: matching)
