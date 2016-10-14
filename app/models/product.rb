@@ -14,7 +14,7 @@ def discount(user)
 	else
 		disc = 0
 	end
-	number_to_percentage disc
+	number_to_percentage(disc)
 end
 
 end #end of class
