@@ -131,7 +131,7 @@ customers.each do |customer| #use the data from customers to fill in the blanks 
 			puts discount + '<'
 			puts '^^^^^^'
 		end
-		account.update(approved: 'approved', discount: discount, company: customer.Name, street: customer.Street, suburb: customer.Suburb, postcode: customer.Postcode, phone: customer.Phone, contact: customer.Contact, seller_level: customer.PriceCat, sort: customer.Sort)
+		account.update(approved: 'approved', company: customer.Name, street: customer.Street, suburb: customer.Suburb, postcode: customer.Postcode, phone: customer.Phone, contact: customer.Contact, seller_level: customer.PriceCat, sort: customer.Sort, discount: discount)
 	end
 end
 
