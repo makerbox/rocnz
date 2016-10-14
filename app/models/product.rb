@@ -3,11 +3,11 @@ has_many :quantities
 has_many :orders, through: :quantities
 
 def discount
-	self.group
-	if Discount.find_by(product: 'LC')
-		Discount.find_by(product: 'LC').discount
+	if Discount.find_by(product: self.group)
+		Discount.find_by(product: self.group).discount
 	else
-		Discount.where(producttype: 'group').first.product
+		0
+		
 	end
 end
 
