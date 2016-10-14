@@ -124,9 +124,9 @@ end
 customers.each do |customer| #use the data from customers to fill in the blanks in Accounts
 	account = Account.find_by(code: customer.Code)
 	if account
-		puts customer.Code
 		if customer.SpecialPriceCat
 			discount = customer.SpecialPriceCat
+			puts discount
 		else
 			discount = nil
 		end
