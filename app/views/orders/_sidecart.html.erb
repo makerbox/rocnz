@@ -11,23 +11,23 @@
 	<% end %>
 	<% case current_user.account.seller_level.to_i %>
 		  	<% when 1 %>
-		  		<% @setprice = po.product.price1 / 100 * product.discount(current_user) %>
-		  		$<%= po.product.price1 / 100 * product.discount(current_user) %>
+		  		<% @setprice = po.product.price1 / 100 * po.product.discount(current_user) %>
+		  		$<%= po.product.price1 / 100 * po.product.discount(current_user) %>
 		    <% when 2 %>
-		    <% @setprice = po.product.price2 / 100 * product.discount(current_user) %>
-		  		$<%= po.product.price2 / 100 * product.discount(current_user) %>
+		    <% @setprice = po.product.price2 / 100 * po.product.discount(current_user) %>
+		  		$<%= po.product.price2 / 100 * po.product.discount(current_user) %>
 		    <% when 3 %>
-		    <% @setprice = po.product.price3 / 100 * product.discount(current_user) %>
+		    <% @setprice = po.product.price3 / 100 * po.product.discount(current_user) %>
 		  		$<%= po.product.price3 %>
 		    <% when 4 %>
-		    <% @setprice = po.product.price4 / 100 * product.discount(current_user) %>
-		  		$<%= po.product.price4 / 100 * product.discount(current_user) %>
+		    <% @setprice = po.product.price4 / 100 * po.product.discount(current_user) %>
+		  		$<%= po.product.price4 / 100 * po.product.discount(current_user) %>
 		    <% when 5 %>
-		    <% @setprice = po.product.price5 / 100 * product.discount(current_user) %>
+		    <% @setprice = po.product.price5 / 100 * po.product.discount(current_user) %>
 		  		$<%= po.product.price5 %>
 		    <% when 6 %>
-		    <% @setprice = po.product.rrp / 100 * product.discount(current_user) %>
-		  		$<%= po.product.rrp / 100 * product.discount(current_user) %>
+		    <% @setprice = po.product.rrp / 100 * po.product.discount(current_user) %>
+		  		$<%= po.product.rrp / 100 * po.product.discount(current_user) %>
 	<% end %>
 	x <%= po.qty %> ------- $<%= po.qty * @setprice %><% @order.total = @order.total + (po.qty * @setprice) %>
 
