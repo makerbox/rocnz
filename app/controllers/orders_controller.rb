@@ -26,17 +26,17 @@ def sendorder
     product = Product.find_by(id: q.product_id)
     case current_user.account.seller_level.to_i
       when 1
-        @setprice = product.price1
+        @setprice = product.price1 / 100 * product.discount(current_user)
       when 2
-        @setprice = product.price2
+        @setprice = product.price2 / 100 * product.discount(current_user)
       when 3
-        @setprice = product.price3
+        @setprice = product.price3 / 100 * product.discount(current_user)
       when 4
-        @setprice = product.price4
+        @setprice = product.price4 / 100 * product.discount(current_user)
       when 5
-        @setprice = product.price5
+        @setprice = product.price5 / 100 * product.discount(current_user)
       when 6
-        @setprice = product.rrp
+        @setprice = product.rrp / 100 * product.discount(current_user)
     end
     @print += "~" + product.code.to_s + "\r\n[" + product.description.strip + "]\r\n$" + @setprice.to_s + " x qty:" + q.qty.to_s + "\r\n\n"
   end
