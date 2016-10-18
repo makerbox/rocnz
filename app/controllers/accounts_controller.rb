@@ -10,7 +10,7 @@ class AccountsController < ApplicationController
   end
 
 def orderas
-  account = Account.find_by(params[:account])
+  account = Account.find_by(id: params[:account])
   if current_user.mimic
     current_user.mimic.update(account: account)
   else
