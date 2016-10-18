@@ -9,6 +9,16 @@ class AccountsController < ApplicationController
     end
   end
 
+def orderas
+  if current_user.mimic
+    current_user.mimic.update(account: @account)
+  else
+    current_user.mimic.create(account: @account, user: current_user)
+  end
+  notification = 'ordering as ' + @account.company
+  redirect_to home_index_path, notice: notification
+end
+
 def approve
   @account.update_attributes(:approved => 'approved')
   redirect_to accounts_path, notice: 'Account approved'

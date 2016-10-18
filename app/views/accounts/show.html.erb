@@ -42,6 +42,8 @@ Your account is pending approval.
 </p>
 <% end %>
 <% if current_user.has_role? :admin %>
+
+          <%= link_to orderas_account_path(account), class: 'btn btn-warning', title: 'seller level required' do %>
 <p>
   <strong>Seller level:</strong>
   <% if @account.seller_level  && @account.seller_level != '' %>

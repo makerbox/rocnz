@@ -23,6 +23,7 @@ end
     member do
       get 'approve'
       get 'unapprove'
+      get 'orderas'
     end
   end
   

@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
   has_one :account
+  has_one :mimic
   has_many :orders
   
   after_create :assign_default_role
