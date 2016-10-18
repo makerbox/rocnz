@@ -32,7 +32,7 @@
 	<% @setprice = @setprice.round(2) %>
 	$<%= number_with_precision(@setprice, precision: 2) %>
 	<% subtotal = (po.qty * @setprice).round(2) %>
-	x <%= po.qty %> ------- $<%= number_with_precision(subtotal, precision: 2) %>
+	x <strong><%= po.qty %></strong> ------- $<%= number_with_precision(subtotal, precision: 2) %>
 	<% @order.total = @order.total + subtotal %>
 
 <%= link_to 'remove', remove_product_path(id: po.id), class: 'btn btn-warning remove-btn' %></div>
