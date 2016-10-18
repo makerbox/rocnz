@@ -32,6 +32,12 @@ def sendorder
   @print += "------------------------------------------------------------------- \r\n\n"
   @order.quantities.each do |q|
     product = Product.find_by(id: q.product_id)
+    if (current_user.has_role? :admin) && (!current_user.mimic.nil?) 
+    level = current_user.mimic.account.seller_level.to_i 
+    else 
+    level = current_user.account.seller_level.to_i 
+    end 
+    case level 
     case current_user.account.seller_level.to_i
       when 1
         @setprice = product.price1 / 100 * product.discount(current_user)

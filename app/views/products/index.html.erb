@@ -16,7 +16,12 @@
             <% if user_signed_in? %>
               <% if current_user.account %>
                 <% if current_user.account.approved == 'approved' %>
-                  <% case current_user.account.seller_level.to_i %>
+    <% if (current_user.has_role? :admin) && (!current_user.mimic.nil?) %>
+    <% level = current_user.mimic.account.seller_level.to_i %>
+    <% else %>
+    <% level = current_user.account.seller_level.to_i %>
+    <% end %>
+    <% case level %>
                     <% when 1 %>
                     <% prodprice = product.price1 / 100 * product.discount(current_user) %>
                     <% when 2 %>
