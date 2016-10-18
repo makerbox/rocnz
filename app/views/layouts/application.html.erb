@@ -92,7 +92,7 @@ Roc Cloudy
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
           <% if current_user.has_role? :admin %>
-          <li><%= link_to 'Pending customers', accounts_path %></li>
+          <li><%= link_to 'Customers', accounts_path %></li>
           <% else %>
           <% if current_user.approved? %>
           <li><%= link_to 'My Account', new_user_session_path %></li>
