@@ -14,8 +14,8 @@
             <%= product.code %> | category <%= product.category %> | quantity <%= product.qty %><br>
 
             <% if user_signed_in? %>
-              <% if current_user.account %>
-                <% if current_user.account.approved == 'approved' %>
+              <% if current_user.account || (current_user.has_role? :admin) %>
+                <% if (current_user.account.approved == 'approved') || (current_user.has_role? :admin) %>
     <% if (current_user.has_role? :admin) && (!current_user.mimic.nil?) %>
     <% level = current_user.mimic.account.seller_level.to_i %>
     <% else %>
@@ -38,8 +38,6 @@
                   $<%= number_with_precision(prodprice, precision: 2) %>
                   <br>[RRP: $<%= product.rrp %>] | [QTY: <%= product.qty %>]
                 <% end %>
-              <% end %>
-              <% if current_user.has_role? :admin %>
               <% end %>
             <% end %> 
           </div>
