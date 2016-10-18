@@ -45,11 +45,10 @@ Roc Cloudy
       <% if user_signed_in? %>
         <ul class="nav navbar-nav">
         <% if current_user.has_role? :admin %>
-      <span style="margin-left: 5em; margin-top:1em;">
-      <% if current_user.mimic %>
+      <span style="margin-left: 5em; margin-top:1em; color: red;">
+      <% if current_user.mimic %>ORDERING FOR: 
       <%= current_user.mimic.account.company %>
-      <% end %>
-      <%= link_to 'test', home_test_path %> | <%= link_to 'pull', home_pull_path %> | <%= link_to 'seed', home_seed_path %></span>
+      <% end %></span>
       <% end %>
         <% if current_user.account %>
           <% if current_user.account.sort %>
