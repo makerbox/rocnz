@@ -32,7 +32,7 @@
 		    <% when 6 %>
 		  		<% prodprice = @product.rrp %>
 		  <% end %>
-		  $<%= prodprice.round(2) %>
+		  $<%= number_with_precision(prodprice, precision: 2) %>
 	  <% end %>
 
 	  <% if user_signed_in? %>
