@@ -43,13 +43,17 @@ Roc Cloudy
         <%= @notice %>
       <% end %>
       <% if user_signed_in? %>
-        <ul class="nav navbar-nav">
-        <% if current_user.has_role? :admin %>
-      <span style="margin-left: 5em; margin-top:1em; color: green;">
-      <% if current_user.mimic %>ORDERING FOR: 
-      <%= current_user.mimic.account.company %>
-      <% end %></span>
+
+      <% if current_user.has_role? :admin %>
+        <div id="mimic">
+          <% if current_user.mimic %>
+            ORDERING FOR: 
+            <%= current_user.mimic.account.company %>
+          <% end %>
+        </div>
       <% end %>
+
+        <ul class="nav navbar-nav">
         <% if current_user.account %>
           <% if current_user.account.sort %>
             <% if current_user.account.sort.include? 'R' %>
