@@ -45,7 +45,7 @@ Roc Cloudy
       <% if user_signed_in? %>
         <ul class="nav navbar-nav">
         <% if current_user.has_role? :admin %>
-      <span style="margin-left: 5em; margin-top:1em; color: red;">
+      <span style="margin-left: 5em; margin-top:1em; color: green;">
       <% if current_user.mimic %>ORDERING FOR: 
       <%= current_user.mimic.account.company %>
       <% end %></span>
