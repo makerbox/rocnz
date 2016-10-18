@@ -20,18 +20,19 @@
 	  <!-- if the user has an approved account with a seller level set, then show them their correct price -->
 		  <% case current_user.account.seller_level.to_i %>
 		  	<% when 1 %>
-		  		$<%= @product.price1  / 100 * @product.discount(current_user) %>
+		  		<% prodprice = @product.price1  / 100 * @product.discount(current_user) %>
 		    <% when 2 %>
-		  		$<%= @product.price2  / 100 * @product.discount(current_user) %>
+		  		<% prodprice = @product.price2  / 100 * @product.discount(current_user) %>
 		    <% when 3 %>
-		  		$<%= @product.price3  / 100 * @product.discount(current_user) %>
+		  		<% prodprice = @product.price3  / 100 * @product.discount(current_user) %>
 		    <% when 4 %>
-		  		$<%= @product.price4  / 100 * @product.discount(current_user) %>
+		  		<% prodprice = @product.price4  / 100 * @product.discount(current_user) %>
 		    <% when 5 %>
-		  		$<%= @product.price5  / 100 * @product.discount(current_user) %>
+		  		<% prodprice = @product.price5  / 100 * @product.discount(current_user) %>
 		    <% when 6 %>
-		  		$<%= @product.rrp %>
+		  		<% prodprice = @product.rrp %>
 		  <% end %>
+		  $<%= prodprice.round(2) %>
 	  <% end %>
 
 	  <% if user_signed_in? %>
