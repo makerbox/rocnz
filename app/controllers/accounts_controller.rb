@@ -11,11 +11,11 @@ class AccountsController < ApplicationController
 
 def orderas
   if current_user.mimic
-    current_user.mimic.update(account: @account)
+    current_user.mimic.update(account: params[:account])
   else
-    current_user.mimic.create(account: @account, user: current_user)
+    current_user.mimic.create(account: params[:account], user: current_user)
   end
-  notification = 'ordering as ' + @account.company
+  notification = 'ordering as ' + @account.company.to_s
   redirect_to home_index_path, notice: notification
 end
 
