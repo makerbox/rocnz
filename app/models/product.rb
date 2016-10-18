@@ -3,6 +3,7 @@ has_many :quantities
 has_many :orders, through: :quantities
 
 def discount(user)
+	if Discount.find_by(producttype: 'group', product: self.group, customertype: 'code', customer: user.account.code)
 	if !Discount.find_by(producttype: 'group', product: self.group, customertype: 'code', customer: user.account.code).discount.nil?
 		100 - Discount.find_by(producttype: 'group', product: self.group, customertype: 'code', customer: user.account.code).discount
 	elsif !Discount.find_by(producttype: 'group', product: self.group, customertype: 'group', customer: user.account.discount).discount.nil?
@@ -14,6 +15,7 @@ def discount(user)
 	else
 		100
 	end
+end
 end
 
 end #end of class
