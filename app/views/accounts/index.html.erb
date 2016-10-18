@@ -15,7 +15,7 @@
       <th><%= link_to 'Contact name', accounts_path(order: 'contact') %></th>
             <th>View</th>
       <th><%= link_to 'Seller level', accounts_path(order: 'seller_level') %></th>
-      <th>Remove acct</th>
+      <th>Order</th>
     </tr>
   </thead>
 
@@ -66,14 +66,14 @@
         </td>
         <% end %>
         <% else %>
-        <td><%= link_to approve_account_path(account), class: 'btn btn-info' do %>
+        <td><%= link_to approve_account_path(account), class: 'btn btn-primary' do %>
           <i class="fa fa-thumbs-o-up"></i> Approve
           <% end %>
         </td>
         <% end %>
         <td>
-          <%= link_to account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do %>
-          <i class="fa fa-close"></i> Delete
+          <%= link_to order_as_account, data: { confirm: 'Now ordering as ' + account.company }, class: 'btn btn-info' do %>
+          <i class="fa fa-cart"></i>
           <% end %>
         </td>
       </tr>

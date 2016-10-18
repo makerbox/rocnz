@@ -1,58 +1,56 @@
 <div class="row">
   <div class="col-md-9">
     <div id="productlist">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        Total products: <%= @totalproducts %>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          Total products: <%= @totalproducts %>
+        </div>
       </div>
-    </div>
       <% @products.each do |product| %>
-      <%= link_to (product) do %>
-      <div class="product">
-        <%= cl_image_tag(product.code.strip) %>
-        <br>
-        <%= product.code %> | category <%= product.category %> | quantity <%= product.qty %><br>
+        <%= link_to (product) do %>
+          <div class="product">
+            <%= cl_image_tag(product.code.strip) %>
+            <br>
+            <%= product.code %> | category <%= product.category %> | quantity <%= product.qty %><br>
 
-        <% if user_signed_in? %>
-        <% if current_user.account %>
-        <% if current_user.account.approved == 'approved' %>
-        <% case current_user.account.seller_level.to_i %>
-        <% when 1 %>
-        $<%= product.price1 / 100 * product.discount(current_user) %>
-        <% when 2 %>
-        $<%= product.price2 / 100 * product.discount(current_user) %>
-        <% when 3 %>
-        $<%= product.price3 / 100 * product.discount(current_user) %>
-        <% when 4 %>
-        $<%= product.price4 / 100 * product.discount(current_user) %>
-        <% when 5 %>
-        $<%= product.price5 / 100 * product.discount(current_user) %>
-        <% when 6 %>
-        $<%= product.rrp %>
+            <% if user_signed_in? %>
+              <% if current_user.account %>
+                <% if current_user.account.approved == 'approved' %>
+                  <% case current_user.account.seller_level.to_i %>
+                    <% when 1 %>
+                    $<%= product.price1 / 100 * product.discount(current_user) %>
+                    <% when 2 %>
+                    $<%= product.price2 / 100 * product.discount(current_user) %>
+                    <% when 3 %>
+                    $<%= product.price3 / 100 * product.discount(current_user) %>
+                    <% when 4 %>
+                    $<%= product.price4 / 100 * product.discount(current_user) %>
+                    <% when 5 %>
+                    $<%= product.price5 / 100 * product.discount(current_user) %>
+                    <% when 6 %>
+                    $<%= product.rrp %>
+                  <% end %>
+                  <br>[RRP: $<%= product.rrp %>] | [QTY: <%= product.qty %>]
+                <% end %>
+              <% end %>
+              <% if current_user.has_role? :admin %>
+              <% end %>
+            <% end %> 
+          </div>
         <% end %>
-        <br>[RRP: $<%= product.rrp %>] | [QTY: <%= product.qty %>]
-        <% end %>
-        <% end %>
-        <% if current_user.has_role? :admin %>
-        <% end %>
-        <% end %> 
-      </div>
       <% end %>
-
-      <% end %>
-
     </div>
   </div>
   <% if current_user.orders.any? && current_user.orders.last.active == true %>
-  <div class="col-md-3 cart">
-    <p>
-      <i class="fa fa-shopping-cart fa-2x"></i>
-    </p>
-    <hr>
-    <p>
-      <%= render 'orders/sidecart' %>
-    </p>
-  </div>
+    <div class="col-md-3 cart">
+      <p>
+        <i class="fa fa-shopping-cart fa-2x"></i>
+      </p>
+      <hr>
+      <p>
+        <%= render 'orders/sidecart' %>
+      </p>
+    </div>
   <% end %>
 </div>
 
