@@ -1,6 +1,38 @@
 <span id="notice"><%= notice %></span>
 <% @order.total = 0 %>
-<% if @order.quantities.any? %><%= @order.quantities.count %><b><%= po.qty %></b> ------- $<%= number_with_precision(subtotal, precision: 2) %>
+<% if @order.quantities.any? %><%= @order.quantities.count %>
+<% @order.quantities.each do |po| %>
+<div class="po">
+	<%= link_to product_path(Product.find_by(code: po.product.code)) do %>
+	<div class="product-thumbnail">
+	<%= cl_image_tag(po.product.code.strip) %>
+	</div>
+<%= po.product.code %>
+	<% end %>
+	<% case current_user.account.seller_level.to_i %>
+		  	<% when 1 %>
+		  		<% @setprice = po.product.price1 / 100 * po.product.discount(current_user) %>
+		  		
+		    <% when 2 %>
+		    <% @setprice = po.product.price2 / 100 * po.product.discount(current_user) %>
+		  		
+		    <% when 3 %>
+		    <% @setprice = po.product.price3 / 100 * po.product.discount(current_user) %>
+		  		
+		    <% when 4 %>
+		    <% @setprice = po.product.price4 / 100 * po.product.discount(current_user) %>
+		  		
+		    <% when 5 %>
+		    <% @setprice = po.product.price5 / 100 * po.product.discount(current_user) %>
+		  		
+		    <% when 6 %>
+		    <% @setprice = po.product.rrp / 100 * po.product.discount(current_user) %>
+		  		
+	<% end %>
+	<% @setprice = @setprice.round(2) %>
+	$<%= number_with_precision(@setprice, precision: 2) %>
+	<% subtotal = (po.qty * @setprice).round(2) %>
+	x <%= po.qty %> ------- $<%= number_with_precision(subtotal, precision: 2) %>
 	<% @order.total = @order.total + subtotal %>
 
 <%= link_to 'remove', remove_product_path(id: po.id), class: 'btn btn-warning remove-btn' %></div>
