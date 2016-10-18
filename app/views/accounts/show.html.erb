@@ -26,7 +26,7 @@
 </p>
 
 <p>
-  <strong>Phone:</strong>
+  <strong>Telephone:</strong>
   <%= @account.phone %>
 </p>
 
@@ -43,7 +43,6 @@ Your account is pending approval.
 <% end %>
 <% if current_user.has_role? :admin %>
 
-          <%= link_to 'ORDER FOR THIS CUSTOMER', orderas_account_path(account), class: 'btn btn-info' %>
 <p>
   <strong>Seller level:</strong>
   <% if @account.seller_level  && @account.seller_level != '' %>
