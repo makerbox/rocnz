@@ -24,7 +24,7 @@ def sendorder
   @print += "------------------------------------------------------------------- \r\n"
   @print += "------------------------------------------------------------------- \r\n"
   if current_user.has_role? :admin
-    @print += "------------made by SALES REP : " + current_user.account.contact + "-------- \r\n"
+    @print += "------------made by SALES REP-------- \r\n"
   end
   @print += "THIS IS A TEST (please diregard) - order from " + company + "\r\n"
   @print += "------------------------------------------------------------------- \r\n"
