@@ -37,8 +37,7 @@ def sendorder
     else 
     level = current_user.account.seller_level.to_i 
     end 
-    case level 
-    case current_user.account.seller_level.to_i
+    case level
       when 1
         @setprice = product.price1 / 100 * product.discount(current_user)
       when 2
