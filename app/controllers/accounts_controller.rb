@@ -15,7 +15,7 @@ def orderas
   else
     Mimic.create(account: params[:account], user: current_user)
   end
-  notification = 'ordering as ' + @account.company.to_s
+  notification = 'ordering as ' + current_user.mimic.account.company.to_s
   redirect_to home_index_path, notice: notification
 end
 
