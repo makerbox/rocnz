@@ -103,7 +103,8 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show
     if current_user.has_role? :admin
-      @order = current_user.mimic.account.user.orders.find_by(active:true)
+      # @order = current_user.mimic.account.user.orders.find_by(active:true)
+      @order = Order.first
     else
       @order = current_user.orders.find_by(active: true)
     end
