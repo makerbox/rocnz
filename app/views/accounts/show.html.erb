@@ -38,11 +38,11 @@
 
 <% if !@account.approved? %>
 <p>
-Your account is pending approval.
+Account is pending approval.
 </p>
 <% end %>
 <% if current_user.has_role? :admin %>
-  <%= link_to 'ORDER FOR THIS CUSTOMER', orderas_account_path(@account), class: 'btn btn-info' %>
+  
 <p>
   <strong>Seller level:</strong>
   <% if @account.seller_level  && @account.seller_level != '' %>
@@ -54,6 +54,7 @@ Your account is pending approval.
 <% end %>
 <% if (!current_user.account.approved?) || (current_user.has_role? :admin) %>
 <%= link_to 'Edit account details', edit_account_path(@account), class: 'btn btn-default' %>
+<%= link_to 'Order for this customer', orderas_account_path(@account), class: 'btn btn-info' %>
 <% end %>
 </div>
 <div class="col-md-6">
