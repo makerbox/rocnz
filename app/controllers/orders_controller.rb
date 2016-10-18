@@ -19,12 +19,16 @@ def sendorder
   end
   @print = "NEW ORDER FROM ROC CLOUDY WHOLESALE PORTAL ["+ Time.now.strftime("%d/%m/%Y || %r") +"] \r\n"
   @print += "------------------------------------------------------------------- \r\n"
+  @print += "------------------------------------------------------------------- \r\n"
+  @print += "------------------ WEB" + @order.id + " ----------------------- \r\n"
+  @print += "------------------------------------------------------------------- \r\n"
+  @print += "------------------------------------------------------------------- \r\n"
   if current_user.has_role? :admin
     @print += "------------made by SALES REP : " + current_user.account.contact + "-------- \r\n"
   end
   @print += "THIS IS A TEST (please diregard) - order from " + company + "\r\n"
   @print += "------------------------------------------------------------------- \r\n"
-  @print += account.street + ' | ' + account.suburb + ' | ' + ' | ' + account.phone + "\r\n"
+  @print += account.street + ' | ' + account.suburb + ' | ' + account.phone + "\r\n"
   @print += "------------------------------------------------------------------- \r\n\n"
   @order.quantities.each do |q|
     product = Product.find_by(id: q.product_id)
