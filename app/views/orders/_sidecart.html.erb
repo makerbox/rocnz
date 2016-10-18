@@ -31,7 +31,8 @@
 	<% end %>
 	<% @setprice = @setprice.round(2) %>
 	$<%= number_with_precision(@setprice, precision: 2) %>
-	x <%= po.qty %> ------- $<%= po.qty * @setprice %><% @order.total = @order.total + (po.qty * @setprice) %>
+	x <%= po.qty %> ------- $<%= number_with_precision((po.qty * @setprice), precision: 2) %>
+	<% @order.total = @order.total + number_with_precision((po.qty * @setprice), precision: 2) %>
 
 <%= link_to 'remove', remove_product_path(id: po.id), class: 'btn btn-warning remove-btn' %></div>
 <% end %>
