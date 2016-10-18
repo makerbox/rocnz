@@ -29,7 +29,7 @@
 		    <% @setprice = po.product.rrp / 100 * po.product.discount(current_user) %>
 		  		
 	<% end %>
-	<% @setprice = @setprice.round(2) %>
+	<% @setprice = number_to_currency(@setprice) %>
 	$<%= @setprice %>
 	x <%= po.qty %> ------- $<%= po.qty * @setprice %><% @order.total = @order.total + (po.qty * @setprice) %>
 

@@ -32,7 +32,7 @@
 		    <% when 6 %>
 		  		<% prodprice = @product.rrp %>
 		  <% end %>
-		  $<%= prodprice.round(2) %>
+		  $<%= number_to_currency(@prodprice) %>
 	  <% end %>
 
 	  <% if user_signed_in? %>

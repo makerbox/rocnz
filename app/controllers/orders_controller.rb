@@ -38,7 +38,7 @@ def sendorder
       when 6
         @setprice = product.rrp / 100 * product.discount(current_user)
     end
-    @setprice = @setprice.round(2)
+    @setprice = number_to_currency(@setprice)
     @print += "~" + product.code.to_s + "\r\n[" + product.description.strip + "]\r\n$" + @setprice.to_s + " x qty:" + q.qty.to_s + "\r\n\n"
   end
   @print += "-------------------------------------------------------------------\r\n"
