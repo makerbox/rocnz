@@ -28,8 +28,8 @@
 		    <% @setprice = po.product.rrp %>
 		  		
 	<% end %>
-	<% @setprice = number_with_precision(@setprice, precision: 2) %>
-	$<%= @setprice %>
+	<% @setprice = @setprice.round(2) %>
+	$<%= number_with_precision(@setprice, precision: 2) %>
 	x <%= po.qty %> ------- $<%= po.qty * @setprice %><% @order.total = @order.total + (po.qty * @setprice) %>
 
 <% end %>
