@@ -15,7 +15,7 @@
 
             <% if user_signed_in? %>
               <% if current_user.account || (current_user.has_role? :admin) %>
-                <% if (current_user.account.approved == 'approved') || (current_user.has_role? :admin) %>
+                <% if (current_user.account.approved == 'approved') || ((current_user.has_role? :admin) && (!current_user.mimic.nil?)) %>
     <% if (current_user.has_role? :admin) && (!current_user.mimic.nil?) %>
     <% level = current_user.mimic.account.seller_level.to_i %>
     <% else %>
