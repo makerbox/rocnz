@@ -16,6 +16,13 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+#mimic{
+	position: fixed;
+    width: 100%;
+    text-align: center;
+    background: #fff;
+}
+
 #comingsoon{
 display:none;
 	position:fixed;
