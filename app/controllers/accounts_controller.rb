@@ -10,10 +10,11 @@ class AccountsController < ApplicationController
   end
 
 def orderas
+  account = Account.find_by(params[:account])
   if current_user.mimic
-    current_user.mimic.update(account: params[:account])
+    current_user.mimic.update(account: account)
   else
-    Mimic.create(account: params[:account], user: current_user)
+    Mimic.create(account: account, user: current_user)
   end
   redirect_to home_index_path
 end
