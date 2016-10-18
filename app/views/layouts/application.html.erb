@@ -46,10 +46,7 @@ Roc Cloudy
 
       <% if current_user.has_role? :admin %>
         <div id="mimic">
-          <% if !current_user.mimic.nil? %>
-            ORDERING FOR: 
-            <%= current_user.mimic.account.company %>
-          <% end %>
+          
         </div>
       <% end %>
 
