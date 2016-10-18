@@ -11,6 +11,7 @@ def sendorder
   @order.update(active: false, sent: DateTime.now, total: params[:total]) # move order to pending and give it a total
   
   account = @order.user.account
+
   if account.company # start putting together printable order
     company = account.company
   else
@@ -18,6 +19,9 @@ def sendorder
   end
   @print = "NEW ORDER FROM ROC CLOUDY WHOLESALE PORTAL ["+ Time.now.strftime("%d/%m/%Y || %r") +"] \r\n"
   @print += "------------------------------------------------------------------- \r\n"
+  if current_user.has_role? :admin
+    @print += "------------made by SALES REP : " + current_user.account.contact + "-------- \r\n"
+  end
   @print += "THIS IS A TEST (please diregard) - order from " + company + "\r\n"
   @print += "------------------------------------------------------------------- \r\n"
   @print += account.street + ' | ' + account.suburb + ' | ' + account.state + ' | ' + account.phone + "\r\n"
