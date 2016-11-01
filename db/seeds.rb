@@ -70,6 +70,29 @@ discounts.each do |d|
 	end
 end
 
+
+
+
+
+
+
+# GET ALL TRANSACTIONS IN VIA TEST FUNCTION - NOT SEED
+# TRY WORKING WITH APP WHILE UPDATING TRANSACTIONS VIA SEED
+# SEED ONLY TO UPDATE AFTER INITIAL SEED VIA TEST FUNCTION
+# WRITE IT ALL IN TEST FUNCTION, THEN COPY UPDATE ACTIONS TO SEED FILE
+
+
+
+
+
+
+
+
+
+
+
+
+
 # contacts.each do |contact| # populate a model of contact email addresses - had to be done to make the data searchable
 # 	if Contact.find_by(code: contact.Code)
 # 		puts "contact exists skipping"
