@@ -35,8 +35,8 @@ class HomeController < ApplicationController
     product_trans = dbh.execute("SELECT * FROM product_transactions").fetch(:all, :Struct)
     
     product_trans.each do |pt|
-      if !Transaction.find_by(prodcode: pt.Code, transtype: pt.TranType, date: pt.Date)
-        Transaction.create(prodcode: pt.Code, transtype: pt.TranType, date: pt.Date, qty: pt.Qty, value: pt.SalesVal, tax: pt.TaxAmt, comment: pt.Comment, custcode: pt.CustomerSupplier)
+      if !Transaction.find_by(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date)
+        Transaction.create(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date, qty: pt.Qty, value: pt.SalesVal, tax: pt.TaxAmt, comment: pt.Comment, custcode: pt.CustomerSupplier.strip)
       end
     end
 

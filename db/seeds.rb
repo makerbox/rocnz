@@ -73,13 +73,10 @@ end
 
 
 
-
-
-
-# GET ALL TRANSACTIONS IN VIA TEST FUNCTION - NOT SEED
-# TRY WORKING WITH APP WHILE UPDATING TRANSACTIONS VIA SEED
-# SEED ONLY TO UPDATE AFTER INITIAL SEED VIA TEST FUNCTION
-# WRITE IT ALL IN TEST FUNCTION, THEN COPY UPDATE ACTIONS TO SEED FILE
+Product.each do |prod|
+	trans = Transaction.where(prodcode: prod.code, custcode: 'ROC CLOU').first
+	prod.newdate = trans.date
+end
 
 
 
