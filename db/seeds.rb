@@ -75,7 +75,7 @@ end
 
 Product.each do |prod|
 	trans = Transaction.where(prodcode: prod.code, custcode: 'ROC CLOU').first
-	prod.newdate = trans.date
+	prod.update(new_date: trans.date)
 end
 
 
