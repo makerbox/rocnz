@@ -6,8 +6,8 @@ class HomeController < ApplicationController
 
   def pull
       system "git pull"
-      # system "bundle"
-      system "rails restart -b 0.0.0.0"
+      system "rake db:migrate"
+      # system "rails restart -b 0.0.0.0"
       # system "rake jobs:work"
       # system "rake db:seed"
   end
@@ -18,10 +18,12 @@ class HomeController < ApplicationController
     #   newproduct = d.product.strip
     #   d.update(product: newproduct, customer: newcustomer)
     # end
+    @products = Product.all
+    @trans = Transaction.all
   end
 
   def seed
-    #THIS WILL COMPLETELY SEED THE DATABASE AND UPDATE EXISTING RECORDS - ONLY RUN AT NIGHT
+    #THIS WILL COMPLETELY SEED THE DATABASE - ONLY RUN AT NIGHT
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
     customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
@@ -30,7 +32,14 @@ class HomeController < ApplicationController
     discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
     products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
     productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
+    product_trans = dbh.execute("SELECT * FROM product_transactions").fetch(:all, :Struct)
     
+    product_trans.each do |pt|
+      if !Transaction.find_by(prodcode: pt.Code, transtype: pt.TranType, date: pt.Date)
+        Transaction.create(prodcode: pt.Code, transtype: pt.TranType, date: pt.Date, qty: pt.Qty, value: pt.SalesVal, tax: pt.TaxAmt, comment: pt.Comment, custcode: pt.CustomerSupplier)
+      end
+    end
+
     discounts.each do |d|
       percent = d.DiscPerc1 + d.DiscPerc2 + d.DiscPerc3 + d.DiscPerc4
       if percent > 0 # check there is an actual discount to apply
@@ -65,6 +74,7 @@ class HomeController < ApplicationController
         end
       end
     end
+
     products.each do |p|
       if p.Inactive == 0
         @product = Product.find_by(code: p.Code)
@@ -78,8 +88,6 @@ class HomeController < ApplicationController
         if @product #if the product already exists, just update the details
           if @product.category != category || @product.code != p.Code || @product.description != p.Description || @product.group != p.ProductGroup || @product.price1 != p.SalesPrice1 || @product.price2 != p.SalesPrice2 || @product.price3 != p.SalesPrice3 || @product.price4 != p.SalesPrice4 || @product.price5 != p.SalesPrice5 || @product.rrp != p.SalesPrice6 || @product.qty != p.QtyInStock 
             Product.find_by(code: p.Code).update(category: category, qty: p.QtyInStock, code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
-          else
-            puts "product exactly the same - skipping"
           end
         else #if the product doesn't already exist, let's make it
           Product.create(category: category, qty: p.QtyInStock, code: p.Code, description: p.Description, group: p.ProductGroup, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
@@ -93,11 +101,6 @@ class HomeController < ApplicationController
         end
       end
     end
-
-    puts "updating accounts and users"
-    customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-    activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
-    contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
 
     contacts.each do |contact| # populate a model of contact email addresses - had to be done to make the data searchable
       if Contact.find_by(code: contact.Code)

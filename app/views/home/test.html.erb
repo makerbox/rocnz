@@ -1,7 +1,6 @@
-
-<% Discount.all.each do |t| %>
-	<%= t.discount %><hr>
-	cust <%= t.customertype %>--<%= t.customer %><br>
-	prod <%= t.producttype %>--<%= t.product %><br>
-	<hr><hr>
+<% @products.each do |p| %>
+<%= p.code %>--<br>
+<% end %>
+<% @trans.each do |t| %>
+<%= t.date %>--<br>
 <% end %>
