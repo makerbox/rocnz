@@ -19,7 +19,6 @@ class HomeController < ApplicationController
     #   d.update(product: newproduct, customer: newcustomer)
     # end
     @products = Product.all
-    @trans = Transaction.all
   end
 
   def seed
