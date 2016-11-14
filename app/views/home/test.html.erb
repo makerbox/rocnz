@@ -1,3 +1,3 @@
 <% @products.each do |p| %>
-<%= p.code %>-<%= p.category %>-<%= p.group %>-<%= cl_image_tag(p.code.strip) %><br>
+<%= p.code %>|<%= p.group %>|<%= p.category %><br>
 <% end %>
