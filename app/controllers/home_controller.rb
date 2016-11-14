@@ -33,46 +33,46 @@ class HomeController < ApplicationController
     productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
     product_trans = dbh.execute("SELECT * FROM product_transactions").fetch(:all, :Struct)
     
-    product_trans.each do |pt|
-      if !Transaction.find_by(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date)
-        Transaction.create(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date, qty: pt.Qty, value: pt.SalesVal, tax: pt.TaxAmt, comment: pt.Comment, custcode: pt.CustomerSupplier.strip)
-      end
-    end
+    # product_trans.each do |pt|
+    #   if !Transaction.find_by(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date)
+    #     Transaction.create(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date, qty: pt.Qty, value: pt.SalesVal, tax: pt.TaxAmt, comment: pt.Comment, custcode: pt.CustomerSupplier.strip)
+    #   end
+    # end
 
-    discounts.each do |d|
-      percent = d.DiscPerc1 + d.DiscPerc2 + d.DiscPerc3 + d.DiscPerc4
-      if percent > 0 # check there is an actual discount to apply
-        if d.CustomerType == 10 # affect discounts for customer codes
-          if d.ProductType == 10 # affect discounts for product codes
-            if Discount.find_by(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              puts 'exists'
-            else
-              Discount.create(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-            end
-          elsif d.ProductType == 30 # affect discounts for product groups
-            if Discount.find_by(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              puts 'exists'
-            else
-              Discount.create(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-            end
-          end
-        elsif d.CustomerType == 30 # affect discounts for customer groups
-          if d.ProductType == 10 # affect discounts for product codes
-            if Discount.find_by(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              puts 'exists'
-            else
-              Discount.create(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-            end
-          elsif d.ProductType == 30 # affect discounts for product groups
-            if Discount.find_by(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              puts 'exists'
-            else
-              Discount.create(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-            end
-          end
-        end
-      end
-    end
+    # discounts.each do |d|
+    #   percent = d.DiscPerc1 + d.DiscPerc2 + d.DiscPerc3 + d.DiscPerc4
+    #   if percent > 0 # check there is an actual discount to apply
+    #     if d.CustomerType == 10 # affect discounts for customer codes
+    #       if d.ProductType == 10 # affect discounts for product codes
+    #         if Discount.find_by(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+    #           puts 'exists'
+    #         else
+    #           Discount.create(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
+    #         end
+    #       elsif d.ProductType == 30 # affect discounts for product groups
+    #         if Discount.find_by(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+    #           puts 'exists'
+    #         else
+    #           Discount.create(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
+    #         end
+    #       end
+    #     elsif d.CustomerType == 30 # affect discounts for customer groups
+    #       if d.ProductType == 10 # affect discounts for product codes
+    #         if Discount.find_by(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+    #           puts 'exists'
+    #         else
+    #           Discount.create(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
+    #         end
+    #       elsif d.ProductType == 30 # affect discounts for product groups
+    #         if Discount.find_by(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+    #           puts 'exists'
+    #         else
+    #           Discount.create(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
+    #         end
+    #       end
+    #     end
+    #   end
+    # end
 
     products.each do |p|
       if p.Inactive == 0
@@ -101,64 +101,64 @@ class HomeController < ApplicationController
       end
     end
 
-    contacts.each do |contact| # populate a model of contact email addresses - had to be done to make the data searchable
-      if Contact.find_by(code: contact.Code)
-        puts "contact exists skipping"
-      else
-        Contact.create(code: contact.Code, email: contact.EmailAddress)
-      end
-    end
+    # contacts.each do |contact| # populate a model of contact email addresses - had to be done to make the data searchable
+    #   if Contact.find_by(code: contact.Code)
+    #     puts "contact exists skipping"
+    #   else
+    #     Contact.create(code: contact.Code, email: contact.EmailAddress)
+    #   end
+    # end
 
-    inactive = 0 #use this to count inactive customers
-    counter = 0 #use this counter to generate an email address for some users in the loop below
-    #create accounts and users for active customers only if they don't exist already
-    activecustomers.each do |activecustomer|
-      @contact = Contact.find_by(code: activecustomer.Code)
-      if @contact # if there is a contact email address for this customer code, then use it
-        if @contact.email
-          email = @contact.email
-        else
-          counter = counter + 1
-          email = counter.to_s + "@wholesaleportal.com"
-        end
-      else #otherwise use the counter to generate an email address
-        counter = counter + 1
-        email = counter.to_s + "@wholesaleportal.com"
-      end
-      if Account.find_by(code: activecustomer.Code) #if there is already an account, skip it
-        puts "account exists - skipping to next one"
-      elsif activecustomer.InactiveCust == 0 #otherwise check if it is active
-        newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
-        if newuser.save
-          newuser.add_role :user
-          newaccount = Account.new(code: activecustomer.Code, user: newuser) #create the account and associate with user
-          newaccount.save
-        else
-          puts newuser.email #if user wasn't created - show me the culprit
-          if User.find_by(email: newuser.email) #if is was a duplicate, let's do it again, but with the counter for the email address
-            puts "--DUPLICATE--USING COUNTER"
-            counter = counter + 1
-            email = counter.to_s + newuser.email
-            newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal")
-            newuser.save
-            newuser.add_role :user
-            newaccount = Account.new(code: activecustomer.Code, user: newuser)
-            newaccount.save   
-          end
-        end
+    # inactive = 0 #use this to count inactive customers
+    # counter = 0 #use this counter to generate an email address for some users in the loop below
+    # #create accounts and users for active customers only if they don't exist already
+    # activecustomers.each do |activecustomer|
+    #   @contact = Contact.find_by(code: activecustomer.Code)
+    #   if @contact # if there is a contact email address for this customer code, then use it
+    #     if @contact.email
+    #       email = @contact.email
+    #     else
+    #       counter = counter + 1
+    #       email = counter.to_s + "@wholesaleportal.com"
+    #     end
+    #   else #otherwise use the counter to generate an email address
+    #     counter = counter + 1
+    #     email = counter.to_s + "@wholesaleportal.com"
+    #   end
+    #   if Account.find_by(code: activecustomer.Code) #if there is already an account, skip it
+    #     puts "account exists - skipping to next one"
+    #   elsif activecustomer.InactiveCust == 0 #otherwise check if it is active
+    #     newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
+    #     if newuser.save
+    #       newuser.add_role :user
+    #       newaccount = Account.new(code: activecustomer.Code, user: newuser) #create the account and associate with user
+    #       newaccount.save
+    #     else
+    #       puts newuser.email #if user wasn't created - show me the culprit
+    #       if User.find_by(email: newuser.email) #if is was a duplicate, let's do it again, but with the counter for the email address
+    #         puts "--DUPLICATE--USING COUNTER"
+    #         counter = counter + 1
+    #         email = counter.to_s + newuser.email
+    #         newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal")
+    #         newuser.save
+    #         newuser.add_role :user
+    #         newaccount = Account.new(code: activecustomer.Code, user: newuser)
+    #         newaccount.save   
+    #       end
+    #     end
 
-      else #if the account doesn't exist, but it's inactive, then skip creation
-        inactive = inactive + 1
-      end
-    end
-    #update accounts with full details
-    customers.each do |customer| #use the data from customers to fill in the blanks in Accounts
-      account = Account.find_by(code: customer.Code)
-      if account
-        account.update(approved: 'approved', company: customer.Name, street: customer.Street, suburb: customer.Suburb, postcode: customer.Postcode, phone: customer.Phone, contact: customer.Contact, seller_level: customer.PriceCat, sort: customer.Sort)
-      end
-      print "."
-    end
+    #   else #if the account doesn't exist, but it's inactive, then skip creation
+    #     inactive = inactive + 1
+    #   end
+    # end
+    # #update accounts with full details
+    # customers.each do |customer| #use the data from customers to fill in the blanks in Accounts
+    #   account = Account.find_by(code: customer.Code)
+    #   if account
+    #     account.update(approved: 'approved', company: customer.Name, street: customer.Street, suburb: customer.Suburb, postcode: customer.Postcode, phone: customer.Phone, contact: customer.Contact, seller_level: customer.PriceCat, sort: customer.Sort)
+    #   end
+    #   print "."
+    # end
   end
 
   
