@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
+gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
 
 #image hosting
 gem 'cloudinary'

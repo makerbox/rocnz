@@ -80,7 +80,7 @@ class HomeController < ApplicationController
         category = ''
         productsext.each do |x| #match the extension file with this product
           if x.Code == p.Code
-            category = x.CostCentre.strip
+            category = x.CostCentre
           end
         end
 
