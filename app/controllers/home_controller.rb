@@ -80,20 +80,20 @@ class HomeController < ApplicationController
         category = ''
         productsext.each do |x| #match the extension file with this product
           if x.Code == p.Code
-            category = x.CostCentre
+            category = x.CostCentre.to_s.strip
           end
         end
 
         if @product #if the product already exists, just update the details
-          if @product.category != category.strip || @product.code != p.Code.strip || @product.description != p.Description || @product.group != p.ProductGroup.strip || @product.price1 != p.SalesPrice1 || @product.price2 != p.SalesPrice2 || @product.price3 != p.SalesPrice3 || @product.price4 != p.SalesPrice4 || @product.price5 != p.SalesPrice5 || @product.rrp != p.SalesPrice6 || @product.qty != p.QtyInStock 
-            Product.find_by(code: p.Code).update(category: category.strip, qty: p.QtyInStock, code: p.Code.strip, description: p.Description, group: p.ProductGroup.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+          if @product.category != category.to_s.strip || @product.code != p.Code.to_s.strip || @product.description != p.Description || @product.group != p.ProductGroup.to_s.strip || @product.price1 != p.SalesPrice1 || @product.price2 != p.SalesPrice2 || @product.price3 != p.SalesPrice3 || @product.price4 != p.SalesPrice4 || @product.price5 != p.SalesPrice5 || @product.rrp != p.SalesPrice6 || @product.qty != p.QtyInStock 
+            Product.find_by(code: p.Code).update(category: category.to_s.strip, qty: p.QtyInStock, code: p.Code.to_s.strip, description: p.Description, group: p.ProductGroup.to_s.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
           end
         else #if the product doesn't already exist, let's make it
-          Product.create(category: category.strip, qty: p.QtyInStock, code: p.Code.strip, description: p.Description, group: p.ProductGroup.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+          Product.create(category: category.to_s.strip, qty: p.QtyInStock, code: p.Code.to_s.strip, description: p.Description, group: p.ProductGroup.to_s.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
           #upload image to cloudinary and store url in product.imageurl (images are stored in z:/attache/roc/images/product/*sku*.jpg)
-          filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.strip + '.jpg'
+          filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.to_s.strip + '.jpg'
           if File.exist?(filename)
-            Cloudinary::Uploader.upload(filename, :public_id => p.Code.strip, :overwrite => true)
+            Cloudinary::Uploader.upload(filename, :public_id => p.Code.to_s.strip, :overwrite => true)
           else
             #image doesn't exist - perhaps create image attribute and set it to 'empty' if no file, or filename(minus path) if exists
           end
