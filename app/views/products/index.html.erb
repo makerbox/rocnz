@@ -35,6 +35,8 @@
                     <% when 6 %>
                     <% prodprice = product.rrp %>
                   <% end %>
+                  prodprice <%= prodprice %><br>
+                  level <%= level %><br>
                   $<%= number_with_precision(prodprice, precision: 2) %>
                   <br>[RRP: $<%= product.rrp %>] | [QTY: <%= product.qty %>]
                 <% end %>
