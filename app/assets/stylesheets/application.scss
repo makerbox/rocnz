@@ -26,6 +26,12 @@
 * {
 	font-family: 'somaticrounded';
 } */
+
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+	border:none;
+}
+
 .menu-icon{
 	max-height:4em;
 	padding-top:0;
@@ -39,6 +45,11 @@
 .menu-icon img{
 	height:4em;
 	width:auto;
+	position: relative;
+    bottom: .5em;
+}
+.navbar-brand{
+	height:7em;
 }
 .qty{
 	font-weight:bold;
