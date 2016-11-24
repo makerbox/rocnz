@@ -17,8 +17,8 @@
 @import "font-awesome";
 @font-face {
     font-family: 'somaticrounded';
-    src: asset-url('somatic-rounded-webfont.woff2') format('woff2'),
-         asset-url('somatic-rounded-webfont.woff') format('woff');
+    src: font-url('somatic-rounded-webfont.woff2') format('woff2'),
+         font-url('somatic-rounded-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
