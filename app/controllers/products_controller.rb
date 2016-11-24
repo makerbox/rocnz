@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
       #   availgroups = availgroups << 'E  ' << 'R  ' << 'D  ' << 'A  '
       # end
       if group == 'roc'
-        if (current_user.account.sort.include? 'R') || (current_user.has_role? :admin)
+        if (current_user.account.sort.include? 'R') || (current_user.has_role? :admin && current_user.mimic.account.sort.include? 'R') || (current_user.has_role? :admin && current_user.mimic.nil?)
           @products = Product.where(group: ['C','J'])
           @categories = []
           @products.each do |p| # get a list of categories

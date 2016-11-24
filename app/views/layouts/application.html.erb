@@ -68,7 +68,8 @@ Roc Cloudy
               <li><%= link_to 'Polasports', products_path(group: 'polasports') %></li>
             <% end %>
             <% if current_user.account.sort.include? 'L' %>
-              <li><%= link_to 'Locello', products_path(group: 'locello') %></li>
+              <li><%= link_to products_path(group: 'locello') do %><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479954637/locello_owt9fc.png">
+              <% end %></li>
             <% end %>
             <% if current_user.account.sort.include? 'U' %>
             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Unity <span class="caret"></span></a>
