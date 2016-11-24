@@ -37,7 +37,7 @@
                   <% end %>
                   <% if (current_user.has_role? :admin) && (current_user.mimic.nil?) %>
                   *****<br>
-                  <% else %><%= current_user.mimic %>
+                  <% else %><%= current_user.mimic.account.company %>
                   $<%= number_with_precision(prodprice, precision: 2) %>
                   <% end %>
                   <br>[RRP: $<%= product.rrp %>] | [QTY: <%= product.qty %>]
