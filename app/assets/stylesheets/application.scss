@@ -46,9 +46,13 @@
 }
 #mimic{
 	position: fixed;
+	bottom:0;
+	z-index:9;
     width: 100%;
     text-align: center;
     background: #fff;
+    border:1px solid black;
+    padding:.5em;
 }
 
 #comingsoon{
@@ -141,7 +145,9 @@ background-repeat:no-repeat;
 	margin-bottom:0;
 	z-index:999;
 	box-shadow:none;
-}
+	background: #FFF;
+	}
+	
 .footer {
 	text-align:center;
 	width:100%;
