@@ -16,6 +16,13 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+.menu-icon{
+	max-height:4em;
+}
+.menu-icon img{
+	height:100%;
+	width:auto;
+}
 .qty{
 	font-weight:bold;
 	position:absolute;
