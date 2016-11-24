@@ -57,7 +57,7 @@ Roc Cloudy
         <% if current_user.account %>
           <% if current_user.account.sort %>
             <% if current_user.account.sort.include? 'R' %>
-              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Roc <span class="caret"></span></a>
+              <li class="dropdown menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479954637/roc_nrnt5m.png"><span class="caret"></span></a>
               <ul class="dropdown-menu">
               <li><%= link_to 'Sunglasses', products_path(group: 'roc', cat: 'C') %></li>
               <li><%= link_to 'Hats', products_path(group: 'roc', cat: 'J') %></li>
@@ -65,14 +65,17 @@ Roc Cloudy
               </li>
             <% end %>
             <% if current_user.account.sort.include? 'P' %>
-              <li><%= link_to 'Polasports', products_path(group: 'polasports') %></li>
+              <li class="menu-icon"><%= link_to products_path(group: 'polasports') do %>
+                <img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479954637/polasports_gmkhsz.png">
+                <% end %>
+              </li>
             <% end %>
             <% if current_user.account.sort.include? 'L' %>
-              <li><%= link_to products_path(group: 'locello') do %><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479954637/locello_owt9fc.png">
+              <li class="menu-icon"><%= link_to products_path(group: 'locello') do %><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479954637/locello_owt9fc.png">
               <% end %></li>
             <% end %>
             <% if current_user.account.sort.include? 'U' %>
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Unity <span class="caret"></span></a>
+            <li class="dropdown menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479954637/unity_ehatxv.gif"><span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><%= link_to 'All Sunglasses', products_path(group: 'unity', cat: ['E','D']) %></li>
               <li><%= link_to 'Fashion', products_path(group: 'unity', cat: 'E', filter: 'FASHION') %></li>
