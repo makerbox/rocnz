@@ -4,6 +4,15 @@ class HomeController < ApplicationController
 
   end
 
+def roc
+end
+def locello
+end
+def polasports
+end
+def unity
+end
+
   def pull
       system "git pull"
       # system "rake db:migrate"

@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   get 'home/test'
   get 'home/pull'
   get 'home/seed'
+  get 'home/roc'
+  get 'home/locello'
+  get 'home/polasports'
+  get 'home/unity'
 
 resources :products do
   member do
