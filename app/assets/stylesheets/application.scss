@@ -100,7 +100,10 @@ padding-top:3em;
 body {
 	font-family: 'Scope One', serif;
 }
-
+.navbar-default .navbar-nav>li>a{
+	border-radius: 0 0 50% 50%;
+    border-bottom: 1px solid #CCC;
+}
 .navbar-default .navbar-nav>li>a:hover{
  box-shadow: .1em .1em 1em #CCC;
  }
