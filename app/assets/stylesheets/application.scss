@@ -101,8 +101,7 @@ body {
 	font-family: 'Scope One', serif;
 }
 .navbar-nav>li>a, .navbar-nav>li{
-	border-radius: 0 0 50% 50%;
-    border-bottom: 1px solid #CCC;
+    border: 0 0 1px 1px solid #CCC;
 }
 .navbar-default .navbar-nav>li>a:hover{
  box-shadow: .1em .1em 1em #CCC;
