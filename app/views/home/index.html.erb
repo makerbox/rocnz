@@ -4,26 +4,13 @@
 <div class="center">
 <div class="homecontainer desktoponly">
 <div class='homeimg' style="background-image: url('http://res.cloudinary.com/roc-cloudy/image/upload/v1477959158/slideshow_slide_2_image_nvxh8t.jpg');">
-<% if user_signed_in? %>
-<div class="homeoverlay">Roc</div>
-<% else %>
-<%= link_to 'Roc', new_user_registration_path, class: "homeoverlay" %>
-<% end %>
+<%= link_to 'Roc', home_roc_path, class: "homeoverlay" %>
 </div><div class='homeimg' style="background-image:url('http://res.cloudinary.com/roc-cloudy/image/upload/v1477959114/slideshow_3_gjyoh5.jpg');">
-<% if user_signed_in? %>
-<div class="homeoverlay">Polasports</div>
-<% else %>
-<%= link_to 'Polasports', new_user_registration_path, class: "homeoverlay" %>
-<% end %></div><div class='homeimg' style="background-image:url('http://res.cloudinary.com/roc-cloudy/image/upload/v1477959119/hero_slide_1_mv3eby.jpg');">
-<% if user_signed_in? %>
-<div class="homeoverlay">Locello</div>
-<% else %>
-<%= link_to 'Locello', new_user_registration_path, class: "homeoverlay" %>
-<% end %></div><div class='homeimg' style="background-image:url('http://res.cloudinary.com/roc-cloudy/image/upload/v1477959121/3_hlm0gc.png');">
-<% if user_signed_in? %>
-<div class="homeoverlay">Unity</div>
-<% else %>
-<%= link_to 'Unity', new_user_registration_path, class: "homeoverlay" %>
-<% end %></div>
+<%= link_to 'Polasports', home_polasports_path, class: "homeoverlay" %>
+</div><div class='homeimg' style="background-image:url('http://res.cloudinary.com/roc-cloudy/image/upload/v1477959119/hero_slide_1_mv3eby.jpg');">
+<%= link_to 'Locello', home_locello_path, class: "homeoverlay" %>
+</div><div class='homeimg' style="background-image:url('http://res.cloudinary.com/roc-cloudy/image/upload/v1477959121/3_hlm0gc.png');">
+<%= link_to 'Unity', home_unity_path, class: "homeoverlay" %>
+</div>
 </div>
 </div>
