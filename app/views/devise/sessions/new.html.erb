@@ -1,4 +1,8 @@
-<h2>Log in</h2>
+<h2>Thank you for visiting our Business to Business online ordering platform</h2>
+
+If you are an existing customer and would like to activate your account please register here : <%= link_to 'REGISTER NOW', new_user_registration_path %>
+
+ 
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-inputs">
@@ -13,3 +17,12 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+ 
+
+If you are a potential new customer and would like to have someone contact you about potential stocking some of our brands please click here to send us an email
+EMAIL: <a href="mailto:office@roccloudy.com">office@roccloudy.com</a><br>
+
+If you are a member of the public, please visit our retailers or view our online stores:<br>
+<a href="http://www.locelloeyewear.com.au">www.locelloeyewear.com.au;</a> <a href="http://www.polasports.com.au">www.polasports.com.au;</a> <a href="http://www.unityeyewear.com.au">www.unityeyewear.com.au;</a> <a href="http://www.roceyewear.com.au">www.roceyewear.com.au</a>
+
