@@ -108,12 +108,13 @@ body {
  box-shadow: .1em .1em 1em #CCC;
  }
  @media (min-width: 768px){
- .navbar-nav>li {
+ /* .navbar-nav>li {
      border-left: 1px solid #CCC;
  } 
  .navbar-nav>li:last-of-type{
      border-right: 1px solid #CCC;
- } }
+ } */
+ }
 a:hover, .homeoverlay:hover{
 	color:#000;
 	background-color:transparent;
