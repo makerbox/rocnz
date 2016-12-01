@@ -127,6 +127,7 @@ a:hover .product-thumbnail{
 }
 
 .homeimg {
+vertical-align:top;
 display:inline-block;
 width:45vw;
 height:30vw;
@@ -158,7 +159,13 @@ background-repeat:no-repeat;
 	text-decoration: none;
 	vertical-align:middle;
 	padding-top:35%;
-}
+	}
+
+	.homeoverlay img{
+	background: #FFF;
+    margin: 1em;
+    }
+
 .navbar{
 	margin-bottom:0;
 	z-index:999;
