@@ -120,8 +120,6 @@
 
 
           <% else %>
-          <li><%= link_to 'Log in', new_user_session_path %></li>
-          <li><%= link_to 'Sign up', new_user_registration_path %></li>
           <li class="dropdown menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Brands<span class="caret"></span></a>
           <ul class="dropdown-menu" style="text-align:center;">
           <li><%= link_to 'Roc', home_roc_path %></li>
@@ -129,7 +127,8 @@
           <li><%= link_to 'Locello', home_locello_path %></li>
           <li><%= link_to 'Unity', home_unity_path %></li>
           </ul>
-          </li>
+          </li>          
+          <li><%= link_to 'Log in', new_user_session_path %></li>
           <% end %>
         </ul>
       </div><!-- /.navbar-collapse -->
