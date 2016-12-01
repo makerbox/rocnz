@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get 'home/locello'
   get 'home/polasports'
   get 'home/unity'
+  get 'home/about'
+  get 'home/contact'
 
 resources :products do
   member do
