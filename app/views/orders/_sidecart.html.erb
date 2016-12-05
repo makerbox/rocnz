@@ -16,7 +16,7 @@
 		<% end %>
 		<% case level %>
 		  	<% when 1 %>
-		  		<% @setprice = po.product.price1 / 100 * po.product.discount(current_user) %>
+		  	<% @setprice = po.product.price1 / 100 * po.product.discount(current_user) %>
 		  		
 		    <% when 2 %>
 		    <% @setprice = po.product.price2 / 100 * po.product.discount(current_user) %>
