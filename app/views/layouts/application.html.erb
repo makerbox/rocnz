@@ -61,13 +61,15 @@
               <ul class="dropdown-menu">
               <li><%= link_to 'Sunglasses', products_path(group: 'roc', cat: 'C') %></li>
               <li><%= link_to 'Hats', products_path(group: 'roc', cat: 'J') %></li>
+              <li><%= link_to 'New arrivals', products_path(group: 'roc', filter: 'new') %></li>
               </ul>
               </li>
             <% end %>
             <% if current_user.account.sort.include? 'P' %>
-              <li class="menu-icon"><%= link_to products_path(group: 'polasports') do %>
+              <li class="dropdown-menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= link_to products_path(group: 'polasports') do %>
                 <img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479954637/polasports_gmkhsz.png">
-                <% end %>
+                <span class="caret"></span></a><ul class="dropdown-menu"><li><%= link_to 'All Sunglasses', products_path(group: 'polasports') %></li>
+              <li><%= link_to 'New arrivals', products_path(group: 'polasports', filter: 'new') %></li></ul></li>
               </li>
             <% end %>
             <% if current_user.account.sort.include? 'L' %>
