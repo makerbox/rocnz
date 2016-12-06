@@ -15,7 +15,6 @@ end
 
   def pull
       system "git pull"
-      Product.all.destroy_all
       # system "rake db:migrate"
       # system "rails restart -b 0.0.0.0"
       # system "rake jobs:work"
