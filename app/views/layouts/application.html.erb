@@ -71,7 +71,7 @@
               </li>
             <% end %>
             <% if current_user.account.sort.include? 'L' %>
-              <li class="dropdown-menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479954637/locello_owt9fc.png"><span class="caret"></span></a><ul class="dropdown-menu"><li><%= link_to 'All Sunglasses', products_path(group: 'locello', filter: 'new') %></li>
+              <li class="dropdown-menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479954637/locello_owt9fc.png"><span class="caret"></span></a><ul class="dropdown-menu"><li><%= link_to 'All Sunglasses', products_path(group: 'locello') %></li>
               <li><%= link_to 'New arrivals', products_path(group: 'locello', filter: 'new') %></li></ul></li>
             <% end %>
             <% if current_user.account.sort.include? 'U' %>
