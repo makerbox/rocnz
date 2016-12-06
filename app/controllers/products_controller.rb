@@ -102,7 +102,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    if (current_user.has_role? :admin) && (!current_user.mimic.nil?)
+    if (current_user.has_role? :admin) && (current_user.mimic == !nil)
       @order = current_user.mimic.account.user.orders.where(active:true).last
     else
       @order = current_user.orders.where(active: true).last
