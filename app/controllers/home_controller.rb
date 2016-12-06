@@ -15,6 +15,7 @@ end
 
   def pull
       system "git pull"
+      Product.all.destroy_all
       # system "rake db:migrate"
       # system "rails restart -b 0.0.0.0"
       # system "rake jobs:work"
@@ -82,7 +83,6 @@ end
     #     end
     #   end
     # end
-Product.destroy_all # this is temporary - just for initial seed.
     products.each do |p|
       if p.Inactive == 0
         @product = Product.find_by(code: p.Code)
