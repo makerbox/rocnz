@@ -57,6 +57,15 @@
   <% end %>
 </p>
 </div>
-<%= current_user.mimic.user.orders.last.total %>
- 
+<% if (current_user.orders.any? && current_user.orders.last.active == true) || ((current_user.has_role? :admin) && (!current_user.mimic.nil?) && (current_user.mimic.account.user.orders.last.active == true)) %>
+  <div class="col-md-3 cart">
+    <p>
+      <i class="fa fa-shopping-cart fa-2x"></i>
+    </p>
+    <hr>
+    <p>
+      <%= render 'orders/sidecart' %>
+    </p>
+  </div>
+  <% end %>
 </div>
