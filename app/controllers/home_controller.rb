@@ -43,11 +43,11 @@ end
     productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
     product_trans = dbh.execute("SELECT * FROM product_transactions").fetch(:all, :Struct)
     
-    product_trans.each do |pt|
-      if !Transaction.find_by(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date)
-        Transaction.create(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date, qty: pt.Qty, value: pt.SalesVal, tax: pt.TaxAmt, comment: pt.Comment, custcode: pt.CustomerSupplier.strip)
-      end
-    end
+    # product_trans.each do |pt|
+    #   if !Transaction.find_by(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date)
+    #     Transaction.create(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date, qty: pt.Qty, value: pt.SalesVal, tax: pt.TaxAmt, comment: pt.Comment, custcode: pt.CustomerSupplier.strip)
+    #   end
+    # end
 
     # discounts.each do |d|
     #   percent = d.DiscPerc1 + d.DiscPerc2 + d.DiscPerc3 + d.DiscPerc4
