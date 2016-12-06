@@ -71,8 +71,8 @@
               </li>
             <% end %>
             <% if current_user.account.sort.include? 'L' %>
-              <li class="menu-icon"><%= link_to products_path(group: 'locello') do %><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479954637/locello_owt9fc.png">
-              <% end %></li>
+              <li class="dropdown-menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479954637/locello_owt9fc.png"><span class="caret"></span></a><ul class="dropdown-menu"><li><%= link_to 'All Sunglasses', products_path(group: 'locello', filter: 'new') %></li>
+              <li><%= link_to 'New arrivals', products_path(group: 'locello', filter: 'new') %></li></ul></li>
             <% end %>
             <% if current_user.account.sort.include? 'U' %>
             <li class="dropdown menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479954637/unity_ehatxv.gif"><span class="caret"></span></a>
@@ -85,9 +85,10 @@
               <li><%= link_to 'Womens Polarised', products_path(group: 'unity', cat: 'E', filter: 'WOMENS POLARISED') %></li>
               <li><%= link_to 'Kids', products_path(group: 'unity', cat: 'D') %></li>
               <li><%= link_to 'Reading', products_path(group: 'unity', cat: 'R') %></li>
-              <li><%= link_to 'Accesories', products_path(group: 'unity', cat: 'A') %></li></ul></li>
+              <li><%= link_to 'Accesories', products_path(group: 'unity', cat: 'A') %></li>
+              <li><%= link_to 'New arrivals', products_path(group: 'unity', filter: 'new') %></li></ul></li>
             <% end %>
-            <li><%= link_to 'New arrivals', products_path(group: 'all', filter: 'new') %></li>
+            
           <% end %>
         <% end %>
       <% end %>
