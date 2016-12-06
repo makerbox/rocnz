@@ -52,14 +52,14 @@
 	padding-bottom:0;
 }
 .dropdown-toggle {
-	max-width:20%;
+	max-width:40%;
 }
 .dropdown-toggle img{
 height:auto;
 width:auto;
 min-width:100%;
 	max-height:100%;
-	max-width:100%;
+	max-width:100% !important;
 	position: relative;
     bottom: .5em;
 }
