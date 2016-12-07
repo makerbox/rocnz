@@ -28,6 +28,7 @@ end
     #   d.update(product: newproduct, customer: newcustomer)
     # end
     @products = Product.all
+    @accounts = Account.all
   end
 
   def seed
