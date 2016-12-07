@@ -29,7 +29,7 @@ end
     # end
     @products = Product.all
     @accounts = Account.all
-    @transactions = Transaction.all
+    @transactions = = dbh.execute("SELECT * FROM product_transactions").fetch(:all, :Struct)
   end
 
   def seed
