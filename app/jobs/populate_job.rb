@@ -13,7 +13,9 @@ class PopulateJob
     product_trans = dbh.execute("SELECT * FROM product_transactions").fetch(:all, :Struct)
     
     product_trans.each do |pt|
-      if !Transaction.find_by(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date)
+      if Transaction.find_by(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date)
+        #do nothing
+      else
         Transaction.create(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date, qty: pt.Qty, value: pt.SalesVal, tax: pt.TaxAmt, comment: pt.Comment, custcode: pt.CustomerSupplier.strip)
       end
     end
@@ -24,13 +26,13 @@ class PopulateJob
         if d.CustomerType == 10 # affect discounts for customer codes
           if d.ProductType == 10 # affect discounts for product codes
             if Discount.find_by(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              puts 'exists'
+              # do nothing
             else
               Discount.create(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
             end
           elsif d.ProductType == 30 # affect discounts for product groups
             if Discount.find_by(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              puts 'exists'
+              # do nothing
             else
               Discount.create(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
             end
@@ -38,13 +40,13 @@ class PopulateJob
         elsif d.CustomerType == 30 # affect discounts for customer groups
           if d.ProductType == 10 # affect discounts for product codes
             if Discount.find_by(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              puts 'exists'
+              # do nothing
             else
               Discount.create(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
             end
           elsif d.ProductType == 30 # affect discounts for product groups
             if Discount.find_by(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              puts 'exists'
+              # do nothing
             else
               Discount.create(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
             end
