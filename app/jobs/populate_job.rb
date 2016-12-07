@@ -15,7 +15,7 @@ class PopulateJob
     product_trans.each do |pt|
       if Transaction.find_by(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date)
         #do nothing
-      else
+      else  
         Transaction.create(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date, qty: pt.Qty, value: pt.SalesVal, tax: pt.TaxAmt, comment: pt.Comment, custcode: pt.CustomerSupplier.strip)
       end
     end
