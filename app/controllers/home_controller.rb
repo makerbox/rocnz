@@ -31,85 +31,8 @@ end
   end
 
   def seed
-    #THIS WILL COMPLETELY SEED THE DATABASE - ONLY RUN AT NIGHT
-    dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-
-    customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-    activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
-    contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
-    discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
-    products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
-    productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
-    product_trans = dbh.execute("SELECT * FROM product_transactions").fetch(:all, :Struct)
+    PopulateJob.perform_async()
     
-    product_trans.each do |pt|
-      if !Transaction.find_by(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date)
-        Transaction.create(prodcode: pt.Code.strip, transtype: pt.TranType, date: pt.Date, qty: pt.Qty, value: pt.SalesVal, tax: pt.TaxAmt, comment: pt.Comment, custcode: pt.CustomerSupplier.strip)
-      end
-    end
-
-    discounts.each do |d|
-      percent = d.DiscPerc1 + d.DiscPerc2 + d.DiscPerc3 + d.DiscPerc4
-      if percent > 0 # check there is an actual discount to apply
-        if d.CustomerType == 10 # affect discounts for customer codes
-          if d.ProductType == 10 # affect discounts for product codes
-            if Discount.find_by(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              puts 'exists'
-            else
-              Discount.create(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-            end
-          elsif d.ProductType == 30 # affect discounts for product groups
-            if Discount.find_by(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              puts 'exists'
-            else
-              Discount.create(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-            end
-          end
-        elsif d.CustomerType == 30 # affect discounts for customer groups
-          if d.ProductType == 10 # affect discounts for product codes
-            if Discount.find_by(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              puts 'exists'
-            else
-              Discount.create(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-            end
-          elsif d.ProductType == 30 # affect discounts for product groups
-            if Discount.find_by(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              puts 'exists'
-            else
-              Discount.create(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-            end
-          end
-        end
-      end
-    end
-    
-    products.each do |p|
-      if p.Inactive == 0
-        @product = Product.find_by(code: p.Code)
-        category = ''
-        productsext.each do |x| #match the extension file with this product
-          if x.Code == p.Code
-            category = x.CostCentre.to_s.strip
-          end
-        end
-
-        if @product #if the product already exists, just update the details
-          if (@product.category != category.to_s.strip) || (@product.code != p.Code.to_s.strip) || (@product.description != p.Description) || (@product.group != p.ProductGroup.to_s.strip) || (@product.price1 != p.SalesPrice1) || (@product.price2 != p.SalesPrice2) || (@product.price3 != p.SalesPrice3) || (@product.price4 != p.SalesPrice4) || (@product.price5 != p.SalesPrice5) || (@product.rrp != p.SalesPrice6) || (@product.qty != p.QtyInStock) 
-            Product.find_by(code: p.Code).update(category: category.to_s.strip, qty: p.QtyInStock, code: p.Code.to_s.strip, description: p.Description, group: p.ProductGroup.to_s.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
-          end
-        else #if the product doesn't already exist, let's make it
-          Product.create(category: category.to_s.strip, qty: p.QtyInStock, code: p.Code.to_s.strip, description: p.Description, group: p.ProductGroup.to_s.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
-          #upload image to cloudinary and store url in product.imageurl (images are stored in z:/attache/roc/images/product/*sku*.jpg)
-          filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.to_s.strip + '.jpg'
-          if File.exist?(filename)
-            Cloudinary::Uploader.upload(filename, :public_id => p.Code.to_s.strip, :overwrite => true)
-          else
-            #image doesn't exist - perhaps create image attribute and set it to 'empty' if no file, or filename(minus path) if exists
-          end
-        end
-      end
-    end
-
     # contacts.each do |contact| # populate a model of contact email addresses - had to be done to make the data searchable
     #   if Contact.find_by(code: contact.Code)
     #     puts "contact exists skipping"
