@@ -29,6 +29,7 @@ end
     # end
     @products = Product.all
     @accounts = Account.all
+    @transactions = Transaction.all
   end
 
   def seed
