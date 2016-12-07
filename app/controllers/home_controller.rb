@@ -27,8 +27,7 @@ end
     #   newproduct = d.product.strip
     #   d.update(product: newproduct, customer: newcustomer)
     # end
-    @products = Product.all
-    @accounts = Account.all
+    dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     @transactions = = dbh.execute("SELECT * FROM product_transactions").fetch(:all, :Struct)
   end
 
