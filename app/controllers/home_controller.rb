@@ -28,7 +28,8 @@ end
     #   d.update(product: newproduct, customer: newcustomer)
     # end
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-    @transactions = dbh.execute("SELECT * FROM product_transactions").fetch(:all, :Struct)
+    # @transactions = dbh.execute("SELECT * FROM product_transactions").fetch(:all, :Struct)
+    @transactions = dbh.run("SELECT * FROM product_transactions WHERE Code='335B'")
   end
 
   def seed
