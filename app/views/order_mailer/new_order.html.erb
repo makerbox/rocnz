@@ -1,6 +1,5 @@
 Hi,
 Here's your order:
-<% account = @order.user.account %>
 YOUR ORDER FROM ROC CLOUDY WHOLESALE PORTAL [<%= Time.now.strftime("%d/%m/%Y || %r") %>]
 ------------------ ORDER ID WEB<%= @order.id.to_s %>
 <% @order.quantities.each do |q| %>
