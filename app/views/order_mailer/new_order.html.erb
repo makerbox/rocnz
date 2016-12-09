@@ -1,3 +1,16 @@
 Hi,
 Here's your order:
-<%= @print %>
+<% account = @order.user.account %>
+YOUR ORDER FROM ROC CLOUDY WHOLESALE PORTAL [<%= Time.now.strftime("%d/%m/%Y || %r") %>]
+------------------ ORDER ID WEB<%= @order.id.to_s %>
+<% @order.quantities.each do |q| %>
+		    
+		  <%= q.product.code.to_s %>
+		  <br>
+		  <%= q.product.description.strip %>
+		  <br>
+		  QTY: <%= q.qty.to_s %>
+		  <hr>
+		  <% end %>
+		  <hr><hr>
+		  <b>total: $<%= @order.total.to_s %></b>
