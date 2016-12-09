@@ -1,3 +1,13 @@
-Hi,
-Here's your order:
-<%= @thisorder %>
+New order from Roc Cloudy
+-------------------------<br>
+order ID:<%= @thisorder.id %><hr>
+<%= @thisorder.user.account.street %><br>
+<%= @thisorder.user.account.suburb %><br>
+<%= @thisorder.user.account.company %><br>
+<hr>
+<% @thisorder.quantities.each do |q| %>
+<%= q.product.code %><br>
+<%= q.product.description %><br>
+QTY : <%= q.qty %><hr>
+<% end %>
+<hr><b>TOTAL : <%= @thisorder.total %></b>
