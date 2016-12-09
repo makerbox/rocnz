@@ -61,7 +61,11 @@ def sendorder
   @print += "total: $" + @order.total.to_s + "\r\n"
   @print += "-------------------------------------------------------------------"
   # `PowerShell -Command "echo '#{@print}' | out-printer"` # print order
-  redirect_to account_path(current_user.account)
+  if current_user.has_role? :admin
+    redirect_to home_index_path
+  else
+    redirect_to account_path(current_user.account)
+  end
 end
 
 # def cart #if there aren't any active orders, then create one
