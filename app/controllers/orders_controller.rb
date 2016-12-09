@@ -11,7 +11,7 @@ def sendorder
   @order.update(active: false, sent: DateTime.now, total: params[:total]) # move order to pending and give it a total
   
 
-  OrderMailer.new_order(@order).deliver_now
+  OrderMailer.order(@order).deliver_now
 
   account = @order.user.account
   
