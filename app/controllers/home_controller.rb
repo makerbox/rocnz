@@ -30,7 +30,7 @@ end
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     # @transactions = dbh.execute("SELECT * FROM product_transactions").fetch(:all, :Struct)
     @transactions = dbh.execute("SELECT * FROM product_transactions WHERE Code='335B'").fetch(:all, :Struct)
-    @transactions = @transactions.where(TranType: 1)
+    @transactions = @transactions.find_by(TranType: 1)
   end
 
   def seed
