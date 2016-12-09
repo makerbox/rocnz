@@ -1,8 +1,8 @@
 Hi,
 Here's your order:
 YOUR ORDER FROM ROC CLOUDY WHOLESALE PORTAL [<%= Time.now.strftime("%d/%m/%Y || %r") %>]
------------------- ORDER ID WEB<%= @order.id.to_s %>
-<% @order.quantities.each do |q| %>
+------------------ ORDER ID WEB<%= @thisorder.id.to_s %>
+<% @thisorder.quantities.each do |q| %>
 		    
 		  <%= q.product.code.to_s %>
 		  <br>
@@ -10,6 +10,6 @@ YOUR ORDER FROM ROC CLOUDY WHOLESALE PORTAL [<%= Time.now.strftime("%d/%m/%Y || 
 		  <br>
 		  QTY: <%= q.qty.to_s %>
 		  <hr>
-		  <% end %>
+<% end %>
 		  <hr><hr>
-		  <b>total: $<%= @order.total.to_s %></b>
+		  <b>total: $<%= @thisorder.total.to_s %></b>
