@@ -27,7 +27,7 @@ end
     #   newproduct = d.product.strip
     #   d.update(product: newproduct, customer: newcustomer)
     # end
-    @products = Product.all
+    @product = Product.all
     # product = '335B'
     # dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     # @transactions = dbh.execute("SELECT * FROM product_transactions WHERE Code='#{product}' AND CustomerSupplier='SAMPLES' ").fetch(:all, :Struct)
