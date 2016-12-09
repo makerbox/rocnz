@@ -57,7 +57,7 @@ def sendorder
   @print += "-------------------------------------------------------------------\r\n"
   @print += "total: $" + @order.total.to_s + "\r\n"
   @print += "-------------------------------------------------------------------"
-  `PowerShell -Command "echo '#{@print}' | out-printer"` # print order
+  # `PowerShell -Command "echo '#{@print}' | out-printer"` # print order
   redirect_to account_path(current_user.account)
 end
 
