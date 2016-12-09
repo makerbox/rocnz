@@ -1,5 +1,5 @@
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %><%= link_to 'SEED', home_seed_path, class: 'btn btn-info' %><%= link_to 'TEST', home_test_path, class: 'btn btn-info' %>
 <% @transactions.each do |t| %> 
 <%= t.CustomerSupplier %><br>
-<%= t.Code %> --- <%= t.date %><hr>
+<%= t.Code %> --- <%= t.Date %><hr>
 <% end %>
