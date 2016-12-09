@@ -3,6 +3,6 @@ class OrderMailer < ApplicationMailer
 	
 	def new_order(order)
 		realemail = order.account.user.email
-		mail(to: 'mattwerth@mattwerth.com', subject: 'Your order summary | RocCloudy')
+		mail(to: 'mattwerth@mattwerth.com', subject: 'Your order summary from RocCloudy')
 	end
 end
