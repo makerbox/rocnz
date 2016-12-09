@@ -28,7 +28,7 @@ def sendorder
   end
   @print += "THIS IS A TEST (please diregard) - order from " + company + "\r\n"
   @print += "------------------------------------------------------------------- \r\n"
-  @print += account.street + ' | ' + account.suburb + ' | ' + account.phone + "\r\n"
+  @print += account.street.to_s + ' | ' + account.suburb.to_s + ' | ' + account.phone.to_s + "\r\n"
   @print += "------------------------------------------------------------------- \r\n\n"
   @order.quantities.each do |q|
     product = Product.find_by(id: q.product_id)
