@@ -1,15 +1,3 @@
 Hi,
 Here's your order:
-YOUR ORDER FROM ROC CLOUDY WHOLESALE PORTAL [<%= Time.now.strftime("%d/%m/%Y || %r") %>]
------------------- ORDER ID WEB<%= @thisorder.id.to_s %>
-<% @thisorder.quantities.each do |q| %>
-		    
-		  <%= q.product.code.to_s %>
-		  <br>
-		  <%= q.product.description.strip %>
-		  <br>
-		  QTY: <%= q.qty.to_s %>
-		  <hr>
-<% end %>
-		  <hr><hr>
-		  <b>total: $<%= @thisorder.total.to_s %></b>
+<%= @thisorder %>
