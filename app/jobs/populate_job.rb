@@ -49,9 +49,7 @@ class PopulateJob
 
     products.each do |p|
       firstsale = dbh.execute("SELECT * FROM product_transactions WHERE Code='#{p.Code}' AND CustomerSupplier='SAMPLES' ").fetch(:all, :Struct)
-      debug firstsale
       @saledate = firstsale.Date.strftime("%d-%m-%Y")
-      debug @saledate
       if p.Inactive == 0
         @product = Product.find_by(code: p.Code)
         category = ''

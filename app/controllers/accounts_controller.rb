@@ -68,14 +68,14 @@ end
       if @account.save
         
         # code for sending email notifications
- #        @admin_user_emails = ''
- #        User.all.each do |u|
- #          if u.has_role? :admin
- #            @admin_user_emails << u.email + ','
- #          end
- #        end 
- # EmailJob.perform_async(@admin_user_emails)
- # UserEmailJob.perform_async(@account.user.email)
+        @admin_user_emails = ''
+        User.all.each do |u|
+          if u.has_role? :admin
+            @admin_user_emails << u.email + ','
+          end
+        end 
+ EmailJob.perform_async(@admin_user_emails)
+ UserEmailJob.perform_async(@account.user.email)
 
         format.html { redirect_to @account, notice: 'Account was successfully created.' }
         format.json { render :show, status: :created, location: @account }

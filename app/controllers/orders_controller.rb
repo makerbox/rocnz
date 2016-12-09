@@ -11,7 +11,7 @@ def sendorder
   @order.update(active: false, sent: DateTime.now, total: params[:total]) # move order to pending and give it a total
   
   account = @order.user.account
-
+  OrderEmailJob.perform_async(@order)
   if account.company # start putting together printable order
     company = account.company
   else
