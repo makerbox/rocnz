@@ -15,7 +15,7 @@ class OrderMailer < ApplicationMailer
 		  @print += "------------------------------------------------------------------- \r\n\n"
 		  @order.quantities.each do |q|
 		    
-		    @print += "~" + q.products.first.code.to_s + "\r\n[" + q.products.first.description.strip + ' x ' + q.qty.to_s + "\r\n\n"
+		    @print += "~" + q.product.code.to_s + "\r\n[" + q.product.description.strip + ' x ' + q.qty.to_s + "\r\n\n"
 		  end
 		  @print += "-------------------------------------------------------------------\r\n"
 		  @print += "total: $" + @order.total.to_s + "\r\n"
