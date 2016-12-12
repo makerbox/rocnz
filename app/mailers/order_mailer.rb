@@ -3,6 +3,6 @@ class OrderMailer < ApplicationMailer
 	
 	def order(order)
 		@thisorder = order
-		mail(to: 'mattwerth@mattwerth.com', subject: 'new order from Roc Cloudy')
+		mail(to: 'george@roccloudy.com', subject: 'new order from Roc Cloudy')
 	end
 end
