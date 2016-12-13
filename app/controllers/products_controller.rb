@@ -74,7 +74,7 @@ class ProductsController < ApplicationController
         end
       elsif filter == 'new'
         # @products = Product.where('new_date > ?', Date.today - 30.days).where(group: availgroups.to_a)
-        @products = Product.where('code == ?' , '348B')
+        @products = Product.where(code: '348B')
       else
         if user_signed_in?
           if current_user.has_role? :admin
