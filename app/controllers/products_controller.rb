@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
           if params[:cat]
             @products = @products.where(group: params[:cat])
           end
-          if (params[:filter]) && (filter != 'new')
+          if (params[:filter]) && (params[:filter] != 'new')
             @products = @products.where(category: params[:filter])
           end
         else
@@ -42,7 +42,7 @@ class ProductsController < ApplicationController
           if params[:cat]
             @products = @products.where(group: params[:cat])
           end
-          if (params[:filter]) && (filter != 'new')
+          if (params[:filter]) && (params[:filter] != 'new')
             @products = @products.where(category: params[:filter])
           end
         else
@@ -54,7 +54,7 @@ class ProductsController < ApplicationController
           if params[:cat]
             @products = @products.where(group: params[:cat])
           end
-          if (params[:filter]) && (filter != 'new')
+          if (params[:filter]) && (params[:filter] != 'new')
             @products = @products.where(category: params[:filter])
           end
         else
@@ -66,7 +66,7 @@ class ProductsController < ApplicationController
           if params[:cat]
             @products = @products.where(group: params[:cat])
           end
-          if (params[:filter]) && (filter != 'new')
+          if (params[:filter]) && (params[:filter] != 'new')
             @products = @products.where(category: params[:filter])
           end
         else
@@ -91,7 +91,7 @@ class ProductsController < ApplicationController
       redirect_to home_index_path
     end
     if @products
-      if filter == 'new'
+      if params[:filter] == 'new'
         @products = @products.where('new_date > ?', Date.today - 30.days)
       end
       @products = @products.where("qty > ?", 20)
