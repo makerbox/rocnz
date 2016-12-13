@@ -1,5 +1,5 @@
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %><%= link_to 'SEED', home_seed_path, class: 'btn btn-info' %><%= link_to 'TEST', home_test_path, class: 'btn btn-info' %>
-user's last active order
-<%= current_user.mimic.account.user.orders.where(active:true).last %><hr>
-user's last order
-<%= current_user.mimic.account.user.orders.last %><hr>
+
+<% @product.each do |p| %>
+<%= p.new_date %>
+<% end %>
