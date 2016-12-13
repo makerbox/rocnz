@@ -13,6 +13,9 @@ end
 def unity
 end
 def confirm
+    if current_user.has_role? :admin
+        current_user.mimic.update(account: nil)
+    end
 end
 
   def pull
