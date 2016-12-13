@@ -11,7 +11,7 @@ def sendorder
   @order.update(active: false, sent: DateTime.now, total: params[:total]) # move order to pending and give it a total
   
 
-  OrderMailer.order(@order).deliver_now
+  # OrderMailer.order(@order).deliver_now
 
   account = @order.user.account
   
@@ -60,7 +60,7 @@ def sendorder
   @print += "-------------------------------------------------------------------\r\n"
   @print += "total: $" + @order.total.to_s + "\r\n"
   @print += "-------------------------------------------------------------------"
-  `PowerShell -Command "echo '#{@print}' | out-printer"` # print order
+  # `PowerShell -Command "echo '#{@print}' | out-printer"` # print order
   redirect_to home_confirm_path
 end
 
