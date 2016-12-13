@@ -56,7 +56,7 @@
         <ul class="nav navbar-nav">
         <% if current_user.account %>
           <% if current_user.account.sort %>
-            <% if (current_user.account.sort.include? 'R') || ((current_user.has_role? :admin) && (current_user.mimic.account.sort.include? 'R')) %>
+            <% if ((!current_user.has_role? :admin) && (current_user.account.sort.include? 'R')) || ((current_user.has_role? :admin) && (current_user.mimic.account.sort.include? 'R')) %>
               <li class="dropdown menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1480980887/roc_backless_ltdncr.png"></a>
               <ul class="dropdown-menu">
               <li><%= link_to 'Sunglasses', products_path(group: 'roc', cat: 'C') %></li>
