@@ -72,9 +72,6 @@ class ProductsController < ApplicationController
         else
           redirect_to home_index_path
         end
-      elsif filter == 'new'
-        # @products = Product.where('new_date > ?', Date.today - 30.days).where(group: availgroups.to_a)
-        @products = Product.where(code: '348B')
       else
         if user_signed_in?
           if current_user.has_role? :admin
@@ -89,10 +86,14 @@ class ProductsController < ApplicationController
         end
 
       end
+
     else
       redirect_to home_index_path
     end
     if @products
+      if filter == 'new'
+        @products = @products.where('new_date > ?', Date.today - 30.days)
+      end
       @products = @products.where("qty > ?", 20)
       @products = @products.order(group: 'DESC').order(code: 'ASC')
       @totalproducts = @products.count
