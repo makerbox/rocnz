@@ -3,8 +3,7 @@ class PopulateJob
 	  def perform
 #THIS WILL COMPLETELY SEED THE DATABASE - ONLY RUN AT NIGHT
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-Product.destroy_all
-
+    
     customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
     activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
     contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
