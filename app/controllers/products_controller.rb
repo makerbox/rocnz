@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
           if params[:cat]
             @products = @products.where(group: params[:cat])
           end
-          if params[:filter]
+          if (params[:filter]) && (filter != 'new')
             @products = @products.where(category: params[:filter])
           end
         else
@@ -42,7 +42,7 @@ class ProductsController < ApplicationController
           if params[:cat]
             @products = @products.where(group: params[:cat])
           end
-          if params[:filter]
+          if (params[:filter]) && (filter != 'new')
             @products = @products.where(category: params[:filter])
           end
         else
@@ -54,7 +54,7 @@ class ProductsController < ApplicationController
           if params[:cat]
             @products = @products.where(group: params[:cat])
           end
-          if params[:filter]
+          if (params[:filter]) && (filter != 'new')
             @products = @products.where(category: params[:filter])
           end
         else
@@ -66,7 +66,7 @@ class ProductsController < ApplicationController
           if params[:cat]
             @products = @products.where(group: params[:cat])
           end
-          if params[:filter]
+          if (params[:filter]) && (filter != 'new')
             @products = @products.where(category: params[:filter])
           end
         else
