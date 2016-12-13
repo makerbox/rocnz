@@ -45,7 +45,7 @@ end
   # GET /accounts/1.json
   def show
     if current_user.has_role? :admin
-      account = params[:account]
+      account = Account.find_by(params[:account])
       @pendingorders = Order.where(user: account.user, active: false, approved: false, complete: false)
     @approvedorders = Order.where(user:current_user.mimic.account.user, active:false, approved: true, complete: false)
     @sentorders = Order.where(user:current_user.mimic.account.user, active:false, approved: true, complete: true)
