@@ -6,13 +6,12 @@
   <thead>
     <tr>
       <th>email</th>
-      <th><%= link_to 'company', accounts_path(order: 'company') %></th>
+      <th><%= link_to 'company name', accounts_path(order: 'company') %></th>
       <th><%= link_to 'Suburb', accounts_path(order: 'Suburb') %></th>
-      <th><%= link_to 'Code', accounts_path(order: 'Code') %></th>
       <th><%= link_to 'Phone', accounts_path(order: 'Phone') %></th>
       <th><%= link_to 'Contact name', accounts_path(order: 'contact') %></th>
-      <th>View</th>
-      <th><%= link_to 'Seller level', accounts_path(order: 'seller_level') %></th>
+      <th>View acct.</th>
+      <th></th>
       <th>Order</th>
     </tr>
   </thead>
@@ -31,7 +30,6 @@
         <% end %>
         <td><%= account.company %></td>
         <td><%= account.suburb %></td>
-        <td><%= account.code %></td>
         <td><%= account.phone %></td>
         <td><%= account.contact %></td>
         <td>
@@ -52,10 +50,6 @@
         </td>
         <% else %>
         <td>
-          <%= link_to edit_account_path(account), class: 'btn btn-success' do %>
-          <i class="fa fa-sort"></i> 
-          <%= account.seller_level %>
-          <% end %>
           <%= link_to unapprove_account_path(account), class: 'btn btn-primary' do %>
           <i class="fa fa-thumbs-o-down"></i> Unapprove
           <% end %>
