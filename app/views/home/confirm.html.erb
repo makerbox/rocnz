@@ -2,6 +2,8 @@
 <p>
 <% if current_user.has_role? :admin %>
 Please select a new customer to place another order.
+<% current_user.mimic.update(account: nil) %>
+<%= link_to accounts_index_path, class: 'btn btn-default' %>
 <% else %>
 We will be in contact soon to confirm and process your order.
 <% end %>
