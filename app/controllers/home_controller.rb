@@ -12,6 +12,8 @@ def polasports
 end
 def unity
 end
+def confirm
+end
 
   def pull
       system "git pull"

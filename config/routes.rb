@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'home/unity'
   get 'home/about'
   get 'home/contact'
+  get 'home/confirm'
 
 resources :products do
   member do
