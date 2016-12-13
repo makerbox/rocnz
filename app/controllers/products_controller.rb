@@ -73,7 +73,8 @@ class ProductsController < ApplicationController
           redirect_to home_index_path
         end
       elsif filter == 'new'
-        @products = Product.where('new_date > ?', Date.today - 30.days).where(group: availgroups.to_a)
+        # @products = Product.where('new_date > ?', Date.today - 30.days).where(group: availgroups.to_a)
+        @products = Product.where('new_date > ?', Date.today - 30.days)
       else
         if user_signed_in?
           if current_user.has_role? :admin
