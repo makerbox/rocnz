@@ -92,8 +92,7 @@ class ProductsController < ApplicationController
     end
     if @products
       if params[:filter] == 'new'
-        # @products = @products.where('new_date > ?', Date.today - 30.days)
-        @products = @products.where(code: '348B')
+        @products = @products.where('new_date < ?', Date.today - 30.days)
       end
       @products = @products.where("qty > ?", 20)
       @products = @products.order(group: 'DESC').order(code: 'ASC')
