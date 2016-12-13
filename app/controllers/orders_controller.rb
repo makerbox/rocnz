@@ -60,7 +60,7 @@ def sendorder
   @print += "-------------------------------------------------------------------\r\n"
   @print += "total: $" + @order.total.to_s + "\r\n"
   @print += "-------------------------------------------------------------------"
-  # `PowerShell -Command "echo '#{@print}' | out-printer"` # print order
+  `PowerShell -Command "echo PRINTHTML.EXE html='Hello <b>THIS IS A TEST</b> - <hr> please give this to Matt, or just call/email him to let him know it printed' "` # print order
   redirect_to home_confirm_path
 end
 
