@@ -10,7 +10,6 @@ class PopulateJob
     discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
     products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
     productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
-    
 
     discounts.each do |d|
       percent = d.DiscPerc1 + d.DiscPerc2 + d.DiscPerc3 + d.DiscPerc4
@@ -48,7 +47,7 @@ class PopulateJob
     end
 
     products.each do |p|
-      firstsale = dbh.execute("SELECT * FROM product_transactions WHERE Code='#{p.Code}' AND CustomerSupplier='SAMPLES' ").fetch(:all, :Struct)
+      firstsale = dbh.execute("SELECT * FROM produdefdata WHERE Code='#{p.Code}' ").fetch(:all, :Struct)
       @saledate = firstsale.Date.strftime("%d-%m-%Y")
       if p.Inactive == 0
         @product = Product.find_by(code: p.Code)
