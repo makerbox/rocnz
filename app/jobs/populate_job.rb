@@ -11,6 +11,12 @@ Product.destroy_all
     discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
     products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
     productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
+    reps = dbh.execute("SELECT * FROM sales_reps_extn").fetch(:all, :Struct)
+
+    reps.each do |r|
+      # create or update rep account
+      # create requires them to become admin
+    end
 
     discounts.each do |d|
       percent = d.DiscPerc1 + d.DiscPerc2 + d.DiscPerc3 + d.DiscPerc4
