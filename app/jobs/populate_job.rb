@@ -48,9 +48,9 @@ class PopulateJob
 
     products.each do |p|
       firstsale = dbh.execute("SELECT * FROM produdefdata WHERE Code='#{p.Code}' ").fetch(:all, :Struct)
-      @saledate = firstsale.DateFld.strftime("%d-%m-%Y")
+      @saledate = firstsale.DateFld
+      @product = Product.find_by(code: p.Code)
       if p.Inactive == 0
-        @product = Product.find_by(code: p.Code)
         category = ''
         productsext.each do |x| #match the extension file with this product
           if x.Code == p.Code
