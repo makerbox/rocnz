@@ -34,6 +34,7 @@ end
     # dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     # @transactions = dbh.execute("SELECT * FROM product_transactions WHERE Code='#{product}' AND CustomerSupplier='SAMPLES' ").fetch(:all, :Struct)
    @products = Product.where(code: '348B')
+   system "printhtml html='Hello <b>THIS IS A TEST</b> - <hr> can you please let Matt know this printed?' "
   end
 
   def seed
