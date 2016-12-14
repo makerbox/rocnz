@@ -153,6 +153,9 @@ class PopulateJob
 # 	# ----------------------------------------------------------------------------------------------------------
 
 
+dbh.disconnect
+
+ActiveRecord::Base.connection.execute("BEGIN TRANSACTION; END;")
   end
 
 end
