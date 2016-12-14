@@ -46,9 +46,10 @@ class PopulateJob
       end
     end
 
-    products.each do |p|#{p.Code}
-      firstsale = dbh.execute("SELECT * FROM produdefdata WHERE Code='348B' ").fetch(:all, :Struct)
-      @saledate = firstsale.DateFld
+    products.each do |p|
+      # firstsale = dbh.execute("SELECT * FROM produdefdata WHERE Code='348B' ").fetch(:all, :Struct) #{p.Code}
+      # @saledate = firstsale.DateFld
+      @saledate = Date.today
       @product = Product.find_by(code: p.Code)
       if p.Inactive == 0
         category = ''
