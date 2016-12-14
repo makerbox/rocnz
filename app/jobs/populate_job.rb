@@ -1,6 +1,7 @@
 class PopulateJob
 	include SuckerPunch::Job
 	  def perform
+Product.destroy_all
 #THIS WILL COMPLETELY SEED THE DATABASE - ONLY RUN AT NIGHT
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     
