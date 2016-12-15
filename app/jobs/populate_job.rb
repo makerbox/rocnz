@@ -58,6 +58,9 @@ class PopulateJob
       puts dbhstring
       @saledate = dbh.execute(dbhstring).fetch(:all, :Struct) #{p.Code}
       if !@saledate.nil?
+        puts 'not nil'
+        puts @saledate
+        puts @saledate[0]
         @saledate = @saledate[0].DateFld
       else
         @saledate = nil
