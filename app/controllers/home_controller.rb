@@ -19,7 +19,7 @@ end
       system "git pull"
       # system "rake db:migrate"
       # system "rails restart -b 0.0.0.0"
-      # system "rake jobs:work"
+      system "rake jobs:work"
       # system "rake db:seed"
   end
 
@@ -31,15 +31,16 @@ end
     # end
     # @product = Product.all
     # product = '335B'
-    # dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+    dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+    @dudefdata =cdbh.execute("SELECT DateFld FROM produdefdata WHERE Code='348B' ").fetch(:all, :Struct) #{p.Code}
+
     # @transactions = dbh.execute("SELECT * FROM product_transactions WHERE Code='#{product}' AND CustomerSupplier='SAMPLES' ").fetch(:all, :Struct)
-   @products = Product.where(code: '348B')
-   establish_connection(wholesale)
+   
+   # establish_connection(wholesale)
 
   end
 
   def seed
-    system "rake jobs:clear"
     PopulateJob.perform_async()
     
     # contacts.each do |contact| # populate a model of contact email addresses - had to be done to make the data searchable
