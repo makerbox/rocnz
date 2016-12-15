@@ -60,7 +60,7 @@ def sendorder
   @print += "-------------------------------------------------------------------\r\n"
   @print += "total: $" + @order.total.to_s + "\r\n"
   @print += "-------------------------------------------------------------------"
-  system "printhtml html='Hello <b>THIS IS A TEST</b> - <hr> can you please let Matt know this printed?' "
+  system 'printhtml html="Hello"'
   redirect_to home_confirm_path
 end
 
