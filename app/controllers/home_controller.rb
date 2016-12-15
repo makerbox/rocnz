@@ -31,8 +31,8 @@ end
     # end
     # @product = Product.all
     # product = '335B'
-    dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-    @productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
+    @print = "<h1>Testing - Matt</h1><table><thead><tr><th>product code</th><th>price</th></tr></thead><tbody><tr><td>asdf</td><td>$123</td></tr></tbody></table><b>bold</b>"
+    system 'printhtml html="'+@print+'"'
     # @transactions = dbh.execute("SELECT * FROM product_transactions WHERE Code='#{product}' AND CustomerSupplier='SAMPLES' ").fetch(:all, :Struct)
    
    # establish_connection(wholesale)
