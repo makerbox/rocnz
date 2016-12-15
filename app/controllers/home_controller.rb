@@ -37,7 +37,7 @@ end
 
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
-    system 'printhtml html="#{@print}"'
+    system "printhtml html='#{@print}'"
     # @transactions = dbh.execute("SELECT * FROM product_transactions WHERE Code='#{product}' AND CustomerSupplier='SAMPLES' ").fetch(:all, :Struct)
    
    # establish_connection(wholesale)
