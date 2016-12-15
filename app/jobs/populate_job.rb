@@ -54,10 +54,9 @@ class PopulateJob
 
     products.each do |p|
       @saledate = nil
-      dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' "
+      dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code.strip}' "
       puts dbhstring
       @saledate = dbh.execute(dbhstring).fetch(:all, :Struct) #{p.Code}
-      puts @saledate 
       @saledate = @saledate[0].DateFld
       @product = Product.find_by(code: p.Code)
       if p.Inactive == 0
