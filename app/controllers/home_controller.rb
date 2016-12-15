@@ -35,7 +35,7 @@ end
     system "printhtml html='#{@print}'"
     system "printhtml html='testing, please show Matt'"
     system 'printhtml html="this is a test, please show Matt"'
-
+dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     # @transactions = dbh.execute("SELECT * FROM product_transactions WHERE Code='#{product}' AND CustomerSupplier='SAMPLES' ").fetch(:all, :Struct)
    dbhstring = "SELECT * FROM produdefdata"
    @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
