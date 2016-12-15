@@ -20,19 +20,19 @@ def sendorder
   else
     company = 'no company ' + account.phone #if no company name, then show phone number instead
   end
-  @print = "NEW ORDER FROM ROC CLOUDY WHOLESALE PORTAL ["+ Time.now.strftime("%d/%m/%Y || %r") +"] \r\n"
-  @print += "------------------------------------------------------------------- \r\n"
-  @print += "------------------------------------------------------------------- \r\n"
-  @print += "------------------ WEB" + @order.id.to_s + " ----------------------- \r\n"
-  @print += "------------------------------------------------------------------- \r\n"
-  @print += "------------------------------------------------------------------- \r\n"
+  @print = "<h1>New order from Roc Cloudy Wholesale Portal</h1>
+  [ordered at: #{Time.now.strftime('%d/%m/%Y || %r')}]"
   if current_user.has_role? :admin
-    @print += "------------made by SALES REP-------- \r\n"
+    @print += "<b> ordered by " + current_user.account.name.to_s + "</b>"
   end
-  @print += "THIS IS A TEST (please diregard) - order from " + company + "\r\n"
-  @print += "------------------------------------------------------------------- \r\n"
-  @print += account.street.to_s + ' | ' + account.suburb.to_s + ' | ' + account.phone.to_s + "\r\n"
-  @print += "------------------------------------------------------------------- \r\n\n"
+  @print += "Company: " + company + "<hr>"
+  @print += account.street.to_s + ' | ' + account.suburb.to_s + ' | ' + account.phone.to_s + "<hr>
+  <table><thead>
+  <tr>
+  <th>CODE</th><th>PRICE</th><th>QTY</th>
+  </tr>
+  </thead>
+  <tbody>"
   @order.quantities.each do |q|
     product = Product.find_by(id: q.product_id)
     if (current_user.has_role? :admin) && (!current_user.mimic.nil?) 
@@ -55,12 +55,13 @@ def sendorder
         @setprice = product.rrp / 100 * product.discount(current_user)
     end
     @setprice = @setprice.round(2)
-    @print += "~" + product.code.to_s + "\r\n[" + product.description.strip + "]\r\n$" + @setprice.to_s + " x qty:" + q.qty.to_s + "\r\n\n"
+    @print += "<tr>
+    <td>#{product.code.to_s}</td><td>$#{@setprice.to_s}</td><td>#{q.qty.to_s}</td>
+    </tr>"
   end
-  @print += "-------------------------------------------------------------------\r\n"
-  @print += "total: $" + @order.total.to_s + "\r\n"
-  @print += "-------------------------------------------------------------------"
-  system 'printhtml html="Hello"'
+  @print += "</tbody></table>"
+  @print += "<h2>total: $" + @order.total.to_s + "</h2>"
+  system 'printhtml html="'+@print+'"'
   redirect_to home_confirm_path
 end
 
