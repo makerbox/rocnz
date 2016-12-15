@@ -33,7 +33,7 @@ end
     # product = '335B'
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     @dudefdata = dbh.execute("SELECT DateFld FROM produdefdata WHERE Code='348B' ").fetch(:all, :Struct) #{p.Code}
-    @dudefdata = @dudefdata.DateFld
+    @dudefdata = @dudefdata[0]
     # @transactions = dbh.execute("SELECT * FROM product_transactions WHERE Code='#{product}' AND CustomerSupplier='SAMPLES' ").fetch(:all, :Struct)
    
    # establish_connection(wholesale)
