@@ -57,7 +57,11 @@ class PopulateJob
       dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code.strip}' "
       puts dbhstring
       @saledate = dbh.execute(dbhstring).fetch(:all, :Struct) #{p.Code}
-      @saledate = @saledate[0].DateFld
+      if @saledate != nil
+        @saledate = @saledate[0].DateFld
+      else
+        @saledate = nil
+      end
       @product = Product.find_by(code: p.Code)
       if p.Inactive == 0
         # category = ''
