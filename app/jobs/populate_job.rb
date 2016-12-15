@@ -55,12 +55,8 @@ class PopulateJob
     products.each do |p|
       @saledate = nil
       dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code.strip}' "
-      puts dbhstring
       @saledate = dbh.execute(dbhstring).fetch(:all, :Struct) #{p.Code}
       if @saledate.any?
-        puts 'not blank!'
-        puts @saledate
-        puts @saledate[0]
         @saledate = @saledate[0].DateFld
       else
         @saledate = nil
