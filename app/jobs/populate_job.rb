@@ -17,46 +17,11 @@ class PopulateJob
       # create requires them to become admin
     end
 
-    discounts.each do |d|
-      # percent = d.DiscPerc1 + d.DiscPerc2 + d.DiscPerc3 + d.DiscPerc4
-      # if percent > 0 # check there is an actual discount to apply
-      #   if d.CustomerType == 10 # affect discounts for customer codes
-      #     if d.ProductType == 10 # affect discounts for product codes
-      #       if Discount.find_by(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-      #         # do nothing
-      #       else
-      #         Discount.create(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-      #       end
-      #     elsif d.ProductType == 30 # affect discounts for product groups
-      #       if Discount.find_by(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-      #         # do nothing
-      #       else
-      #         Discount.create(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-      #       end
-      #     end
-      #   elsif d.CustomerType == 30 # affect discounts for customer groups
-      #     if d.ProductType == 10 # affect discounts for product codes
-      #       if Discount.find_by(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-      #         # do nothing
-      #       else
-      #         Discount.create(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-      #       end
-      #     elsif d.ProductType == 30 # affect discounts for product groups
-      #       if Discount.find_by(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-      #         # do nothing
-      #       else
-      #         Discount.create(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-      #       end
-      #     end
-      #   end
-      # end
-    end
-
     products.each do |p|
       if p.Inactive == 0
-        @saledate = nil
+        # @saledate = nil
         dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code.strip}' "
-        @saledate = dbh.execute(dbhstring).fetch(:all, :Struct) #{p.Code}
+        @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
         if @saledate.any?
           @saledate = @saledate[0].DateFld
         else
@@ -69,7 +34,7 @@ class PopulateJob
             category = x.CostCentre
           end
         end
-
+        
         if @product.any? #if the product already exists, just update the details
           if (@product.new_date != @sale_date) || (@product.category != category.to_s.strip) || (@product.code != p.Code.to_s.strip) || (@product.description != p.Description) || (@product.group != p.ProductGroup.to_s.strip) || (@product.price1 != p.SalesPrice1) || (@product.price2 != p.SalesPrice2) || (@product.price3 != p.SalesPrice3) || (@product.price4 != p.SalesPrice4) || (@product.price5 != p.SalesPrice5) || (@product.rrp != p.SalesPrice6) || (@product.qty != p.QtyInStock) 
             Product.find_by(code: p.Code).update(new_date: @saledate, category: category.to_s.strip, qty: p.QtyInStock, code: p.Code.to_s.strip, description: p.Description, group: p.ProductGroup.to_s.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
@@ -81,12 +46,50 @@ class PopulateJob
           if File.exist?(filename)
             Cloudinary::Uploader.upload(filename, :public_id => p.Code.to_s.strip, :overwrite => true)
           else
+            filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.strip + '.jpg' #check if the filename is different
+            if File.exist?(filename)
+              Cloudinary::Uploader.upload(filename, :public_id => p.Code.strip, :overwrite => true)
+            end
             #image doesn't exist - perhaps create image attribute and set it to 'empty' if no file, or filename(minus path) if exists
           end
         end
       end
     end
 
+discounts.each do |d|
+      percent = d.DiscPerc1 + d.DiscPerc2 + d.DiscPerc3 + d.DiscPerc4
+      if percent > 0 # check there is an actual discount to apply
+        if d.CustomerType == 10 # affect discounts for customer codes
+          if d.ProductType == 10 # affect discounts for product codes
+            if Discount.find_by(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+              # do nothing
+            else
+              Discount.create(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
+            end
+          elsif d.ProductType == 30 # affect discounts for product groups
+            if Discount.find_by(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+              # do nothing
+            else
+              Discount.create(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
+            end
+          end
+        elsif d.CustomerType == 30 # affect discounts for customer groups
+          if d.ProductType == 10 # affect discounts for product codes
+            if Discount.find_by(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+              # do nothing
+            else
+              Discount.create(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
+            end
+          elsif d.ProductType == 30 # affect discounts for product groups
+            if Discount.find_by(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+              # do nothing
+            else
+              Discount.create(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
+            end
+          end
+        end
+      end
+    end
 
 #   	# GET THE DATA INTO VARIABLES--------------------------------------------------------------------------
 #     dbh = RDBI.connect :ODBC, :db => "wholesaleportal" # connect to DB
