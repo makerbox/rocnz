@@ -1,7 +1,5 @@
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %><%= link_to 'SEED', home_seed_path, class: 'btn btn-info' %><%= link_to 'TEST', home_test_path, class: 'btn btn-info' %>
 
-<% Product.all.each do |p| %>
-<% if !p.new_date.nil? %>
-<%= p.new_date %> <%= p.code %>
-<% end %>
+<% @saledate.each do |s| %>
+<%= @saledate.DateFld %>
 <% end %>
