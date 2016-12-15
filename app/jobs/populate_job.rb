@@ -4,9 +4,9 @@ class PopulateJob
 #THIS WILL COMPLETELY SEED THE DATABASE - ONLY RUN AT NIGHT
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     
-    customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-    activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
-    contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
+    # customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+    # activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
+    # contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
     discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
     products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
     productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
