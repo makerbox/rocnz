@@ -32,7 +32,7 @@ end
     # @product = Product.all
     # product = '335B'
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-    @dudefdata =cdbh.execute("SELECT DateFld FROM produdefdata WHERE Code='348B' ").fetch(:all, :Struct) #{p.Code}
+    @dudefdata = dbh.execute("SELECT DateFld FROM produdefdata WHERE Code='348B' ").fetch(:all, :Struct) #{p.Code}
 
     # @transactions = dbh.execute("SELECT * FROM product_transactions WHERE Code='#{product}' AND CustomerSupplier='SAMPLES' ").fetch(:all, :Struct)
    
