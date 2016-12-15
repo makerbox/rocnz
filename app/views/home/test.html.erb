@@ -1,1 +1,5 @@
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %><%= link_to 'SEED', home_seed_path, class: 'btn btn-info' %><%= link_to 'TEST', home_test_path, class: 'btn btn-info' %>
+
+<% Product.all.each do |p| %>
+<%= p.new_date %>
+<% end %>
