@@ -61,7 +61,7 @@ class PopulateJob
         puts 'not blank!'
         puts @saledate
         puts @saledate[0]
-        # @saledate = @saledate[0].DateFld
+        @saledate = @saledate[0].DateFld
       else
         @saledate = nil
       end
