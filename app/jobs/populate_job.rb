@@ -22,12 +22,12 @@ class PopulateJob
         # @saledate = nil
         dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' " #p.Code.strip
         @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
-        @saledate = nil
-        if @saledate != nil
-          @saledate = @saledate.DateFld
-        else
-          @saledate = nil
-        end
+        @saledate = Date.today
+        # if @saledate != nil
+        #   @saledate = @saledate.DateFld
+        # else
+        #   @saledate = nil
+        # end
           @product = Product.find_by(code: p.Code)
         category = ''
         productsext.each do |x| #match the extension file with this product
