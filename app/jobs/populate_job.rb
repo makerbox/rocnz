@@ -67,7 +67,7 @@ class PopulateJob
       end
       @product = Product.find_by(code: p.Code)
       if p.Inactive == 0
-        # category = ''
+        category = ''
         productsext.each do |x| #match the extension file with this product
           if x.Code == p.Code
             category = x.CostCentre
