@@ -54,7 +54,8 @@ class PopulateJob
 
     products.each do |p|
       @saledate = nil
-      @saledate = dbh.execute("SELECT * FROM produdefdata WHERE Code='#{p.Code}' ").fetch(:all, :Struct) #{p.Code}
+      dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' "
+      @saledate = dbh.execute(dbhstring).fetch(:all, :Struct) #{p.Code}
       puts @saledate 
       @saledate = @saledate[0].DateFld
       @product = Product.find_by(code: p.Code)
