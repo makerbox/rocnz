@@ -20,9 +20,9 @@ class PopulateJob
     products.each do |p|
       if p.Inactive == 0
         # @saledate = nil
-        dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' " #p.Code.strip
-        @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
-        @saledate = Date.today
+        # dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' " #p.Code.strip
+        # @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
+        @saledate = nil
         # if @saledate != nil
         #   @saledate = @saledate.DateFld
         # else

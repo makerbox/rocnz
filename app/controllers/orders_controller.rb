@@ -61,7 +61,7 @@ def sendorder
   end
   @print += "</tbody></table>"
   @print += "<h2>total: $" + @order.total.to_s + "</h2>"
-  system 'printhtml html="'+@print+'"'
+  `printhtml.exe html="#{@print}"`
   redirect_to home_confirm_path
 end
 
