@@ -1,9 +1,9 @@
 class PopulateJob
 	include SuckerPunch::Job
-	  def perform
+ def perform
 #THIS WILL COMPLETELY SEED THE DATABASE - ONLY RUN AT NIGHT
-    dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-    
+dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+
     # customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
     # activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
     # contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
@@ -12,23 +12,23 @@ class PopulateJob
     productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
     reps = dbh.execute("SELECT * FROM sales_reps_extn").fetch(:all, :Struct)
 
-    reps.each do |r|
+    # reps.each do |r|
       # create or update rep account
       # create requires them to become admin
-    end
+    # end
 
     products.each do |p|
       if p.Inactive == 0
         # @saledate = nil
         # dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' " #p.Code.strip
         # @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
-        @saledate = Date.today
+        
         # if @saledate != nil
         #   @saledate = @saledate.DateFld
         # else
         #   @saledate = nil
         # end
-          @product = Product.find_by(code: p.Code)
+        #   @product = Product.find_by(code: p.Code)
         category = ''
         productsext.each do |x| #match the extension file with this product
           if x.Code == p.Code
@@ -57,39 +57,39 @@ class PopulateJob
       end
     end
 
-discounts.each do |d|
-      percent = d.DiscPerc1 + d.DiscPerc2 + d.DiscPerc3 + d.DiscPerc4
-      if percent > 0 # check there is an actual discount to apply
-        if d.CustomerType == 10 # affect discounts for customer codes
-          if d.ProductType == 10 # affect discounts for product codes
-            if Discount.find_by(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              # do nothing
-            else
-              Discount.create(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-            end
-          elsif d.ProductType == 30 # affect discounts for product groups
-            if Discount.find_by(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              # do nothing
-            else
-              Discount.create(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-            end
-          end
-        elsif d.CustomerType == 30 # affect discounts for customer groups
-          if d.ProductType == 10 # affect discounts for product codes
-            if Discount.find_by(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              # do nothing
-            else
-              Discount.create(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-            end
-          elsif d.ProductType == 30 # affect discounts for product groups
-            if Discount.find_by(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-              # do nothing
-            else
-              Discount.create(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-            end
-          end
-        end
-      end
+    discounts.each do |d|
+      # percent = d.DiscPerc1 + d.DiscPerc2 + d.DiscPerc3 + d.DiscPerc4
+      # if percent > 0 # check there is an actual discount to apply
+      #   if d.CustomerType == 10 # affect discounts for customer codes
+      #     if d.ProductType == 10 # affect discounts for product codes
+      #       if Discount.find_by(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+      #         # do nothing
+      #       else
+      #         Discount.create(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
+      #       end
+      #     elsif d.ProductType == 30 # affect discounts for product groups
+      #       if Discount.find_by(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+      #         # do nothing
+      #       else
+      #         Discount.create(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
+      #       end
+      #     end
+      #   elsif d.CustomerType == 30 # affect discounts for customer groups
+      #     if d.ProductType == 10 # affect discounts for product codes
+      #       if Discount.find_by(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+      #         # do nothing
+      #       else
+      #         Discount.create(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
+      #       end
+      #     elsif d.ProductType == 30 # affect discounts for product groups
+      #       if Discount.find_by(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+      #         # do nothing
+      #       else
+      #         Discount.create(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
+      #       end
+      #     end
+      #   end
+      # end
     end
 
 #   	# GET THE DATA INTO VARIABLES--------------------------------------------------------------------------
@@ -165,6 +165,6 @@ discounts.each do |d|
 dbh.disconnect
 
 ActiveRecord::Base.connection.execute("BEGIN TRANSACTION; END;")
-  end
+end
 
 end
