@@ -22,7 +22,7 @@ class PopulateJob
         # @saledate = nil
         # dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' " #p.Code.strip
         # @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
-        @saledate = nil
+        @saledate = Date.today
         # if @saledate != nil
         #   @saledate = @saledate.DateFld
         # else
@@ -47,10 +47,10 @@ class PopulateJob
           if File.exist?(filename)
             Cloudinary::Uploader.upload(filename, :public_id => p.Code.to_s.strip, :overwrite => true)
           else
-            filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.strip + '.jpg' #check if the filename is different
-            if File.exist?(filename)
-              Cloudinary::Uploader.upload(filename, :public_id => p.Code.strip, :overwrite => true)
-            end
+            # filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.strip + '.jpg' #check if the filename is different
+            # if File.exist?(filename)
+            #   Cloudinary::Uploader.upload(filename, :public_id => p.Code.strip, :overwrite => true)
+            # end
             #image doesn't exist - perhaps create image attribute and set it to 'empty' if no file, or filename(minus path) if exists
           end
         end
