@@ -20,14 +20,14 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     products.each do |p|
       if p.Inactive == 0
         # @saledate = nil
-        dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' " #p.Code.strip
-        @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
-        # @saledate = Date.today
-        if @saledate != nil
-          @saledate = @saledate.DateFld
-        else
-          @saledate = nil
-        end
+        # dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' " #p.Code.strip
+        # @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
+        @saledate = Date.today
+        # if @saledate != nil
+          # @saledate = @saledate.DateFld
+        # else
+          # @saledate = nil
+        # end
           @product = Product.find_by(code: p.Code)
         category = ''
         productsext.each do |x| #match the extension file with this product
