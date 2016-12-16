@@ -31,13 +31,13 @@ end
     # end
     # @product = Product.all
     # product = '335B'
-    @print = "<h1>Testing by Matt</h1><table><thead><tr><th>product code</th><th>price</th></tr></thead><tbody><tr><td>asdf</td><td>$123</td></tr></tbody></table><b>bold</b>"
+#     @print = "<h1>Testing by Matt</h1><table><thead><tr><th>product code</th><th>price</th></tr></thead><tbody><tr><td>asdf</td><td>$123</td></tr></tbody></table><b>bold</b>"
 
-    `printhtml.exe html="#{@print}"`
-dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-    # @transactions = dbh.execute("SELECT * FROM product_transactions WHERE Code='#{product}' AND CustomerSupplier='SAMPLES' ").fetch(:all, :Struct)
-   dbhstring = "SELECT * FROM produdefdata"
-   @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
+#     `printhtml.exe html="#{@print}"`
+# dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+#     # @transactions = dbh.execute("SELECT * FROM product_transactions WHERE Code='#{product}' AND CustomerSupplier='SAMPLES' ").fetch(:all, :Struct)
+#    dbhstring = "SELECT * FROM produdefdata"
+#    @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
    # establish_connection(wholesale)
 
   end
