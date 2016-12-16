@@ -22,7 +22,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
         # @saledate = nil
         # dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' " #p.Code.strip
         # @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
-        
+        @saledate = Date.today
         # if @saledate != nil
         #   @saledate = @saledate.DateFld
         # else
