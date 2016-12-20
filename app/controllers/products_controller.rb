@@ -4,12 +4,6 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    if (current_user.has_role? :admin) && (!current_user.mimic.nil?) #for sidecart
-      @order = current_user.mimic.account.user.orders.where(active: true).last #for sidecart
-    else #for sidecart
-      @order = current_user.orders.where(active: true).last #for sidecart
-    end #for sidecart
-
     availgroups = [] #create empty array to store the groups available to the current user
     group = params[:group]
     filter = params[:filter]
@@ -103,7 +97,11 @@ class ProductsController < ApplicationController
       @products = @products.where("qty > ?", 20)
       @products = @products.order(group: 'DESC').order(code: 'ASC')
       @totalproducts = @products.count
-      @order = current_user.orders.find_by(active: true)
+          if (current_user.has_role? :admin) && (!current_user.mimic.nil?) #for sidecart
+      @order = current_user.mimic.account.user.orders.where(active: true).last #for sidecart
+    else #for sidecart
+      @order = current_user.orders.where(active: true).last #for sidecart
+    end #for sidecart
     end
   end
 
