@@ -44,20 +44,20 @@
             <i class="fa fa-exclamation-triangle"></i>
           <% end %>
           Approved
-          <%= link_to unapprove_account_path(account), class: 'btn btn-primary' do %>
+          <%= link_to unapprove_account_path(account), class: 'btn btn-danger' do %>
             <i class="fa fa-thumbs-o-down">
           </i> Unapprove
           <% end %>
         </td>
         <% else %>
         <td>Approved
-          <%= link_to unapprove_account_path(account), class: 'btn btn-primary' do %>
+          <%= link_to unapprove_account_path(account), class: 'btn btn-danger' do %>
           <i class="fa fa-thumbs-o-down"></i> Unapprove
           <% end %>
         </td>
         <% end %>
         <% else %>
-        <td>Not approved<%= link_to approve_account_path(account), class: 'btn btn-primary' do %>
+        <td>Not approved<%= link_to approve_account_path(account), class: 'btn btn-info' do %>
           <i class="fa fa-thumbs-o-up"></i> Approve
           <% end %>
         </td>
