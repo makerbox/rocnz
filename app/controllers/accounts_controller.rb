@@ -30,13 +30,13 @@ end
 
   # GET /accounts
   # GET /accounts.json
-  def index
+  def index    
     if params[:searchterm]
-      searchterm = params[:searchterm].to_s
-      @accounts = Account.name.include? searchterm
+      searchterm = params[:searchterm]
+      @accounts = Account.where(name: include? searchterm)
     else
-    @accounts = Account.all.order('name desc')
-  end
+      @accounts = Account.all.order('name desc')
+    end
     if params[:order]
       @accounts = @accounts.order(params[:order] + ' ASC')
     end
