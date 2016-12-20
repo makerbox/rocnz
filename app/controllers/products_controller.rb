@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     if (current_user.has_role? :admin) && (!current_user.mimic.nil?) #for sidecart
-      @order = current_user.mimic.account.user.orders.where(active:true).last #for sidecart
+      @order = current_user.mimic.account.user.orders.where(active: true).last #for sidecart
     else #for sidecart
       @order = current_user.orders.where(active: true).last #for sidecart
     end #for sidecart
