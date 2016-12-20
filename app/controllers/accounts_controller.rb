@@ -33,7 +33,7 @@ end
   def index
     if params[:searchterm]
       searchterm = params[:searchterm].to_s
-      @accounts = Account.include? searchterm
+      @accounts = Account.name.include? searchterm
     else
     @accounts = Account.all.order('name desc')
   end
