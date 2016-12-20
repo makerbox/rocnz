@@ -57,7 +57,7 @@ def sendorder
     end
     @setprice = @setprice.round(2)
     @print += "<tr>
-    <td>#{product.code.to_s}</td><td>$#{@setprice.to_s}</td><td>#{q.qty.to_s}</td>
+    <td>#{product.code.to_s}<td>$#{@setprice.to_s}</td><td>#{q.qty.to_s}</td>
     </tr>"
   end
   @print += "</tbody></table>"
