@@ -92,6 +92,11 @@ end
   # GET /orders/1
   # GET /orders/1.json
   def show
+    if !current_user.has_role? :admin
+    @sellerlevel = current_user.account.seller_level
+  else
+    @sellerlevel = current_user.mimic.account.seller_level
+  end
   end
 
   # GET /orders/new

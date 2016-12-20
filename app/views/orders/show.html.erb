@@ -7,8 +7,7 @@
 	<%= cl_image_tag(po.product.code.strip) %>
 	</div><%= po.product.code %>
 	<% end %>
-	<%= current_user.account.seller_level %>
-	<% case current_user.account.seller_level.to_i %>
+	<% case @sellerlevel.to_i %>
 		  	<% when 1 %>
 		  	<% @setprice = po.product.price1 %>
 		  		
