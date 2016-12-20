@@ -32,7 +32,8 @@ end
   # GET /accounts.json
   def index
     if params[:searchterm]
-      @accounts = Account.include? params[:searchterm]
+      searchterm = params[:searchterm].to_s
+      @accounts = Account.include? searchterm
     else
     @accounts = Account.all.order('name desc')
   end
