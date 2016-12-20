@@ -30,7 +30,7 @@
 	<% @setprice = @setprice.round(2) %>
 	$<%= number_with_precision(@setprice, precision: 2) %>
 	x <%= po.qty %> ------- $<%= po.qty * @setprice %><% @order.total = @order.total + (po.qty * @setprice) %>
-
+</div>
 <% end %>
 <hr>
 TOTAL (excl. freight) = $<%= @order.total %>
