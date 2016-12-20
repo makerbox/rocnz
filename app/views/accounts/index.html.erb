@@ -43,20 +43,21 @@
           <%= link_to edit_account_path(account), class: 'btn btn-warning', title: 'seller level required' do %>
             <i class="fa fa-exclamation-triangle"></i>
           <% end %>
+          Approved
           <%= link_to unapprove_account_path(account), class: 'btn btn-primary' do %>
             <i class="fa fa-thumbs-o-down">
           </i> Unapprove
           <% end %>
         </td>
         <% else %>
-        <td>
+        <td>Approved
           <%= link_to unapprove_account_path(account), class: 'btn btn-primary' do %>
           <i class="fa fa-thumbs-o-down"></i> Unapprove
           <% end %>
         </td>
         <% end %>
         <% else %>
-        <td><%= link_to approve_account_path(account), class: 'btn btn-primary' do %>
+        <td>Not approved<%= link_to approve_account_path(account), class: 'btn btn-primary' do %>
           <i class="fa fa-thumbs-o-up"></i> Approve
           <% end %>
         </td>
