@@ -9,7 +9,6 @@ class ProductsController < ApplicationController
     else #for sidecart
       @order = current_user.orders.where(active: true).last #for sidecart
     end #for sidecart
-    @quantity = Quantity.new #for sidecart
 
     availgroups = [] #create empty array to store the groups available to the current user
     group = params[:group]
