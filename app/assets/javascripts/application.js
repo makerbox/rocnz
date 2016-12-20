@@ -18,5 +18,5 @@
 
 function searchme(){
 var searchterm = $('#searchfield').val();
-alert(searchterm);
+window.location.href = "?searchterm="+searchterm;
 }
