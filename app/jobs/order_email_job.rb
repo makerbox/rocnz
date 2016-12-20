@@ -4,7 +4,7 @@ class OrderEmailJob
 
   # The perform method is in charge of our code execution when enqueued.
   def perform(order)
-  	# ditched suckerpunch on thsi for now - will reinstate later
+  	  OrderMailer.order(order).deliver_now
   end
 
 end

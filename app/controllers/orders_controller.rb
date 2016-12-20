@@ -11,14 +11,15 @@ def sendorder
   @order.update(active: false, sent: DateTime.now, total: params[:total]) # move order to pending and give it a total
   
 
-  # OrderMailer.order(@order).deliver_now
-
-  account = @order.user.account
   
-  if account.company # start putting together printable order
-    company = account.company
+
+  @account = @order.user.account
+  OrderEmailJob.perform_async(@order)
+
+  if @account.company # start putting together printable order
+    company = @account.company
   else
-    company = 'no company ' + account.phone #if no company name, then show phone number instead
+    company = 'no company ' + @account.phone #if no company name, then show phone number instead
   end
   @print = "<h1>New order from Roc Cloudy Wholesale Portal</h1>
   [ordered at: #{Time.now.strftime('%d/%m/%Y || %r')}]"
@@ -26,7 +27,7 @@ def sendorder
     @print += "<b> ordered by " + current_user.account.name.to_s + "</b>"
   end
   @print += "Company: " + company + "<hr>"
-  @print += account.street.to_s + ' | ' + account.suburb.to_s + ' | ' + account.phone.to_s + "<hr>
+  @print += @account.street.to_s + ' | ' + @account.suburb.to_s + ' | ' + @account.phone.to_s + "<hr>
   <table><thead>
   <tr>
   <th>CODE</th><th>PRICE</th><th>QTY</th>
