@@ -46,11 +46,9 @@ class QuantitiesController < ApplicationController
     when 'C' || 'J'
       thisgroup = 'roc'
     end
-
-    returnhere = products_index_path(group: thisgroup)
     respond_to do |format|
       if @quantity.save
-        format.html { redirect_to returnhere, notice: 'Successfully added to order.' }
+        format.html { redirect_to products_index_path(group: thisgroup), notice: 'Successfully added to order.' }
         format.json { render :show, status: :created, location: @quantity }
       else
         format.html { render :new }
