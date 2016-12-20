@@ -24,7 +24,7 @@ def sendorder
   @print = "<h1>New order from Roc Cloudy Wholesale Portal</h1>
   [ordered at: #{Time.now.strftime('%d/%m/%Y || %r')}]"
   if current_user.has_role? :admin
-    @print += "<b> ordered by " + current_user.account.name.to_s + "</b>"
+    @print += "<b> test order - please ignore </b>"
   end
   @print += "Company: " + company + "<hr>"
   @print += @account.street.to_s + ' | ' + @account.suburb.to_s + ' | ' + @account.phone.to_s + "<hr>
