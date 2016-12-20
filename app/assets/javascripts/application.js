@@ -16,3 +16,7 @@
 //= require_tree .
 
 
+function searchme(){
+var searchterm = $('#searchfield').val();
+alert(searchterm);
+}
