@@ -31,7 +31,11 @@ end
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.all.order('created_at desc')
+    if params[:searchterm]
+      @accounts = Account.include? params[:searchterm]
+    else
+    @accounts = Account.all.order('name desc')
+  end
     if params[:order]
       @accounts = @accounts.order(params[:order] + ' ASC')
     end
