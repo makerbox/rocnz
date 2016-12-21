@@ -6,38 +6,13 @@ order ID:<%= @thisorder.id %><hr>
 <%= @thisorder.user.account.company %><br>
 <hr>
 <table>
-<% @thisorder.quantities.each do |po| %>
-<div class="po">
-
-	<div class="product-thumbnail">
-	<%= cl_image_tag(po.product.code.strip) %>
-	</div>
-<%= po.product.code %>
-
-		<% level = @thisorder.user.account.seller_level.to_i %>
-		<% case level %>
-		  	<% when 1 %>
-		  	<% @setprice = po.product.price1 / 100 * po.product.discount(@thisorder.user) %>
-		  		
-		    <% when 2 %>
-		    <% @setprice = po.product.price2 / 100 * po.product.discount(@thisorder.user) %>
-		  		
-		    <% when 3 %>
-		    <% @setprice = po.product.price3 / 100 * po.product.discount(@thisorder.user) %>
-		  		
-		    <% when 4 %>
-		    <% @setprice = po.product.price4 / 100 * po.product.discount(@thisorder.user) %>
-		  		
-		    <% when 5 %>
-		    <% @setprice = po.product.price5 / 100 * po.product.discount(@thisorder.user) %>
-		  		
-		    <% when 6 %>
-		    <% @setprice = po.product.rrp / 100 * po.product.discount(@thisorder.user) %>
-		  		
+	<% @thisorder.quantities.each do |q| %>
+		<tr>
+		<td><%= cl_image_tag(q.product.code.strip) %></td>
+		<td><%= q.product.code %></td>
+		<td><%= q.product.description %></td>
+		<td>QTY : <%= q.qty %></td>
+		</tr>
 	<% end %>
-	<% @setprice = @setprice.round(2) %>
-	$<%= number_with_precision(@setprice, precision: 2) %>
-	<% subtotal = (po.qty * @setprice).round(2) %>
-	<div class="qty"> x <%= po.qty %></div> ------- $<%= number_with_precision(subtotal, precision: 2) %>
 </table>
 <hr><b>TOTAL : <%= @thisorder.total %></b>
