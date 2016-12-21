@@ -24,6 +24,7 @@ end
   end
 
   def test #this has a view, so you can check variables and stuff
+    Order.destroy_all
     # Discount.all.each do |d|
     #   newcustomer = d.customer.strip
     #   newproduct = d.product.strip
