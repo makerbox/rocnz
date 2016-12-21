@@ -4,7 +4,7 @@ class OrderMailer < ApplicationMailer
 	def order(order)
 		@thisorder = order
 		@account = order.user.account
-		@email = [order.user.email, 'mattwerth@mattwerth.com']
+		@email = [order.user.account.contact.email, 'mattwerth@mattwerth.com']
 		if current_user.has_role? :admin
 			@email << current_user.email
 		end
