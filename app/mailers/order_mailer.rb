@@ -4,7 +4,11 @@ class OrderMailer < ApplicationMailer
 	def order(order)
 		@thisorder = order
 		@account = order.user.account
-		# mail(to: order.user.email, subject: 'your order from Roc Cloudy')
-		mail(to: 'mattwerth@mattwerth.com; maker-box@hotmail.com', subject: 'your order from Roc Cloudy')
+		@email = order.user.email
+		if current_user.has_role? :admin
+			mail(to: current_user.email, subject: 'new Roc Cloudy order')
+		end
+		mail(to: 'mattwerth@mattwerth.com', subject: 'new order from Roc Cloudy')
+		mail(to: @email, subject: 'your order from Roc Cloudy')
 	end
 end
