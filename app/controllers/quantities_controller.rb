@@ -35,16 +35,16 @@ class QuantitiesController < ApplicationController
       #and then add it to the new order
       @quantity.order = @order
     end
-    thisgroup = params[:thisgroup]
-    case thisgroup
-    when 'L'
-      thisgroup = 'polasports'
-    when 'E' || 'R' || 'D' || 'A'
-      thisgroup = 'unity'
-    when 'LC'
-      thisgroup = 'locello'
-    when 'C' || 'J'
-      thisgroup = 'roc'
+    groupletter = params[:thisgroup]
+    case groupletter
+      when 'L'
+        thisgroup = 'polasports'
+      when 'E' || 'R' || 'D' || 'A'
+        thisgroup = 'unity'
+      when 'LC'
+        thisgroup = 'locello'
+      when 'C' || 'J'
+        thisgroup = 'roc'
     end
     respond_to do |format|
       if @quantity.save
