@@ -4,7 +4,7 @@ class OrderEmailJob
 
   # The perform method is in charge of our code execution when enqueued.
   def perform(order)
-  	  OrderMailer.order(order).deliver_now
+  	  OrderMailer.order(order).deliver
   end
 
 end
