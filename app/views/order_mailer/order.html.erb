@@ -8,7 +8,8 @@ order ID:<%= @thisorder.id %><hr>
 <table>
 	<% @thisorder.quantities.each do |q| %>
 		<tr>
-		<td></td>
+		<% image = cl_image_src(q.product.code.strip) %>
+		<td><%= image_tag(image) %></td>
 		<td><%= q.product.code %></td>
 		<td><%= q.product.description %></td>
 		<td>QTY : <%= q.qty %></td>
