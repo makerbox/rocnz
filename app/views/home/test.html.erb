@@ -3,7 +3,7 @@
 <table>
 	<% Product.all.each do |q| %>
 		<tr>
-		<td><img src=<%= cl_image_src(q.code.strip) %> height="100"></td>
+		<td><img src=<%= cl_image_path(q.code.strip) %> height="100"></td>
 		</tr>
 	<% end %>
 </table>
