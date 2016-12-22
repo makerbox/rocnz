@@ -15,7 +15,7 @@ class TermsController < ApplicationController
     	if p.Inactive == 0
         	dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' "
         	@saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
-    
+
         	# if @saledate
          #  		@saledate = @saledate.DateFld
         	# else
@@ -23,7 +23,9 @@ class TermsController < ApplicationController
         	# end
         	@productscreen << @saledate
         	@product = Product.find_by(code: p.Code)
-        	@productscreen << @product.code
+        	if @product
+        		@productscreen << @product.code
+        	end
     	end
 	end
 
