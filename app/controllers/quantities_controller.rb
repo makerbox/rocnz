@@ -35,9 +35,20 @@ class QuantitiesController < ApplicationController
       #and then add it to the new order
       @quantity.order = @order
     end
+
+    case @quantity.product.group
+      when 'C' || 'J'
+        group = 'roc'
+      when 'L'
+        group = 'polasports'
+      when 'LC'
+        group = 'locello'
+      when 'E' || 'R' || 'D' || 'A'
+        group = 'unity'
+    end
     respond_to do |format|
       if @quantity.save
-        format.html { redirect_to products_path(group: @quantity.product.group), notice: 'Successfully added to order.' }
+        format.html { redirect_to products_path(group: group), notice: 'Successfully added to order.' }
         format.json { render :show, status: :created, location: @quantity }
       else
         format.html { render :new }

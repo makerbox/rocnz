@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
       # if current_user.account.sort.include? 'U'
       #   availgroups = availgroups << 'E  ' << 'R  ' << 'D  ' << 'A  '
       # end
-      if group == 'roc' || group == 'R'
+      if group == 'roc'
         if (current_user.account.sort.include? 'R') || ((current_user.has_role? :admin) && (current_user.mimic.account.sort.include? 'R'))
           @products = Product.where(group: ['C','J'])
           @categories = []
@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
         else
           redirect_to home_index_path
         end
-      elsif group == 'polasports' || group == 'P'
+      elsif group == 'polasports'
         if (current_user.account.sort.include? 'P') || (current_user.has_role? :admin)
           @products = Product.where(group: ['L'])
           if params[:cat]
@@ -48,7 +48,7 @@ class ProductsController < ApplicationController
         else
           redirect_to home_index_path
         end
-      elsif group == 'locello' || group == 'LC'
+      elsif group == 'locello'
         if (current_user.account.sort.include? 'L') || (current_user.has_role? :admin)
           @products = Product.where(group: ['LC'])
           if params[:cat]
@@ -60,7 +60,7 @@ class ProductsController < ApplicationController
         else
           redirect_to home_index_path
         end
-      elsif group == 'unity' || group == 'U'
+      elsif group == 'unity'
         if (current_user.account.sort.include? 'U') || (current_user.has_role? :admin)
           @products = Product.where(group: ['E', 'R', 'D', 'A'])
           if params[:cat]
