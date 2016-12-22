@@ -4,10 +4,16 @@ class OrderMailer < ApplicationMailer
 	def order(order)
 		@thisorder = order
 		@account = order.user.account
-		@email = [order.user.account.contact.email, 'mattwerth@mattwerth.com']
-		if current_user.has_role? :admin
-			@email << current_user.email
-		end
-		mail(to: @email, subject: 'Roc Cloudy order')
+		mail(to: 'mattwerth@mattwerth.com', subject: 'Roc Cloudy order')
+	end
+	def receipt(order)
+		@thisorder = order
+		@account = order.user.account
+		mail(to: @account.contact.email, subject: 'Roc Cloudy order')
+	end
+	def rep(order)
+		@thisorder = order
+		@account = order.user.account
+		mail(to: current_user.email, subject: 'Roc Cloudy order')
 	end
 end
