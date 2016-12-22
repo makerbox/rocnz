@@ -4,7 +4,7 @@ class OrderMailer < ApplicationMailer
 	def order(order)
 		@thisorder = order
 		@account = order.user.account
-		mail(to: 'mattwerth@mattwerth.com', subject: 'Roc Cloudy order')
+		mail(to: 'office@roccloudy.com', subject: 'Roc Cloudy order')
 	end
 	def receipt(order)
 		@thisorder = order

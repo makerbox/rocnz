@@ -20,6 +20,3 @@ function searchme(){
 var searchterm = $('#searchfield').val();
 window.location.href = "?searchterm="+searchterm;
 }
-
-var progress = $('.turbolinks-progressbar').width();
-console.log(progress);

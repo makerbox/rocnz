@@ -24,7 +24,53 @@ end
   end
 
   def test #this has a view, so you can check variables and stuff
-    Order.destroy_all
+    dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+
+    # customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+    # activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
+    # contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
+    discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
+    products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
+    productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
+    reps = dbh.execute("SELECT * FROM sales_reps_extn").fetch(:all, :Struct)
+
+    # reps.each do |r|
+      # create or update rep account
+      # create requires them to become admin
+    # end
+
+    products.each do |p|
+        if p.Inactive == 0
+# @saledate = nil
+dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' " #p.Code.strip
+@saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
+# @saledate = Date.today
+if @saledate
+    @saledate = @saledate.DateFld
+else
+    @saledate = nil
+end
+@product = Product.find_by(code: p.Code)
+category = ''
+productsext.each do |x| #match the extension file with this product
+    if x.Code == p.Code
+        category = x.CostCentre
+    end
+end
+
+if @product #if the product already exists, just update the details
+    if (@product.new_date != @sale_date) || (@product.category != category.to_s.strip) || (@product.code != p.Code.to_s.strip) || (@product.description != p.Description) || (@product.group != p.ProductGroup.to_s.strip) || (@product.price1 != p.SalesPrice1) || (@product.price2 != p.SalesPrice2) || (@product.price3 != p.SalesPrice3) || (@product.price4 != p.SalesPrice4) || (@product.price5 != p.SalesPrice5) || (@product.rrp != p.SalesPrice6) || (@product.qty != p.QtyInStock) 
+        @product.update(new_date: @saledate, category: category.to_s.strip, qty: p.QtyInStock, code: p.Code.to_s.strip, description: p.Description, group: p.ProductGroup.to_s.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+    end
+else #if the product doesn't already exist, let's make it
+# Product.create(new_date: @saledate, category: category.to_s.strip, qty: p.QtyInStock, code: p.Code.to_s.strip, description: p.Description, group: p.ProductGroup.to_s.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+#upload image to cloudinary and store url in product.imageurl (images are stored in z:/attache/roc/images/product/*sku*.jpg)
+filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.to_s.strip + '.jpg'
+if File.exist?(filename)
+    Cloudinary::Uploader.upload(filename, :public_id => p.Code.to_s.strip, :overwrite => true)
+end
+end
+end
     # Discount.all.each do |d|
     #   newcustomer = d.customer.strip
     #   newproduct = d.product.strip
