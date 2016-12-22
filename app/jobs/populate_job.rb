@@ -35,7 +35,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
             category = x.CostCentre
           end
         end
-        
+
             @product.update(new_date: @saledate, category: category.to_s.strip, qty: p.QtyInStock, code: p.Code.to_s.strip, description: p.Description, group: p.ProductGroup.to_s.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
 # just as a test, update all products^^^^
 
@@ -50,11 +50,8 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
           if File.exist?(filename)
             Cloudinary::Uploader.upload(filename, :public_id => p.Code.to_s.strip, :overwrite => true)
           else
-            # filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.strip + '.jpg' #check if the filename is different
-            # if File.exist?(filename)
-            #   Cloudinary::Uploader.upload(filename, :public_id => p.Code.strip, :overwrite => true)
-            # end
-            #image doesn't exist - perhaps create image attribute and set it to 'empty' if no file, or filename(minus path) if exists
+            # destroy the product
+            Product.find_by(code: p.Code.to_s.strip).destroy
           end
         end
       end
