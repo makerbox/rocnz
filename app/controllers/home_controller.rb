@@ -24,7 +24,7 @@ end
   end
 
   def test #this has a view, so you can check variables and stuff
-
+    
 
   end
 
