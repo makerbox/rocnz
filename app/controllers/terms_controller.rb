@@ -6,7 +6,7 @@ class TermsController < ApplicationController
     # customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
     # activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
     # contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
-    @productscreen = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
+    @productscreen = dbh.execute("SELECT Code FROM product_master").fetch(:all, :Struct)
   dbh.disconnect
 
 ActiveRecord::Base.connection.execute("BEGIN TRANSACTION; END;")
