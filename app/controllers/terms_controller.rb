@@ -6,11 +6,8 @@ class TermsController < ApplicationController
     # customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
     # activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
     # contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
-    discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
     @productscreen = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
-    productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
-    reps = dbh.execute("SELECT * FROM sales_reps_extn").fetch(:all, :Struct)
-    
+  
 
   end
 

@@ -50,7 +50,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
           if File.exist?(filename)
             Cloudinary::Uploader.upload(filename, :public_id => p.Code.to_s.strip, :overwrite => true)
           else
-            # destroy the product
+            # destroy the product - no image, no dice
             Product.find_by(code: p.Code.to_s.strip).destroy
           end
         end
