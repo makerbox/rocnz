@@ -9,8 +9,6 @@ class TermsController < ApplicationController
     @productscreen = dbh.execute("SELECT * FROM product_master").fetch(:Code, :Struct)
   dbh.disconnect
 
-ActiveRecord::Base.connection.execute("BEGIN TRANSACTION; END;")
-
   end
 
 end
