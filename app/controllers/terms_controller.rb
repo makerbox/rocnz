@@ -8,7 +8,7 @@ class TermsController < ApplicationController
     # contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
 	discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
     discounts.each do |p|
-    	@reply = @reply + p + '<br>'
+    	@reply = @reply + p.to_s + '<br>'
     end
   dbh.disconnect
 
