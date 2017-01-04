@@ -22,8 +22,8 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     products.each do |p|
       if p.Inactive == 0
         # @saledate = nil
-        dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' " #p.Code.strip
-        @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
+        # dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' " #p.Code.strip
+        # @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
         # if @saledate
         #   @saledate = @saledate.DateFld
         # else
