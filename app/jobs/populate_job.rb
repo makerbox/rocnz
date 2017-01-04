@@ -39,7 +39,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
           end
         end
 
-        if @product
+        if !@product.blank?
           @product.update(new_date: @saledate)
         end
         # if @product #if the product already exists, just update the details
