@@ -6,9 +6,9 @@ class TermsController < ApplicationController
     # customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
     # activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
     # contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
-	discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
-    discounts.each do |p|
-    	@reply = @reply + p.to_s + '<br>'
+	@discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
+    @discounts.each do |p|
+    	@reply = @reply + p.to_s
     end
   dbh.disconnect
 
