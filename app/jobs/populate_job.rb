@@ -6,7 +6,7 @@ Contact.where(code:'running').each do |del|
   del.destroy
 end
 
-Contact.create(code:'running', email:'running')
+# Contact.create(code:'running', email:'running')
 
 dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
