@@ -30,7 +30,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
         # else
         #   @saledate = nil
         # end
-        @product = Product.where(code: p.Code).first
+        @product = Product.where(code: p.Code.to_s.strip).first
         @product.update(new_date: Date.today)
 
         productsext.each do |x| #match the extension file with this product
