@@ -4,6 +4,11 @@
       <div class="panel panel-default">
         <div class="panel-body">
           Total products: <%= @totalproducts %>
+          <% if Contact.find_by(code:'running', email:'running') %>
+          RUNNING SEED
+          <% else %>
+          FINISHED SEED
+          <% end %>
         </div>
       </div>
       <% @products.each do |product| %>
@@ -16,32 +21,32 @@
             <% if user_signed_in? %>
               <% if current_user.account || (current_user.has_role? :admin) %>
                 <% if (current_user.account.approved == 'approved') || ((current_user.has_role? :admin) && (!current_user.mimic.nil?)) %>
-    <% if (current_user.has_role? :admin) && (!current_user.mimic.nil?) %>
-    <% level = current_user.mimic.account.seller_level.to_i %>
-    <% else %>
-    <% level = current_user.account.seller_level.to_i %>
-    <% end %>
-    <% case level %>
+                  <% if (current_user.has_role? :admin) && (!current_user.mimic.nil?) %>
+                    <% level = current_user.mimic.account.seller_level.to_i %>
+                  <% else %>
+                    <% level = current_user.account.seller_level.to_i %>
+                  <% end %>
+                  <% case level %>
                     <% when 1 %>
-                    <% prodprice = product.price1 / 100 * product.discount(current_user) %>
+                      <% prodprice = product.price1 / 100 * product.discount(current_user) %>
                     <% when 2 %>
-                    <% prodprice = product.price2 / 100 * product.discount(current_user) %>
+                      <% prodprice = product.price2 / 100 * product.discount(current_user) %>
                     <% when 3 %>
-                    <% prodprice = product.price3 / 100 * product.discount(current_user) %>
+                      <% prodprice = product.price3 / 100 * product.discount(current_user) %>
                     <% when 4 %>
-                    <% prodprice = product.price4 / 100 * product.discount(current_user) %>
+                      <% prodprice = product.price4 / 100 * product.discount(current_user) %>
                     <% when 5 %>
-                    <% prodprice = product.price5 / 100 * product.discount(current_user) %>
+                      <% prodprice = product.price5 / 100 * product.discount(current_user) %>
                     <% when 6 %>
-                    <% prodprice = product.rrp %>
+                      <% prodprice = product.rrp %>
                   <% end %>
                   <% if (current_user.has_role? :admin) && (current_user.mimic.nil?) %>
-                  <br>[RRP: $<%= product.rrp %>]<br>
+                    <br>[RRP: $<%= product.rrp %>]<br>
                   <% else %>
-                  $<%= number_with_precision(prodprice, precision: 2) %>
+                    $<%= number_with_precision(prodprice, precision: 2) %>
                   <% end %>
                   <% if current_user.has_role? :admin %>
-                   | [QTY: <%= product.qty %>]
+                    | [QTY: <%= product.qty %>]
                   <% end %>
                 <% end %>
               <% end %>
@@ -52,25 +57,25 @@
     </div>
   </div>
   <% if (current_user.orders.any?) && (current_user.orders.last.active == true) %>
-<div class="col-md-3 cart">
-    <p>
-      <i class="fa fa-shopping-cart fa-2x"></i>
-    </p>
-    <hr>
-    <p>
-      <%= render 'orders/sidecart' %>
-    </p>
-  </div>
-<% elsif (current_user.has_role? :admin) && (!current_user.mimic.nil?) && (current_user.mimic.account.user.orders.any?) && (current_user.mimic.account.user.orders.last.active == true) %>
-  <div class="col-md-3 cart">
-    <p>
-      <i class="fa fa-shopping-cart fa-2x"></i>
-    </p>
-    <hr>
-    <p>
-      <%= render 'orders/sidecart' %>
-    </p>
-  </div>
+    <div class="col-md-3 cart">
+      <p>
+        <i class="fa fa-shopping-cart fa-2x"></i>
+      </p>
+      <hr>
+      <p>
+        <%= render 'orders/sidecart' %>
+      </p>
+    </div>
+  <% elsif (current_user.has_role? :admin) && (!current_user.mimic.nil?) && (current_user.mimic.account.user.orders.any?) && (current_user.mimic.account.user.orders.last.active == true) %>
+    <div class="col-md-3 cart">
+      <p>
+        <i class="fa fa-shopping-cart fa-2x"></i>
+      </p>
+      <hr>
+      <p>
+        <%= render 'orders/sidecart' %>
+      </p>
+    </div>
   <% end %>
 </div>
 
