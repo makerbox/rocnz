@@ -24,11 +24,11 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
         # @saledate = nil
         dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' " #p.Code.strip
         @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
-        if @saledate
-          @saledate = @saledate.DateFld
-        else
-          @saledate = Date.today - 35.days
-        end
+        # if @saledate
+        #   @saledate = @saledate.DateFld
+        # else
+        #   @saledate = Date.today - 35.days
+        # end
         
         @product = Product.where(code: p.Code.to_s.strip).first
 
