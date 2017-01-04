@@ -2,7 +2,9 @@ class PopulateJob
 	include SuckerPunch::Job
  def perform
 #THIS WILL COMPLETELY SEED THE DATABASE - ONLY RUN AT NIGHT
-Contact.find_by(code:'running', email:'running').destroy
+Contact.where(code:'running').each do |del|
+  del.destroy
+end
 
 Contact.create(code:'running', email:'running')
 
