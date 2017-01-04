@@ -1,6 +1,12 @@
+<ul>
 <% @discounts.each do |disc| %>
-<%= disc[0] %><br>
+<li>
+<% disc.each do |d| %>
+<%= d %> | 
 <% end %>
+</li>
+<% end %>
+</ul>
 <h1>Terms & Conditions</h1>
 <ol>
 <li><h2>General</h2>
