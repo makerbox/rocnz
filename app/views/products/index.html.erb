@@ -23,27 +23,29 @@
                 <% if (current_user.account.approved == 'approved') || ((current_user.has_role? :admin) && (!current_user.mimic.nil?)) %>
                   <% if (current_user.has_role? :admin) && (!current_user.mimic.nil?) %>
                     <% level = current_user.mimic.account.seller_level.to_i %>
+                    <% thisperson = current_user.mimic.account.user %>
                   <% else %>
                     <% level = current_user.account.seller_level.to_i %>
+                    <% thisperson = current_user %>
                   <% end %>
                   <% case level %>
                     <% when 1 %>
-                      <% prodprice = product.price1 / 100 * product.discount(current_user) %>
+                      <% prodprice = product.price1 / 100 * product.discount(thisperson) %>
                     <% when 2 %>
-                      <% prodprice = product.price2 / 100 * product.discount(current_user) %>
+                      <% prodprice = product.price2 / 100 * product.discount(thisperson) %>
                     <% when 3 %>
-                      <% prodprice = product.price3 / 100 * product.discount(current_user) %>
+                      <% prodprice = product.price3 / 100 * product.discount(thisperson) %>
                     <% when 4 %>
-                      <% prodprice = product.price4 / 100 * product.discount(current_user) %>
+                      <% prodprice = product.price4 / 100 * product.discount(thisperson) %>
                     <% when 5 %>
-                      <% prodprice = product.price5 / 100 * product.discount(current_user) %>
+                      <% prodprice = product.price5 / 100 * product.discount(thisperson) %>
                     <% when 6 %>
                       <% prodprice = product.rrp %>
                   <% end %>
                   <% if (current_user.has_role? :admin) && (current_user.mimic.nil?) %>
                     <br>[RRP: $<%= product.rrp %>]<br>
                   <% else %>
-                    $<%= number_with_precision(prodprice, precision: 2) %> -- disc = <%= product.discount(current_user) %>
+                    $<%= number_with_precision(prodprice, precision: 2) %> -- disc = <%= product.discount(thisperson) %>
                   <% end %>
                   <% if current_user.has_role? :admin %>
                     | [QTY: <%= product.qty %>]
