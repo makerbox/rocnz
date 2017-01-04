@@ -2,11 +2,7 @@ class PopulateJob
 	include SuckerPunch::Job
  def perform
 #THIS WILL COMPLETELY SEED THE DATABASE - ONLY RUN AT NIGHT
-Contact.where(code:'running').each do |del|
-  del.destroy
-end
-
-# Contact.create(code:'running', email:'running')
+Contact.create(code:'running', email:'running')
 
 dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
@@ -176,8 +172,10 @@ dbh.disconnect
 
 # ActiveRecord::Base.connection.execute("BEGIN TRANSACTION; END;")
 
-Contact.find_by(code:'running', email:'running').destroy
-
+Contact.where(code:'running').each do |del|
+  del.destroy
 end
 
-end
+end #end perform
+
+end #end class
