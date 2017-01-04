@@ -16,7 +16,7 @@ def discount(user)
 			100
 		end
 	else
-		100
+		self
 	end
 end
 
