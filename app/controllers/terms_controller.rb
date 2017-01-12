@@ -11,7 +11,7 @@ class TermsController < ApplicationController
 		dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' " #p.Code.strip
         saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
         if saledate
-          saledate  saledate.DateFld
+          saledate = saledate.DateFld
         else
           saledate = Date.today - 35.days
         end
