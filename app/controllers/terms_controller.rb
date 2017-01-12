@@ -6,7 +6,7 @@ class TermsController < ApplicationController
   	discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
     products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
     productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
-
+    @dates
 	products.each do |p|
 		dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' " #p.Code.strip
         saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
