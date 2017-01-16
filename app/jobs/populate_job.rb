@@ -21,27 +21,14 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
     products.each do |p|
       if p.Inactive == 0
-        @saledate = nil
-        dbhstring = "SELECT * FROM produdefdata WHERE Code='#{p.Code}' " #p.Code.strip
-        @saledate = dbh.execute(dbhstring).fetch(:all, :Struct)
-        if @saledate
-          @saledate = @saledate.DateFld
-        else
-          @saledate = Date.today - 35.days
-        end
-        
+        @saledate = dbh.execute("SELECT DateFld FROM produdefdata WHERE Code LIKE '#{p.Code}%' ").fetch[0]
         @product = Product.where(code: p.Code.to_s.strip).first
 
-
-        productsext.each do |x| #match the extension file with this product
-          if x.Code == p.Code
-            category = x.CostCentre
-          end
-        end
+        category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code LIKE '#{p.Code}%' ").fetch(:all, :Struct)
 
 
         if @product #if the product already exists, just update the details and destroy any without images
-          if (@product.new_date != @sale_date) || (@product.category != category.to_s.strip) || (@product.code != p.Code.to_s.strip) || (@product.description != p.Description) || (@product.group != p.ProductGroup.to_s.strip) || (@product.price1 != p.SalesPrice1) || (@product.price2 != p.SalesPrice2) || (@product.price3 != p.SalesPrice3) || (@product.price4 != p.SalesPrice4) || (@product.price5 != p.SalesPrice5) || (@product.rrp != p.SalesPrice6) || (@product.qty != p.QtyInStock) 
+          if (@product.new_date != @saledate) || (@product.category != category.to_s.strip) || (@product.code != p.Code.to_s.strip) || (@product.description != p.Description) || (@product.group != p.ProductGroup.to_s.strip) || (@product.price1 != p.SalesPrice1) || (@product.price2 != p.SalesPrice2) || (@product.price3 != p.SalesPrice3) || (@product.price4 != p.SalesPrice4) || (@product.price5 != p.SalesPrice5) || (@product.rrp != p.SalesPrice6) || (@product.qty != p.QtyInStock) 
             filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.to_s.strip + '.jpg'
             if File.exist?(filename)
               Cloudinary::Uploader.upload(filename, :public_id => p.Code.to_s.strip, :overwrite => true)
