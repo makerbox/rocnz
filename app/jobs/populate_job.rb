@@ -21,10 +21,10 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
     products.each do |p|
       if p.Inactive == 0
-        saledate = dbh.execute("SELECT DateFld FROM produdefdata WHERE Code LIKE '#{p.Code} %' ").fetch[0]
+        saledate = dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}' ").fetch[0]
         product = Product.where(code: p.Code.to_s.strip).first
 
-        category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code LIKE '#{p.Code} %' ").fetch(:all, :Struct)[0].to_h[:CostCentre]
+        category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code = '#{p.Code}' ").fetch(:all, :Struct)[0].to_h[:CostCentre]
         if category != nil
           category = category.strip
         end
