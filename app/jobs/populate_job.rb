@@ -21,11 +21,13 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
     products.each do |p|
       if p.Inactive == 0
-        @saledate = dbh.execute("SELECT DateFld FROM produdefdata WHERE Code LIKE '#{p.Code}%' ").fetch[0]
+        @saledate = dbh.execute("SELECT DateFld FROM produdefdata WHERE Code LIKE '#{p.Code} %' ").fetch[0]
         @product = Product.where(code: p.Code.to_s.strip).first
 
-        category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code LIKE '#{p.Code}%' ").fetch(:all, :Struct)
-
+        category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code LIKE '#{p.Code} %' ").fetch(:all, :Struct)[0].to_h[:CostCentre]
+        if category != nil
+          category = category.strip
+        end
 
         if @product #if the product already exists, just update the details and destroy any without images
           if (@product.new_date != @saledate) || (@product.category != category.to_s.strip) || (@product.code != p.Code.to_s.strip) || (@product.description != p.Description) || (@product.group != p.ProductGroup.to_s.strip) || (@product.price1 != p.SalesPrice1) || (@product.price2 != p.SalesPrice2) || (@product.price3 != p.SalesPrice3) || (@product.price4 != p.SalesPrice4) || (@product.price5 != p.SalesPrice5) || (@product.rrp != p.SalesPrice6) || (@product.qty != p.QtyInStock) 
