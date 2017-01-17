@@ -18,8 +18,7 @@ end
   def pull
       system "git pull"
       # system "rake db:migrate"
-      system "bundle"
-      system "rails stop"
+      system "rails restart -b 0.0.0.0"
       # system "rake jobs:work"
       # system "rake db:seed"
   end
