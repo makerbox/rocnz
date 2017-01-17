@@ -24,6 +24,7 @@ end
 
   def test #this has a view, so you can check variables and stuff - be careful of breaking home controller
    `Taskkill /IM ruby.exe /F`
+   #you can use the backtick method of system commands to get the output e.g. output = `echo 'hi'` => 'hi'
   end
 
   def seed
