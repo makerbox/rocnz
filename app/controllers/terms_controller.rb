@@ -8,13 +8,12 @@ class TermsController < ApplicationController
   	    @alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)[0].to_h
 
   	  	@products.each do |p|
-
-	        if @alldates.where(Code: p.Code)
-	          saledate = @alldates.where(Code: p.Code)
-	        else
-	          saledate = Date.today - 40.days
-	        end
-	        @results << saledate
+  	  		@alldates.each do |d|
+  	  			if d.Code = p.Code
+  	  				saledate = d.DateFld
+  	  				@results << saledate
+  	  			end
+  	  		end
 
 	    #     # product = Product.where(code: p.Code.to_s.strip).first
 
