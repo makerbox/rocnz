@@ -17,6 +17,7 @@ end
 
   def pull
       system "git pull"
+      system "kill `cat tmp/pids/server.pid`;"
       # system "rake db:migrate"
       # system "rake jobs:work"
       # system "rake db:seed"
