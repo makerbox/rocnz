@@ -17,6 +17,7 @@ end
 
   def pull
       system "git pull"
+      @hi = system "?.pid"
       # system "rake db:migrate"
       # system "rake jobs:work"
       # system "rake db:seed"
