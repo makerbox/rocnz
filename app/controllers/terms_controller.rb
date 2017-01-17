@@ -1,7 +1,7 @@
 class TermsController < ApplicationController
 		skip_before_action :authenticate_user!
   def index
-  		@categories = []
+  		@results = []
   		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
   		@products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
   		productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
@@ -9,11 +9,12 @@ class TermsController < ApplicationController
 
   	  	@products.each do |p|
 
-	    #     # if alldates.where(Code: p.Code)
-	    #     #   saledate = alldates.where(Code: p.Code)
-	    #     # else
-	    #     #   saledate = Date.today - 40.days
-	    #     # end
+	        if alldates.where(Code: p.Code)
+	          saledate = alldates.where(Code: p.Code)
+	        else
+	          saledate = Date.today - 40.days
+	        end
+	        results << saledate
 
 	    #     # product = Product.where(code: p.Code.to_s.strip).first
 
