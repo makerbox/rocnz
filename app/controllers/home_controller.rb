@@ -25,7 +25,7 @@ end
   def test #this has a view, so you can check variables and stuff - be careful of breaking home controller
     @logstring = 'working?'
     f = File.open("../../log/development.log", "r")
-    f.readlines.200 do |line|
+    f.every_line do |line|
       @logstring = logstring + line
     end
     f.close
