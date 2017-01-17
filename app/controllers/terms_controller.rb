@@ -5,10 +5,10 @@ class TermsController < ApplicationController
   		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
   		@products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
   		productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
-  	    alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+  	    @alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
 
-  	    @products = @products.first.Code
-  	  #   @products.each do |p|
+  	  	@products.each do |p|
+
 	    #     # if alldates.where(Code: p.Code)
 	    #     #   saledate = alldates.where(Code: p.Code)
 	    #     # else
@@ -22,7 +22,7 @@ class TermsController < ApplicationController
 	    #       category = category.strip
 	    #     end
 	    #     @categories << category
-	    # end
+	    end
   end
 
 end
