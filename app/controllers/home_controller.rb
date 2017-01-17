@@ -19,7 +19,7 @@ end
       system "git pull"
       # system "rake db:migrate"
       system "bundle"
-      system "rails restart -b 0.0.0.0"
+      system "rails stop"
       # system "rake jobs:work"
       # system "rake db:seed"
   end
