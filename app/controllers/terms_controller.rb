@@ -10,11 +10,11 @@ class TermsController < ApplicationController
   	  	@products.each do |p|
   	  		# @alldates.each do |d|
   	  			
-  	  			if dbh.prepare("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
-  	  				saledate = dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
-  	  				@results << saledate
-  	  				@results << p.Code
-  	  			end
+  	  			@results = dbh.preprocess_query("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
+  	  			# 	saledate = dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
+  	  			# 	@results << saledate
+  	  			# 	@results << p.Code
+  	  			# end
   	  		# end
 
 	    #     # product = Product.where(code: p.Code.to_s.strip).first
