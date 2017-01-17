@@ -17,6 +17,7 @@ end
 
   def pull
       system "git pull"
+      system "kill -9 `pgrep ruby`"
       # system "rake db:migrate"
       # system "rake jobs:work"
       # system "rake db:seed"
