@@ -17,7 +17,6 @@ end
 
   def pull
       system "git pull"
-      system "del c:/Sites/roccloudy/tmp/pid/*.pid"
       # system "rake db:migrate"
       # system "rake jobs:work"
       # system "rake db:seed"
