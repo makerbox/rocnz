@@ -9,7 +9,7 @@ class TermsController < ApplicationController
 
   	  	@products.each do |p|
   	  		@alldates.each do |d|
-  	  			if d.Code = p.Code
+  	  			if d.Code == p.Code
   	  				saledate = d.Code
   	  				@results << saledate
   	  				@results << p.Code
