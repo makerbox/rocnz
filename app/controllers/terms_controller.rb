@@ -7,7 +7,7 @@ class TermsController < ApplicationController
   		productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
   	    alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
 
-  	    @products = @products.first
+  	    @products = @products.first.Code
   	  #   @products.each do |p|
 	    #     # if alldates.where(Code: p.Code)
 	    #     #   saledate = alldates.where(Code: p.Code)
