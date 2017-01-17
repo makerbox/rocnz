@@ -3,12 +3,12 @@ class TermsController < ApplicationController
   def index
   		@categories = []
   		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-  		products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
+  		@products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
   		productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
   	    alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
 
-  	    products = products.first
-  	    products.each do |p|
+  	    @products = @products.first
+  	    @products.each do |p|
 	        # if alldates.where(Code: p.Code)
 	        #   saledate = alldates.where(Code: p.Code)
 	        # else
