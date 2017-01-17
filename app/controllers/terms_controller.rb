@@ -14,7 +14,7 @@ class TermsController < ApplicationController
 	        else
 	          saledate = Date.today - 40.days
 	        end
-	        results << saledate
+	        @results << saledate
 
 	    #     # product = Product.where(code: p.Code.to_s.strip).first
 
