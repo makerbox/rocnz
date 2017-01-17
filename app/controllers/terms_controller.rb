@@ -2,7 +2,7 @@ class TermsController < ApplicationController
 		skip_before_action :authenticate_user!
   def index
   		@results = []
-  		dbh.last_statement
+  		RDBI.last_statement
   		# dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
   		# # # @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
