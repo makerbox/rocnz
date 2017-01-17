@@ -17,7 +17,7 @@ end
 
   def pull
       system "git pull"
-      system "kill -9 $(lsof -i tcp:3000 -t)"
+      system "rails stop"
       # system "rake db:migrate"
       # system "rake jobs:work"
       # system "rake db:seed"
