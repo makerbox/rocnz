@@ -9,7 +9,7 @@ class TermsController < ApplicationController
   	 # # #    @alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
 
   	  	@products.each do |p|
-  	  		if dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct).empty?
+  	  		if dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct).any?
   	  			@results << dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
   	  		end
 
