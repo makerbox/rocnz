@@ -1,6 +1,7 @@
 class TermsController < ApplicationController
 		skip_before_action :authenticate_user!
   def index
+  	dbh.disconnect
   		@results = []
   		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
   		# @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
@@ -24,6 +25,7 @@ class TermsController < ApplicationController
 	   #  #     end
 	   #  #     @categories << category
 	   #  end
+	   dbh.disconnect
   end
 
 end
