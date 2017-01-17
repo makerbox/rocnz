@@ -5,7 +5,7 @@ class TermsController < ApplicationController
   		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
   		@products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
   		productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
-  	    @alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+  	    @alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)[0].to_h
 
   	  	@products.each do |p|
 
