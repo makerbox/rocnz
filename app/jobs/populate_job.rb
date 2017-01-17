@@ -18,47 +18,47 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       # create or update rep account
       # create requires them to become admin
     # end
-    
-    # products.each do |p|
-    #   if p.Inactive == 0
-    #     alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
-    #     if alldates.where(Code: p.Code)
-    #       saledate = alldates.where(Code: p.Code)
-    #     else
-    #       saledate = Date.today - 40.days
-    #     end
 
-    #     product = Product.where(code: p.Code.to_s.strip).first
+    products.each do |p|
+      if p.Inactive == 0
+        alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+        if alldates.where(Code: p.Code)
+          saledate = alldates.where(Code: p.Code)
+        else
+          saledate = Date.today - 40.days
+        end
 
-    #     category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code = '#{p.Code}' ").fetch(:all, :Struct)[0].to_h[:CostCentre]
-    #     if category != nil
-    #       category = category.strip
-    #     end
+        product = Product.where(code: p.Code.to_s.strip).first
 
-    #     if product #if the product already exists, just update the details and destroy any without images
-    #       if (product.new_date != saledate) || (product.category != category.to_s.strip) || (product.code != p.Code.to_s.strip) || (product.description != p.Description) || (product.group != p.ProductGroup.to_s.strip) || (product.price1 != p.SalesPrice1) || (product.price2 != p.SalesPrice2) || (product.price3 != p.SalesPrice3) || (product.price4 != p.SalesPrice4) || (product.price5 != p.SalesPrice5) || (product.rrp != p.SalesPrice6) || (product.qty != p.QtyInStock) 
-    #         filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.to_s.strip + '.jpg'
-    #         if File.exist?(filename)
-    #           Cloudinary::Uploader.upload(filename, :public_id => p.Code.to_s.strip, :overwrite => true)
-    #         else
-    #           # destroy the product - no image, no dice
-    #           Product.find_by(code: p.Code.to_s.strip).destroy
-    #         end
-    #         product.update(new_date: saledate, category: category.to_s.strip, qty: p.QtyInStock, code: p.Code.to_s.strip, description: p.Description, group: p.ProductGroup.to_s.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
-    #       end
-    #     else #if the product doesn't already exist, let's make it
-    #       Product.create(new_date: saledate, category: category.to_s.strip, qty: p.QtyInStock, code: p.Code.to_s.strip, description: p.Description, group: p.ProductGroup.to_s.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
-    #       #upload image to cloudinary and store url in product.imageurl (images are stored in z:/attache/roc/images/product/*sku*.jpg)
-    #       filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.to_s.strip + '.jpg'
-    #       if File.exist?(filename)
-    #         Cloudinary::Uploader.upload(filename, :public_id => p.Code.to_s.strip, :overwrite => true)
-    #       else
-    #         # destroy the product - no image, no dice
-    #         Product.find_by(code: p.Code.to_s.strip).destroy
-    #       end
-    #     end
-    #   end
-    # end
+        category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code = '#{p.Code}' ").fetch(:all, :Struct)[0].to_h[:CostCentre]
+        if category != nil
+          category = category.strip
+        end
+        
+        # if product #if the product already exists, just update the details and destroy any without images
+        #   if (product.new_date != saledate) || (product.category != category.to_s.strip) || (product.code != p.Code.to_s.strip) || (product.description != p.Description) || (product.group != p.ProductGroup.to_s.strip) || (product.price1 != p.SalesPrice1) || (product.price2 != p.SalesPrice2) || (product.price3 != p.SalesPrice3) || (product.price4 != p.SalesPrice4) || (product.price5 != p.SalesPrice5) || (product.rrp != p.SalesPrice6) || (product.qty != p.QtyInStock) 
+        #     filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.to_s.strip + '.jpg'
+        #     if File.exist?(filename)
+        #       Cloudinary::Uploader.upload(filename, :public_id => p.Code.to_s.strip, :overwrite => true)
+        #     else
+        #       # destroy the product - no image, no dice
+        #       Product.find_by(code: p.Code.to_s.strip).destroy
+        #     end
+        #     product.update(new_date: saledate, category: category.to_s.strip, qty: p.QtyInStock, code: p.Code.to_s.strip, description: p.Description, group: p.ProductGroup.to_s.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+        #   end
+        # else #if the product doesn't already exist, let's make it
+        #   Product.create(new_date: saledate, category: category.to_s.strip, qty: p.QtyInStock, code: p.Code.to_s.strip, description: p.Description, group: p.ProductGroup.to_s.strip, price1: p.SalesPrice1, price2: p.SalesPrice2, price3: p.SalesPrice3, price4: p.SalesPrice4, price5: p.SalesPrice5, rrp: p.SalesPrice6)
+        #   #upload image to cloudinary and store url in product.imageurl (images are stored in z:/attache/roc/images/product/*sku*.jpg)
+        #   filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.to_s.strip + '.jpg'
+        #   if File.exist?(filename)
+        #     Cloudinary::Uploader.upload(filename, :public_id => p.Code.to_s.strip, :overwrite => true)
+        #   else
+        #     # destroy the product - no image, no dice
+        #     Product.find_by(code: p.Code.to_s.strip).destroy
+        #   end
+        # end
+      end
+    end
 
     discounts.each do |d|
       if d.PriceCode1 != 0 #if the discount is a fixed price
