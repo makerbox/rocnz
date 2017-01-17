@@ -4,14 +4,14 @@ class TermsController < ApplicationController
   		@results = []
   		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
-  		# # # @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
+  		@products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
   		# # # productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
   	 # # #    @alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
 
-  	 # # #  	@products.each do |p|
-  	 # # #  		if dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct).has_data?
-  	 # # #  			@results << dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
-  	 # # #  		end
+  	  	@products.each do |p|
+  	  		if dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct).has_data?
+  	  			@results << dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
+  	  		end
 
 	   # # #  #     # product = Product.where(code: p.Code.to_s.strip).first
 
@@ -20,7 +20,7 @@ class TermsController < ApplicationController
 	   # # #  #       category = category.strip
 	   # # #  #     end
 	   # # #  #     @categories << category
-	   # # #  end
+	    end
 	   # # @results << dbh.database_name
 	   dbh.disconnect
   end
