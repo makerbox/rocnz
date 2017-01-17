@@ -1,6 +1,7 @@
 class TermsController < ApplicationController
 		skip_before_action :authenticate_user!
   def index
+  		@categories = []
   		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
   		products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
   		productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
@@ -18,6 +19,7 @@ class TermsController < ApplicationController
 	        if category != nil
 	          category = category.strip
 	        end
+	        @categories << category
 	    end
   end
 
