@@ -9,8 +9,8 @@ class TermsController < ApplicationController
 
   	  	@products.each do |p|
 
-	        if alldates.where(Code: p.Code)
-	          saledate = alldates.where(Code: p.Code)
+	        if @alldates.where(Code: p.Code)
+	          saledate = @alldates.where(Code: p.Code)
 	        else
 	          saledate = Date.today - 40.days
 	        end
