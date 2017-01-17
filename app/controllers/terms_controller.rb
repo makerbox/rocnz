@@ -9,10 +9,11 @@ class TermsController < ApplicationController
 
   	  	@products.each do |p|
   	  		@alldates.each do |d|
-  	  			if d.Code = p.Code
-  	  				saledate = d.DateFld
+  	  			# if d.Code = p.Code
+  	  				saledate = d.Code
   	  				@results << saledate
-  	  			end
+  	  				@results << p.Code
+  	  			# end
   	  		end
 
 	    #     # product = Product.where(code: p.Code.to_s.strip).first
