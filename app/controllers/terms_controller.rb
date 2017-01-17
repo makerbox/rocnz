@@ -10,8 +10,8 @@ class TermsController < ApplicationController
   	  	@products.each do |p|
   	  		# @alldates.each do |d|
   	  			
-  	  			if d = dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
-  	  				saledate = d
+  	  			if dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
+  	  				saledate = dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
   	  				@results << saledate
   	  				@results << p.Code
   	  			end
