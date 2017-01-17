@@ -18,12 +18,11 @@ end
   def pull
       system "git pull"
       # system "rake db:migrate"
-      system "killall -9 rails"
       # system "rake jobs:work"
       # system "rake db:seed"
   end
 
-  def test #this has a view, so you can check variables and stuff
+  def test #this has a view, so you can check variables and stuff - be careful of breaking home controller
     
 
   end

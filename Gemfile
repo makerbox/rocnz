@@ -2,9 +2,6 @@ source 'http://rubygems.org'
 gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
 gem 'wdm'
 
-# see logs to debug better - also requires route (see routes.rb)
-gem 'browserlog'
-
 #image hosting
 gem 'cloudinary'
 gem 'carrierwave'

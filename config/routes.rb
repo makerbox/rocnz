@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  mount Browserlog::Engine => '/logs' #for viewing logs in browser
-
   resources :discounts
   resources :quantities
   resources :orders
