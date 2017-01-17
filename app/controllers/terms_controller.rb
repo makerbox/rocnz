@@ -9,10 +9,10 @@ class TermsController < ApplicationController
   	 # # #    @alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
 
   	  	@products.each do |p|
-  	  		# if dbh.execute("SELECT * FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
-            @results << 'found'
+  	  		if d = dbh.execute("SELECT * FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
+            @results << d
   	  		# 	# @results << dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
-  	  		# end
+  	  		end
 
 	   # # #  #     # product = Product.where(code: p.Code.to_s.strip).first
 
