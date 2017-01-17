@@ -9,10 +9,10 @@ class TermsController < ApplicationController
   	 # # #    @alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
 
   	  	@products.each do |p|
-  	  		if dbh.execute("SELECT * FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
-            @results << 'found'
-  	  			# @results << dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
-  	  		end
+  	  		# if dbh.execute("SELECT * FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
+       #      @results << 'found'
+  	  		# 	# @results << dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
+  	  		# end
 
 	   # # #  #     # product = Product.where(code: p.Code.to_s.strip).first
 
@@ -21,7 +21,7 @@ class TermsController < ApplicationController
 	   # # #  #       category = category.strip
 	   # # #  #     end
 	   # # #  #     @categories << category
-	    end
+	       end
 	   # # @results << dbh.database_name
 	   dbh.disconnect
   end
