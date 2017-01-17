@@ -17,14 +17,13 @@ end
 
   def pull
       system "git pull"
-      system "kill `cat tmp/pids/server.pid`;"
       # system "rake db:migrate"
       # system "rake jobs:work"
       # system "rake db:seed"
   end
 
   def test #this has a view, so you can check variables and stuff - be careful of breaking home controller
-   
+   `Taskkill /IM ruby.exe /F`
   end
 
   def seed
