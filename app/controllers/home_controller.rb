@@ -16,7 +16,6 @@ def confirm
 end
 
   def pull
-    system "git stash"
     system "git pull"
       # system "rake db:migrate"
       # system "rake jobs:work"
