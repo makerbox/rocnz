@@ -34,11 +34,11 @@ class TermsController < ApplicationController
         # else
         newproduct = Product.new(code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
         filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.to_s.strip + '.jpg'
-        if File.exist?(filename)
-          Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
+        # if File.exist?(filename)
+          # Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
           newproduct.save
-          @results << newproduct.code
-        end
+          @results << filename
+        # end
       end
     end
 
