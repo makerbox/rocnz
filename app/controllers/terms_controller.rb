@@ -11,22 +11,23 @@ class TermsController < ApplicationController
     Product.destroy_all
 
     @products.each do |p|
-      code = p.Code.strip
-      description = p.Description.strip
-      price1 = p.SalesPrice1
-      price2 = p.SalesPrice2
-      price3 = p.SalesPrice3
-      price4 = p.SalesPrice4
-      price5 = p.SalesPrice5
-      rrp = p.SalesPrice6
-      qty = p.QtyInStock
-      # needs category and image
-      Product.create(code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
+      @results << p.Code
+      # code = p.Code.strip
+      # description = p.Description.strip
+      # price1 = p.SalesPrice1
+      # price2 = p.SalesPrice2
+      # price3 = p.SalesPrice3
+      # price4 = p.SalesPrice4
+      # price5 = p.SalesPrice5
+      # rrp = p.SalesPrice6
+      # qty = p.QtyInStock
+      # # needs category and image
+      # Product.create(code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
     end
 
-    @datedata.each do |d|
-      @results << Product.find(code: d.Code)
-    end
+    # @datedata.each do |d|
+    #   @results << Product.find(code: d.Code)
+    # end
 
     dbh.disconnect
   end
