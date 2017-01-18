@@ -45,6 +45,7 @@ class TermsController < ApplicationController
 
     @datedata.each do |d|
       code = d.Code.strip
+      @results << d.Code
       @results << d.DateFld
       # Product.where(code: code).update(newdate: d.DateFld)
     end
