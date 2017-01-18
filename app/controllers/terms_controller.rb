@@ -12,7 +12,7 @@ class TermsController < ApplicationController
 
     @products.each do |p|
       code = p.Code.strip
-      description = p.Description.strip
+      # description = p.Description.strip
       # price1 = p.SalesPrice1
       # price2 = p.SalesPrice2
       # price3 = p.SalesPrice3
