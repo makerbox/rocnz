@@ -19,7 +19,7 @@ class TermsController < ApplicationController
       price4 = p.SalesPrice4
       price5 = p.SalesPrice5
       rrp = p.SalesPrice6
-      group = p.ProductGroup.strip
+      # group = p.ProductGroup.strip
       qty = p.QtyInStock
       # needs category and image
       Product.create(code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, group: group, qty: qty)
