@@ -6,9 +6,9 @@ class TermsController < ApplicationController
 
   		@products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
       @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
-      
+
       @datedata.each do |d|
-        Product.where(code: d.Code).update(newdate: d.DateFld)
+        @results << Product.where(code: d.Code).code
       end
   		# # # productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
   	 # # #    @alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
