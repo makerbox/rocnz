@@ -9,8 +9,7 @@ class TermsController < ApplicationController
 
     @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
     @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
-    Product.destroy_all
-    Discount.destroy_all
+
     @products.each do |p|
       if p.Inactive == 0
         code = p.Code.strip
