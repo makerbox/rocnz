@@ -30,7 +30,7 @@ class TermsController < ApplicationController
 
     @datedata.each do |d|
       code = d.Code.strip
-      @results << Product.find(code: code)
+      @results << Product.where(code: code)
     end
 
     @time = Time.now - @time
