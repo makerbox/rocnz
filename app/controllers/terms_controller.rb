@@ -1,6 +1,8 @@
 class TermsController < ApplicationController
     skip_before_action :authenticate_user!
   def index
+    @time = Time.now
+
     @results = []
 
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
@@ -29,6 +31,7 @@ class TermsController < ApplicationController
       @results << Product.find(code: d.Code)
     end
 
+    @time = Time.now - @time
     dbh.disconnect
   end
 
