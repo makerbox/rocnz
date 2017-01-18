@@ -49,7 +49,7 @@ class TermsController < ApplicationController
       @results << d.DateFld
       # Product.where(code: code).update(newdate: d.DateFld)
     end
-
+    @results << Product.count
     @time = Time.now - @time
     dbh.disconnect
   end
