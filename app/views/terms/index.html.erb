@@ -1,5 +1,5 @@
 <%= @results %>
-
+<%= @time %>
 <% if Contact.find_by(code:'running', email:'running') %>
           <b style="color:red;">RUNNING SEED</b>
           <% else %>
