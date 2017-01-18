@@ -14,7 +14,7 @@ class TermsController < ApplicationController
       code = p.Code.strip
       description = p.Description
       @results << code
-      @results << description
+      @results << description.strip
       # price1 = p.SalesPrice1
       # price2 = p.SalesPrice2
       # price3 = p.SalesPrice3
