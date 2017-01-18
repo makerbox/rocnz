@@ -10,8 +10,6 @@ class TermsController < ApplicationController
     @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
     @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
 
-    Product.destroy_all
-
     @products.each do |p|
       code = p.Code.strip
       description = p.Description.to_s.strip
@@ -24,11 +22,15 @@ class TermsController < ApplicationController
       qty = p.QtyInStock
       group = p.ProductGroup.to_s.strip
       # # needs category and image
-      Product.create(code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
+      if Product.where(code: code)
+      else
+        Product.create(code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
+      end
     end
 
     @datedata.each do |d|
-      @results << Product.find(code: d.Code)
+      code = d.Code.strip
+      @results << Product.find(code: code)
     end
 
     @time = Time.now - @time
