@@ -45,7 +45,8 @@ class TermsController < ApplicationController
 
     @datedata.each do |d|
       code = d.Code.strip
-      Product.where(code: code).update(newdate: d.DateFld)
+      @results << d.DateFld
+      # Product.where(code: code).update(newdate: d.DateFld)
     end
 
     @time = Time.now - @time
