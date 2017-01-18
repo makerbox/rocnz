@@ -44,10 +44,10 @@ class TermsController < ApplicationController
       # end
     end
 
-    @datedata.each do |d|
-      code = d.Code.strip
-      Product.where(code: code).update(newdate: d.DateFld)
-    end
+    # @datedata.each do |d|
+    #   code = d.Code.strip
+    #   Product.where(code: code).update(newdate: d.DateFld)
+    # end
 
     @time = Time.now - @time
     dbh.disconnect
