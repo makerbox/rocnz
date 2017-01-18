@@ -9,7 +9,7 @@ class TermsController < ApplicationController
 
     @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
     @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
-@results << `ls -f`
+
     @products.each do |p|
       if p.Inactive == 0
         code = p.Code.strip
@@ -24,9 +24,9 @@ class TermsController < ApplicationController
         group = p.ProductGroup.to_s.strip
         # # needs category
         if !Product.where(code: code).blank?
-          Product.where(code: code).first.update(code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
+          Product.where(code: code).first.update(group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
           filename = "Z:\\Attache\\Roc\\Images\\Product\\" + code + '.jpg'
-          # @results << filename
+          @results << filename
 
           if File.exist?(filename)
             # Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
@@ -36,7 +36,7 @@ class TermsController < ApplicationController
             @results << 'NO FILE'
           end
         else
-          newproduct = Product.new(code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
+          newproduct = Product.new(group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
           filename = "Z:\\Attache\\Roc\\Images\\Product\\" + p.Code.to_s.strip + '.jpg'
           # if File.exist?(filename)
             # Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
