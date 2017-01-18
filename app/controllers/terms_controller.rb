@@ -1,34 +1,35 @@
 class TermsController < ApplicationController
 		skip_before_action :authenticate_user!
   def index
-  		@results = []
-  		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+		@results = []
 
-  		@products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
-      @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
-      @datedata.each do |d|
-        @results << Product.where(code: d.Code)
-      end
-  		# # # productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
-  	 # # #    @alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+		@products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
+    @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
 
-  	 #  	@products.each do |p|
-  	 # #  		if dbh.execute("SELECT * FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
-            
-  	 # #  		# 	# @results << dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
-  	 # #  		end
+    Product.destroy_all
 
-	   # # # # #  #     # product = Product.where(code: p.Code.to_s.strip).first
+    @products.each do |p|
+      code = p.Code.strip
+      description = p.Description.strip
+      price1 = p.SalesPrice1
+      price2 = p.SalesPrice2
+      price3 = p.SalesPrice3
+      price4 = p.SalesPrice4
+      price5 = p.SalesPrice5
+      rrp = p.SalesPrice6
+      group = p.ProductGroup.strip
+      qty = p.QtyInStock
+      # needs category and image
+      Product.create(code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, group: group, qty: qty)
+    end
 
-	   # # # # #  #     category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code = '#{p.Code}' ").fetch(:all, :Struct)[0].to_h[:CostCentre]
-	   # # # # #  #     if category != nil
-	   # # # # #  #       category = category.strip
-	   # # # # #  #     end
-	   # # # # #  #     @categories << category
-	   #     end
-	   # # @results << dbh.database_name
-	   dbh.disconnect
+    @datedata.each do |d|
+      @results << Product.find(code: d.Code)
+    end
+
+    dbh.disconnect
   end
 
 end
