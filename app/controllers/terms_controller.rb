@@ -23,7 +23,7 @@ class TermsController < ApplicationController
         qty = p.QtyInStock
         group = p.ProductGroup.to_s.strip
         # # needs category
-        if Product.where(code: code) != nil
+        if Product.where(code: code).present?
           Product.where(code: code).first.update(code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
           filename = "Z:\\Attache\\Roc\\Images\\Product\\" + code + '.jpg'
           if File.exist?(filename)
