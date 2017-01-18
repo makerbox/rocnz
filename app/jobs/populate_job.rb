@@ -21,19 +21,19 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
     products.each do |p|
       if p.Inactive == 0
-        alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
-        if alldates.where(Code: p.Code)
-          saledate = alldates.where(Code: p.Code)
-        else
-          saledate = Date.today - 40.days
-        end
+        # alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+        # if alldates.where(Code: p.Code)
+        #   saledate = alldates.where(Code: p.Code)
+        # else
+        #   saledate = Date.today - 40.days
+        # end
 
-        product = Product.where(code: p.Code.to_s.strip).first
+        # product = Product.where(code: p.Code.to_s.strip).first
 
-        category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code = '#{p.Code}' ").fetch(:all, :Struct)[0].to_h[:CostCentre]
-        if category != nil
-          category = category.strip
-        end
+        # category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code = '#{p.Code}' ").fetch(:all, :Struct)[0].to_h[:CostCentre]
+        # if category != nil
+        #   category = category.strip
+        # end
         
         # if product #if the product already exists, just update the details and destroy any without images
         #   if (product.new_date != saledate) || (product.category != category.to_s.strip) || (product.code != p.Code.to_s.strip) || (product.description != p.Description) || (product.group != p.ProductGroup.to_s.strip) || (product.price1 != p.SalesPrice1) || (product.price2 != p.SalesPrice2) || (product.price3 != p.SalesPrice3) || (product.price4 != p.SalesPrice4) || (product.price5 != p.SalesPrice5) || (product.rrp != p.SalesPrice6) || (product.qty != p.QtyInStock) 
@@ -70,13 +70,13 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       if percent > 0 # check there is an actual discount to apply
         if d.CustomerType == 10 # affect discounts for customer codes
           if d.ProductType == 10 # affect discounts for product codes
-            if Discount.find_by(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+            if Discount.where(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
               # do nothing
             else
               Discount.create(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
             end
           elsif d.ProductType == 30 # affect discounts for product groups
-            if Discount.find_by(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+            if Discount.where(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
               # do nothing
             else
               Discount.create(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
@@ -84,13 +84,13 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
           end
         elsif d.CustomerType == 30 # affect discounts for customer groups
           if d.ProductType == 10 # affect discounts for product codes
-            if Discount.find_by(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+            if Discount.where(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
               # do nothing
             else
               Discount.create(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
             end
           elsif d.ProductType == 30 # affect discounts for product groups
-            if Discount.find_by(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
+            if Discount.where(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
               # do nothing
             else
               Discount.create(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
