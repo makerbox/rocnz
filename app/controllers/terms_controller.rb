@@ -11,7 +11,9 @@ class TermsController < ApplicationController
     Product.destroy_all
 
     @products.each do |p|
+      @results << p.Code.to_s
       @results << p.Code
+      @results << p.Code.strip
       # code = p.Code.strip
       # description = p.Description.strip
       # price1 = p.SalesPrice1
