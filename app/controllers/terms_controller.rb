@@ -4,9 +4,7 @@ class TermsController < ApplicationController
     @time = Time.now
 
     @results = []
-    Dir.foreach("Z:") { |file|
-  @results << file
-}
+    
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
     @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
