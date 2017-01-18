@@ -50,7 +50,7 @@ class TermsController < ApplicationController
       # Product.where(code: code).update(newdate: d.DateFld)
     end
     @results << Product.count
-    @time = Time.now - @time
+    @time = (Time.now - @time) / 60
     dbh.disconnect
   end
 
