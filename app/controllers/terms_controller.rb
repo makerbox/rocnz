@@ -5,22 +5,27 @@ class TermsController < ApplicationController
   		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
   		@products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
+      @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+      
+      @datedata.each do |d|
+        Product.where(code: d.Code).update(newdate: d.DateFld)
+      end
   		# # # productsext = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
   	 # # #    @alldates = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
 
   	 #  	@products.each do |p|
-  	 #  		if dbh.execute("SELECT * FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
-    #         @results << dbh.execute("SELECT * FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
-  	 #  		# 	# @results << dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
-  	 #  		end
+  	 # #  		if dbh.execute("SELECT * FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
+            
+  	 # #  		# 	# @results << dbh.execute("SELECT DateFld FROM produdefdata WHERE Code = '#{p.Code}'").fetch(:all, :Struct)
+  	 # #  		end
 
-	   # # # #  #     # product = Product.where(code: p.Code.to_s.strip).first
+	   # # # # #  #     # product = Product.where(code: p.Code.to_s.strip).first
 
-	   # # # #  #     category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code = '#{p.Code}' ").fetch(:all, :Struct)[0].to_h[:CostCentre]
-	   # # # #  #     if category != nil
-	   # # # #  #       category = category.strip
-	   # # # #  #     end
-	   # # # #  #     @categories << category
+	   # # # # #  #     category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code = '#{p.Code}' ").fetch(:all, :Struct)[0].to_h[:CostCentre]
+	   # # # # #  #     if category != nil
+	   # # # # #  #       category = category.strip
+	   # # # # #  #     end
+	   # # # # #  #     @categories << category
 	   #     end
 	   # # @results << dbh.database_name
 	   dbh.disconnect
