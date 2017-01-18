@@ -32,15 +32,13 @@ class TermsController < ApplicationController
         #     Product.where(code: code).first.destroy
         #   end
         # else
-          newproduct = Product.create(code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
+        newproduct = Product.new(code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
+        filename = "Z:\\Attache\\Roc\\Images\\Product\\" + code + '.jpg'
+        if File.exist?(filename)
+          Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
+          newproduct.save
           @results << newproduct.code
-          filename = "Z:\\Attache\\Roc\\Images\\Product\\" + code + '.jpg'
-          if File.exist?(filename)
-            Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
-          else
-            Product.where(code: code).first.destroy
-          end
-        # end
+        end
       end
     end
 
