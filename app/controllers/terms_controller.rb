@@ -43,7 +43,7 @@ class TermsController < ApplicationController
 
     @datedata.each do |d|
       code = d.Code.strip
-      @results << Product.where(code: code).code
+      @results << Product.where(code: code).first.code
       # Product.where(code: code).first.update_attributes(new_date: d.DateFld)
     end
 
