@@ -25,7 +25,7 @@ class TermsController < ApplicationController
         group = p.ProductGroup.to_s.strip
         # # needs category
         if !Product.all.where(code: code).blank?
-          Product.all.where(code: code).first.update_attributes(group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
+          Product.all.find_by(code: code).update_attributes(group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
           filename = "Z:\\Attache\\Roc\\Images\\Product\\" + code + ".jpg"
           if File.exist?(filename)
             Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
@@ -47,10 +47,8 @@ class TermsController < ApplicationController
     @datedata.each do |d|
       code = d.Code.strip
       if Product.find_by(code: code)
-        @results << Product.find_by(code: code).code
+        Product.find_by(code: code).update_attributes(new_date: d.Datefld)
       end
-      # Product.all.where(code: code).update_attributes(new_date: d.Datefld)
-      # Product.where(code: code).first.update_attributes(new_date: d.DateFld)
     end
 
 
