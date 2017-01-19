@@ -24,8 +24,8 @@ class TermsController < ApplicationController
         qty = p.QtyInStock
         group = p.ProductGroup.to_s.strip
         # # needs category
-        if !Product.where(code: code).blank?
-          Product.where(code: code).first.update_attributes(group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
+        if !Product.all.where(code: code).blank?
+          Product.all.where(code: code).first.update_attributes(group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
           filename = "Z:\\Attache\\Roc\\Images\\Product\\" + code + ".jpg"
           if File.exist?(filename)
             Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
@@ -43,12 +43,11 @@ class TermsController < ApplicationController
 
 # ------------------------GET DATES AND UPDATE THE PRODUCTS WITH new_date FIELD-----------------------
     @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
-    Product.all.each do |p|
-        @results << p.code
-      end
+
     @datedata.each do |d|
       code = d.Code.strip
-
+      @results << Product.all.where(code: code).code
+      Product.all.where(code: code).update_attributes(new_date: d.Datefld)
       # Product.where(code: code).first.update_attributes(new_date: d.DateFld)
     end
 
