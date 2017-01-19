@@ -3,12 +3,7 @@
     <div id="productlist">
       <div class="panel panel-default">
         <div class="panel-body">
-          Total products: <%= @totalproducts %>
-          <% if Contact.find_by(code:'running', email:'running') %>
-          RUNNING SEED
-          <% else %>
-          FINISHED SEED
-          <% end %>
+          Showing total: <%= @totalproducts %>
         </div>
       </div>
       <% @products.each do |product| %>
