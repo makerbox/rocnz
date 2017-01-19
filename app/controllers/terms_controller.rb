@@ -43,9 +43,10 @@ class TermsController < ApplicationController
 
     @datedata.each do |d|
       code = d.Code.strip
-      Product.where(code: code).update(new_date: d.DateFld)
+      @results << Product.where(code: code).code
+      Product.where(code: code).first.update(new_date: d.DateFld)
     end
-    
+
     @results << Product.count
     @time = (Time.now - @time) / 60
     dbh.disconnect
