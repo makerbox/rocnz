@@ -47,7 +47,7 @@ class TermsController < ApplicationController
     @datedata.each do |d|
       code = d.Code.strip
       if Product.find_by(code: code)
-        Product.find_by(code: code).update_attributes(new_date: d.Datefld)
+        Product.find_by(code: code).update_attributes(new_date: d.DateFld)
       end
     end
 
