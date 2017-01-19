@@ -24,7 +24,7 @@ class TermsController < ApplicationController
         group = p.ProductGroup.to_s.strip
         # # needs category
         if !Product.where(code: code).blank?
-          Product.where(code: code).first.update(group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
+          Product.where(code: code).update_attributes(group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
           filename = "Z:\\Attache\\Roc\\Images\\Product\\" + code + ".jpg"
           @results << `if exist #{filename} echo yas`
           if File.exist?(filename)
@@ -43,8 +43,7 @@ class TermsController < ApplicationController
 
     @datedata.each do |d|
       code = d.Code.strip
-      @results << Product.where(code: code).code
-      Product.where(code: code).first.update(new_date: d.DateFld)
+      Product.where(code: code).update_attributes(new_date: d.DateFld)
     end
 
     @results << Product.count
