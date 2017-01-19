@@ -43,11 +43,12 @@ class TermsController < ApplicationController
 
 # ------------------------GET DATES AND UPDATE THE PRODUCTS WITH new_date FIELD-----------------------
     @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+    Product.each do |p|
+        @results << p.code
+      end
     @datedata.each do |d|
       code = d.Code.strip
-      product = Product.find_by(code: code)
-      @results << code
-      @results << product.code
+
       # Product.where(code: code).first.update_attributes(new_date: d.DateFld)
     end
 
