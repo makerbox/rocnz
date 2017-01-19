@@ -53,6 +53,9 @@ class TermsController < ApplicationController
 
 
 # ------------------------META DATA--------------------------------------------------------------
+Product.all.each do |p|
+  @results << p.new_date
+end
     @results << Product.count
     @time = (Time.now - @time) / 60
     dbh.disconnect
