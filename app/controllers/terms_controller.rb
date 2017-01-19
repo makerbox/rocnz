@@ -46,7 +46,9 @@ class TermsController < ApplicationController
 
     @datedata.each do |d|
       code = d.Code.strip
-      @results << Product.find_by(code: code).code
+      if Product.find_by(code: code)
+        @results << Product.find_by(code: code).code
+      end
       # Product.all.where(code: code).update_attributes(new_date: d.Datefld)
       # Product.where(code: code).first.update_attributes(new_date: d.DateFld)
     end
