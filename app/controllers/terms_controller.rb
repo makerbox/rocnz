@@ -45,7 +45,7 @@ class TermsController < ApplicationController
     @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
     @datedata.each do |d|
       code = d.Code.strip
-      product = Product.where(code: code)
+      product = Product.find_by(code: code)
       @results << code
       @results << product.code
       # Product.where(code: code).first.update_attributes(new_date: d.DateFld)
