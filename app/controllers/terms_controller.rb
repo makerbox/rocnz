@@ -41,12 +41,11 @@ class TermsController < ApplicationController
       end
     end
 
-    # @datedata.each do |d|
-    #   code = d.Code.strip
-    #   @results << d.Code
-    #   @results << d.DateFld
-    #   # Product.where(code: code).update(newdate: d.DateFld)
-    # end
+    @datedata.each do |d|
+      code = d.Code.strip
+      Product.where(code: code).update(new_date: d.DateFld)
+    end
+    
     @results << Product.count
     @time = (Time.now - @time) / 60
     dbh.disconnect
