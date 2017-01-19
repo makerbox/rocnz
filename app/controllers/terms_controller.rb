@@ -43,7 +43,7 @@ class TermsController < ApplicationController
 
 # ------------------------GET DATES AND UPDATE THE PRODUCTS WITH new_date FIELD-----------------------
     @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
-    Product.each do |p|
+    Product.all.each do |p|
         @results << p.code
       end
     @datedata.each do |d|
