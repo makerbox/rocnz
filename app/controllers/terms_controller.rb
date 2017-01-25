@@ -8,6 +8,7 @@ class TermsController < ApplicationController
     discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
     discounts.each do |d|
+      @results << d.PriceCode1
       if d.PriceCode1 != 0 #if the discount is a fixed price
         percent = 0 #temporary while under construction
         #percent = d.Price1 and flag as fixed price somehow -- still under construction
@@ -49,10 +50,10 @@ class TermsController < ApplicationController
 
     dbh.disconnect
 
-    Discount.all.each do |d|
-      @results << d
+    Discount.all.each do |disc|
+      @results << disc
     end
-    
+
   end #end def index
 
 end #end class
