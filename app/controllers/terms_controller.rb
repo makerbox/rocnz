@@ -4,7 +4,6 @@ class TermsController < ApplicationController
     @results = []
     Discount.destroy_all #wipe the database for a clean start
 
-
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
@@ -47,9 +46,13 @@ class TermsController < ApplicationController
         end
       end
     end
-    
+
     dbh.disconnect
 
+    Discount.all.each do |d|
+      @results << d
+    end
+    
   end #end def index
 
 end #end class
