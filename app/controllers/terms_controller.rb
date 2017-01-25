@@ -47,9 +47,7 @@ class TermsController < ApplicationController
         end
       end
     end
-    Discount.each do |d|
-      @results << d
-    end
+    
     dbh.disconnect
 
   end #end def index
