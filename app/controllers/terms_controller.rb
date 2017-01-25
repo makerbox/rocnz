@@ -9,8 +9,9 @@ class TermsController < ApplicationController
 
     discounts.each do |d|
       @results << d.PriceCode1
-      @results << d
+
       if d.PriceCode1 != 0 #if the discount is a fixed price
+        @results << d
         percent = 0 #temporary while under construction
         #percent = d.Price1 and flag as fixed price somehow -- still under construction
       else
