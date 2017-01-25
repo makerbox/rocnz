@@ -11,7 +11,7 @@ class TermsController < ApplicationController
       @results << d.PriceCode1
 
       if d.PriceCode1 != 0 #if the discount is a fixed price
-        @results << d.DiscPerc1 + d.DiscPerc2 + d.DiscPerc3 + d.DiscPerc4
+        @results << d.DiscPerc1 + d.DiscPerc2 + d.DiscPerc3 + d.DiscPerc4 + d.PriceReduce1
         percent = 0 #temporary while under construction
         #percent = d.Price1 and flag as fixed price somehow -- still under construction
       else
