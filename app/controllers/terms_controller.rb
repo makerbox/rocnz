@@ -11,11 +11,11 @@ class TermsController < ApplicationController
       
       @results << 'pricecode1'
       @results << d.PriceCode1
-      results << 'pricecode2'
+      @results << 'pricecode2'
       @results << d.PriceCode2
-      results << 'pricecode3'
+      @results << 'pricecode3'
       @results << d.PriceCode3
-      results << 'pricecode4'
+      @results << 'pricecode4'
       @results << d.PriceCode4
         @results << 'price1--'
         @results << d.Price1
