@@ -11,8 +11,8 @@ class TermsController < ApplicationController
       if (d.PriceCode1 + d.PriceCode2 + d.PriceCode3 + d.PriceCode4 + d.PriceCode5 + d.PriceCode6) < 13
         @results << 'CUSTOMER'
         @results << d.Customer
-        # @results << 'PRODUCT'
-        # @resutls << d.Product
+        @results << 'PRODUCT'
+        @resutls << d.Product
         @results << 'Customer Type'
         @results << d.CustomerType
         @results << 'Product Type'
