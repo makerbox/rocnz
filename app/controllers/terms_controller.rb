@@ -17,6 +17,22 @@ class TermsController < ApplicationController
       @results << d.PriceCode3
       @results << 'pricecode4'
       @results << d.PriceCode4
+      @results << 'PriceAdd1'
+      @results << d.PriceAdd1
+      @results << 'PriceAdd2'
+      @results << d.PriceAdd2
+      @results << 'PriceAdd3'
+      @results << d.PriceAdd3
+      @results << 'PriceAdd4'
+      @results << d.PriceAdd4
+      @results << 'Disccode1'
+      @results << d.DiscCode1
+      @results << 'Disccode2'
+      @results << d.DiscCode2
+      @results << 'Disccode3'
+      @results << d.DiscCode3
+      @results << 'Disccode4'
+      @results << d.DiscCode4
         @results << 'price1--'
         @results << d.Price1
         @results << 'price2--'
