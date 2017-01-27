@@ -5,7 +5,16 @@
           <% end %>
           <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %><%= link_to 'SEED', home_seed_path, class: 'btn btn-info' %><%= link_to 'SUICIDE', home_test_path, class: 'btn btn-danger' %>
           
-<%= @results %><br>
+<% count = 16 %>
+<% @results.each do |e| %>
+	<% count = count - 1 %>
+	<%= e %><br>
+	<% if count <= 0 %>
+		<% count = 16 %>
+		<hr>
+	<% end %>
+<% end %>
+
 <br>
 
 <hr>
