@@ -12,7 +12,7 @@ class TermsController < ApplicationController
         @results << 'CUSTOMER'
         @results << d.Customer
         @results << 'PRODUCT'
-        @resutls << d.Product
+        @results << d.Product
         @results << 'Customer Type'
         @results << d.CustomerType
         @results << 'Product Type'
