@@ -25,6 +25,14 @@ class TermsController < ApplicationController
       @results << d.PriceAdd3
       @results << 'PriceAdd4'
       @results << d.PriceAdd4
+      @results << 'PriceReduce1'
+      @results << d.PriceReduce1
+      @results << 'PriceReduce2'
+      @results << d.PriceReduce2
+      @results << 'PriceReduce3'
+      @results << d.PriceReduce3
+      @results << 'PriceReduce4'
+      @results << d.PriceReduce4
       @results << 'Disccode1'
       @results << d.DiscCode1
       @results << 'Disccode2'
@@ -33,6 +41,14 @@ class TermsController < ApplicationController
       @results << d.DiscCode3
       @results << 'Disccode4'
       @results << d.DiscCode4
+      @results << 'DiscPerc1'
+      @results << d.DiscPerc1
+      @results << 'DiscPerc2'
+      @results << d.DiscPerc2
+      @results << 'DiscPerc3'
+      @results << d.DiscPerc3
+      @results << 'DiscPerc4'
+      @results << d.DiscPerc4
         @results << 'price1--'
         @results << d.Price1
         @results << 'price2--'
