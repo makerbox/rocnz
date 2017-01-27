@@ -8,10 +8,25 @@ class TermsController < ApplicationController
     discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
     discounts.each do |d|
+      
+      @results << 'pricecode1'
       @results << d.PriceCode1
-
-      if d.PriceCode1 != 0 #if the discount is a fixed price
+      results << 'pricecode2'
+      @results << d.PriceCode2
+      results << 'pricecode3'
+      @results << d.PriceCode3
+      results << 'pricecode4'
+      @results << d.PriceCode4
+        @results << 'price1--'
         @results << d.Price1
+        @results << 'price2--'
+        @results << d.Price2
+        @results << 'price3--'
+        @results << d.Price1
+        @results << 'price4--'
+        @results << d.Price2  
+      if d.PriceCode1 != 0 #if the discount is a fixed price
+      
         percent = 0 #temporary while under construction
         #percent = d.Price1 and flag as fixed price somehow -- still under construction
       else
