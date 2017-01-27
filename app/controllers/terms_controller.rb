@@ -8,60 +8,59 @@ class TermsController < ApplicationController
     discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
     discounts.each do |d|
-      @results << 'pricecode1'
-      @results << d.PriceCode1
-      @results << 'PriceAdd1'
-      @results << d.PriceAdd1
-      @results << 'PriceReduce1'
-      @results << d.PriceReduce1
-      @results << 'Disccode1'
-      @results << d.DiscCode1
-      @results << 'DiscPerc1'
-      @results << d.DiscPerc1
-      @results << 'price1--'
-      @results << d.Price1
+      if (d.DiscPerc1 + d.DiscPerc2 + d.DiscPerc3 + d.DiscPerc4 + d.DiscPerc5 + d.DiscPerc6) >= 10
+        @results << 'pricecode1'
+        @results << d.PriceCode1
+        @results << 'PriceAdd1'
+        @results << d.PriceAdd1
+        @results << 'PriceReduce1'
+        @results << d.PriceReduce1
+        @results << 'Disccode1'
+        @results << d.DiscCode1
+        @results << 'DiscPerc1'
+        @results << d.DiscPerc1
+        @results << 'price1--'
+        @results << d.Price1
+        @results << 'pricecode2'
+        @results << d.PriceCode2
+        @results << 'PriceAdd2'
+        @results << d.PriceAdd2
+        @results << 'PriceReduce2'
+        @results << d.PriceReduce2
+        @results << 'Disccode2'
+        @results << d.DiscCode2
+        @results << 'DiscPerc2'
+        @results << d.DiscPerc2
+        @results << 'price2--'
+        @results << d.Price2
+        @results << 'pricecode3'
+        @results << d.PriceCode3
+        @results << 'PriceAdd3'
+        @results << d.PriceAdd3
+        @results << 'PriceReduce3'
+        @results << d.PriceReduce3
+        @results << 'Disccode3'
+        @results << d.DiscCode3
+        @results << 'DiscPerc3'
+        @results << d.DiscPerc3
+        @results << 'price3--'
+        @results << d.Price3
+        @results << 'pricecode4'
+        @results << d.PriceCode4
+        @results << 'PriceAdd4'
+        @results << d.PriceAdd4
+        @results << 'PriceReduce4'
+        @results << d.PriceReduce4
+        @results << 'Disccode4'
+        @results << d.DiscCode4
+        @results << 'DiscPerc4'
+        @results << d.DiscPerc4
+        @results << 'price4--'
+        @results << d.Price4
+      end
 
-            @results << 'pricecode2'
-      @results << d.PriceCode2
-      @results << 'PriceAdd2'
-      @results << d.PriceAdd2
-      @results << 'PriceReduce2'
-      @results << d.PriceReduce2
-      @results << 'Disccode2'
-      @results << d.DiscCode2
-      @results << 'DiscPerc2'
-      @results << d.DiscPerc2
-      @results << 'price2--'
-      @results << d.Price2
 
-            @results << 'pricecode3'
-      @results << d.PriceCode3
-      @results << 'PriceAdd3'
-      @results << d.PriceAdd3
-      @results << 'PriceReduce3'
-      @results << d.PriceReduce3
-      @results << 'Disccode3'
-      @results << d.DiscCode3
-      @results << 'DiscPerc3'
-      @results << d.DiscPerc3
-      @results << 'price3--'
-      @results << d.Price3
-
-            @results << 'pricecode4'
-      @results << d.PriceCode4
-      @results << 'PriceAdd4'
-      @results << d.PriceAdd4
-      @results << 'PriceReduce4'
-      @results << d.PriceReduce4
-      @results << 'Disccode4'
-      @results << d.DiscCode4
-      @results << 'DiscPerc4'
-      @results << d.DiscPerc4
-      @results << 'price4--'
-      @results << d.Price4
-      
-      if d.PriceCode1 != 0 #if the discount is a fixed price
-      
+      if d.PriceCode1 == 9 #if the discount is a fixed price
         percent = 0 #temporary while under construction
         #percent = d.Price1 and flag as fixed price somehow -- still under construction
       else
