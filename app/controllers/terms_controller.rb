@@ -9,6 +9,10 @@ class TermsController < ApplicationController
 
     discounts.each do |d|
       if (d.DiscCode1 + d.DiscCode2 + d.DiscCode3 + d.DiscCode4 + d.DiscCode5 + d.DiscCode6) >= 13
+        @results << 'CUSTOMER'
+        @results << d.Customer
+        @results << 'PRODUCT'
+        @resutls << d.Product
         @results << 'Customer Type'
         @results << d.CustomerType
         @results << 'Product Type'
