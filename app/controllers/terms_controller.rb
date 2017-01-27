@@ -8,7 +8,7 @@ class TermsController < ApplicationController
     discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
     discounts.each do |d|
-      if (d.PriceCode1 + d.PriceCode2 + d.PriceCode3 + d.PriceCode4 + d.PriceCode5 + d.PriceCode6) >= 13
+      if (d.PriceCode1 + d.PriceCode2 + d.PriceCode3 + d.PriceCode4 + d.PriceCode5 + d.PriceCode6) < 13
         @results << 'CUSTOMER'
         @results << d.Customer
         # @results << 'PRODUCT'
