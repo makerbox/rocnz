@@ -5,7 +5,7 @@ class TermsController < ApplicationController
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
     @products.each do |p|
-      category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code = '#{p.Code}' ").fetch(:all, :Struct)[0].to_h[:CostCentre]
+      category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code = '#{p.Code}' ").fetch(:all, :Struct) #[0].to_h[:CostCentre]
       @results << category
     end
     dbh.disconnect
