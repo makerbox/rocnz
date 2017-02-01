@@ -37,7 +37,7 @@ class TermsController < ApplicationController
         end
       end
 
-      @results << d.Product.strip
+      @results << d.Customer.strip
 
       # Product.create(customertype: customertype, producttype: producttype, customer: d.Customer, product: d.Product, discount: discount)
 
