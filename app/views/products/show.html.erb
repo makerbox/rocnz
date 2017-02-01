@@ -27,15 +27,15 @@
                   <% end %>
                   <% case level %>
                     <% when 1 %>
-                      <% prodprice = product.discount(thisperson, product.price1) %>
+                      <% prodprice = @product.discount(thisperson, @product.price1) %>
                     <% when 2 %>
-                      <% prodprice = product.discount(thisperson, product.price2) %>
+                      <% prodprice = @product.discount(thisperson, @product.price2) %>
                     <% when 3 %>
-                      <% prodprice = product.discount(thisperson, product.price3) %>
+                      <% prodprice = @product.discount(thisperson, @product.price3) %>
                     <% when 4 %>
-                      <% prodprice = product.discount(thisperson, product.price4) %>
+                      <% prodprice = @product.discount(thisperson, @product.price4) %>
                     <% when 5 %>
-                      <% prodprice = product.discount(thisperson, product.price5) %>
+                      <% prodprice = @product.discount(thisperson, @product.price5) %>
                     <% when 6 %>
 		  		<% prodprice = @product.rrp %>
 		  <% end %>
