@@ -5,6 +5,8 @@ class TermsController < ApplicationController
 
     Discount.all.each do |d|
       @results << d.customer
+      @results << d.product
+      @results << d.discount
     end
 
   end #end def index
