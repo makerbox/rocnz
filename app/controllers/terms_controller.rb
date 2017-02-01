@@ -37,7 +37,9 @@ class TermsController < ApplicationController
         end
       end
 
-      Product.create(customertype: customertype, producttype: producttype, customer: d.Customer.to_i.strip, product: d.Product.to_i.strip, discount: discount)
+      @results << d.Product.strip
+
+      # Product.create(customertype: customertype, producttype: producttype, customer: d.Customer, product: d.Product, discount: discount)
 
     end
 
