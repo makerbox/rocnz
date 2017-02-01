@@ -25,15 +25,15 @@
                   <% end %>
                   <% case level %>
                     <% when 1 %>
-                      <% prodprice = product.price1 %>disc<%= product.discount(thisperson, prodprice) %>
+                      <% prodprice = product.discount(thisperson, product.price1) %>
                     <% when 2 %>
-                      <% prodprice = product.price2 %>disc<%= product.discount(thisperson, prodprice) %>
+                      <% prodprice = product.discount(thisperson, product.price2) %>
                     <% when 3 %>
-                      <% prodprice = product.price3 %>disc<%= product.discount(thisperson, prodprice) %>
+                      <% prodprice = product.discount(thisperson, product.price3) %>
                     <% when 4 %>
-                      <% prodprice = product.price4 %>disc<%= product.discount(thisperson, prodprice) %>
+                      <% prodprice = product.discount(thisperson, product.price4) %>
                     <% when 5 %>
-                      <% prodprice = product.price5 %>disc<%= product.discount(thisperson, prodprice) %>
+                      <% prodprice = product.discount(thisperson, product.price5) %>
                     <% when 6 %>
                       <% prodprice = product.rrp %>
                   <% end %>
