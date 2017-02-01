@@ -25,15 +25,15 @@
                   <% end %>
                   <% case level %>
                     <% when 1 %>
-                      <% prodprice = product.price1 / 100 * product.discount(thisperson) %>
+                      <% prodprice = product.price1 - product.discount(thisperson) %>
                     <% when 2 %>
-                      <% prodprice = product.price2 / 100 * product.discount(thisperson) %>
+                      <% prodprice = product.price2 - product.discount(thisperson) %>
                     <% when 3 %>
-                      <% prodprice = product.price3 / 100 * product.discount(thisperson) %>
+                      <% prodprice = product.price3 - product.discount(thisperson) %>
                     <% when 4 %>
-                      <% prodprice = product.price4 / 100 * product.discount(thisperson) %>
+                      <% prodprice = product.price4 - product.discount(thisperson) %>
                     <% when 5 %>
-                      <% prodprice = product.price5 / 100 * product.discount(thisperson) %>
+                      <% prodprice = product.price5 - product.discount(thisperson) %>
                     <% when 6 %>
                       <% prodprice = product.rrp %>
                   <% end %>
