@@ -37,10 +37,10 @@ class TermsController < ApplicationController
         end
       end
 
-      @results << d.Customer
-
-      # Product.create(customertype: customertype, producttype: producttype, customer: d.Customer, product: d.Product.strip, discount: discount)
-
+      if !d.Customer.blank? && !d.Product.blank?
+        Product.create(customertype: customertype, producttype: producttype, customer: d.Customer.strip, product: d.Product.strip, discount: discount)
+      end
+      
     end
 
     dbh.disconnect
