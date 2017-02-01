@@ -9,62 +9,62 @@ class TermsController < ApplicationController
 
     discounts.each do |d|
       if (d.PriceCode1 + d.PriceCode2 + d.PriceCode3 + d.PriceCode4 + d.PriceCode5 + d.PriceCode6) < 13
-        @results << 'CUSTOMER'
-        @results << d.Customer
-        @results << 'PRODUCT'
-        @results << d.Product
-        @results << 'Customer Type'
-        @results << d.CustomerType
-        @results << 'Product Type'
-        @results << d.ProductType
-        @results << 'pricecode1'
-        @results << d.PriceCode1
-        @results << 'PriceAdd1'
-        @results << d.PriceAdd1
-        @results << 'PriceReduce1'
-        @results << d.PriceReduce1
-        @results << 'Disccode1'
-        @results << d.DiscCode1
-        @results << 'DiscPerc1'
-        @results << d.DiscPerc1
-        @results << 'price1--'
-        @results << d.Price1
-        @results << 'pricecode2'
-        @results << d.PriceCode2
-        @results << 'PriceAdd2'
-        @results << d.PriceAdd2
-        @results << 'PriceReduce2'
-        @results << d.PriceReduce2
-        @results << 'Disccode2'
-        @results << d.DiscCode2
-        @results << 'DiscPerc2'
-        @results << d.DiscPerc2
-        @results << 'price2--'
-        @results << d.Price2
-        @results << 'pricecode3'
-        @results << d.PriceCode3
-        @results << 'PriceAdd3'
-        @results << d.PriceAdd3
-        @results << 'PriceReduce3'
-        @results << d.PriceReduce3
-        @results << 'Disccode3'
-        @results << d.DiscCode3
-        @results << 'DiscPerc3'
-        @results << d.DiscPerc3
-        @results << 'price3--'
-        @results << d.Price3
-        @results << 'pricecode4'
-        @results << d.PriceCode4
-        @results << 'PriceAdd4'
-        @results << d.PriceAdd4
-        @results << 'PriceReduce4'
-        @results << d.PriceReduce4
-        @results << 'Disccode4'
-        @results << d.DiscCode4
-        @results << 'DiscPerc4'
-        @results << d.DiscPerc4
-        @results << 'price4--'
-        @results << d.Price4
+        # @results << 'CUSTOMER'
+        # @results << d.Customer
+        # @results << 'PRODUCT'
+        # @results << d.Product
+        # @results << 'Customer Type'
+        # @results << d.CustomerType
+        # @results << 'Product Type'
+        # @results << d.ProductType
+        # @results << 'pricecode1'
+        # @results << d.PriceCode1
+        # @results << 'PriceAdd1'
+        # @results << d.PriceAdd1
+        # @results << 'PriceReduce1'
+        # @results << d.PriceReduce1
+        # @results << 'Disccode1'
+        # @results << d.DiscCode1
+        # @results << 'DiscPerc1'
+        # @results << d.DiscPerc1
+        # @results << 'price1--'
+        # @results << d.Price1
+        # @results << 'pricecode2'
+        # @results << d.PriceCode2
+        # @results << 'PriceAdd2'
+        # @results << d.PriceAdd2
+        # @results << 'PriceReduce2'
+        # @results << d.PriceReduce2
+        # @results << 'Disccode2'
+        # @results << d.DiscCode2
+        # @results << 'DiscPerc2'
+        # @results << d.DiscPerc2
+        # @results << 'price2--'
+        # @results << d.Price2
+        # @results << 'pricecode3'
+        # @results << d.PriceCode3
+        # @results << 'PriceAdd3'
+        # @results << d.PriceAdd3
+        # @results << 'PriceReduce3'
+        # @results << d.PriceReduce3
+        # @results << 'Disccode3'
+        # @results << d.DiscCode3
+        # @results << 'DiscPerc3'
+        # @results << d.DiscPerc3
+        # @results << 'price3--'
+        # @results << d.Price3
+        # @results << 'pricecode4'
+        # @results << d.PriceCode4
+        # @results << 'PriceAdd4'
+        # @results << d.PriceAdd4
+        # @results << 'PriceReduce4'
+        # @results << d.PriceReduce4
+        # @results << 'Disccode4'
+        # @results << d.DiscCode4
+        # @results << 'DiscPerc4'
+        # @results << d.DiscPerc4
+        # @results << 'price4--'
+        # @results << d.Price4
       end
 
 
@@ -108,10 +108,6 @@ class TermsController < ApplicationController
     end
 
     dbh.disconnect
-
-    Discount.all.each do |disc|
-      @results << disc
-    end
 
   end #end def index
 
