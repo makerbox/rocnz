@@ -9,7 +9,7 @@ class TermsController < ApplicationController
       if cat.CostCentre
         categorycode = cat.Code.strip
         @results << cat.Code
-        @results << Product.find_by(code: categorycode).code
+        @results << Product.where(code: categorycode)
       end
     end
     dbh.disconnect
