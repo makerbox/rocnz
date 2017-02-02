@@ -7,9 +7,9 @@ class TermsController < ApplicationController
     @categories = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
     @categories.each do |cat|
       if cat.CostCentre
-      @results << cat.CostCentre
-    end
-      # @results << Product.find_by(code: cat.Code).code
+        @results << cat.CostCentre
+        Product.find_by(code: cat.Code).code
+      end
     end
     dbh.disconnect
   end #end def index
