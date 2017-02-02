@@ -46,7 +46,21 @@ Contact.create(code:'running', email:'running')
     end
 
     dbh.disconnect
-    
+
+#-------------------------UPDATE PRODUCTS WITH CATEGORIES -------------------------------------
+dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+    @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
+    @categories = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
+    @categories.each do |cat|
+      if cat.CostCentre
+        categorycode = cat.Code.strip
+        if Product.find_by(code: categorycode)
+          Product.find_by(code: categorycode).update_attributes(category: categorycode)
+        end
+      end
+    end
+dbh.disconnect
+
 # ------------------------GET DATES AND UPDATE THE PRODUCTS WITH new_date FIELD-----------------------
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
