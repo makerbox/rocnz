@@ -5,8 +5,8 @@ class TermsController < ApplicationController
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
     @products.each do |p|
-      category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code = '#{p.Code}' ").fetch(:first, :Struct) #[0].to_h[:CostCentre]
-      @results << category
+      category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code LIKE '#{p.Code}%' ") #[0].to_h[:CostCentre]
+      @results << 'found'
     end
     dbh.disconnect
   end #end def index
