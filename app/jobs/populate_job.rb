@@ -53,9 +53,9 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     @categories = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
     @categories.each do |cat|
       if cat.CostCentre #if the prodmastext record has a category, then let's do it
-        categorycode = cat.CostCentre.strip
+        categorycode = cat.Code.strip
         if Product.find_by(code: categorycode) #if the product exists, let's give it the category (some products without images have no dice)
-          Product.find_by(code: categorycode).update_attributes(category: categorycode)
+          Product.find_by(code: categorycode).update_attributes(category: cat.CostCentre.strip)
         end
       end
     end
