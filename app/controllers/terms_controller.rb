@@ -8,8 +8,8 @@ class TermsController < ApplicationController
     @categories.each do |cat|
       if cat.CostCentre
         categorycode = cat.Code.strip
-        @results << cat.Code
-        @results << Product.where(code: categorycode).code
+        @results << cat.Code.strip
+        Product.where(code: categorycode).update_attributes(category: categorycode)
       end
     end
     dbh.disconnect
