@@ -6,7 +6,7 @@ class TermsController < ApplicationController
     @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
     
     Product.all.each do |p|
-      category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code LIKE '#{p.Code}%' ").fetch(:all, :Struct)[0].to_h[:CostCentre]
+      category = dbh.execute("SELECT CostCentre FROM prodmastext WHERE Code LIKE '#{p.code}%' ").fetch(:all, :Struct)[0].to_h[:CostCentre]
       # Product.where(code: p.Code).update_attributes(category: category)
       @results << category
     end
