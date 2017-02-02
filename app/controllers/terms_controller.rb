@@ -9,7 +9,9 @@ class TermsController < ApplicationController
       if cat.CostCentre
         categorycode = cat.Code.strip
         @results << cat.Code.strip
-        Product.find_by(code: categorycode).update_attributes(category: categorycode)
+        if Product.find_by(code: categorycode)
+          Product.find_by(code: categorycode).update_attributes(category: categorycode)
+        end
       end
     end
     dbh.disconnect
