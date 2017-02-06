@@ -25,15 +25,15 @@
                   <% end %>
                   <% case level %>
                     <% when 1 %>
-                      <%= oldprice = product.price1 %>
+                      <% oldprice = product.price1 %>
                     <% when 2 %>
-                      <%= oldprice = product.price2 %>
+                      <% oldprice = product.price2 %>
                     <% when 3 %>
-                      <%= oldprice = product.price3 %>
+                      <% oldprice = product.price3 %>
                     <% when 4 %>
-                      <%= oldprice = product.price4 %>
+                      <% oldprice = product.price4 %>
                     <% when 5 %>
-                      <%= oldprice = product.price5 %>
+                      <% oldprice = product.price5 %>
                     <% when 6 %>
                       <% oldprice = product.rrp %>
                   <% end %>
@@ -51,8 +51,8 @@
                     <% when 6 %>
                       <% prodprice = product.rrp %>
                   <% end %>
-                  <% if oldprice <= prodprice %>
-                  <span style="text-decoration: line-through;">$<%= oldprice %></span>
+                  <% if oldprice > prodprice %>
+                    <span style="text-decoration: line-through;">$<%= oldprice %></span>
                   <% end %>
                   <% if (current_user.has_role? :admin) && (current_user.mimic.nil?) %>
                     <br>[RRP: $<%= product.rrp %>]<br>
