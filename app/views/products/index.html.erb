@@ -22,7 +22,21 @@
                   <% else %>
                     <% level = current_user.account.seller_level.to_i %>
                     <% thisperson = current_user %>
-                  <% end %>
+                  <% end %>REAL::
+                  <% case level %>
+                    <% when 1 %>
+                      <%= product.price1 %>
+                    <% when 2 %>
+                      <%= product.price2 %>
+                    <% when 3 %>
+                      <%= product.price3 %>
+                    <% when 4 %>
+                      <%= product.price4 %>
+                    <% when 5 %>
+                      <%= product.price5 %>
+                    <% when 6 %>
+                      <% prodprice = product.rrp %>
+                  <% end %>::
                   <% case level %>
                     <% when 1 %>
                       <% prodprice = product.discount(thisperson, product.price1) %>
