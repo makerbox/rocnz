@@ -4,7 +4,7 @@ has_many :orders, through: :quantities
 
 def calc_discount(user, price, prod_group, prod_code)
 	# if Discount.where(producttype: 'group_percent', product: self.group, customertype: 'code_percent', customer: user.account.code)
-		if Discount.where(producttype: 'group_percent', product: prod_group, customertype: 'code_percent', customer: user.account.code).exists?
+		if Discount.find_by(producttype: 'group_percent', product: prod_group, customertype: 'code_percent', customer: user.account.code)
 			discount = Discount.where(producttype: 'group_percent', product: prod_group, customertype: 'code_percent', customer: user.account.code).discount
 			# discount = (price / 100) * discount
 			price - discount
