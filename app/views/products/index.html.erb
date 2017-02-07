@@ -39,23 +39,18 @@
                   <% end %>
                   <% case level %>
                     <% when 1 %>
-                      <% prodprice = product.calc_discount(thisperson, product.price1, product) %>
+                      <% prodprice = product.calc_discount(thisperson, product.price1, product.group, product.code) %>
                     <% when 2 %>
-                      <% prodprice = product.calc_discount(thisperson, product.price2, product) %>
+                      <% prodprice = product.calc_discount(thisperson, product.price2, product.group, product.code) %>
                     <% when 3 %>
-                      <% prodprice = product.calc_discount(thisperson, product.price3, product) %>
+                      <% prodprice = product.calc_discount(thisperson, product.price3, product.group, product.code) %>
                     <% when 4 %>
-                      <% prodprice = product.calc_discount(thisperson, product.price4, product) %>
+                      <% prodprice = product.calc_discount(thisperson, product.price4, product.group, product.code) %>
                     <% when 5 %>
-                      <% prodprice = product.calc_discount(thisperson, product.price5, product) %>
+                      <% prodprice = product.calc_discount(thisperson, product.price5, product.group, product.code) %>
                     <% when 6 %>
                       <% prodprice = product.rrp %>
                   <% end %>
-
-                  group = <%= product.group %><br>
-                  user account discount = <%= thisperson.account.sort %><br>
-                  user account code = <%= thisperson.account.code %><br>
-
 
                   <% if oldprice > prodprice %>
                     <span style="text-decoration: line-through;">$<%= oldprice %></span>
