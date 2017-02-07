@@ -51,6 +51,12 @@
                     <% when 6 %>
                       <% prodprice = product.rrp %>
                   <% end %>
+
+                  group = <%= product.group %><br>
+                  user account discount = <%= thisperson.account.discount %><br>
+                  user account code = <%= thisperson.account.code %><br>
+
+
                   <% if oldprice > prodprice %>
                     <span style="text-decoration: line-through;">$<%= oldprice %></span>
                   <% end %>
