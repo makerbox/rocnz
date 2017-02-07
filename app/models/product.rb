@@ -35,7 +35,7 @@ def discount(user, price)
 			price - discount
 		# end
 		else
-			price
+			price - 1
 		end
 end
 
