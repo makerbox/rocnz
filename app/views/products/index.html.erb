@@ -51,7 +51,7 @@
                     <% when 6 %>
                       <% prodprice = product.rrp %>
                   <% end %><%= thisperson.account.code %>
-                  <% if Discount.all.find_by(producttype: 'group_percent', product: product.group, customertype: 'code_percent', customer: thisperson.account.code) %>
+                  <% if Discount.all.where(producttype: 'group_percent', product: product.group, customertype: 'code_percent', customer: thisperson.account.code) %>
                     <%= Discount.all.find_by(producttype: 'group_percent', product: product.group, customertype: 'code_percent', customer: thisperson.account.code) %>
                   <% end %>
                   <% if oldprice > prodprice %>
