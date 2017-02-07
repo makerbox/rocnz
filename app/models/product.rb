@@ -2,7 +2,7 @@ class Product < ActiveRecord::Base
 has_many :quantities
 has_many :orders, through: :quantities
 
-def calc_discount(user, price, prod_group, prog_code)
+def calc_discount(user, price, prod_group, prod_code)
 	# if Discount.where(producttype: 'group_percent', product: self.group, customertype: 'code_percent', customer: user.account.code)
 		if Discount.where(producttype: 'group_percent', product: prod_group, customertype: 'code_percent', customer: user.account.code).exists?
 			discount = Discount.where(producttype: 'group_percent', product: prod_group, customertype: 'code_percent', customer: user.account.code).discount
@@ -35,7 +35,7 @@ def calc_discount(user, price, prod_group, prog_code)
 			price - discount
 		# end
 		else
-			price - 1
+			price
 		end
 end
 
