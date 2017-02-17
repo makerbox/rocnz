@@ -7,14 +7,10 @@
           <% Account.all.each do |c| %>
           <%= c.discount %>--<%= c.code %>
           <% end %>
-          <% Discount.all.each do |d| %>
+          <% Product.all.each do |d| %>
           <br>
           <ul>
-              <li>   "customertype" <%= d.customertype %></li>
-    <li>   "producttype" <%= d.producttype %></li>
-    <li>   "customer" )<%= d.customer %>(</li>
-    <li>   "product" <%= d.product %></li>
-    <li>  "discount" <%= d.discount %></li>
+              <li>   "new date" <%= d.new_date %></li>
           </ul>
           <% end %>
 
