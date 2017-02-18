@@ -4,16 +4,13 @@
           <b style="color:green;">FINISHED SEED</b>
           <% end %>
           <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %><%= link_to 'SEED', home_seed_path, class: 'btn btn-info' %><%= link_to 'SUICIDE', home_test_path, class: 'btn btn-danger' %><br>
-          <% #Account.all.each do |c| %>
-          <%= #c.discount %>--<%= #c.code %>
-          <% #end %>
+          
           <% Product.all.each do |d| %>
-          <br>
-          <ul>
-          <% if d.new_date %>
-              <li>date = <%= d.new_date %> product = <%= d.code %></li>
-          <% end %>
-          </ul>
+            <br>
+            <% if d.new_date %>
+              date = <%= d.new_date %> 
+              product = <%= d.code %>
+            <% end %>
           <% end %>
 
 <br>
