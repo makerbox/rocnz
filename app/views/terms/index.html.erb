@@ -7,7 +7,7 @@
           
           <% Product.all.each do |d| %>
             <br>
-            <% if d.new_date %>
+            <% if !d.new_date.blank? %>
               date = <%= d.new_date %> 
               product = <%= d.code %>
             <% end %>
