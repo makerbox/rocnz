@@ -6,8 +6,8 @@
           <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %><%= link_to 'SEED', home_seed_path, class: 'btn btn-info' %><%= link_to 'SUICIDE', home_test_path, class: 'btn btn-danger' %><br>
           
           <% Product.all.each do |d| %>
-            <br>
             <% if !d.new_date.blank? %>
+            <br>
               date = <%= d.new_date %> 
               product = <%= d.code %>
             <% end %>
