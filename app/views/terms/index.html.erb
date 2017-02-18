@@ -10,9 +10,9 @@
           <% Product.all.each do |d| %>
           <br>
           <ul>
-          <% if !d.new_date.blank? %>
-              <li>date = <%= d.new_date %> | product = <%= d.code %></li>
-              <% end %>
+          <% if d.new_date %>
+              <li>date = <%= d.new_date %> product = <%= d.code %></li>
+          <% end %>
           </ul>
           <% end %>
 
