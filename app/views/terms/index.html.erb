@@ -4,7 +4,7 @@
           <b style="color:green;">FINISHED SEED</b>
           <% end %>
           <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %><%= link_to 'SEED', home_seed_path, class: 'btn btn-info' %><%= link_to 'SUICIDE', home_test_path, class: 'btn btn-danger' %><br>
-          
+          <h1>DATES</h1>(NEW ARRIVALS)<br>
           <% Product.all.each do |d| %>
             <% if !d.new_date.blank? %>
             <br>
@@ -12,6 +12,7 @@
               product = <%= d.code %>
             <% end %>
           <% end %>
+          <h1>QTYs in SPECIAL PRICING</h1>
           <% @xray.each do |x| %>
             <% if x.MaxQty1 || x.MaxQty2 || x.MaxQty3 %>
             <%= x.MaxQty1 %> ----qty<br>
