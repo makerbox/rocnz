@@ -7,7 +7,7 @@ class TermsController < ApplicationController
     end
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     @xray = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
-
+    dbh.disconnect
   end #end def index
 
 end #end class
