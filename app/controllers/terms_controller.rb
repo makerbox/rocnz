@@ -8,7 +8,7 @@ class TermsController < ApplicationController
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     @xray = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
     dbh.disconnect
-    @output = `heroku db:push`
+    system "heroku db:push"
   end #end def index
 
 end #end class
