@@ -44,9 +44,8 @@
                     <% when 6 %>
                       <% prodprice = po.product.rrp %>
                   <% end %>
-	<% @setprice = @setprice.round(2) %>
-	$<%= number_with_precision(@setprice, precision: 2) %>
-	<% subtotal = (po.qty * @setprice).round(2) %>
+	$<%= number_with_precision(prodprice, precision: 2)%>
+	<% subtotal = (po.qty * prodprice).round(2) %>
 	<div class="qty"> x <%= po.qty %></div> ------- $<%= number_with_precision(subtotal, precision: 2) %>
 	<% @order.total = @order.total + subtotal %>
 
