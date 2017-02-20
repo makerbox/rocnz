@@ -18,31 +18,31 @@
                   <% end %>
                   <% case level %>
                     <% when 1 %>
-                      <% oldprice = product.price1 %>
+                      <% oldprice = po.product.price1 %>
                     <% when 2 %>
-                      <% oldprice = product.price2 %>
+                      <% oldprice = po.product.price2 %>
                     <% when 3 %>
-                      <% oldprice = product.price3 %>
+                      <% oldprice = po.product.price3 %>
                     <% when 4 %>
-                      <% oldprice = product.price4 %>
+                      <% oldprice = po.product.price4 %>
                     <% when 5 %>
-                      <% oldprice = product.price5 %>
+                      <% oldprice = po.product.price5 %>
                     <% when 6 %>
-                      <% oldprice = product.rrp %>
+                      <% oldprice = po.product.rrp %>
                   <% end %>
                   <% case level %>
                     <% when 1 %>
-                      <% prodprice = product.calc_discount(thisperson, product.price1, product.group, product.code) %>
+                      <% prodprice = po.product.calc_discount(thisperson, po.product.price1, po.product.group, po.product.code) %>
                     <% when 2 %>
-                      <% prodprice = product.calc_discount(thisperson, product.price2, product.group, product.code) %>
+                      <% prodprice = po.product.calc_discount(thisperson, po.product.price2, po.product.group, po.product.code) %>
                     <% when 3 %>
-                      <% prodprice = product.calc_discount(thisperson, product.price3, product.group, product.code) %>
+                      <% prodprice = po.product.calc_discount(thisperson, po.product.price3, po.product.group, po.product.code) %>
                     <% when 4 %>
-                      <% prodprice = product.calc_discount(thisperson, product.price4, product.group, product.code) %>
+                      <% prodprice = po.product.calc_discount(thisperson, po.product.price4, po.product.group, po.product.code) %>
                     <% when 5 %>
-                      <% prodprice = product.calc_discount(thisperson, product.price5, product.group, product.code) %>
+                      <% prodprice = po.product.calc_discount(thisperson, po.product.price5, po.product.group, po.product.code) %>
                     <% when 6 %>
-                      <% prodprice = product.rrp %>
+                      <% prodprice = po.product.rrp %>
                   <% end %>
 	<% @setprice = @setprice.round(2) %>
 	$<%= number_with_precision(@setprice, precision: 2) %>
