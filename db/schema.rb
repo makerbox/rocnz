@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217221137) do
+ActiveRecord::Schema.define(version: 20170220030558) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 20170217221137) do
     t.integer  "discount"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "maxqty"
+    t.integer  "level"
   end
 
   create_table "mimics", force: :cascade do |t|

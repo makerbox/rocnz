@@ -4,39 +4,9 @@
           <b style="color:green;">FINISHED SEED</b>
           <% end %>
           <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %><%= link_to 'SEED', home_seed_path, class: 'btn btn-info' %><%= link_to 'SUICIDE', home_test_path, class: 'btn btn-danger' %><br>
-          <h1>DATES</h1>(NEW ARRIVALS)<br>
-          <% Product.all.each do |d| %>
-            <% if !d.new_date.blank? %>
-            <br>
-              date = <%= d.new_date %> 
-              product = <%= d.code %>
-            <% end %>
+          <% @results.each do |r| %>
+          <%= r.customer %> X <%= r.product %> ....<%= r.level %> = <%= r.discount %> @ <%= r.maxqty %><br>
           <% end %>
-          <h1>QTYs in SPECIAL PRICING</h1>
-          <table>
-          <thead>
-          <tr>
-          <th>CUST</th>
-          <th>PROD</th>
-          <th>QTY</th>
-          <th>DISC1</th>
-          <th>DISC2</th>
-          </tr>
-          </thead>
-          <tbody>
-          <% @xray.each do |x| %>
-          <% if (x.PriceCode1 == 9) || (x.DiscCode1 == 9) %>
-          <tr>
-            <th><%= x.Customer %></th>
-            <th><%= x.Product %></th>
-            <th><%= x.MaxQty1 %> | <%= x.MaxQty2 %> | <%= x.MaxQty3 %> | <%= x.MaxQty4 %></th>
-            <th><%= x.PriceCode1 %> | <%= x.Price1 %> | <%= x.PriceAdd1 %> | <%= x.PriceReduce1 %> | <%= x.DiscPerc1%>|<%= x.DiscCode1%></th>
-            <th><%= x.PriceCode2 %> | <%= x.Price2 %> | <%= x.PriceAdd2 %> | <%= x.PriceReduce2 %> | <%= x.DiscPerc2%>|<%= x.DiscCode2%></th>
-          </tr>
-          <% end %>
-          <% end %>
-          </tbody>
-          </table>
 
 <br>
 
