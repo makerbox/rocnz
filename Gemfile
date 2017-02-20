@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
-gem 'wdm'
+gem 'wdm', group: :development
 
 #image hosting
 gem 'cloudinary'
