@@ -19,7 +19,8 @@
           <th>CUST</th>
           <th>PROD</th>
           <th>QTY</th>
-          <th>DISC</th>
+          <th>DISC1</th>
+          <th>DISC2</th>
           </tr>
           </thead>
           <tbody>
@@ -29,15 +30,11 @@
             <th><%= x.Product %></th>
             <th><%= x.MaxQty1 %> | <%= x.MaxQty2 %> | <%= x.MaxQty3 %> | <%= x.MaxQty4 %></th>
             <th><%= x.PriceCode1 %> | <%= x.Price1 %> | <%= x.PriceAdd1 %> | <%= x.PriceReduce1 %> | <%= x.DiscPerc1%>|<%= x.DiscCode1%></th>
+            <th><%= x.PriceCode2 %> | <%= x.Price2 %> | <%= x.PriceAdd2 %> | <%= x.PriceReduce2 %> | <%= x.DiscPerc2%>|<%= x.DiscCode2%></th>
           </tr>
           <% end %>
           </tbody>
           </table>
-          <h1>DISCOUNTS</h1>
-          <% Discount.all.each do |t| %>
-          customer = <%= t.customer %> |
-          product = <%= t.product %><br>
-          <% end %>
 
 <br>
 
