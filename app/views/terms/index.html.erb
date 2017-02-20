@@ -15,6 +15,7 @@
           <h1>QTYs in SPECIAL PRICING</h1>
           <% @xray.each do |x| %>
             <% if x.MaxQty1 || x.MaxQty2 || x.MaxQty3 %>
+            <%= x.Code %>
             <%= x.MaxQty1 %> ----qty<br>
             <% end %>
           <% end %>
