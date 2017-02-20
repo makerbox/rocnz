@@ -4,11 +4,11 @@ Search: <input id="searchfield" type="text"><span class="btn btn-info" onclick="
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>code</th>
+      <th>company</th>
+      <th>phone</th>
+      <th>contact</th>
       <th>email</th>
-      <th><%= link_to 'company name', accounts_path(order: 'company') %></th>
-      <th><%= link_to 'Suburb', accounts_path(order: 'Suburb') %></th>
-      <th><%= link_to 'Phone', accounts_path(order: 'Phone') %></th>
-      <th><%= link_to 'Contact name', accounts_path(order: 'contact') %></th>
       <th>View acct.</th>
       <th></th>
       <th>Order</th>
@@ -22,15 +22,15 @@ Search: <input id="searchfield" type="text"><span class="btn btn-info" onclick="
       <% else %>
       <tr>
         <% end %>
+        <td><%= account.code %></td>
+        <td><%= account.company %></td>
+        <td><%= account.phone %></td>
+        <td><%= account.contact %></td>
         <% if account.user %>
         <td><%= account.user.email %></td>
         <% else %>
         <td>no user assoc.</td>
         <% end %>
-        <td><%= account.company %></td>
-        <td><%= account.suburb %></td>
-        <td><%= account.phone %></td>
-        <td><%= account.contact %></td>
         <td>
           <%= link_to account_path(account) do %>
             <i class='fa fa-eye'></i>
