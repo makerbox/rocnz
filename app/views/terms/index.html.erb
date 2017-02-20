@@ -14,12 +14,27 @@
             <% end %>
           <% end %>
           <h1>QTYs in SPECIAL PRICING</h1>
+          <table>
+          <thead>
+          <tr>
+          <th>CUST</th>
+          <th>PROD</th>
+          <th>QTY</th>
+          <th>DISC</th>
+          </tr>
+          </thead>
+          <tbody>
           <% @xray.each do |x| %>
-            <% if x.MaxQty1 || x.MaxQty2 || x.MaxQty3 %>
-            <%= x.Customer %> (cust) | <%= x.Product %> (prod)
-            <%= x.MaxQty1 %> ----qty<br>
-            <% end %>
+          <tr>
+            <th><%= x.Customer %></th>
+            <th><%= x.Product %></th>
+            <th><%= x.MaxQty1 %></th>
+            <th><%= x.MaxQty2 %>??</th>
+            <th><%= x.PriceCode1 %>|<%= x.Price1 %>|<%= x.PriceAdd1 %>|<%= x.PriceReduce1 %>|<%= x.DiscPerc1%>|<%= x.DiscCode1%></th>
+          </tr>
           <% end %>
+          </tbody>
+          </table>
           <h1>DISCOUNTS</h1>
           <% Discount.all.each do |t| %>
           customer = <%= t.customer %> |
