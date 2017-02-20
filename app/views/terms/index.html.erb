@@ -19,6 +19,11 @@
             <%= x.MaxQty1 %> ----qty<br>
             <% end %>
           <% end %>
+          <h1>DISCOUNTS</h1>
+          <% Discount.all.each do |t| %>
+          customer = <%= t.customer %> |
+          product = <%= t.product %><br>
+          <% end %>
 
 <br>
 
