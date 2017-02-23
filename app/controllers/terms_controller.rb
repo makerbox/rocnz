@@ -3,8 +3,10 @@ class TermsController < ApplicationController
   def index
 	@results = []
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-    @results = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
-
+    discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
+    discounts.each do |d|
+    	@results << d.Customer
+    end
 
     dbh.disconnect   
   end #end def index
