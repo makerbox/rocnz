@@ -37,7 +37,7 @@ class TermsController < ApplicationController
       end
 @results << [producttype]
     end
-    discounts.each do |d|
+    discounts.all.each do |d|
       if (d.PriceCode1 == 9) || (d.DiscCode1 == 9) 
         percentage = d.DiscPerc1
         fixed = d.Price1
