@@ -19,7 +19,7 @@ end
     system "git stash"
     system "git pull"
     system "rake db:migrate"
-    @output = `git status`
+    @output = `psql --version`
       # system "rake jobs:work"
       # system "rake db:seed"
   end

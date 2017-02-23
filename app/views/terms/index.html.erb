@@ -5,11 +5,7 @@
           <% end %>
           <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %><%= link_to 'SEED', home_seed_path, class: 'btn btn-info' %><%= link_to 'SUICIDE', home_test_path, class: 'btn btn-danger' %><br>
           
-          <% @results.each do |r| %>
-          <%= r.customer %> X <%= r.product %> ....<%= r.level %> = <%= r.discount %> @ <%= r.maxqty %><br>
-          <% end %>
-          <% Product.all.each do |p| %>
-            <%= p.pricecat %><br>
+          <% @results.each do |r| %><%= r %>
           <% end %>
 
 <br>
