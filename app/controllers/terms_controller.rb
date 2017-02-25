@@ -49,7 +49,7 @@ class TermsController < ApplicationController
         maxqty = d.MaxQty1
       end
       if !d.Customer.blank? && !d.Product.blank?
-        disco(percentage, fixed, fixedprice, level, maxqty)
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType)
       end
       if (d.PriceCode1 == 9) || (d.DiscCode1 == 9) 
         percentage = d.DiscPerc2
@@ -59,7 +59,7 @@ class TermsController < ApplicationController
         maxqty = d.MaxQty2
       end
       if !d.Customer.blank? && !d.Product.blank?
-        disco(percentage, fixed, fixedprice, level, maxqty)
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType)
       end
       if (d.PriceCode1 == 9) || (d.DiscCode1 == 9) 
         percentage = d.DiscPerc3
@@ -69,7 +69,7 @@ class TermsController < ApplicationController
         maxqty = d.MaxQty3
       end
       if !d.Customer.blank? && !d.Product.blank?
-        disco(percentage, fixed, fixedprice, level, maxqty)
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType)
       end
       if (d.PriceCode1 == 9) || (d.DiscCode1 == 9) 
         percentage = d.DiscPerc4
@@ -79,7 +79,7 @@ class TermsController < ApplicationController
         maxqty = d.MaxQty4
       end
       if !d.Customer.blank? && !d.Product.blank?
-        disco(percentage, fixed, fixedprice, level, maxqty)
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType)
       end
       if (d.PriceCode1 == 9) || (d.DiscCode1 == 9) 
         percentage = d.DiscPerc5
@@ -89,7 +89,7 @@ class TermsController < ApplicationController
         maxqty = d.MaxQty5
       end
       if !d.Customer.blank? && !d.Product.blank?
-        disco(percentage, fixed, fixedprice, level, maxqty)
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType)
       end
       if (d.PriceCode1 == 9) || (d.DiscCode1 == 9) 
         percentage = d.DiscPerc6
@@ -99,7 +99,7 @@ class TermsController < ApplicationController
         maxqty = d.MaxQty6
       end
       if !d.Customer.blank? && !d.Product.blank?
-        disco(percentage, fixed, fixedprice, level, maxqty)
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType)
       end
       if (d.PriceCode1 == 9) || (d.DiscCode1 == 9) 
         percentage = d.DiscPerc7
@@ -109,7 +109,7 @@ class TermsController < ApplicationController
         maxqty = d.MaxQty7
       end
       if !d.Customer.blank? && !d.Product.blank?
-        disco(percentage, fixed, fixedprice, level, maxqty)
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType)
       end
       if (d.PriceCode1 == 9) || (d.DiscCode1 == 9) 
         percentage = d.DiscPerc8
@@ -119,7 +119,7 @@ class TermsController < ApplicationController
         maxqty = d.MaxQty8
       end
       if !d.Customer.blank? && !d.Product.blank?
-        disco(percentage, fixed, fixedprice, level, maxqty)
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType)
       end
       if (d.PriceCode1 == 9) || (d.DiscCode1 == 9) 
         percentage = d.DiscPerc9
@@ -129,7 +129,7 @@ class TermsController < ApplicationController
         maxqty = d.MaxQty9
       end
       if !d.Customer.blank? && !d.Product.blank?
-        disco(percentage, fixed, fixedprice, level, maxqty)
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType)
       end
       if (d.PriceCode1 == 9) || (d.DiscCode1 == 9) 
         percentage = d.DiscPerc10
