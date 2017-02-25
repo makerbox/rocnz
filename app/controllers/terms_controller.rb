@@ -7,7 +7,7 @@ class TermsController < ApplicationController
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
-    def disco(percentage, fixed, fixedprice, level, maxqty, ctype, ptype)
+    def disco(percentage, fixed, fixedprice, level, maxqty, ctype, ptype, customer, product)
       if fixedprice == 9 #if the discount is a fixed price
         discount = fixed
         if ctype == 10
@@ -37,7 +37,7 @@ class TermsController < ApplicationController
           producttype = 'cat_percent'
         end
       end
-        Discount.create(customertype: customertype, producttype: producttype, customer: d.Customer.strip, product: d.Product.strip, discount: discount, level: level, maxqty: maxqty)
+        Discount.create(customertype: customertype, producttype: producttype, customer: customer, product: d.product, discount: discount, level: level, maxqty: maxqty)
     end
 
     discounts.each do |d|
@@ -112,7 +112,7 @@ class TermsController < ApplicationController
         maxqty = d.MaxQty10
       end
       if !d.Customer.blank? && !d.Product.blank?
-        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType)
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
       end
     end
 
