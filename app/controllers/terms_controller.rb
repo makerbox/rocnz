@@ -37,7 +37,7 @@ class TermsController < ApplicationController
           producttype = 'cat_percent'
         end
       end
-        Discount.create(customertype: customertype, producttype: producttype, customer: customer, product: d.product, discount: discount, level: level, maxqty: maxqty)
+        Discount.create(customertype: customertype, producttype: producttype, customer: customer, product: product, discount: discount, level: level, maxqty: maxqty)
     end
 
     discounts.each do |d|
