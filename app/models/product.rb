@@ -3,9 +3,9 @@ has_many :quantities
 has_many :orders, through: :quantities
 
 def calc_discount(user, price, prod_group, prod_code, price_cat)
-	if !Discount.where(product: (prod_group || prod_code || price_cat), customer: (user.account.discount || user.account.code.strip)).nil?
-		@disc = Discount.find_by(product: (prod_group || prod_code || price_cat), customer: (user.account.discount || user.account.code.strip))
-		@disc.to_h.discount
+	if Discount.where("product = (prod_group OR prod_code OR price_cat)", "customer = (user.account.discount OR user.account.code.strip)")
+		@disc = Discount.find_by("product = (prod_group OR prod_code OR price_cat)", "customer = (user.account.discount OR user.account.code.strip)")
+		@disc
 	else
 		price
 	end
