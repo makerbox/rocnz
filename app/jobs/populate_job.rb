@@ -118,7 +118,7 @@ dbh.disconnect
           maxqty = 9999
         end
       end
-        Discount.create(customertype: customertype, producttype: producttype, customer: cust, product: prod, discount: discount, level: level, maxqty: maxqty)
+        Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty)
     end
 
     discounts.each do |d|
