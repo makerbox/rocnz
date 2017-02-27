@@ -37,7 +37,14 @@ class TermsController < ApplicationController
           producttype = 'cat_percent'
         end
       end
-        Discount.create(customertype: customertype, producttype: producttype, customer: cust, product: prod, discount: discount, level: level, maxqty: maxqty)
+      @results << customertype
+      @results << producttype
+      @results << cust
+      @results << prod
+      @results << discount
+      @results << "--------||--------"
+
+        # Discount.create(customertype: customertype, producttype: producttype, customer: cust, product: prod, discount: discount, level: level, maxqty: maxqty)
     end
 
     discounts.each do |d|
