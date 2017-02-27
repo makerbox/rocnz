@@ -4,8 +4,8 @@ has_many :orders, through: :quantities
 
 def calc_discount(user, price, prod_group, prod_code, price_cat)
 	if Discount.where(product: [prod_group , prod_code , price_cat])
-		@disc = Discount.where(product: [prod_group , prod_code , price_cat])
-		@disc.first
+		@disc = Discount.find_by(product: [prod_group , prod_code , price_cat])
+		@disc
 	else
 		price
 	end
