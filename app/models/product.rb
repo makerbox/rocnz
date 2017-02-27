@@ -3,12 +3,16 @@ has_many :quantities
 has_many :orders, through: :quantities
 
 def calc_discount(user, price, prod_group, prod_code, price_cat)
-	if Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (user.account.discount || user.account.code.strip))
-		@disc = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (user.account.discount || user.account.code.strip))
-		@disc
-	else
-		price
-	end
+	# if Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (user.account.discount || user.account.code.strip))
+	# 	@disc = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (user.account.discount || user.account.code.strip))
+	# 	@disc
+	# else
+	# 	price
+	# end
+	if Discount.where('product = ? AND customer = ?, (prod_group OR prod_code OR price_cat), (user.account.discount OR user.account.code.strip)')
+		disc = Discount.where('product = ? AND customer = ?, (prod_group OR prod_code OR price_cat), (user.account.discount OR user.account.code.strip)')
+	disc
+end
 		# if Discount.where(producttype: 'group_percent', product: prod_group, customertype: 'code_percent', customer: user.account.code.strip).exists?
 		# 	discount = Discount.where(producttype: 'group_percent', product: prod_group, customertype: 'code_percent', customer: user.account.code.strip)[0].discount
 		# 	discount = (price / 100) * discount
