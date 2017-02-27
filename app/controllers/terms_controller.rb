@@ -27,6 +27,8 @@ class TermsController < ApplicationController
       @results << cust
       @results << prod
       @results << discount
+      @results << level
+      @results << maxqty
       @results << "--------||--------"
       else
         discount = percentage
