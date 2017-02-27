@@ -16,10 +16,10 @@ def confirm
 end
 
   def pull
-    system "git stash"
+    # system "git stash"
     system "git pull"
-    system "rake db:migrate"
-    @output = `psql --version`
+    # system "rake db:migrate"
+    # @output = `psql --version`
       # system "rake jobs:work"
       # system "rake db:seed"
   end
