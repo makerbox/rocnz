@@ -51,7 +51,7 @@
                     <% when 6 %>
                       <% prodprice = product.rrp %>
                   <% end %>
-                  <%= @prod_group %>-
+                  <%= @prod_group %><%= product.group %>-
                   <%= @price_cat %>-
                   <%= @prod_code %>
                   <% if oldprice > prodprice %>
