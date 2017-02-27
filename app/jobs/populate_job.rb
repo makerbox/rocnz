@@ -80,11 +80,10 @@ dbh.disconnect
 
 # ------------------------DISCOUNTS---------------------------------------------------------
     Discount.destroy_all #wipe existing discounts in case of some deletions in Attache
-
     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
-    def disco(percentage, fixed, fixedprice, level, maxqty, ctype, ptype)
+    def disco(percentage, fixed, fixedprice, level, maxqty, ctype, ptype, cust, prod)
       if fixedprice == 9 #if the discount is a fixed price
         discount = fixed
         if ctype == 10
@@ -114,7 +113,12 @@ dbh.disconnect
           producttype = 'cat_percent'
         end
       end
-        Discount.create(customertype: customertype, producttype: producttype, customer: d.Customer.strip, product: d.Product.strip, discount: discount, level: level, maxqty: maxqty)
+      if maxqty #sometimes there is no qty
+        if maxqty >= 10000 #sometimes it's way too big to store as an integer
+          maxqty = 9999
+        end
+      end
+        Discount.create(customertype: customertype, producttype: producttype, customer: cust, product: prod, discount: discount, level: level, maxqty: maxqty)
     end
 
     discounts.each do |d|
@@ -189,7 +193,7 @@ dbh.disconnect
         maxqty = d.MaxQty10
       end
       if !d.Customer.blank? && !d.Product.blank?
-        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType)
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
       end
     end
 
