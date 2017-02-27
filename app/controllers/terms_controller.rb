@@ -22,14 +22,6 @@ class TermsController < ApplicationController
         else
           producttype = 'cat_fixed'
         end
-        @results << customertype
-      @results << producttype
-      @results << cust
-      @results << prod
-      @results << discount
-      @results << level
-      @results << maxqty
-      @results << "--------||--------"
       else
         discount = percentage
         if ctype == 10
@@ -45,8 +37,10 @@ class TermsController < ApplicationController
           producttype = 'cat_percent'
         end
       end
-
-        # Discount.create(customertype: customertype, producttype: producttype, customer: cust, product: prod, discount: discount, level: level, maxqty: maxqty)
+      	if maxqty >= 10000
+      		maxqty = 9999
+      	end
+        Discount.create(customertype: customertype, producttype: producttype, customer: cust, product: prod, discount: discount, level: level, maxqty: maxqty)
     end
 
     discounts.each do |d|
