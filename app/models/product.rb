@@ -11,7 +11,7 @@ def calc_discount(user, price, prod_group, prod_code, price_cat)
 	# end
 	if Discount.where('product = ? AND customer = ?, (prod_group OR prod_code OR price_cat), (user.account.discount OR user.account.code.strip)')
 		disc = Discount.where('product = ? AND customer = ?, (prod_group OR prod_code OR price_cat), (user.account.discount OR user.account.code.strip)')
-	disc
+	disc.first
 end
 		# if Discount.where(producttype: 'group_percent', product: prod_group, customertype: 'code_percent', customer: user.account.code.strip).exists?
 		# 	discount = Discount.where(producttype: 'group_percent', product: prod_group, customertype: 'code_percent', customer: user.account.code.strip)[0].discount
