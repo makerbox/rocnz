@@ -37,9 +37,11 @@ class TermsController < ApplicationController
           producttype = 'cat_percent'
         end
       end
+      if maxqty
       	if maxqty >= 10000
       		maxqty = 9999
       	end
+      end
         Discount.create(customertype: customertype, producttype: producttype, customer: cust, product: prod, discount: discount, level: level, maxqty: maxqty)
     end
 
