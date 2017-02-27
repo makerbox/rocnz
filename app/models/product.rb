@@ -3,7 +3,7 @@ has_many :quantities
 has_many :orders, through: :quantities
 
 def calc_discount(user, price, prod_group, prod_code, price_cat)
-	if Discount.where(product: [prod_group , prod_code , price_cat], customer: [user.account.discount , user.account.code.strip]).any?
+	if Discount.where(product: [prod_group , prod_code , price_cat], customer: [user.account.discount , user.account.code.strip])
 		@disc = Discount.where(product: [prod_group , prod_code , price_cat], customer: [user.account.discount , user.account.code.strip])
 		price - @disc.first.discount
 	else
