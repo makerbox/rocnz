@@ -12,7 +12,7 @@ Contact.create(code:'running', email:'running')
 
 # -------------------------GET PRODUCTS AND CREATE / UPDATE PRODUCT RECORDS------------------------
     @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
-    Product.destroy_all
+    # Product.destroy_all
     @products.each do |p|
       if p.Inactive == 0
         code = p.Code.strip
