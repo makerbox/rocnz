@@ -25,7 +25,7 @@ Contact.create(code:'running', email:'running')
         rrp = p.SalesPrice6
         qty = p.QtyInStock
         group = p.ProductGroup.to_s.strip
-        pricecat = p.PriceCat
+        pricecat = p.PriceCat.strip
         # # needs category
         if !Product.all.where(code: code).blank?
           Product.all.find_by(code: code).update_attributes(pricecat: pricecat, group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
