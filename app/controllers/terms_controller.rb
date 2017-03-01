@@ -5,7 +5,7 @@ class TermsController < ApplicationController
 	discounts = Discount.all
 	products = Product.all
 	products.each do |p|
-		@results << discounts.where(product: p.code).product
+		@results << discounts.where(product: p.code).first.product
 	end
   end #end def index
 
