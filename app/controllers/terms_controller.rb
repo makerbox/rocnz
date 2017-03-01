@@ -7,12 +7,7 @@ class TermsController < ApplicationController
 		@results << newd.code
 		@results << '......................'
 	end
-
-	discounts = Discount.all
-	products = Product.all
-	products.each do |p|
-		@results << discounts.find_by(product: p.code)
-	end
+	@results << Discount.all.count
   end #end def index
 
 end #end class
