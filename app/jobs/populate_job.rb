@@ -86,6 +86,7 @@ dbh.disconnect
 
     def disco(percentage, fixed, fixedprice, level, maxqty, ctype, ptype, cust, prod)
       if fixedprice == 9 #if the discount is a fixed price
+        type = fixedtype
         discount = fixed
         if ctype == 10
           customertype = 'code_fixed'
@@ -100,6 +101,7 @@ dbh.disconnect
           producttype = 'cat_fixed'
         end
       else
+        type = percentagetype
         discount = percentage
         if ctype == 10
           customertype = 'code_percent'
@@ -120,7 +122,7 @@ dbh.disconnect
         end
     end
     if !prod.nil? && !cust.nil?
-      Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty)
+      Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty, type: type)
     end
 end
 
