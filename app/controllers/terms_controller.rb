@@ -4,6 +4,8 @@ class TermsController < ApplicationController
 	@results = []	
 	Product.all.each do |newd|
 		@results << newd.new_date
+		@results << newd.code
+		@results << '......................'
 	end
 
 	discounts = Discount.all
