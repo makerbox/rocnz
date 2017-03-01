@@ -129,6 +129,7 @@ dbh.disconnect
         fixedprice = d.PriceCode1
         level = 1
         maxqty = d.MaxQty1
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
       end
       if (d.PriceCode2 == 9) || (d.DiscCode2 == 9) 
         percentage = d.DiscPerc2
@@ -136,6 +137,7 @@ dbh.disconnect
         fixedprice = d.PriceCode2
         level = 2
         maxqty = d.MaxQty2
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
       end
       if (d.PriceCode3 == 9) || (d.DiscCode3 == 9) 
         percentage = d.DiscPerc3
@@ -143,6 +145,7 @@ dbh.disconnect
         fixedprice = d.PriceCode3
         level = 3
         maxqty = d.MaxQty3
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
       end
       if (d.PriceCode4 == 9) || (d.DiscCode4 == 9) 
         percentage = d.DiscPerc4
@@ -150,6 +153,7 @@ dbh.disconnect
         fixedprice = d.PriceCode4
         level = 4
         maxqty = d.MaxQty4
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
       end
       if (d.PriceCode5 == 9) || (d.DiscCode5 == 9) 
         percentage = d.DiscPerc5
@@ -157,6 +161,7 @@ dbh.disconnect
         fixedprice = d.PriceCode5
         level = 5
         maxqty = d.MaxQty5
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
       end
       if (d.PriceCode6 == 9) || (d.DiscCode6 == 9) 
         percentage = d.DiscPerc6
@@ -164,6 +169,7 @@ dbh.disconnect
         fixedprice = d.PriceCode6
         level = 6
         maxqty = d.MaxQty6
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
       end
       if (d.PriceCode7 == 9) || (d.DiscCode7 == 9) 
         percentage = d.DiscPerc7
@@ -171,6 +177,7 @@ dbh.disconnect
         fixedprice = d.PriceCode7
         level = 7
         maxqty = d.MaxQty7
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
       end
       if (d.PriceCode8 == 9) || (d.DiscCode8 == 9) 
         percentage = d.DiscPerc8
@@ -178,6 +185,7 @@ dbh.disconnect
         fixedprice = d.PriceCode8
         level = 8
         maxqty = d.MaxQty8
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
       end
       if (d.PriceCode9 == 9) || (d.DiscCode9 == 9) 
         percentage = d.DiscPerc9
@@ -185,6 +193,7 @@ dbh.disconnect
         fixedprice = d.PriceCode9
         level = 9
         maxqty = d.MaxQty9
+        disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
       end
       if (d.PriceCode10 == 9) || (d.DiscCode10 == 9) 
         percentage = d.DiscPerc10
@@ -192,8 +201,6 @@ dbh.disconnect
         fixedprice = d.PriceCode10
         level = 10
         maxqty = d.MaxQty10
-      end
-      if !d.Customer.blank? && !d.Product.blank?
         disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
       end
     end
