@@ -2,7 +2,9 @@ class TermsController < ApplicationController
     skip_before_action :authenticate_user!
   def index
 	@results = []	
-	@results << Product.all.find_by(code: '7495AM').new_date
+	Product.all.each do |newd|
+		@results << newd.new_date
+	end
 
 	discounts = Discount.all
 	products = Product.all
