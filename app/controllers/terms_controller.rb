@@ -3,8 +3,8 @@ class TermsController < ApplicationController
   def index
 	@results = []	
 	Product.all.each do |newd|
-		@results << newd.new_date
-		@results << newd.code
+		@results << newd.new_date + '|'
+		@results << newd.code + '|'
 		@results << '......................'
 	end
 
