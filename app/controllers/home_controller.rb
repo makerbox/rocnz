@@ -18,7 +18,7 @@ end
   def pull
     system "git stash"
     system "git pull"
-    system "rake db:migrate"
+    system "bundle exec rake db:migrate"
     # @output = `psql --version`
       # system "rake jobs:work"
       # system "rake db:seed"
