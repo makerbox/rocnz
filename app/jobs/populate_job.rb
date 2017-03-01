@@ -33,7 +33,6 @@ Contact.create(code:'running', email:'running')
           if File.exist?(filename)
             # Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
             # stop from overloading transformations
-            Product.all.find_by(code: code).update_attributes(image_url: filename)
           else
             Product.all.find_by(code: code).destroy
           end
@@ -41,8 +40,7 @@ Contact.create(code:'running', email:'running')
           newproduct = Product.new(pricecat: pricecat, group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
           filename = "E:\\Attache\\Attache\\Roc\\Images\\Product\\" + code + ".jpg"
           if File.exist?(filename)
-            # Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
-            newproduct.image_url = filename
+            Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
           end
           newproduct.save
         end
