@@ -86,7 +86,7 @@ dbh.disconnect
 
     def disco(percentage, fixed, fixedprice, level, maxqty, ctype, ptype, cust, prod)
       if fixedprice == 9 #if the discount is a fixed price
-        type = fixedtype
+        type = 'fixedtype'
         discount = fixed
         if ctype == 10
           customertype = 'code_fixed'
@@ -101,7 +101,7 @@ dbh.disconnect
           producttype = 'cat_fixed'
         end
       else
-        type = percentagetype
+        type = 'percentagetype'
         discount = percentage
         if ctype == 10
           customertype = 'code_percent'
