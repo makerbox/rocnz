@@ -9,7 +9,7 @@
       <% @products.each do |product| %>
         <%= link_to (product) do %>
           <div class="product">
-            <%= cl_image_tag(product.code.strip) %>
+            <img src="#{product.image_url}">
             <br>
             <%= product.code %> | <%= product.description %> | <%= product.pricecat %><br>
 
