@@ -3,7 +3,7 @@ class TermsController < ApplicationController
   def index
 	@results = []	
 	Discount.all.each do |disc|
-		@results << disc.product
+		@results << disc.discount
 		@results << '......................'
 	end
 	@results << Discount.all.count
