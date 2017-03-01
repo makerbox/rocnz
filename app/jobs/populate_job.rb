@@ -40,7 +40,8 @@ Contact.create(code:'running', email:'running')
           newproduct = Product.new(pricecat: pricecat, group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
           filename = "E:\\Attache\\Attache\\Roc\\Images\\Product\\" + code + ".jpg"
           if File.exist?(filename)
-            Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
+            # Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
+            # stop from overloading transformations
           end
           newproduct.save
         end
