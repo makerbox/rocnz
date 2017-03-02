@@ -3,9 +3,9 @@ has_many :quantities
 has_many :orders, through: :quantities
 
 def calc_discount(user, price, prod_group, prod_code, price_cat)
-	if Discount.where(product: (prod_group || prod_code || price_cat), customer: (user.account.discount || user.account.code.strip))
-		discos = Discount.where(product: (prod_group || prod_code || price_cat), customer: (user.account.discount || user.account.code.strip))
-		if discos.first.disctype == 'fixedtype'
+	if Discount.where(product: (prod_group || prod_code || price_cat), customer: (user.account.discount || user.account.code.strip)).any?
+		disco = Discount.where(product: (prod_group || prod_code || price_cat), customer: (user.account.discount || user.account.code.strip)).first
+		if disco.disctype == 'fixedtype'
 			price - thisdisco.discount
 		else
 			price - (price * (thisdisco.discount / 100))
