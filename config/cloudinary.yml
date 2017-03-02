@@ -1,19 +1,19 @@
 ---
 development:
-  cloud_name: roc-cloudy
-  api_key: '616878854913564'
-  api_secret: dnBfWmgOamXJ_JXhBQQf_PdFU08
+  cloud_name: ddmbp4xnw
+  api_key: '793545245556975'
+  api_secret: l0HIx8n57HIU8Y48Y8tLyvQ13sQ
   enhance_image_tag: true
   static_image_support: false
 production:
-  cloud_name: roc-cloudy
-  api_key: '616878854913564'
-  api_secret: dnBfWmgOamXJ_JXhBQQf_PdFU08
+  cloud_name: ddmbp4xnw
+  api_key: '793545245556975'
+  api_secret: l0HIx8n57HIU8Y48Y8tLyvQ13sQ
   enhance_image_tag: true
   static_image_support: true
 test:
-  cloud_name: roc-cloudy
-  api_key: '616878854913564'
-  api_secret: dnBfWmgOamXJ_JXhBQQf_PdFU08
+  cloud_name: ddmbp4xnw
+  api_key: '793545245556975'
+  api_secret: l0HIx8n57HIU8Y48Y8tLyvQ13sQ
   enhance_image_tag: true
   static_image_support: false
