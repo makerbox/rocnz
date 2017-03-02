@@ -3,7 +3,7 @@ class TermsController < ApplicationController
 	def index
 
 @results = []	
-
+@results = Discount.all
 
   end #end def index
 
