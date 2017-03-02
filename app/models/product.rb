@@ -3,8 +3,8 @@ has_many :quantities
 has_many :orders, through: :quantities
 
 def calc_discount(user, price, prod_group, prod_code, price_cat)
-	if !Discount.where(product: (prod_group || prod_code || price_cat), customer: (user.account.discount || user.account.code.strip)).nil?
-		disco = Discount.where(product: (prod_group || prod_code || price_cat), customer: (user.account.discount || user.account.code.strip)).first
+	if Discount.where(product: (prod_group || prod_code || price_cat)).exists?
+		disco = Discount.where(product: (prod_group || prod_code || price_cat)).first
 		if disco.disctype == 'fixedtype'
 			price - disco.discount
 		else
