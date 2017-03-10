@@ -6,18 +6,18 @@
   <link href="https://fonts.googleapis.com/css?family=Lobster|Scope+One|Vesper+Libre" rel="stylesheet">
   
   <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -32,51 +32,97 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="../">
-<img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479963402/RocCloudy_axxjva.jpg"><div class='tinytext'>Roc Cloudy Pty Ltd (<%= Product.all.count %>)</div>
-</a>
+          <img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479963402/RocCloudy_axxjva.jpg"><div class='tinytext'>Roc Cloudy Pty Ltd (<%= Product.all.count %>)</div>
+        </a>
 
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <% if @notice != nil %>
+        <% if @notice != nil %>
         <%= @notice %>
-      <% end %>
-      <% if user_signed_in? %>
+        <% end %>
+        <% if user_signed_in? %>
 
-      <% if current_user.has_role? :admin %>
+        <% if current_user.has_role? :admin %>
         <div id="mimic">
           <% if !current_user.mimic.account.nil? %>
-            ORDERING FOR: 
-            <%= current_user.mimic.account.company %>
+          ORDERING FOR: 
+          <%= current_user.mimic.account.company %>
           <% end %>
         </div>
-      <% end %>
+        <% end %>
 
         <ul class="nav navbar-nav">
-        <% if current_user.account %>
+          <% if current_user.account %>
           <% if current_user.account.sort %>
-            <% if ((!current_user.has_role? :admin) && (current_user.account.sort.include? 'R')) || ((current_user.has_role? :admin) && (current_user.mimic.account != nil) && (current_user.mimic.account.sort.include? 'R')) %>
-              <li class="dropdown menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1480980887/roc_backless_ltdncr.png"></a>
-              <ul class="dropdown-menu">
+          <% if ((!current_user.has_role? :admin) && (current_user.account.sort.include? 'R')) || ((current_user.has_role? :admin) && (current_user.mimic.account != nil) && (current_user.mimic.account.sort.include? 'R')) %>
+          <li class="dropdown menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1480980887/roc_backless_ltdncr.png"></a>
+            <ul class="dropdown-menu">
               <li><%= link_to 'Sunglasses', products_path(group: 'roc', cat: 'C') %></li>
               <li><%= link_to 'Hats', products_path(group: 'roc', cat: 'J') %></li>
               <li><%= link_to 'New arrivals', products_path(group: 'roc', filter: 'new') %></li>
-              </ul>
-              </li>
+            </ul>
+          </li>
+          <% end %>
+          <% if ((!current_user.has_role? :admin) && (current_user.account.sort.include? 'P')) || ((current_user.has_role? :admin) && (current_user.mimic.account != nil) && (current_user.mimic.account.sort.include? 'P')) %>
+          <li class="dropdown-menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1480980887/polasports_backless_jhozlk.png">
+          </a><ul class="dropdown-menu"><li><%= link_to 'All Sunglasses', products_path(group: 'polasports') %></li>
+          <li><%= link_to 'New arrivals', products_path(group: 'polasports', filter: 'new') %></li></ul></li>
+        </li>
+        <% end %>
+        <% if ((!current_user.has_role? :admin) && (current_user.account.sort.include? 'L')) || ((current_user.has_role? :admin) && (current_user.mimic.account != nil) && (current_user.mimic.account.sort.include? 'L')) %>
+        <li class="dropdown-menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1480979854/locello_backless_q6dgfz.png"></a><ul class="dropdown-menu"><li><%= link_to 'All Sunglasses', products_path(group: 'locello') %></li>
+        <li><%= link_to 'New arrivals', products_path(group: 'locello', filter: 'new') %></li></ul></li>
+        <% end %>
+        <% if ((!current_user.has_role? :admin) && (current_user.account.sort.include? 'U')) || ((current_user.has_role? :admin) && (current_user.mimic.account != nil) && (current_user.mimic.account.sort.include? 'U')) %>
+        <li class="dropdown menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1480980887/unity_backless_fzdl6h.png"></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'All Sunglasses', products_path(group: 'unity', cat: ['E','D']) %></li>
+            <li><%= link_to 'Fashion', products_path(group: 'unity', cat: 'E', filter: 'FASHION') %></li>
+            <li><%= link_to 'Mens', products_path(group: 'unity', cat: 'E', filter: 'MENS') %></li>
+            <li><%= link_to 'Mens Polarised', products_path(group: 'unity', cat: 'E', filter: 'MENS POLARISED') %></li>
+            <li><%= link_to 'Womens', products_path(group: 'unity', cat: 'E', filter: 'WOMENS') %></li>
+            <li><%= link_to 'Womens Polarised', products_path(group: 'unity', cat: 'E', filter: 'WOMENS POLARISED') %></li>
+            <li><%= link_to 'Kids', products_path(group: 'unity', cat: 'D') %></li>
+            <li><%= link_to 'Reading', products_path(group: 'unity', cat: 'R') %></li>
+            <li><%= link_to 'Accesories', products_path(group: 'unity', cat: 'A') %></li>
+            <li><%= link_to 'New arrivals', products_path(group: 'unity', filter: 'new') %></li></ul></li>
             <% end %>
-            <% if ((!current_user.has_role? :admin) && (current_user.account.sort.include? 'P')) || ((current_user.has_role? :admin) && (current_user.mimic.account != nil) && (current_user.mimic.account.sort.include? 'P')) %>
-              <li class="dropdown-menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1480980887/polasports_backless_jhozlk.png">
-                </a><ul class="dropdown-menu"><li><%= link_to 'All Sunglasses', products_path(group: 'polasports') %></li>
-              <li><%= link_to 'New arrivals', products_path(group: 'polasports', filter: 'new') %></li></ul></li>
-              </li>
+            
             <% end %>
-            <% if ((!current_user.has_role? :admin) && (current_user.account.sort.include? 'L')) || ((current_user.has_role? :admin) && (current_user.mimic.account != nil) && (current_user.mimic.account.sort.include? 'L')) %>
-              <li class="dropdown-menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1480979854/locello_backless_q6dgfz.png"></a><ul class="dropdown-menu"><li><%= link_to 'All Sunglasses', products_path(group: 'locello') %></li>
-              <li><%= link_to 'New arrivals', products_path(group: 'locello', filter: 'new') %></li></ul></li>
             <% end %>
-            <% if ((!current_user.has_role? :admin) && (current_user.account.sort.include? 'U')) || ((current_user.has_role? :admin) && (current_user.mimic.account != nil) && (current_user.mimic.account.sort.include? 'U')) %>
+            <% end %>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+            <% if current_user.has_role? :admin %>
+            <li><%= link_to 'Customers', accounts_path %></li>
+            <% else %>
+            <% if current_user.approved? %>
+            <li><%= link_to 'My Account', new_user_session_path %></li>
+            <% else %>
+            <% if !current_user.account %>
+            <li><%= link_to 'create account for approval', new_account_path(current_user) %></li>
+            <% else %>
+            <% if current_user.account.approved != 'approved' %>
+            <li><%= link_to 'your account is pending approval', account_path(current_user.account) %></a></li>
+            <% else %>
+            <li><%= link_to 'my account', account_path(current_user.account) %></a></li>
+            <% end %>
+            <% end %>
+            <% end %>
+
+            <% end %>
+            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+            <% if current_user.orders.any? && current_user.orders.last.active == true %>
+            <li><%= link_to 'View Cart', order_path(current_user.orders.where(active: true).last) %></li>
+            <% end %> 
+
+
+            <% else %>
             <li class="dropdown menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1480980887/unity_backless_fzdl6h.png"></a>
             <ul class="dropdown-menu">
               <li><%= link_to 'All Sunglasses', products_path(group: 'unity', cat: ['E','D']) %></li>
@@ -89,79 +135,34 @@
               <li><%= link_to 'Reading', products_path(group: 'unity', cat: 'R') %></li>
               <li><%= link_to 'Accesories', products_path(group: 'unity', cat: 'A') %></li>
               <li><%= link_to 'New arrivals', products_path(group: 'unity', filter: 'new') %></li></ul></li>
+            <li class="dropdown menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Brands<span class="caret"></span></a>
+              <ul class="dropdown-menu" style="text-align:center;">
+                <li><%= link_to 'Roc', home_roc_path %></li>
+                <li><%= link_to 'Polasports', home_polasports_path %></li>
+                <li><%= link_to 'Locello', home_locello_path %></li>
+                <li><%= link_to 'Unity', home_unity_path %></li>
+              </ul>
+            </li>
+            <li><%= link_to 'About us', home_about_path %></li>
+            <li><%= link_to 'Contact us', home_contact_path %></li>          
+            <li><%= link_to 'Log in', new_user_session_path %></li>
             <% end %>
-            
-          <% end %>
-        <% end %>
-      <% end %>
-        </ul>
-
-        <ul class="nav navbar-nav navbar-right">
-          <% if user_signed_in? %>
-          <% if current_user.has_role? :admin %>
-          <li><%= link_to 'Customers', accounts_path %></li>
-          <% else %>
-          <% if current_user.approved? %>
-          <li><%= link_to 'My Account', new_user_session_path %></li>
-          <% else %>
-          <% if !current_user.account %>
-          <li><%= link_to 'create account for approval', new_account_path(current_user) %></li>
-          <% else %>
-          <% if current_user.account.approved != 'approved' %>
-          <li><%= link_to 'your account is pending approval', account_path(current_user.account) %></a></li>
-          <% else %>
-          <li><%= link_to 'my account', account_path(current_user.account) %></a></li>
-          <% end %>
-          <% end %>
-          <% end %>
-
-          <% end %>
-          <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-          <% if current_user.orders.any? && current_user.orders.last.active == true %>
-          <li><%= link_to 'View Cart', order_path(current_user.orders.where(active: true).last) %></li>
-          <% end %> 
-
-
-          <% else %>
-          <li class="dropdown menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Brands<span class="caret"></span></a>
-          <ul class="dropdown-menu" style="text-align:center;">
-          <li><%= link_to 'Roc', home_roc_path %></li>
-          <li><%= link_to 'Polasports', home_polasports_path %></li>
-          <li><%= link_to 'Locello', home_locello_path %></li>
-          <li class="dropdown menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1480980887/unity_backless_fzdl6h.png"></a>
-            <ul class="dropdown-menu">
-              <li><%= link_to 'All Sunglasses', products_path(group: 'unity', cat: ['E','D']) %></li>
-              <li><%= link_to 'Fashion', products_path(group: 'unity', cat: 'E', filter: 'FASHION') %></li>
-              <li><%= link_to 'Mens', products_path(group: 'unity', cat: 'E', filter: 'MENS') %></li>
-              <li><%= link_to 'Mens Polarised', products_path(group: 'unity', cat: 'E', filter: 'MENS POLARISED') %></li>
-              <li><%= link_to 'Womens', products_path(group: 'unity', cat: 'E', filter: 'WOMENS') %></li>
-              <li><%= link_to 'Womens Polarised', products_path(group: 'unity', cat: 'E', filter: 'WOMENS POLARISED') %></li>
-              <li><%= link_to 'Kids', products_path(group: 'unity', cat: 'D') %></li>
-              <li><%= link_to 'Reading', products_path(group: 'unity', cat: 'R') %></li>
-              <li><%= link_to 'Accesories', products_path(group: 'unity', cat: 'A') %></li>
-              <li><%= link_to 'New arrivals', products_path(group: 'unity', filter: 'new') %></li></ul></li>
           </ul>
-          </li>
-          <li><%= link_to 'About us', home_about_path %></li>
-          <li><%= link_to 'Contact us', home_contact_path %></li>          
-          <li><%= link_to 'Log in', new_user_session_path %></li>
-          <% end %>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
 
-  <div class="mycontainer">
-    <%= yield %>
-  </div>
+    <div class="mycontainer">
+      <%= yield %>
+    </div>
 
-  <div class="footer">
-    <%= link_to 'terms', terms_index_path %> | <%= link_to 'privacy', privacy_index_path %>
-    <% if !user_signed_in? %>
-    | <%= link_to 'sign up', new_user_registration_path %> | <%= link_to 'log in', new_user_session_path %>
-    <% end %>
-    | copyright &copy; <%= Time.now.year %> Roc Cloudy Pty Ltd
-  </div>
+    <div class="footer">
+      <%= link_to 'terms', terms_index_path %> | <%= link_to 'privacy', privacy_index_path %>
+      <% if !user_signed_in? %>
+      | <%= link_to 'sign up', new_user_registration_path %> | <%= link_to 'log in', new_user_session_path %>
+      <% end %>
+      | copyright &copy; <%= Time.now.year %> Roc Cloudy Pty Ltd
+    </div>
 
-</body>
-</html>
+  </body>
+  </html>
