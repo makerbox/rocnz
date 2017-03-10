@@ -7,103 +7,141 @@ class ProductsController < ApplicationController
     availgroups = [] #create empty array to store the groups available to the current user
     group = params[:group]
     filter = params[:filter]
-    if current_user.account.sort # check that they have a sort before trying to use include? statements
-      # if current_user.account.sort.include? 'R'
-      #   availgroups = availgroups << 'C  '
-      # end
-      # if current_user.account.sort.include? 'P'
-      #   availgroups = availgroups << 'L  '
-      # end
-      # if current_user.account.sort.include? 'L'
-      #   availgroups = availgroups << 'LC  '
-      # end
-      # if current_user.account.sort.include? 'U'
-      #   availgroups = availgroups << 'E  ' << 'R  ' << 'D  ' << 'A  '
-      # end
-      if group == 'roc'
-        if (current_user.account.sort.include? 'R') || ((current_user.has_role? :admin) && (current_user.mimic.account.sort.include? 'R'))
-          @products = Product.where(group: ['C','J'])
-          @categories = []
-          @products.each do |p| # get a list of categories
-            @categories << p.category
+    if user_signed_in?
+      if current_user.account.sort # check that they have a sort before trying to use include? statements
+        # if current_user.account.sort.include? 'R'
+        #   availgroups = availgroups << 'C  '
+        # end
+        # if current_user.account.sort.include? 'P'
+        #   availgroups = availgroups << 'L  '
+        # end
+        # if current_user.account.sort.include? 'L'
+        #   availgroups = availgroups << 'LC  '
+        # end
+        # if current_user.account.sort.include? 'U'
+        #   availgroups = availgroups << 'E  ' << 'R  ' << 'D  ' << 'A  '
+        # end
+        if group == 'roc'
+          if (current_user.account.sort.include? 'R') || ((current_user.has_role? :admin) && (current_user.mimic.account.sort.include? 'R'))
+            @products = Product.where(group: ['C','J'])
+            @categories = []
+            @products.each do |p| # get a list of categories
+              @categories << p.category
+            end
+            if params[:cat]
+              @products = @products.where(group: params[:cat])
+            end
+            if (params[:filter]) && (params[:filter] != 'new')
+              @products = @products.where(category: params[:filter])
+            end
+          else
+            redirect_to home_index_path
           end
-          if params[:cat]
-            @products = @products.where(group: params[:cat])
+        elsif group == 'polasports'
+          if (current_user.account.sort.include? 'P') || (current_user.has_role? :admin)
+            @products = Product.where(group: ['L'])
+            if params[:cat]
+              @products = @products.where(group: params[:cat])
+            end
+            if (params[:filter]) && (params[:filter] != 'new')
+              @products = @products.where(category: params[:filter])
+            end
+          else
+            redirect_to home_index_path
           end
-          if (params[:filter]) && (params[:filter] != 'new')
-            @products = @products.where(category: params[:filter])
+        elsif group == 'locello'
+          if (current_user.account.sort.include? 'L') || (current_user.has_role? :admin)
+            @products = Product.where(group: ['LC'])
+            if params[:cat]
+              @products = @products.where(group: params[:cat])
+            end
+            if (params[:filter]) && (params[:filter] != 'new')
+              @products = @products.where(category: params[:filter])
+            end
+          else
+            redirect_to home_index_path
+          end
+        elsif group == 'unity'
+          if (current_user.account.sort.include? 'U') || (current_user.has_role? :admin)
+            @products = Product.where(group: ['E', 'R', 'D', 'A'])
+            if params[:cat]
+              @products = @products.where(group: params[:cat])
+            end
+            if (params[:filter]) && (params[:filter] != 'new')
+              @products = @products.where(category: params[:filter])
+            end
+          else
+            redirect_to home_index_path
           end
         else
-          redirect_to home_index_path
-        end
-      elsif group == 'polasports'
-        if (current_user.account.sort.include? 'P') || (current_user.has_role? :admin)
-          @products = Product.where(group: ['L'])
-          if params[:cat]
-            @products = @products.where(group: params[:cat])
-          end
-          if (params[:filter]) && (params[:filter] != 'new')
-            @products = @products.where(category: params[:filter])
-          end
-        else
-          redirect_to home_index_path
-        end
-      elsif group == 'locello'
-        if (current_user.account.sort.include? 'L') || (current_user.has_role? :admin)
-          @products = Product.where(group: ['LC'])
-          if params[:cat]
-            @products = @products.where(group: params[:cat])
-          end
-          if (params[:filter]) && (params[:filter] != 'new')
-            @products = @products.where(category: params[:filter])
-          end
-        else
-          redirect_to home_index_path
-        end
-      elsif group == 'unity'
-        if (current_user.account.sort.include? 'U') || (current_user.has_role? :admin)
-          @products = Product.where(group: ['E', 'R', 'D', 'A'])
-          if params[:cat]
-            @products = @products.where(group: params[:cat])
-          end
-          if (params[:filter]) && (params[:filter] != 'new')
-            @products = @products.where(category: params[:filter])
-          end
-        else
-          redirect_to home_index_path
-        end
-      else
-        if user_signed_in?
-          if current_user.has_role? :admin
-            @products = Product.all
+          if user_signed_in?
+            if current_user.has_role? :admin
+              @products = Product.all
+            else
+              @products = Product.all
+              redirect_to home_index_url
+            end
           else
             @products = Product.all
             redirect_to home_index_url
           end
-        else
-          @products = Product.all
-          redirect_to home_index_url
         end
-
+      else
+        redirect_to home_index_path
       end
-
-    else
-      redirect_to home_index_path
+    else #if the user is not logged in, show everything (with no prices)
+      if group == 'roc'
+            @products = Product.where(group: ['C','J'])
+            @categories = []
+            @products.each do |p| # get a list of categories
+              @categories << p.category
+            end
+            if params[:cat]
+              @products = @products.where(group: params[:cat])
+            end
+            if (params[:filter]) && (params[:filter] != 'new')
+              @products = @products.where(category: params[:filter])
+            end
+      elsif group == 'polasports'
+            @products = Product.where(group: ['L'])
+            if params[:cat]
+              @products = @products.where(group: params[:cat])
+            end
+            if (params[:filter]) && (params[:filter] != 'new')
+              @products = @products.where(category: params[:filter])
+            end
+        elsif group == 'locello'
+            @products = Product.where(group: ['LC'])
+            if params[:cat]
+              @products = @products.where(group: params[:cat])
+            end
+            if (params[:filter]) && (params[:filter] != 'new')
+              @products = @products.where(category: params[:filter])
+            end
+        elsif group == 'unity'
+            @products = Product.where(group: ['E', 'R', 'D', 'A'])
+            if params[:cat]
+              @products = @products.where(group: params[:cat])
+            end
+            if (params[:filter]) && (params[:filter] != 'new')
+              @products = @products.where(category: params[:filter])
+            end
+        end
     end
-    if @products
-      if params[:filter] == 'new'
-        @products = @products.where("new_date >= ?", Date.today - 30.days)
-      end
-      @products = @products.where("qty > ?", 20)
-      @products = @products.order(group: 'DESC').order(code: 'ASC')
-      @totalproducts = @products.count
+  if @products
+    if params[:filter] == 'new'
+      @products = @products.where("new_date >= ?", Date.today - 30.days)
+    end
+    @products = @products.where("qty > ?", 20)
+    @products = @products.order(group: 'DESC').order(code: 'ASC')
+    @totalproducts = @products.count
           if (current_user.has_role? :admin) && (!current_user.mimic.nil?) #for sidecart
       @order = current_user.mimic.account.user.orders.where(active: true).last #for sidecart
     else #for sidecart
       @order = current_user.orders.where(active: true).last #for sidecart
     end #for sidecart
-    end
   end
+end
 
   # GET /products/1
   # GET /products/1.json
