@@ -11,7 +11,7 @@
           <div class="product">
             <%= cl_image_tag(product.code.strip) %>
             <br>
-            <%= product.code %> | <%= product.description %> | <%= product.pricecat %><br>
+            <%= product.code %> | <%= product.description %><br>
 
             <% if user_signed_in? %>
               <% if current_user.account || (current_user.has_role? :admin) %>
@@ -57,7 +57,7 @@
                   <% if (current_user.has_role? :admin) && (current_user.mimic.nil?) %>
                     <br>[RRP: $<%= product.rrp %>]<br>
                   <% else %>
-                    $<%= number_with_precision(prodprice, precision: 2) %> -- <%= product.new_date %>
+                    $<%= number_with_precision(prodprice, precision: 2) %>
                   <% end %>
                   <% if current_user.has_role? :admin %>
                     | [QTY: <%= product.qty %>]
