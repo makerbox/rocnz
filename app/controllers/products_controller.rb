@@ -135,11 +135,13 @@ class ProductsController < ApplicationController
     @products = @products.where("qty > ?", 20)
     @products = @products.order(group: 'DESC').order(code: 'ASC')
     @totalproducts = @products.count
-          if (current_user.has_role? :admin) && (!current_user.mimic.nil?) #for sidecart
-      @order = current_user.mimic.account.user.orders.where(active: true).last #for sidecart
-    else #for sidecart
-      @order = current_user.orders.where(active: true).last #for sidecart
-    end #for sidecart
+    if user_signed_in?
+      if (current_user.has_role? :admin) && (!current_user.mimic.nil?) #for sidecart
+        @order = current_user.mimic.account.user.orders.where(active: true).last #for sidecart
+      else #for sidecart
+        @order = current_user.orders.where(active: true).last #for sidecart
+      end #for sidecart
+    end
   end
 end
 
