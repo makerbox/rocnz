@@ -6,10 +6,10 @@ def calc_discount(user, price, prod_group, prod_code, price_cat)
 	if Discount.where(product: (prod_group || prod_code || price_cat)).exists?
 		disco = Discount.where(product: (prod_group || prod_code || price_cat)).first
 		if disco.disctype == 'fixedtype'
-			# price - disco.discount
-			results = []
-			results << disco.producttype
-			results << disco.product
+			@results = []
+			@results << disco.producttype
+			@results << disco.product
+			price - disco.discount
 		else
 			price - (price * (disco.discount / 100))
 		end
