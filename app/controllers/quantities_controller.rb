@@ -48,7 +48,7 @@ class QuantitiesController < ApplicationController
     end
     respond_to do |format|
       if @quantity.save
-        format.html { redirect_to products_path(group: group), notice: 'Successfully added to order.' }
+        format.html { redirect_to products_path(cat: @quantity.product.group, group: group), notice: 'Successfully added to order.' }
         format.json { render :show, status: :created, location: @quantity }
       else
         format.html { render :new }
