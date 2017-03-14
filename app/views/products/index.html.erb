@@ -60,7 +60,7 @@
                     $<%= number_with_precision(prodprice, precision: 2) %>
                   <% end %>
                   <% if current_user.has_role? :admin %>
-                    | [QTY: <%= product.qty %>]
+                    | [QTY: <%= product.qty %>] 
                   <% end %>
                 <% end %>
               <% end %>
