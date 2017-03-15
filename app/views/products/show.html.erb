@@ -1,15 +1,9 @@
-<% if user_signed_in? %>
-  <% if current_user.has_role? :admin %>
-    <%= @logster %>
-  <% end %>
-<% end %>
-
 <div class="row">
 
 <div class="col-md-5">
 <%= cl_image_tag(@product.code.strip) %>
 </div>
-
+<%= @logster %>
 <div class="col-md-4">
 <p>
   <strong>SKU:</strong>
