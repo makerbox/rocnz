@@ -19,12 +19,7 @@
 
 <tr>
 <td><%= d.customertype %></td>
-<td><%= d.customer %>
-	<% if d.customer == 'C' %>
-	====
-<%= Account.all.find_by(discount: 'C').code %>
-<% end %>
-</td>
+<td><%= d.customer %></td>
 <td><%= d.producttype %></td>
 <td><%= d.product %></td>
 <td><%= d.discount %></td>
