@@ -3,6 +3,6 @@ class AdminMailer < ApplicationMailer
 	
 	def new_user_waiting_for_approval(emails)
 		@emails = emails
-		mail(to: 'cheryl@roccloudy.com', subject: 'Pending Approval - RocCloudy')
+		mail(to: @emails, subject: 'Pending Approval - RocCloudy')
 	end
 end
