@@ -4,7 +4,6 @@
 <%= cl_image_tag(@product.code.strip) %>
 </div>
 
-<%= @product.show_discount(thisperson, @product.price1, @product.group, @product.code, @product.pricecat) %>
 <div class="col-md-4">
 <p>
   <strong>SKU:</strong>
@@ -25,6 +24,9 @@
                     <% level = current_user.account.seller_level.to_i %>
                     <% thisperson = current_user %>
                   <% end %>
+                  
+                  <%= @product.show_discount(thisperson, @product.price1, @product.group, @product.code, @product.pricecat) %>
+
                   <% case level %>
                     <% when 1 %>
                       <% prodprice = @product.calc_discount(thisperson, @product.price1, @product.group, @product.code, @product.pricecat) %>
