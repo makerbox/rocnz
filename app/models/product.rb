@@ -2,9 +2,9 @@ class Product < ActiveRecord::Base
 has_many :quantities
 has_many :orders, through: :quantities
 
-def calc_discount(user, price, prod_group, prod_code, price_cat)
-	if Discount.where(product: (prod_group || prod_code || price_cat), customer: user.account.code.strip).exists?
-		disco = Discount.where(product: (prod_group || prod_code || price_cat), customer: user.account.code.strip).first
+def calc_discount(u, price, prod_group, prod_code, price_cat)
+	if Discount.where(product: (prod_group || prod_code || price_cat), customer: u.account.code.strip).exists?
+		disco = Discount.where(product: (prod_group || prod_code || price_cat), customer: u.account.code.strip).first
 		if disco.disctype == 'fixedtype'
 			price - disco.discount
 		else
