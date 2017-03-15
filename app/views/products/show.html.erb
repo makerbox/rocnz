@@ -19,7 +19,7 @@
 	  <!-- if the user has an approved account with a seller level set, then show them their correct price -->
 		<% if (current_user.has_role? :admin) && (!current_user.mimic.nil?) %>
                     <% level = current_user.mimic.account.seller_level.to_i %>
-                    <% thisperson = current_user.mimic.account.user %>.<%= @product.show_discount(@product.group, @product.code, @product.pricecat) %>.
+                    <% thisperson = current_user.mimic.account.user %>.<%= @product.show_discount(thisperson, @product.group, @product.code, @product.pricecat) %>.
                   <% else %>
                     <% level = current_user.account.seller_level.to_i %>
                     <% thisperson = current_user %>

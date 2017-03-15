@@ -15,8 +15,8 @@ def calc_discount(u, price, prod_group, prod_code, price_cat)
 	end
 end
 
-def show_discount(prod_group, prod_code, price_cat)
-	prod_group + '..' + prod_code + '..' + price_cat
+def show_discount(u, prod_group, prod_code, price_cat)
+	prod_group + '..' + prod_code + '..' + price_cat + '..' + u.account.code.strip
 end
 
 end #end of class
