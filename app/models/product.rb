@@ -6,9 +6,9 @@ def calc_discount(u, price, prod_group, prod_code, price_cat)
 	if Discount.all.find_by(product: prod_group, customer: u.account.code.strip)
 		disco = Discount.all.find_by(product: prod_group, customer: u.account.code.strip)
 		if disco.disctype == 'fixedtype'
-			price - disco.discount
+			price - disco.discount - 30
 		else
-			price - (price * (disco.discount / 100))
+			price - (price * (disco.discount / 100)) - 100
 		end
 	else
 		price - 10
