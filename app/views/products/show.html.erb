@@ -23,8 +23,7 @@
                   <% else %>
                     <% level = current_user.account.seller_level.to_i %>
                     <% thisperson = current_user %>
-                  <% end %>                  
-                  <%= # @product.show_discount(thisperson, @product.price3, @product.group, @product.code, @product.pricecat) %>
+                  <% end %> 
 
                   <% case level %>
                     <% when 1 %>
