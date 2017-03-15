@@ -9,7 +9,8 @@ def calc_discount(user, price, prod_group, prod_code, price_cat)
 			@results = []
 			@results << disco.producttype
 			@results << disco.product
-			price - disco.discount
+			@results
+			# price - disco.discount
 		else
 			price - (price * (disco.discount / 100))
 		end
