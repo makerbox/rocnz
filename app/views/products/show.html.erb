@@ -3,7 +3,8 @@
 <div class="col-md-5">
 <%= cl_image_tag(@product.code.strip) %>
 </div>
-<%= @logster %>
+
+<%= @product.show_discount(thisperson, @product.price1, @product.group, @product.code, @product.pricecat) %>
 <div class="col-md-4">
 <p>
   <strong>SKU:</strong>

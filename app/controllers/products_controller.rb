@@ -155,10 +155,6 @@ end
         @order = current_user.orders.where(active: true).last
       end
       @quantity = Quantity.new
-
-      if current_user.has_role? :admin
-        @logster = `tail -n 20 log/development.log`
-      end
     end
   end
 
