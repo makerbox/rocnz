@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+Search: <input id="searchfield" type="text"><span class="btn btn-info" onclick="searchme();"><i class="fa fa-search"></i></span><br>
 
 <table class="table table-striped">
   <thead>
@@ -23,8 +24,7 @@
       <tr>
         <% end %>
         <td><%= account.code %></td>
-        <td>Search: <input id="searchfield" type="text"><span class="btn btn-info" onclick="searchme();"><i class="fa fa-search"></i></span><br>
-        <%= account.company %></td>
+        <td><%= account.company %></td>
         <td><%= account.phone %></td>
         <td><%= account.contact %></td>
         <% if account.user %>
