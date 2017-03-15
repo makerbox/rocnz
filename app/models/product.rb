@@ -13,7 +13,7 @@ def calc_discount(u, price, prod_group, prod_code, price_cat)
 	else
 		result = price
 	end
-	return result
+	puts result
 end
 
 def show_discount(u, prod_group, prod_code, price_cat)
