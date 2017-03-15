@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
   <% if current_user.has_role? :admin %>
-    <%= `tail -n 20 log/development.log` %>
+    <%= @logster %>
   <% end %>
 <% end %>
 
