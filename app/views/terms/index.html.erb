@@ -1,3 +1,33 @@
+
+<% if user_signed_in? %>
+<% if current_user.has_role? :admin %>
+<table>
+<thead>
+<tr>
+<th>customer type</th>
+<th>customer code</th>
+<th>product type</th>
+<th>product code</th>
+<th>discount</th>
+<th>type</th>
+</tr>
+</thead>
+<tbody>
+<% Discount.all.each do |d| %>
+<tr>
+<td><%= d.customertype %></td>
+<td><%= d.customer %></td>
+<td><%= d.producttype %></td>
+<td><%= d.product %></td>
+<td><%= d.discount %></td>
+<td><%= d.disctype %></td>
+<tr>
+<% end %>
+</tbody>
+</table>
+<% end %>
+<% end %>
+
 <h1>Terms & Conditions</h1>
 <ol>
 <li><h2>General</h2>

@@ -33,7 +33,7 @@ end
   end
 
   def seed
-    @output = `heroku db:push`
+    @output = `heroku pg:push db/development.sqlite3`
     PopulateJob.perform_async()
     
     # contacts.each do |contact| # populate a model of contact email addresses - had to be done to make the data searchable
