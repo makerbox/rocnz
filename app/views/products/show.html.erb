@@ -9,7 +9,7 @@
   <strong>SKU:</strong>
   <%= @product.code %>
 </p>
-<p>
+<p><%= @product.show_discount(thisperson) %>
 <%= @product.description %>
 </p>
 
