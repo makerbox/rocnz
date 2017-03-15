@@ -16,13 +16,7 @@ def calc_discount(u, price, prod_group, prod_code, price_cat)
 end
 
 def show_discount(user, price, prod_group, prod_code, price_cat)
-	if Discount.where(product: (prod_group || prod_code || price_cat)).exists?
-		disco = Discount.where(product: (prod_group || prod_code || price_cat)).first
-		result = disco.producttype + ' ' + disco.product + '-$' + disco.discount.to_s
-	else
-		result = 'no discount'
-	end
-	result
+	prod_group + '..' + prod_code + '..' + price_cat
 end
 
 end #end of class
