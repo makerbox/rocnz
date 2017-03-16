@@ -86,8 +86,10 @@ fab = ''
 @fabdata.each do |d|
   code = d.Code.strip
   if Product.find_by(code: code)
-    fab += d.TextFld
-    Product.find_by(code: code).update_attributes(fab: fab)
+    if !d.TextFld.blank?
+      fab = d.TextFld.strip
+      Product.find_by(code: code).update_attributes(fab: fab)
+    end
   end
 end
 
