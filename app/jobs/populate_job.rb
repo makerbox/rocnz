@@ -78,6 +78,20 @@ end
 
 dbh.disconnect
 
+# ------------------------GET FABS, CONNECT THEM, AND UPDATE THE PRODUCTS-----------------------
+dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+
+@fabdata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+fab = ''
+@fabdata.each do |d|
+  code = d.Code.strip
+  if Product.find_by(code: code)
+    fab += d.TextFld
+    Product.find_by(code: code).update_attributes(fab: fab)
+  end
+end
+
+dbh.disconnect
 
 # ------------------------DISCOUNTS---------------------------------------------------------
     Discount.destroy_all #wipe existing discounts in case of some deletions in Attache
