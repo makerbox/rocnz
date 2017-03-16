@@ -86,8 +86,8 @@ end
             @admin_user_emails << u.email + ','
           end
         end 
- EmailJob.perform_async(@admin_user_emails)
- UserEmailJob.perform_async(@account.user.email)
+ EmailJob.perform_async(@admin_user_emails) #email the request to admin for approval
+ UserEmailJob.perform_async(@account.user.email) #email the user with a receipt
 
         format.html { redirect_to @account, notice: 'Account was successfully created.' }
         format.json { render :show, status: :created, location: @account }
