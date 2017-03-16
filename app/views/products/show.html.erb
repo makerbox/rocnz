@@ -10,7 +10,10 @@
   <%= @product.code %>
 </p>
 <p>
-<%= @product.description %>
+<%= @product.description %> 
+<% if @product.fab %>
+<%= @product.fab %>
+<% end %>
 </p>
 
 <p>
