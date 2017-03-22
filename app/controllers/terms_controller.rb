@@ -1,6 +1,7 @@
 class TermsController < ApplicationController
 	skip_before_action :authenticate_user!
 	def index
+		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 	@customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
 @results = []
     @customers.each do |c|
@@ -32,6 +33,7 @@ class TermsController < ApplicationController
         @results << code
       end
     end
+    dbh.disconnect
   end #end def index
 
 end #end class
