@@ -29,9 +29,7 @@ class TermsController < ApplicationController
       # PriceCat
       # specialpricecat
       # (camelcase)
-      if Account.all.find_by(code: code).any?
         @results << code
-      end
     end
     dbh.disconnect
   end #end def index
