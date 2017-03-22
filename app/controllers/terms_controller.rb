@@ -29,7 +29,7 @@ class TermsController < ApplicationController
       # PriceCat
       # specialpricecat
       # (camelcase)
-      if Account.all.find_by(code: code).exists?
+      if Account.all.find_by(code: code).any?
         @results << code
       end
     end
