@@ -1,5 +1,5 @@
 
-local test server<% if user_signed_in? %>
+<% if user_signed_in? %>
 <% if current_user.has_role? :admin %>
 <%= current_user.mimic.account.code %> --- <%= current_user.mimic.account.discount %>
 
