@@ -2,7 +2,7 @@
 <% if user_signed_in? %>
 <% if current_user.has_role? :admin %>
 <%= current_user.mimic.account.code %> --- <%= current_user.mimic.account.discount %>
-<%= Product.all.where(fab: !nil) %>
+local test server
 <table>
 <thead>
 <tr>
@@ -16,18 +16,7 @@
 </tr>
 </thead>
 <tbody>
-<% Discount.all.each do |d| %>
 
-<tr>
-<td><%= d.customertype %></td>
-<td><%= d.customer %></td>
-<td><%= d.producttype %></td>
-<td><%= d.product %></td>
-<td><%= d.discount %></td>
-<td><%= d.disctype %></td>
-<td><%= d.maxqty %></td>
-<tr>
-<% end %>
 </tbody>
 </table>
 <% end %>
