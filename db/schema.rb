@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316003530) do
+ActiveRecord::Schema.define(version: 20170323013950) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20170316003530) do
     t.string   "sort"
     t.string   "company"
     t.string   "discount"
+    t.string   "rep"
   end
 
   add_index "accounts", ["user_id"], name: "index_accounts_on_user_id"
