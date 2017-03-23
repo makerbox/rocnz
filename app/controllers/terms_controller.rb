@@ -3,7 +3,7 @@ class TermsController < ApplicationController
 	def index
 		@results = []
 		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-		@customers_ext = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
+		@customers_ext = dbh.execute("SELECT * FROM customer_mastext WHERE 'InactiveCust' = '0' ").fetch(:all, :Struct)
 		@customers_ext.each do |ce|
 			@results << ce.InactiveCust
 		end
