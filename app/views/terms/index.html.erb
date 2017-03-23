@@ -1,5 +1,5 @@
 <%= Account.all.count %>
-<%= Account.all.each do |acct| %>
+<% Account.all.each do |acct| %>
 <%= acct.code %>
 <% end %>
 <table>
@@ -20,10 +20,6 @@
 <% end %>
 </tbody>
 </table>
-<%= Account.all.count %>
-<%= Account.all.each do |acct| %>
-<%= acct.code %>
-<% end %>
 
 <h1>Terms & Conditions</h1>
 <ol>

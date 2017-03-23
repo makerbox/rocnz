@@ -12,6 +12,8 @@ class TermsController < ApplicationController
 				if !Account.all.find_by(code: code)
 					@results << code
 					Account.create(code: code)
+				else
+					@results << code + ' exists!'
 				end
 			end
 		end
@@ -28,10 +30,10 @@ class TermsController < ApplicationController
 				discount = c.SpecialPriceCat 
 				seller_level = c.PriceCat
 				rep = c.SalesRep
-				@results << c.SalesRep
-				# account.update_attributes(company: compname, rep: rep, seller_level: seller_level, discount: discount)
+				@results << c.SalesRep + ' updated :) - for ' + c.Code.strip
+				account.update_attributes(company: compname, rep: rep, seller_level: seller_level, discount: discount)
 			else
-				@results << 'none found'
+				@results << 'no account, no rep'
 			end
 		    # code
 		    # name
