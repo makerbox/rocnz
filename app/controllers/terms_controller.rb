@@ -1,7 +1,39 @@
 class TermsController < ApplicationController
 	skip_before_action :authenticate_user!
 	def index
-		@results = Account.all
+		@results = []
+		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+  @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+  @customers.each do |c|
+    code = c.Code
+    compname = c.Name
+    street = c.Street
+    suburb = c.Suburb 
+    postcode = c.Postcode 
+    phone = c.Phone 
+    sort = c.Sort 
+    discount = c.SpecialPriceCat 
+    seller_level = c.PriceCat
+    rep = c.SalesRep
+    # code
+    # name
+    # street
+    # suburb
+    # postcode
+    # phone
+    # Contact
+    # sort
+    # territory
+    # SalesRep
+    # cat
+    # PriceCat
+    # specialpricecat
+    # (camelcase)
+    @account = Account.new(rep: rep, sort: sort, discount: discount, seller_level: seller_level, code: code, company: compname, approved:'approved',  street: street, suburb: suburb, postcode: postcode, phone: phone)
+    @account.save
+    @results << @account.rep
+  end
+dbh.disconnect
   	end #end def index
 
 end #end class
