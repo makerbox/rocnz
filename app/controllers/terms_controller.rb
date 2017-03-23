@@ -2,7 +2,7 @@ class TermsController < ApplicationController
 	skip_before_action :authenticate_user!
 	def index
 		@results = []
-		Account.destroy_all
+		# Account.destroy_all
 		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 		@customers_ext = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
 		@customers_ext.each do |ce|
@@ -10,7 +10,7 @@ class TermsController < ApplicationController
 				code = ce.Code.strip
 				if !Account.all.find_by(code: code)
 					@results << code
-					# Account.create(code: code)
+					Account.create(code: code)
 				end
 			end
 		end
