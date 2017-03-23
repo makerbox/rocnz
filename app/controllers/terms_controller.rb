@@ -2,10 +2,17 @@ class TermsController < ApplicationController
 	skip_before_action :authenticate_user!
 	def index
 		@results = []
+		Account.destroy_all
 		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 		@customers_ext = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
 		@customers_ext.each do |ce|
-			@results << ce.InactiveCust
+			if ce.InactiveCust == 0
+				code = ce.Code.strip
+				@results << code
+				@results << ce.CostCentre
+				@results << ce.CountryCode
+				# Account.create(code: code)
+			end
 		end
 
   # @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
