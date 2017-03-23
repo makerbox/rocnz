@@ -13,7 +13,11 @@ class TermsController < ApplicationController
 					@results << code
 					Account.create(code: code)
 				else
-					@results << code + ' exists!'
+					acct = Account.all.find_by(code: code)
+					@results << code + ' exists!-----'
+					@results << acct.company
+					@results << acct.discount
+					@results << acct.seller_level
 				end
 			end
 		end
