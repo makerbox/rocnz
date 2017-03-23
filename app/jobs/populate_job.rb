@@ -240,7 +240,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     sort = c.Sort 
     discount = c.SpecialPriceCat 
     seller_level = c.PriceCat
-
+    rep = c.SalesRep
     # code
     # name
     # street
@@ -255,7 +255,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     # PriceCat
     # specialpricecat
     # (camelcase)
-    Account.create(sort: sort, discount: discount, seller_level: seller_level, code: code, company: compname, approved:'approved',  street: street, suburb: suburb, postcode: postcode, phone: phone)
+    Account.create(rep: rep, sort: sort, discount: discount, seller_level: seller_level, code: code, company: compname, approved:'approved',  street: street, suburb: suburb, postcode: postcode, phone: phone)
   end
 dbh.disconnect
 # -------------------------GET CUSTOMER EXT INFO AND UPDATE / ADD ON TO EACH CUSTOMER----------------------
