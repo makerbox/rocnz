@@ -29,8 +29,11 @@ class TermsController < ApplicationController
     # PriceCat
     # specialpricecat
     # (camelcase)
-    Account.create(rep: rep)
+
+    # Account.create(rep: rep)
+    
     @results << rep
+    @results << sort
   end
 dbh.disconnect
   	end #end def index
