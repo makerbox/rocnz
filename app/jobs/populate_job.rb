@@ -226,47 +226,45 @@ dbh.disconnect
     end
 
     dbh.disconnect 
-    @results = Discount.all
 
 # -------------------------GET CUSTOMERS AND ADD / UPDATE THE DB----------------------------------
-@customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-@results = []
-    @customers.each do |c|
-      code = c.Code
-      compname = c.Name
-      street = c.Street
-      suburb = c.Suburb 
-      postcode = c.Postcode 
-      phone = c.Phone 
-      sort = c.Sort 
-      discount = c.SpecialPriceCat 
-      seller_level = c.PriceCat
+dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+  @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+  @customers.each do |c|
+    code = c.Code
+    compname = c.Name
+    street = c.Street
+    suburb = c.Suburb 
+    postcode = c.Postcode 
+    phone = c.Phone 
+    sort = c.Sort 
+    discount = c.SpecialPriceCat 
+    seller_level = c.PriceCat
 
-      # code
-      # name
-      # street
-      # suburb
-      # postcode
-      # phone
-      # Contact
-      # sort
-      # territory
-      # SalesRep
-      # cat
-      # PriceCat
-      # specialpricecat
-      # (camelcase)
-      if Account.all.find_by(code: code)
-        @results << code
-      end
-    end
+    # code
+    # name
+    # street
+    # suburb
+    # postcode
+    # phone
+    # Contact
+    # sort
+    # territory
+    # SalesRep
+    # cat
+    # PriceCat
+    # specialpricecat
+    # (camelcase)
+    Account.create(sort: sort, discount: discount, seller_level: seller_level, code: code, company: compname, approved:'approved',  street: street, suburb: suburb, postcode: postcode, phone: phone)
+  end
+dbh.disconnect
 # -------------------------GET CUSTOMER EXT INFO AND UPDATE / ADD ON TO EACH CUSTOMER----------------------
-code
-countrycode
-CostCentre
-emailaddr
-inactivecust #give accounts an active field to check this with and clear inactivecust 
-custstate
+# code
+# countrycode
+# CostCentre
+# emailaddr
+# inactivecust #give accounts an active field to check this with and clear inactivecust 
+# custstate
 # ------------------------META DATA--------------------------------------------------------------
 @results << Product.count
 @time = (Time.now - @time) / 60
