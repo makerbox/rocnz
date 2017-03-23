@@ -8,10 +8,12 @@ class TermsController < ApplicationController
 		@customers_ext.each do |ce|
 			if ce.InactiveCust == 0
 				code = ce.Code.strip
-				@results << code
-				@results << ce.CostCentre
-				@results << ce.CountryCode
-				# Account.create(code: code)
+				if !Account.all.find_by(code: code)
+					@results << code
+					@results << ce.CostCentre
+					@results << ce.CountryCode
+					Account.create(code: code)
+				end
 			end
 		end
 		@customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
@@ -26,7 +28,7 @@ class TermsController < ApplicationController
 				discount = c.SpecialPriceCat 
 				seller_level = c.PriceCat
 				rep = c.SalesRep
-				account.update_attributes(company: compname)
+				account.update_attributes(company: compname, rep: rep, seller_level: seller_level, discount: discount)
 			end
 		    # code
 		    # name
