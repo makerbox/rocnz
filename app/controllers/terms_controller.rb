@@ -30,7 +30,8 @@ class TermsController < ApplicationController
 				discount = c.SpecialPriceCat 
 				seller_level = c.PriceCat
 				rep = c.SalesRep
-				@results << c.SalesRep + ' updated :) - for ' + c.Code.strip
+				@results << c.SalesRep
+				@results << 'updated for ' + c.Code.strip
 				account.update_attributes(company: compname, rep: rep, seller_level: seller_level, discount: discount)
 			else
 				@results << 'no account, no rep'
