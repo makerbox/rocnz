@@ -29,7 +29,7 @@ class TermsController < ApplicationController
     # PriceCat
     # specialpricecat
     # (camelcase)
-    Account.create(rep: rep, sort: sort, discount: discount, seller_level: seller_level, code: code, company: compname, approved:'approved', street: street, suburb: suburb, postcode: postcode, phone: phone)
+    Account.create(rep: rep)
     @results << rep
   end
 dbh.disconnect
