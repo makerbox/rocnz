@@ -29,6 +29,8 @@ class TermsController < ApplicationController
 				rep = c.SalesRep
 				@results << c.SalesRep
 				# account.update_attributes(company: compname, rep: rep, seller_level: seller_level, discount: discount)
+			else
+				@results << 'none found'
 			end
 		    # code
 		    # name
