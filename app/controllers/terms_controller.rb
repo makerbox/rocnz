@@ -16,7 +16,8 @@ class TermsController < ApplicationController
 		end
 		@customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
 		@customers.each do |c|
-			if account = Account.all.find_by(code: c.Code.strip)
+			if Account.all.find_by(code: c.Code.strip)
+				account = Account.all.find_by(code: c.Code.strip)
 				compname = c.Name
 				street = c.Street
 				suburb = c.Suburb 
