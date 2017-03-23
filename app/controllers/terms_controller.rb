@@ -11,8 +11,7 @@ class TermsController < ApplicationController
 				@results << code
 				@results << ce.CostCentre
 				@results << ce.CountryCode
-					# Account.create(code: code)
-				end
+				# Account.create(code: code)
 			end
 		end
 		@customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
