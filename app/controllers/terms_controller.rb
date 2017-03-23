@@ -10,9 +10,7 @@ class TermsController < ApplicationController
 				code = ce.Code.strip
 				if !Account.all.find_by(code: code)
 					@results << code
-					@results << ce.CostCentre
-					@results << ce.CountryCode
-					Account.create(code: code)
+					# Account.create(code: code)
 				end
 			end
 		end
@@ -28,7 +26,8 @@ class TermsController < ApplicationController
 				discount = c.SpecialPriceCat 
 				seller_level = c.PriceCat
 				rep = c.SalesRep
-				account.update_attributes(company: compname, rep: rep, seller_level: seller_level, discount: discount)
+				@results << c.SalesRep
+				# account.update_attributes(company: compname, rep: rep, seller_level: seller_level, discount: discount)
 			end
 		    # code
 		    # name
