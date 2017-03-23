@@ -3,38 +3,40 @@ class TermsController < ApplicationController
 	def index
 		@results = []
 		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-  @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-  @customers.each do |c|
-    code = c.Code
-    compname = c.Name
-    street = c.Street
-    suburb = c.Suburb 
-    postcode = c.Postcode 
-    phone = c.Phone 
-    sort = c.Sort 
-    discount = c.SpecialPriceCat 
-    seller_level = c.PriceCat
-    rep = c.SalesRep
-    # code
-    # name
-    # street
-    # suburb
-    # postcode
-    # phone
-    # Contact
-    # sort
-    # territory
-    # SalesRep
-    # cat
-    # PriceCat
-    # specialpricecat
-    # (camelcase)
+		@customers_ext = dbh.execute("SELECT * FROM customer_mastext")
+		@customers_ext.each do |ce|
+			@results << ce.InactiveCust
+		end
 
-    # Account.create(rep: rep)
-    
-    @results << rep
-    @results << sort
-  end
+  # @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+  # @customers.each do |c|
+  #   code = c.Code
+  #   compname = c.Name
+  #   street = c.Street
+  #   suburb = c.Suburb 
+  #   postcode = c.Postcode 
+  #   phone = c.Phone 
+  #   sort = c.Sort 
+  #   discount = c.SpecialPriceCat 
+  #   seller_level = c.PriceCat
+  #   rep = c.SalesRep
+  #   # code
+  #   # name
+  #   # street
+  #   # suburb
+  #   # postcode
+  #   # phone
+  #   # Contact
+  #   # sort
+  #   # territory
+  #   # SalesRep
+  #   # cat
+  #   # PriceCat
+  #   # specialpricecat
+  #   # (camelcase)
+
+  #   # Account.create(rep: rep)
+  # end
 dbh.disconnect
   	end #end def index
 
