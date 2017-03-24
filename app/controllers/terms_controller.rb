@@ -10,14 +10,7 @@ class TermsController < ApplicationController
 			if ce.InactiveCust == 0
 				code = ce.Code.strip
 				if !Account.all.find_by(code: code)
-					@results << code
 					Account.create(code: code)
-				else
-					acct = Account.all.find_by(code: code)
-					@results << code + ' exists!-----'
-					@results << acct.company
-					@results << acct.discount
-					@results << acct.seller_level
 				end
 			end
 		end
