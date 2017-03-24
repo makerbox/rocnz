@@ -18,7 +18,9 @@ end
 
   def pull
     # system "rake db:migrate"
-    @output = `bundle`
+    # @output = `rails g migration AddSortToAccount sort`
+    @output += `rake db:migrate`
+
     # system "git stash"
     system "git pull"
     # system "bundle exec rake db:migrate"
