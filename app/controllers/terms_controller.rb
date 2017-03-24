@@ -36,7 +36,7 @@ class TermsController < ApplicationController
 				rep = c.SalesRep
 				@results << c.SalesRep
 				@results << 'updated for ' + c.Code.strip
-				account.update_attributes(sort: 'D', company: compname, rep: rep, seller_level: seller_level, discount: discount)
+				account.update_attributes(company: compname, rep: rep, seller_level: seller_level, discount: discount)
 			else
 				@results << 'no account, no rep'
 			end
