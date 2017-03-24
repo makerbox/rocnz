@@ -1,4 +1,6 @@
-<%= Account.new.attributes.keys - Account.protected_attributes.to_a %>
+<% Account.new.attributes.keys.each do |acctkey| %>
+<%= acctkey %><br>
+<% end %>
 <% Account.all.each do |acct| %>
 <%= acct.code %>
 <% end %>
