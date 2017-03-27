@@ -268,6 +268,10 @@ dbh.disconnect
 # emailaddr
 # inactivecust #give accounts an active field to check this with and clear inactivecust 
 # custstate
+
+#-------------------------- CREATE ADMIN USER -------------------------------------
+User.create(email: 'web@roccloudy.com', password: 'cloudy_16', password_confirmation: 'cloudy_16')
+
 # ------------------------META DATA--------------------------------------------------------------
 @results << Product.count
 @time = (Time.now - @time) / 60
