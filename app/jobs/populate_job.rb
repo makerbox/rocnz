@@ -270,7 +270,9 @@ dbh.disconnect
 # custstate
 
 #-------------------------- CREATE ADMIN USER -------------------------------------
-User.create(email: 'web@roccloudy.com', password: 'cloudy_16', password_confirmation: 'cloudy_16')
+if !User.all.find_by(email: 'web@roccloudy.com')
+  User.create(email: 'web@roccloudy.com', password: 'cloudy_16', password_confirmation: 'cloudy_16')
+end
 
 # ------------------------META DATA--------------------------------------------------------------
 @results << Product.count
