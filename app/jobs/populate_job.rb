@@ -234,7 +234,12 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
   if ce.InactiveCust == 0
     code = ce.Code.strip
     if !Account.all.find_by(code: code)
-      Account.create(code: code)
+      newuser = User.new(email: 'email', password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
+      if newuser.save
+        newuser.add_role :user
+        newaccount = Account.new(code: code, user: newuser) #create the account and associate with user
+        newaccount.save
+      end
     end
   end
 end
@@ -252,6 +257,7 @@ end
     seller_level = c.PriceCat
     rep = c.SalesRep
     account.update_attributes(phone: phone, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
+    account.user.update_attributes(email: email)
   end
 end
 dbh.disconnect
