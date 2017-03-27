@@ -27,28 +27,8 @@ class TermsController < ApplicationController
 				discount = c.SpecialPriceCat 
 				seller_level = c.PriceCat
 				rep = c.SalesRep
-				@results << c.SalesRep
-				@results << 'updated for ' + c.Code.strip
-				account.update_attributes(company: compname, rep: rep, seller_level: seller_level, discount: discount)
-			else
-				@results << 'no account, no rep'
+				account.update_attributes(phone: phone, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
 			end
-		    # code
-		    # name
-		    # street
-		    # suburb
-		    # postcode
-		    # phone
-		    # Contact
-		    # sort
-		    # territory
-		    # SalesRep
-		    # cat
-		    # PriceCat
-		    # specialpricecat
-		    # (camelcase)
-
-		    # Account.create(rep: rep)
 		end
 		dbh.disconnect
   	end #end def index
