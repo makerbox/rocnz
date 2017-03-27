@@ -229,9 +229,19 @@ dbh.disconnect
 
 # -------------------------GET CUSTOMERS AND ADD / UPDATE THE DB----------------------------------
 dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-  @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-  @customers.each do |c|
-    code = c.Code
+@customers_ext = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
+@customers_ext.each do |ce|
+  if ce.InactiveCust == 0
+    code = ce.Code.strip
+    if !Account.all.find_by(code: code)
+      Account.create(code: code)
+    end
+  end
+end
+@customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+@customers.each do |c|
+  if Account.all.find_by(code: c.Code.strip)
+    account = Account.all.find_by(code: c.Code.strip)
     compname = c.Name
     street = c.Street
     suburb = c.Suburb 
@@ -241,23 +251,9 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     discount = c.SpecialPriceCat 
     seller_level = c.PriceCat
     rep = c.SalesRep
-    # code
-    # name
-    # street
-    # suburb
-    # postcode
-    # phone
-    # Contact
-    # sort
-    # territory
-    # SalesRep
-    # cat
-    # PriceCat
-    # specialpricecat
-    # (camelcase)
-    @account = Account.new(rep: rep, sort: sort, discount: discount, seller_level: seller_level, code: code, company: compname, approved:'approved',  street: street, suburb: suburb, postcode: postcode, phone: phone)
-    @account.save
+    account.update_attributes(phone: phone, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
   end
+end
 dbh.disconnect
 # -------------------------GET CUSTOMER EXT INFO AND UPDATE / ADD ON TO EACH CUSTOMER----------------------
 # code

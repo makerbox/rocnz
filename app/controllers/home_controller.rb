@@ -19,9 +19,6 @@ end
   def pull
     # system "rake db:migrate"
     # @output = `rails g migration AddSortToAccount sort`
-
-    @output = `rake db:migrate`
-
     system "git stash"
     system "git pull"
     @output = `rake db:migrate`
@@ -39,7 +36,7 @@ end
   end
 
   def seed
-    @output = `heroku pg:push db/development.sqlite3`
+    # @output = `heroku pg:push db/development.sqlite3`
     PopulateJob.perform_async()
     
     # contacts.each do |contact| # populate a model of contact email addresses - had to be done to make the data searchable
