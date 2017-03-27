@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'test/index'
+
   resources :discounts
   resources :quantities
   resources :orders
