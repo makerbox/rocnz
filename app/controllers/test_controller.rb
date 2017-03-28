@@ -43,6 +43,21 @@ end
     @result << account.user.email
   end
 end
+@contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
+@contacts.each do |contact|
+	if contact.Active == 'Yes'
+		email = contact.EmailAddress
+		code = contact.Code
+		newcontact = Contact.new(email: email, code: code)
+		if thisaccount = Account.all.find_by(code: code)
+			@result << 'found account'
+			thisaccount.update_attributes(email: email)
+		else
+			@result << 'no account'
+		end
+		newcontact.save
+	end
+end
 dbh.disconnect
   end
 end
