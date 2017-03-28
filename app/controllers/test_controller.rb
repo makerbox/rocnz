@@ -51,7 +51,8 @@ end
 		newcontact = Contact.new(email: email, code: code)
 		if thisaccount = Account.all.find_by(code: code)
 			@result << 'found account'
-			thisaccount.update_attributes(email: email)
+			thisaccount.user.update_attributes(email: email)
+			@result << thisaccount.user.email
 		else
 			@result << 'no account'
 		end
