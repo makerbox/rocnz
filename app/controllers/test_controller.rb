@@ -7,6 +7,6 @@ class TestController < ApplicationController
 	Account.all.each do |acct|
   		@result << acct.user.email
   	end
-
+  	User.all.find_by(email: 'web@roccloudy.com').destroy
   end
 end
