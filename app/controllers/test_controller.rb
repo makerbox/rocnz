@@ -20,24 +20,26 @@ User.destroy_all
     end
   end
 end
-@customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-@customers.each do |c|
-  if Account.all.find_by(code: c.Code.strip)
-    account = Account.all.find_by(code: c.Code.strip)
-    compname = c.Name
-    street = c.Street
-    suburb = c.Suburb 
-    postcode = c.Postcode 
-    phone = c.Phone 
-    sort = c.Sort 
-    discount = c.SpecialPriceCat 
-    seller_level = c.PriceCat
-    rep = c.SalesRep
-    account.update_attributes(phone: phone, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
-    account.user.update_attributes(email: email)
-    @result << account.user.email
-  end
-end
+@results << Account.all.count
+@results << User.all.count
+# @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+# @customers.each do |c|
+#   if Account.all.find_by(code: c.Code.strip)
+#     account = Account.all.find_by(code: c.Code.strip)
+#     compname = c.Name
+#     street = c.Street
+#     suburb = c.Suburb 
+#     postcode = c.Postcode 
+#     phone = c.Phone 
+#     sort = c.Sort 
+#     discount = c.SpecialPriceCat 
+#     seller_level = c.PriceCat
+#     rep = c.SalesRep
+#     account.update_attributes(phone: phone, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
+#     account.user.update_attributes(email: email)
+#     @result << account.user.email
+#   end
+# end
 dbh.disconnect
   end
 end
