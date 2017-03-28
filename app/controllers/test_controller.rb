@@ -16,6 +16,8 @@ class TestController < ApplicationController
 		else
 		  @result << 'none'
 	    end
+	else
+		@result << contact.Active
 	  end
 	end
 	dbh.disconnect
