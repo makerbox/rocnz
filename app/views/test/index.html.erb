@@ -1,9 +1,5 @@
-<% Account.new.attributes.keys.each do |acctkey| %>
-	<%= acctkey %><br>
-<% end %>
-<% User.all.each do |acct| %>
-	<%= acct.email %>
-<% end %>
+<%= Account.all.count %>
+<%= User.all.count %>
 <% @result.each do |r| %>
 	<%= r %>
 <% end %>

@@ -13,15 +13,12 @@ User.destroy_all
     if !Account.all.find_by(code: code)
       newuser = User.new(email: "email", password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
       newuser.save
-      @result << newuser.email
       newuser.add_role :user
       newaccount = Account.new(code: code, user: newuser) #create the account and associate with user
       newaccount.save
     end
   end
 end
-@results << Account.all.count
-@results << User.all.count
 # @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
 # @customers.each do |c|
 #   if Account.all.find_by(code: c.Code.strip)
