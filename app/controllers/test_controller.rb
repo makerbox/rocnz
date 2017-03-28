@@ -3,7 +3,9 @@ class TestController < ApplicationController
   def index
   	@result = []
   	# -------------------------GET CUSTOMERS AND ADD / UPDATE THE DB----------------------------------
-
+  	Account.all.each do |acct|
+  		@result << acct.user.email
+  	end
 
   end
 end
