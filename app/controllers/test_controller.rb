@@ -12,12 +12,11 @@ User.destroy_all
     code = ce.Code.strip
     if !Account.all.find_by(code: code)
       newuser = User.new(email: "email", password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
-      if newuser.save
-      	@result << newuser.email
-        newuser.add_role :user
-        newaccount = Account.new(code: code, user: newuser) #create the account and associate with user
-        newaccount.save
-      end
+      newuser.save
+      @result << newuser.email
+      newuser.add_role :user
+      newaccount = Account.new(code: code, user: newuser) #create the account and associate with user
+      newaccount.save
     end
   end
 end
