@@ -290,6 +290,7 @@ dbh.disconnect
 if !User.all.find_by(email: 'web@roccloudy.com')
   adminuser = User.new(email: 'web@roccloudy.com', password: 'cloudy_16', password_confirmation: 'cloudy_16')
   adminuser.add_role :admin
+  Account.create(user: adminuser)
   adminuser.save(:validate => false) #false to skip validation
 end
 
