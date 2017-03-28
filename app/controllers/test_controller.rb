@@ -4,13 +4,16 @@ class TestController < ApplicationController
   	@result = []
   	# -------------------------GET CUSTOMERS AND ADD / UPDATE THE DB----------------------------------
 dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+Account.destroy_all
+User.destroy_all
 @customers_ext = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
 @customers_ext.each do |ce|
   if ce.InactiveCust == 0
     code = ce.Code.strip
     if !Account.all.find_by(code: code)
-      newuser = User.new(email: 'email', password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
+      newuser = User.new(email: "email", password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
       if newuser.save
+      	@result << newuser.email
         newuser.add_role :user
         newaccount = Account.new(code: code, user: newuser) #create the account and associate with user
         newaccount.save
