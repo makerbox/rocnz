@@ -235,7 +235,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     code = ce.Code.strip
     if !Account.all.find_by(code: code)
       newuser = User.new(email: 'email', password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
-      if newuser.save
+      if newuser.save(false) #false to skip validation
         newuser.add_role :user
         newaccount = Account.new(code: code, user: newuser) #create the account and associate with user
         newaccount.save
@@ -271,7 +271,9 @@ dbh.disconnect
 
 #-------------------------- CREATE ADMIN USER -------------------------------------
 if !User.all.find_by(email: 'web@roccloudy.com')
-  User.create(email: 'web@roccloudy.com', password: 'cloudy_16', password_confirmation: 'cloudy_16')
+  adminuser = User.new(email: 'web@roccloudy.com', password: 'cloudy_16', password_confirmation: 'cloudy_16')
+  adminuser.add_role :admin
+  adminuser.save(false) #false to skip validation
 end
 
 # ------------------------META DATA--------------------------------------------------------------
