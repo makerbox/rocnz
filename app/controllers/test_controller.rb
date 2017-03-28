@@ -6,12 +6,14 @@ class TestController < ApplicationController
 Account.destroy_all
 User.destroy_all
 dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+iteration = 0
 @customers_ext = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
 @customers_ext.each do |ce|
   if ce.InactiveCust == 0
     code = ce.Code.strip
     if !Account.all.find_by(code: code)
-      newuser = User.new(email: 'email', password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
+      iteration += 1
+      newuser = User.new(email: iteration, password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
       if newuser.save(:validate => false) #false to skip validation
         newuser.add_role :user
         newaccount = Account.new(code: code, user: newuser) #create the account and associate with user

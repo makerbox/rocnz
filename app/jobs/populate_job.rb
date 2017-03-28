@@ -237,7 +237,7 @@ iteration = 0
     if !Account.all.find_by(code: code)
       iteration += 1
       newuser = User.new(email: iteration, password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
-      if newuser.save(false) #false to skip validation
+      if newuser.save(:validate => false) #false to skip validation
         newuser.add_role :user
         newaccount = Account.new(code: code, user: newuser) #create the account and associate with user
         newaccount.save
