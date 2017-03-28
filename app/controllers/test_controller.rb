@@ -3,10 +3,9 @@ class TestController < ApplicationController
   def index
   	@result = []
   	# -------------------------GET CUSTOMERS AND ADD / UPDATE THE DB----------------------------------
-# Account.destroy_all
-# User.destroy_all
+Account.destroy_all
+User.destroy_all
 dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-iteration = 0
 @customers_ext = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
 @customers_ext.each do |ce|
   if ce.InactiveCust == 0
