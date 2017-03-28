@@ -3,24 +3,6 @@ class TestController < ApplicationController
   def index
   	@result = []
   	# -------------------------GET CUSTOMERS AND ADD / UPDATE THE DB----------------------------------
-  	dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-  	@contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
-	@contacts.each do |contact|
-	  if contact.Active == 1
-	    email = contact.EmailAddress
-	    code = contact.Code
-	    newcontact = Contact.new(email: email, code: code)
-	    if thisaccount = Account.all.find_by(code: code)
-	      thisaccount.user.update_attributes(email: email)
-	      @result << 'found'
-		else
-		  @result << 'none'
-	    end
-	else
-		@result << contact.Active
-	  end
-	end
-	dbh.disconnect
 
 	Account.all.each do |acct|
   		@result << acct.user.email
