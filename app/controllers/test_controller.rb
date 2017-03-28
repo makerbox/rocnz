@@ -33,7 +33,7 @@ end
     rep = c.SalesRep
     account.update_attributes(phone: phone, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
     # account.user.update_attributes(email: email)
-    @result << account.user.email
+    @result << account.user
   end
 end
 dbh.disconnect
