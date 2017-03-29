@@ -52,8 +52,8 @@ end
     if current_user.has_role? :admin
       account = Account.find(params[:id])
       @pendingorders = Order.where(user: account.user, active: false, approved: false, complete: false)
-    @approvedorders = Order.where(user:current_user.mimic.account.user, active:false, approved: true, complete: false)
-    @sentorders = Order.where(user:current_user.mimic.account.user, active:false, approved: true, complete: true)
+    @approvedorders = Order.where(user:account.user, active:false, approved: true, complete: false)
+    @sentorders = Order.where(user:account.user, active:false, approved: true, complete: true)
     else
     @pendingorders = Order.where(user: current_user, active: false, approved: false, complete: false)
     @approvedorders = Order.where(user:current_user, active:false, approved: true, complete: false)
@@ -81,7 +81,7 @@ end
         # code for sending email notifications
          EmailJob.perform_async('cheryl@roccloudy.com, web@roccloudy.com') #email the request to admin for approval
          UserEmailJob.perform_async(@account.user.email) #email the user with a receipt
-         
+
         format.html { redirect_to @account, notice: 'Account was successfully created.' }
         format.json { render :show, status: :created, location: @account }
       else
