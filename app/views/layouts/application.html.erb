@@ -33,16 +33,12 @@
         </button>
         <a class="navbar-brand" href="../">
           <img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479963402/RocCloudy_axxjva.jpg"><div class='tinytext'>Roc Cloudy Pty Ltd 
-          <% if user_signed_in? %>
-          <% if current_user.has_role? :admin %>
           <% if Contact.find_by(code:'running', email:'running') %>
           <span style="color:red;">
           <% else %>
           <span style="color:green;">
           <% end %>
           (<%= Product.all.count %>)</span></div>
-          <% end %>
-          <% end %>
         </a>
 
       </div>
