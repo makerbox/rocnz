@@ -5,8 +5,9 @@ class TestController < ApplicationController
   	# -------------------------GET CUSTOMERS AND ADD / UPDATE THE DB----------------------------------
 
 	Account.all.each do |acct|
-  		@result << acct.user.email
+		if acct.user.has_role? :admin
+	  		@result << acct.user.email
+	  	end
   	end
-  	User.all.find_by(email: 'web@roccloudy.com').destroy
   end
 end
