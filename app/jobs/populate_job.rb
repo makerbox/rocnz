@@ -262,7 +262,7 @@ end
     discount = c.SpecialPriceCat 
     seller_level = c.PriceCat
     rep = c.SalesRep
-    account.update_attributes(phone: phone, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
+    account.update_attributes(approved: 'approved', phone: phone, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
   end
 end
 @contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
@@ -287,13 +287,9 @@ dbh.disconnect
 # custstate
 
 #-------------------------- CREATE ADMIN USER -------------------------------------
-if !User.all.find_by(email: 'web@roccloudy.com')
-  adminuser = User.new(email: 'web@roccloudy.com', password: 'cloudy_16', password_confirmation: 'cloudy_16')
-  adminuser.add_role :admin
-  adminuser.save(:validate => false) #false to skip validation
-  adminaccount = Account.new(user: adminuser)
-  adminaccount.save
-end
+adminuser = User.all.find_by(email: 'web@roccloudy.com')
+adminuser.add_role :admin
+adminuser.account.update_attributes(approved: 'approved')
 
 # ------------------------META DATA--------------------------------------------------------------
 @results << Product.count
