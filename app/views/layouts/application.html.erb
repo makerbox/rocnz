@@ -50,7 +50,7 @@
         <% end %>
         <% if user_signed_in? %>
 
-        <% if current_user.has_role? :admin %>
+        <% if (current_user.has_role? :admin) && (current_user.mimic) %>
         <div id="mimic">
           <% if !current_user.mimic.account.nil? %>
           ORDERING FOR: 
