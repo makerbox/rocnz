@@ -38,7 +38,7 @@ end
   def seed
     # @output = `heroku pg:push db/development.sqlite3`
     PopulateJob.perform_async()
-    
+    PopulateJob.performnz_async()
     # contacts.each do |contact| # populate a model of contact email addresses - had to be done to make the data searchable
     #   if Contact.find_by(code: contact.Code)
     #     puts "contact exists skipping"
