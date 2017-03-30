@@ -16,12 +16,14 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       if email.blank?
         email = counter
       end
-      newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
-      if newuser.save(validate: false) #false to skip validation
-        newuser.add_role :user
-        newaccount = Account.new(code: code, user: newuser) #create the account and associate with user
-        newaccount.save
-      end
+      if !User.all.find_by(email: email)
+	      newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
+	      if newuser.save(validate: false) #false to skip validation
+	        newuser.add_role :user
+	        newaccount = Account.new(code: code, user: newuser) #create the account and associate with user
+	        newaccount.save
+	      end
+	  end
     end
   end
 end
