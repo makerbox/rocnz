@@ -43,6 +43,9 @@ end
     if params[:search]
       @accounts = @accounts.where(code: params[:search])
     end
+    if current_user.email != 'web@roccloudy.com'
+      @accounts = @accounts.where(rep: current_user.account.code)
+    end
     @accounts = @accounts.paginate(:page => params[:page], :per_page => 20)
   end
 
