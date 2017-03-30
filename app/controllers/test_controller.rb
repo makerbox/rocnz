@@ -23,6 +23,8 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 	        newaccount = Account.new(code: code, user: newuser) #create the account and associate with user
 	        newaccount.save
 	      end
+	  else
+	  	User.all.find_by(email: email)
 	  end
     end
   end
