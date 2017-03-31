@@ -13,7 +13,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 # -------------------------GET PRODUCTS AND CREATE / UPDATE PRODUCT RECORDS------------------------
 @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
     @products.each do |p|
-      if p.Inactive == 0
+      if p.Inactive == 'N'
         code = p.Code.strip
         description = p.Description.to_s.strip
         price1 = p.SalesPrice1
