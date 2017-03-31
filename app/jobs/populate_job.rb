@@ -288,6 +288,7 @@ adminuser.add_role :admin
 adminuser.account.update_attributes(approved: 'approved')
 
 #-------------------------- CREATE REP ACCOUNTS -----------------------------------
+dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 @reps = dbh.execute("SELECT * FROM sales_reps_extn").fetch(:all, :Struct)
 @reps.each do |rep|
   if rep.Inactive == 'N'
@@ -302,7 +303,7 @@ adminuser.account.update_attributes(approved: 'approved')
     end
   end
 end
-
+dbh.disconnect
 
 # ------------------------META DATA--------------------------------------------------------------
 @results << Product.count
