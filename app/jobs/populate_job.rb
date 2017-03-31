@@ -292,12 +292,13 @@ adminuser.account.update_attributes(approved: 'approved')
 @reps.each do |rep|
   if rep.Inactive == 'N'
     code = rep.Code
-    email = rep.EmailAddress
-    repuser = User.new(email: email, password: 'cloudy_rep_123', password_confirmation: 'cloudy_rep_123')
-    if repuser.save(validate: false)
-      repaccount = Account.new(code: code, user: repuser)
-      repaccount.save
-      repuser.add_role :admin
+    if email = rep.EmailAddress
+      repuser = User.new(email: email, password: 'cloudy_rep_123', password_confirmation: 'cloudy_rep_123')
+      if repuser.save(validate: false)
+        repaccount = Account.new(code: code, user: repuser)
+        repaccount.save
+        repuser.add_role :admin
+      end
     end
   end
 end
