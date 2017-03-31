@@ -2,6 +2,8 @@ class TestController < ApplicationController
 	skip_before_action :authenticate_user!
   def index
   	@result = []
+    
+dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 #-------------------------- CREATE REP ACCOUNTS -----------------------------------
     @reps = dbh.execute("SELECT * FROM sales_reps_extn").fetch(:all, :Struct)
       @reps.each do |rep|
@@ -17,6 +19,6 @@ class TestController < ApplicationController
           end
         end
     end
-    
+
   end
 end
