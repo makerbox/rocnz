@@ -8,7 +8,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     @reps = dbh.execute("SELECT * FROM sales_reps_extn").fetch(:all, :Struct)
       @reps.each do |rep|
         @result << rep.Inactive
-        if rep.Inactive == 0
+        if rep.Inactive == 'N'
           code = rep.Code
           email = rep.EmailAddress
           repuser = User.new(email: email, password: 'cloudy_rep_123', password_confirmation: 'cloudy_rep_123')
