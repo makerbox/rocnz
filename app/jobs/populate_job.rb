@@ -13,7 +13,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 # -------------------------GET PRODUCTS AND CREATE / UPDATE PRODUCT RECORDS------------------------
 @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
     @products.each do |p|
-      if p.Inactive == 'N'
+      if p.Inactive == 0
         code = p.Code.strip
         description = p.Description.to_s.strip
         price1 = p.SalesPrice1
@@ -290,7 +290,7 @@ adminuser.account.update_attributes(approved: 'approved')
 #-------------------------- CREATE REP ACCOUNTS -----------------------------------
 @reps = dbh.execute("SELECT * FROM sales_reps_extn").fetch(:all, :Struct)
 @reps.each do |rep|
-  if rep.Inactive == 0
+  if rep.Inactive == 'N'
     code = rep.Code
     email = rep.EmailAddress
     repuser = User.new(email: email, password: 'cloudy_rep_123', password_confirmation: 'cloudy_rep_123')
