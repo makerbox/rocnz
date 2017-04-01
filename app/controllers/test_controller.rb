@@ -2,7 +2,7 @@ class TestController < ApplicationController
 	skip_before_action :authenticate_user!
   def index
   	@result = []
-    User.destroy_all
+    # User.destroy_all
 counter = 0
 dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 @customers_ext = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
