@@ -7,7 +7,9 @@ class TestController < ApplicationController
     # Contact.destroy_all
 #-------------------------- CREATE ADMIN USER -------------------------------------
 User.all.each do |p|
-  @result << p.role
+  if p.has_role? :admin
+    @result << p.email
+  end
 end
 
 #-------------------------- CREATE REP ACCOUNTS -----------------------------------
