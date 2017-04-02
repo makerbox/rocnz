@@ -63,6 +63,11 @@ def sendorder
   @print += "</tbody></table>"
   @print += "<h2>total: $" + @order.total.to_s + "</h2>"
   # `printhtml.exe html="#{@print}"`
+
+  if (current_user.has_role :admin?) && (!current_user.mimic.account.nil?)
+    current_user.mimic.destroy
+  end
+
   redirect_to home_confirm_path
 end
 
