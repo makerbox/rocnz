@@ -7,7 +7,7 @@ class TestController < ApplicationController
     # Contact.destroy_all
 #-------------------------- CREATE ADMIN USER -------------------------------------
 
-    @result << current_user.mimic.account.sort
+    @result << current_user.account
 
 
 #-------------------------- CREATE REP ACCOUNTS -----------------------------------
