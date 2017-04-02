@@ -12,10 +12,13 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
     code = ce.Code.strip
     email = ce.EmailAddr
     if !Account.all.find_by(code: code)
+      @result << 'did not find account by code'
       if email.blank?
         email = counter
       end
+      string = 'did'
       if !User.all.find_by(email: email)
+        string += ' not'
         newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
         if newuser.save(validate: false) #false to skip validation
           newuser.add_role :user
@@ -24,6 +27,8 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
           @result << 'newuser save - maybe account save too'
         end
       end
+      string += ' find user by email'
+      @result << string
     end
   end
 end
