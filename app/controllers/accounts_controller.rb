@@ -11,10 +11,14 @@ class AccountsController < ApplicationController
 
 def orderas
   account = Account.find_by(id: params[:account])
-  if current_user.mimic
-    current_user.mimic.update(account: account)
+  if account.user.email = 'web@roccloudy.com'
+    current_user.mimic.destroy #if they choose to order as themselves, just wipe it clean
   else
-    Mimic.create(account: account, user: current_user)
+    if current_user.mimic
+      current_user.mimic.update(account: account) #if they are already mimicing, then just update
+    else
+      Mimic.create(account: account, user: current_user) #if they are fresh to a mimic, then creat the record
+    end
   end
   redirect_to home_index_path
 end
