@@ -11,7 +11,7 @@ class AccountsController < ApplicationController
 
 def orderas
   account = Account.find_by(id: params[:account])
-  if account.user.email = 'web@roccloudy.com'
+  if account.code == 'ADMIN'
     current_user.mimic.destroy #if they choose to order as themselves, just wipe it clean
   else
     if current_user.mimic
