@@ -43,19 +43,20 @@ end
     account.update_attributes(approved: 'approved', phone: phone, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
   end
 end
-# @contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
-# @contacts.each do |contact|
-#   if contact.Active == 1
-#     email = contact.EmailAddress
-#     code = contact.Code
-#     newcontact = Contact.new(email: email, code: code)
-#     if thisaccount = Account.all.find_by(code: code)
-#       thisaccount.user.update_attributes(email: email)
-#       newcontact.save
-#     end
-#   end
-# end
-# dbh.disconnect
+@contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
+@contacts.each do |contact|
+  if contact.Active == 1
+    @result << 'contact active'
+    email = contact.EmailAddress
+    code = contact.Code
+    newcontact = Contact.new(email: email, code: code)
+    if thisaccount = Account.all.find_by(code: code)
+      thisaccount.user.update_attributes(email: email)
+      newcontact.save
+    end
+  end
+end
+dbh.disconnect
 
 # #-------------------------- CREATE ADMIN USER -------------------------------------
 # adminuser = User.all.find_by(email: 'web@roccloudy.com')
