@@ -270,7 +270,7 @@ end
 end
 @contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
 @contacts.each do |contact|
-  if contact.Active == 1
+  if (contact.Active == 1) && (!Contact.all.find_by(code: contact.Code.strip))
     email = contact.EmailAddress
     code = contact.Code
     newcontact = Contact.new(email: email, code: code)

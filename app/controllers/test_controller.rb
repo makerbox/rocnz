@@ -59,9 +59,9 @@ end
 dbh.disconnect
 
 # #-------------------------- CREATE ADMIN USER -------------------------------------
-# adminuser = User.all.find_by(email: 'web@roccloudy.com')
-# adminuser.add_role :admin
-# adminuser.account.update_attributes(approved: 'approved')
+adminuser = User.all.find_by(email: 'web@roccloudy.com')
+adminuser.add_role :admin
+adminuser.account.update_attributes(approved: 'approved')
 
 # #-------------------------- CREATE REP ACCOUNTS -----------------------------------
 # dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
