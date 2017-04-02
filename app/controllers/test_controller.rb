@@ -6,10 +6,9 @@ class TestController < ApplicationController
     # Account.destroy_all
     # Contact.destroy_all
 #-------------------------- CREATE ADMIN USER -------------------------------------
-User.all.each do |p|
-    @result << p.email
-    @result << p.account.sort
-end
+
+    @result << current_user.mimic.account.sort
+
 
 #-------------------------- CREATE REP ACCOUNTS -----------------------------------
 # dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
