@@ -7,13 +7,17 @@ class TestController < ApplicationController
     # Contact.destroy_all
 #-------------------------- CREATE ADMIN USER -------------------------------------
 if adminuser = User.all.find_by(email: 'web@roccloudy.com')
-  @result << adminuser.email
-  # adminuser.add_role :admin
-  # adminuser.account.update_attributes(approved: 'approved')
+  adminuser.add_role :admin
+  if adminuser.account
+    adminuser.account.update_attributes(approved: 'approved')
+  else
+    Account.create(code: 'ADMIN', company: 'Roc', user: adminuser)
+  end
 else
-  # adminuser = User.new(email: 'web@roccloudy.com', password:'cloudy_16', password_confirmation: 'cloudy_16')
-  # adminuser.add_role :admin
-  # adminuser.save(validate: false)
+  adminuser = User.new(email: 'web@roccloudy.com', password:'cloudy_16', password_confirmation: 'cloudy_16')
+  adminuser.add_role :admin
+  adminuser.save(validate: false)
+  Account.create(code: 'ADMIN', company: 'Roc', user: adminuser)
 end
 
 #-------------------------- CREATE REP ACCOUNTS -----------------------------------
