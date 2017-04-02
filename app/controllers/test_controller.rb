@@ -10,6 +10,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
   counter += 1
   if ce.InactiveCust == 0
     code = ce.Code.strip
+    @result << code
     email = ce.EmailAddr
     if !Account.all.find_by(code: code)
       @result << 'did not find account by code'
