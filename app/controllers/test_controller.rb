@@ -4,6 +4,7 @@ class TestController < ApplicationController
   	@result = []
     User.destroy_all
     Account.destroy_all
+    Contact.destroy_all
 counter = 0
 dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 @customers_ext = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
@@ -45,10 +46,9 @@ end
 end
 @contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
 @contacts.each do |contact|
-  if contact.Active == 1
-    @result << 'contact active'
+  if (contact.Active == 1) && (!Contact.all.find_by(code: contact.Code.strip))
     email = contact.EmailAddress
-    code = contact.Code
+    code = contact.Code.strip
     newcontact = Contact.new(email: email, code: code)
     if thisaccount = Account.all.find_by(code: code)
       thisaccount.user.update_attributes(email: email)
@@ -68,7 +68,7 @@ dbh.disconnect
 # @reps = dbh.execute("SELECT * FROM sales_reps_extn").fetch(:all, :Struct)
 # @reps.each do |rep|
 #   if rep.Inactive == 'N'
-#     code = rep.Code
+#     code = rep.Code.strip
 #     if email = rep.EmailAddress
 #       repuser = User.new(email: email, password: 'cloudy_rep_123', password_confirmation: 'cloudy_rep_123')
 #       if repuser.save(validate: false)
