@@ -2,7 +2,8 @@ class TestController < ApplicationController
 	skip_before_action :authenticate_user!
   def index
   	@result = []
-    # User.destroy_all
+    User.destroy_all
+    Account.destroy_all
 counter = 0
 dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 @customers_ext = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
@@ -10,26 +11,19 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
   counter += 1
   if ce.InactiveCust == 0
     code = ce.Code.strip
-    @result << code
     email = ce.EmailAddr
     if !Account.all.find_by(code: code)
-      @result << 'did not find account by code'
       if email.blank?
         email = counter
       end
-      string = 'did'
       if !User.all.find_by(email: email)
-        string += ' not'
         newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
         if newuser.save(validate: false) #false to skip validation
           newuser.add_role :user
           newaccount = Account.new(code: code, user: newuser) #create the account and associate with user
           newaccount.save
-          @result << 'newuser save - maybe account save too'
         end
       end
-      string += ' find user by email'
-      @result << string
     end
   end
 end
