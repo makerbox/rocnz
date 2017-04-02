@@ -7,6 +7,7 @@ class TestController < ApplicationController
     # Contact.destroy_all
 #-------------------------- CREATE ADMIN USER -------------------------------------
 User.all.each do |p|
+    @result << p.email
     @result << p.account.sort
 end
 
