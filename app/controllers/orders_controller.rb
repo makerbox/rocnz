@@ -18,19 +18,17 @@ def sendorder
 
   if @account.company # start putting together printable order
     company = @account.company
+    code = @account.code
   else
     company = 'no company ' + @account.phone #if no company name, then show phone number instead
   end
   @print = "<h1>New order from Roc Cloudy Wholesale Portal</h1>
   [ordered at: #{Time.now.strftime('%d/%m/%Y || %r')}]"
-  if current_user.has_role? :admin
-    @print += "<b> test order - please ignore </b>"
-  end
-  @print += "Company: " + company + "<hr>"
+  @print += "Company: " + company + " [#{code.to_s}]<hr>"
   @print += @account.street.to_s + ' | ' + @account.suburb.to_s + ' | ' + @account.phone.to_s + "<hr>
   <table><thead>
   <tr>
-  <th>CODE</th><th>PRICE</th><th>QTY</th>
+  <th>ITEM</th><th>PRICE</th><th>QTY</th><th>DESCRIPTION</th><th>SUBTOTAL</th>
   </tr>
   </thead>
   <tbody>"
@@ -56,13 +54,15 @@ def sendorder
         @setprice = product.rrp / 100 * product.discount(current_user)
     end
     @setprice = @setprice.round(2)
+    @subtotal = @setprice * q.qty
     @print += "<tr>
-    <td>#{product.code.to_s}<td>$#{@setprice.to_s}</td><td>#{q.qty.to_s}</td>
-    </tr>"
+    <td>#{product.code.to_s}<td>$#{@setprice.to_s}</td><td>#{q.qty.to_s}</td><td>#{product.description.to_s}</td>
+    <td>#{@subtotal.to_s}</td></tr>"
   end
   @print += "</tbody></table>"
   @print += "<h2>total: $" + @order.total.to_s + "</h2>"
-  # `printhtml.exe html="#{@print}"`
+  @print += "<h2>+ GST: $" + (@order.total * 1.1).to_s + "</h2>"
+  `printhtml.exe html="#{@print}"`
 
   if (current_user.has_role :admin?) && (!current_user.mimic.account.nil?)
     current_user.mimic.destroy
