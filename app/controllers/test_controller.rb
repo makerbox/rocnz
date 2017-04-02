@@ -7,7 +7,7 @@ class TestController < ApplicationController
     # Contact.destroy_all
 #-------------------------- CREATE ADMIN USER -------------------------------------
 if adminuser = User.all.find_by(email: 'web@roccloudy.com')
-  @result << adminuser
+  @result << adminuser.email
   # adminuser.add_role :admin
   # adminuser.account.update_attributes(approved: 'approved')
 else
