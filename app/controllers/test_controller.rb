@@ -6,8 +6,8 @@ class TestController < ApplicationController
     # Account.destroy_all
     # Contact.destroy_all
 #-------------------------- CREATE ADMIN USER -------------------------------------
-Product.all.each do |p|
-  @result << p.group
+User.all.each do |p|
+  @result << p.role
 end
 
 #-------------------------- CREATE REP ACCOUNTS -----------------------------------
