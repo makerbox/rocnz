@@ -3,7 +3,7 @@ class TestController < ApplicationController
   def index
   	@result = []
   	dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
-  	@result = dbh.execute("SELECT table_name FROM all_tables;")
+  	@result = dbh.execute("SELECT table_name FROM wholesaleportalnz")
  #    @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
  #    @products.each do |p|
  #      if p.Inactive == 0
