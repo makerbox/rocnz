@@ -2,9 +2,8 @@ class TestController < ApplicationController
 	skip_before_action :authenticate_user!
   def index
   	@result = []
-  	@result = RDBI.datasources
   	dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
-  	# @result = dbh.execute("SHOW TABLES").fetch(:all, :Struct)
+  	@result = dbh.tables
  #    @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
  #    @products.each do |p|
  #      if p.Inactive == 0
