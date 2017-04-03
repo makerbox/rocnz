@@ -2,6 +2,7 @@ class TestController < ApplicationController
 	skip_before_action :authenticate_user!
   def index
   	@result = []
+  	dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
     @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
     @products.each do |p|
       if p.Inactive == 0
