@@ -46,7 +46,6 @@ config.action_mailer.smtp_settings = {
   authentication: "plain",
   enable_starttls_auto: true,
   user_name: "web@roccloudy.com",
-  password: "web@Roc123",
-  tls: true
+  password: "web@Roc123!"
 }
 end
