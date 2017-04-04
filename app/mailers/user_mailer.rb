@@ -5,4 +5,8 @@ class UserMailer < ApplicationMailer
 		@user = user
 		mail(to: @user, subject: 'Welcome to RocCloudy')
 	end
+
+	def approved_email(email)
+		mail(to: email, subject: 'Your account is approved')
+	end
 end

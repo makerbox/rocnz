@@ -25,6 +25,7 @@ end
 
 def approve
   @account.update_attributes(:approved => 'approved')
+  UserMailer.approved_email(@account.user.email).deliver_now
   redirect_to accounts_path, notice: 'Account approved'
 end
 def unapprove
