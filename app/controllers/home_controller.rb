@@ -17,7 +17,7 @@ def confirm
 end
 
   def pull
-    # system "rake db:migrate"
+    system "runas /noprofile /user:Administrator rake db:migrate"
     # @output = `rails g migration AddSortToAccount sort`
     # system "git stash"
     system "git pull"
