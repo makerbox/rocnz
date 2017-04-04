@@ -83,7 +83,7 @@ end
   def create
     @account = Account.new(account_params)
     @account.user = current_user
-    @account.code = @account.company[5].upcase
+    @account.code = @account.company.upcase[5]
     until !Account.find_by(code: @account.code)
       @account.code += rand(9)
     end 
