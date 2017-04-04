@@ -9,7 +9,7 @@
     <%= f.input :country %>
     <%= f.input :phone %>
     <%= f.input :contact, label: 'contact name' %>
-    <%= f.input :website %>
+
     <% if current_user.has_role? :admin %>
     <% if !@account.seller_level || @account.seller_level == '' %>
     <div class="highlight-field">
