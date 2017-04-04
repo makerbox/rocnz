@@ -31,9 +31,9 @@ end
 
   def test #this has a view, so you can check variables and stuff - be careful of breaking home controller
     system "git stash"
-    Account.destroy_all
-    User.destroy_all
-    Contact.destroy_all
+    # Account.destroy_all
+    # User.destroy_all
+    # Contact.destroy_all
    `Taskkill /IM ruby.exe /F`
    #you can use the backtick method of system commands to get the output e.g. output = `echo 'hi'` => 'hi'
   end
