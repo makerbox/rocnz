@@ -90,9 +90,8 @@ end
 
     respond_to do |format|
       if @account.save
-        # code for sending email notifications
-         EmailJob.perform_async('cheryl@roccloudy.com, web@roccloudy.com', @account) #email the request to admin for approval
-         UserEmailJob.perform_async(@account.user.email) #email the user with a receipt
+        EmailJob.perform_async('web@roccloudy.com', @account)
+        UserEmailJob.perform_async(@account.user.email) #email the user with a receipt
 
         format.html { redirect_to @account, notice: 'Account was successfully created.' }
         format.json { render :show, status: :created, location: @account }
