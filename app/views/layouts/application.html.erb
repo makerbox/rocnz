@@ -54,8 +54,12 @@
         <% if (current_user.has_role? :admin) && (current_user.mimic) %>
         <div id="mimic">
           <% if !current_user.mimic.account.nil? %>
-          ORDERING FOR: 
-          <%= current_user.mimic.account.company %>
+            ORDERING FOR: 
+            <%= current_user.mimic.account.company %>
+            <% account = current_user.account %>
+            <%= link_to orderas_account_path(account, account: account), class: 'btn btn-info' do %>
+              X
+            <% end %>
           <% end %>
         </div>
         <% end %>
