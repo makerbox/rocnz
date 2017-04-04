@@ -7,7 +7,7 @@ Contact.create(code:'running', email:'running')
 
 @results = []
 
-dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
 
 
 # -------------------------GET PRODUCTS AND CREATE / UPDATE PRODUCT RECORDS------------------------
