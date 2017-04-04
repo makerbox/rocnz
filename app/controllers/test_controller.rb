@@ -3,6 +3,6 @@ class TestController < ApplicationController
   def index
   	@result = []
   	# EmailJob.perform_async('web@roccloudy.com')
-  	AdminMailer.new_user_waiting_for_approval('web@roccloudy.com').deliver_now
+  	AdminMailer.new_user_waiting_for_approval('web@roccloudy.com', Account.first).deliver_now
   end
 end
