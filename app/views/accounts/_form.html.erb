@@ -2,14 +2,14 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :code %>
     <%= f.input :company %>
     <%= f.input :street %>
     <%= f.input :suburb %>
     <%= f.input :state %>
     <%= f.input :country %>
     <%= f.input :phone %>
-    <%= f.input :contact %>
+    <%= f.input :contact, label: 'contact name' %>
+    <%= f.input :website %>
     <% if current_user.has_role? :admin %>
     <% if !@account.seller_level || @account.seller_level == '' %>
     <div class="highlight-field">

@@ -83,6 +83,11 @@ end
   def create
     @account = Account.new(account_params)
     @account.user = current_user
+    @account.code = @account.company[5].upcase
+    until !Account.find_by(code: @account.code)
+      @account.code += rand(9)
+    end 
+
     respond_to do |format|
       if @account.save
         # code for sending email notifications
@@ -130,6 +135,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
-      params.require(:account).permit(:user_id, :rep, :code, :company, :street, :suburb, :postcode, :state, :country, :phone, :contact, :seller_level, :sort, :discount)
+      params.require(:account).permit(:user_id, :website, :rep, :code, :company, :street, :suburb, :postcode, :state, :country, :phone, :contact, :seller_level, :sort, :discount)
     end
 end

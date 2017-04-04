@@ -1,8 +1,9 @@
 <h1>There is a new user awaiting your approval for the RocCloudy wholesaler portal.</h1>
 Company: <%= @account.company %><br>
 [<%= @account.user.email %>]<br>
-<%= @account.phone %><hr>
-<%= @account.street %><br>
-<%= @account.suburb %><br>
-<%= @account.postcode %><br>
-<h2>Please moderate their account to allow them access to the wholesale portal</h2>
+PH: <%= @account.phone %> | Contact: <%= @account.contact %> | Website: <%= @account.website %><hr>
+Address: <%= @account.street %><br>
+Suburb: <%= @account.suburb %><br>
+Postcode: <%= @account.postcode %><br>
+<h2>Please moderate their account to allow them access to the wholesale portal<br>
+<strong>NB: ensure their account code (<%= @account.code %>) is used when adding the customer in Attache!</strong></h2>
