@@ -90,7 +90,7 @@ end
 
     respond_to do |format|
       if @account.save
-        EmailJob.perform_async('web@roccloudy.com', @account)
+        EmailJob.perform_async('web@roccloudy.com', @account) #email admin with notification
         UserEmailJob.perform_async(@account.user.email) #email the user with a receipt
 
         format.html { redirect_to @account, notice: 'Account was successfully created.' }
