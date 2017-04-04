@@ -2,6 +2,9 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+      <% if current_user.has_role? :admin %>
+        <%= f.input :code %>
+      <% end %>
     <%= f.input :company %>
     <%= f.input :street %>
     <%= f.input :suburb %>
