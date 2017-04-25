@@ -27,6 +27,5 @@ production:
   port: 3000
   pool: 5
   timeout: 5000
-  host: http://roccloudy.com
-  port: 3000
-  database: default
+  host: "http://roccloudy.com"
+  database: "development"
