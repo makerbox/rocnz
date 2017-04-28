@@ -128,6 +128,7 @@ class ProductsController < ApplicationController
             end
         end
     end
+
   if @products
     if params[:filter] == 'new'
       @products = @products.where("new_date >= ?", Date.today - 30.days)
@@ -135,14 +136,16 @@ class ProductsController < ApplicationController
     @products = @products.where("qty > ?", 20)
     @products = @products.order(group: 'DESC').order(code: 'ASC')
     @totalproducts = @products.count
+
     if user_signed_in?
-      if (current_user.has_role? :admin) && (!current_user.mimic.nil?) #for sidecart
+      if (current_user.has_role? :admin) && (!current_user.mimic) #for sidecart
         @order = current_user.mimic.account.user.orders.where(active: true).last #for sidecart
       else #for sidecart
         @order = current_user.orders.where(active: true).last #for sidecart
       end #for sidecart
     end
   end
+
 end
 
   # GET /products/1
