@@ -15,15 +15,16 @@ class User < ActiveRecord::Base
   end
 
   def checksort(user)
-    if !user.has_role? :admin #if they ain't admin - they just have normal sort
-      output = user.account.sort
-    else
-      if user.mimic #if they is admin and have mimic - give them mimic sort
-        output = user.mimic.account.sort
-      else #if they admin without mimic - they get full sort
-        output = 'R L U P'
-      end
-    end
+    # if !user.has_role? :admin #if they ain't admin - they just have normal sort
+    #   output = user.account.sort
+    # else
+    #   if user.mimic #if they is admin and have mimic - give them mimic sort
+    #     output = user.mimic.account.sort
+    #   else #if they admin without mimic - they get full sort
+    #     output = 'R L U P'
+    #   end
+    # end
+    output = 'R'
     return output
   end 
 
