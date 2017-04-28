@@ -65,7 +65,7 @@
         <% end %>
 
         <ul class="nav navbar-nav">
-          <% if current_user.account && user_signed_in? %>
+          <% if user_signed_in? %>
           <% if current_user.account.sort %>
           <% sortfield = current_user.checksort(current_user) %>
           <% if sortfield.include? 'R' %>
