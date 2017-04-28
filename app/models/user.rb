@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   		add_role(:user)
   end
 
-  def checksort(self)
+  def self.checksort
     if !self.has_role? :admin #if they ain't admin - they just have normal sort
       @sort = self.account.sort
     else
