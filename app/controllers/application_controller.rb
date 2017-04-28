@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
 
+helper_method :checksort
 def checksort
 	if user_signed_in?
 		if !current_user.has_role? :admin #if they ain't admin - they just have normal sort
