@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
   end
 
   def checksort
-    if user_signed_in?
       if !current_user.has_role? :admin #if they ain't admin - they just have normal sort
         @sort = current_user.account.sort
       else
@@ -25,7 +24,6 @@ class User < ActiveRecord::Base
           @sort = 'R L U P'
         end
       end
-    end
     return @sort
   end
 
