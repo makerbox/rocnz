@@ -10,6 +10,7 @@ class QuantitiesController < ApplicationController
   # GET /quantities/1
   # GET /quantities/1.json
   def show
+    @order = Order.last
   end
 
   # GET /quantities/new
