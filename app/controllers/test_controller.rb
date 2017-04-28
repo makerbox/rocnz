@@ -4,6 +4,6 @@ class TestController < ApplicationController
 	def index
 	  	# system "clockwork clock.rb"
 	  	# system "heroku pg:push development postgresql-round-86328 --app shrouded-waters-74068"
-	 	@sort = current_user.checksort(current_user)
+	 	@sort = checksort(current_user)
 	end
 end
