@@ -14,17 +14,17 @@ class User < ActiveRecord::Base
   		add_role(:user)
   end
 
-  def self.checksort
-    if !self.has_role? :admin #if they ain't admin - they just have normal sort
-      output = self.account.sort
+  def checksort(user)
+    if !user.has_role? :admin #if they ain't admin - they just have normal sort
+      output = user.account.sort
     else
-      if self.mimic #if they is admin and have mimic - give them mimic sort
-        output = self.mimic.account.sort
+      if user.mimic #if they is admin and have mimic - give them mimic sort
+        output = user.mimic.account.sort
       else #if they admin without mimic - they get full sort
         output = 'R L U P'
       end
     end
     return output
-  end
+  end 
 
 end
