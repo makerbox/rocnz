@@ -67,7 +67,7 @@
         <ul class="nav navbar-nav">
           <% if current_user.account && user_signed_in? %>
           <% if current_user.account.sort %>
-          <% sortfield = User.first.checksort(User.first) %>
+          <% sortfield = current_user.checksort(current_user) %>
           <% if sortfield.include? 'R' %>
           <li class="dropdown menu-icon"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1480980887/roc_backless_ltdncr.png"></a>
             <ul class="dropdown-menu">
