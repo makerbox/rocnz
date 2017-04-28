@@ -18,12 +18,14 @@ class User < ActiveRecord::Base
     if user.has_role? :admin
       if user.mimic
         output = user.mimic.account.sort
-        output = 'R'
       else
         output = 'R L U P'
       end
     else
       output = user.account.sort
+    end
+    if output == nil
+      output = ' '
     end
     return output
   end 
