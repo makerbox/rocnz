@@ -5,5 +5,6 @@ class TestController < ApplicationController
 	  	# system "clockwork clock.rb"
 	  	# system "heroku pg:push development postgresql-round-86328 --app shrouded-waters-74068"
 	 	@sort = User.first.account.sort
+	 	@currentsort = current_user.account.sort
 	end
 end
