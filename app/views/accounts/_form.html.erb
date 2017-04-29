@@ -4,6 +4,8 @@
   <div class="form-inputs">
       <% if current_user.has_role? :admin %>
         <%= f.input :code %>
+        <% else %>
+        <%= link_to "Change your password", edit_user_registration_path %>
       <% end %>
     <%= f.input :company %>
     <%= f.input :street %>
