@@ -40,7 +40,7 @@ end
       searchterm = params[:searchterm]
       @accounts = Account.where('company LIKE ?', "%#{searchterm}%")
     else
-      @accounts = Account.all.order('company desc')
+      @accounts = Account.all.order('approved DESC')
     end
     if params[:order]
       @accounts = @accounts.order(params[:order] + ' ASC')
