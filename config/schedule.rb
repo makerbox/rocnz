@@ -7,10 +7,7 @@
 #
 # set :output, "/path/to/my/cron_log.log"
 #
-every 10.minutes do
-  # PopulateJob.perform_async()
-  Contact.create(code:'running', email:'running')
-end
+
 #
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
