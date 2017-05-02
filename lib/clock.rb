@@ -8,4 +8,4 @@ handler do |job|
   puts "Running #{job}"
 end
 
-every(30.minutes, 'populate') { Delayed::Job.enqueue PopulateJob.new.perform}
+every(1.hours, 'populate') { Delayed::Job.enqueue PopulateJob.new.perform}
