@@ -6,4 +6,4 @@ include Clockwork
 
 handler { |job| Delayed::Job.enqueue job }
 
-every(1.hours, 'PopulateJob.perform')
+every(1.hours, 'PopulateJob.new.perform')
