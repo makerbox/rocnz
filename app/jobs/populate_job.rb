@@ -1,11 +1,8 @@
 class PopulateJob
 	include SuckerPunch::Job
  def perform
-#THIS WILL COMPLETELY SEED THE DATABASE - ONLY RUN AT NIGHT
 Contact.create(code:'running', email:'running')
-@time = Time.now
 
-@results = []
 
 dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
@@ -316,8 +313,7 @@ end
 dbh.disconnect
 
 # ------------------------META DATA--------------------------------------------------------------
-@results << Product.count
-@time = (Time.now - @time) / 60
+
 Contact.where(code:'running').each do |del|
   del.destroy
 end
