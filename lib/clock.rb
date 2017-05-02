@@ -1,6 +1,7 @@
 require 'clockwork'
-# require './config/boot'
-# require './config/environment'
+require './config/boot'
+require './config/environment'
+
 include Clockwork
 
 handler do |job|
