@@ -7,12 +7,7 @@ class TestController < ApplicationController
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       @accounts = dbh.execute("SELECT * FROM genledger_master").fetch(:all, :Struct)
       @accounts.each do |acct|
-        if acct.Inactive == (1 || 'Yes' || 'Y')
-        	@output << 'inactive is yes or 1'
-        else
-          code = acct.Code.strip
-          @output << code
-        end
+        @output = acct.Inactive
       end
 
 
