@@ -64,7 +64,7 @@ def sendorder
   # @print += "<h2>+ GST: $" + (@order.total * 1.1).to_s + "</h2>"
   # `printhtml.exe html="#{@print}"`
 
-  if (current_user.has_role? :admin) && (!current_user.mimic.account.nil?)
+  if (current_user.has_role? :admin) && (current_user.mimic)
     current_user.mimic.destroy
   end
 
