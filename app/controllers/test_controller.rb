@@ -8,7 +8,7 @@ class TestController < ApplicationController
       @customers_ext = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
       @customers_ext.each do |ce|
         counter += 1
-        if ce.InactiveCust == (1 || 'Yes')
+        if ce.InactiveCust == (1 || 'Yes' || 'Y')
           code = ce.Code.strip
           if account = Account.all.find_by(code: code)
 	          user = account.user

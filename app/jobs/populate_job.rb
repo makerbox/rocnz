@@ -237,10 +237,11 @@ class PopulateJob
         counter += 1
         if ce.InactiveCust == (1 || 'Yes')
           code = ce.Code.strip
-          account = Account.all.find_by(code: code)
-          user = User.all.find_by(account: account)
-          account.destroy
-          user.destroy
+          if account = Account.all.find_by(code: code) # if there is an attache inactive account already in the portal, we delete it and it's user
+            user = account.user
+            account.destroy
+            user.destroy
+          end
         else
           code = ce.Code.strip
           email = ce.EmailAddr
