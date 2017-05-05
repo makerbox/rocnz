@@ -14,8 +14,8 @@ class TestController < ApplicationController
 	          user = account.user
 	          @output << user.email
 	          @output << account.code
-	          account.destroy
-	          user.destroy
+	          # account.destroy
+	          # user.destroy
 	      end
         else
           code = ce.Code.strip
