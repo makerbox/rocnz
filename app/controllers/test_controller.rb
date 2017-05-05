@@ -10,7 +10,7 @@ class TestController < ApplicationController
         counter += 1
         if ce.InactiveCust == (1 || 'Yes')
           code = ce.Code.strip
-          account = Account.all.find_by(code: code)
+          if account = Account.all.find_by(code: code)
           user = account.user
           @output << user.email
           @output << account.email
