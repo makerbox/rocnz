@@ -235,15 +235,14 @@ class PopulateJob
       @customers_ext = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
       @customers_ext.each do |ce|
         counter += 1
-        if ce.InactiveCust == (1 || 'Yes')
-          code = ce.Code.strip
+        code = ce.Code.strip
+        if ce.InactiveCust == 1
           if account = Account.all.find_by(code: code) # if there is an attache inactive account already in the portal, we delete it and it's user
             user = account.user
             account.destroy
             user.destroy
           end
         else
-          code = ce.Code.strip
           email = ce.EmailAddr
           if !Account.all.find_by(code: code)
             if email.blank?
