@@ -237,6 +237,12 @@ class PopulateJob
         counter += 1
         if ce.InactiveCust == 0
           code = ce.Code.strip
+          account = Account.all.find_by(code: code)
+          user = User.all.find_by(account: account)
+          account.destroy
+          user.destroy
+        else
+          code = ce.Code.strip
           email = ce.EmailAddr
           if !Account.all.find_by(code: code)
             if email.blank?

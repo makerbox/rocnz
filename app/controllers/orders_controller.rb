@@ -16,12 +16,12 @@ def sendorder
   @account = @order.user.account
   OrderEmailJob.perform_async(@order)
 
-  if @account.company # start putting together printable order
-    company = @account.company
-    code = @account.code
-  else
-    company = 'no company ' + @account.phone #if no company name, then show phone number instead
-  end
+  # if @account.company # start putting together printable order
+  #   company = @account.company
+  #   code = @account.code
+  # else
+  #   company = 'no company ' + @account.phone #if no company name, then show phone number instead
+  # end
   # @print = "<h1>New order from Roc Cloudy Wholesale Portal</h1>
   # [ordered at: #{Time.now.strftime('%d/%m/%Y || %r')}]"
   # @print += "Company: " + company + " [#{code.to_s}]<hr>"
