@@ -5,9 +5,9 @@ class TestController < ApplicationController
 		@output = []
 	  	counter = 0
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-      @accounts = dbh.execute("SELECT * FROM genledger_master").fetch(:all, :Struct)
+      @accounts = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
       @accounts.each do |acct|
-        @output << (acct.Inactive.to_s + acct.Code.to_s)
+        @output << (acct.InactiveCust.to_s + '--' + acct.Code.to_s)
       end
 
 
