@@ -13,7 +13,7 @@ class TestController < ApplicationController
           if account = Account.all.find_by(code: code)
 	          user = account.user
 	          @output << user.email
-	          @output << account.email
+	          @output << account.code
 	          account.destroy
 	          user.destroy
 	      end
