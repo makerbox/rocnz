@@ -9,7 +9,7 @@ class TestController < ApplicationController
       @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
 
       @accounts.each do |acct|
-      	if acct.InactiveCust == 1
+      	if acct.InactiveCust == 0
         	@output << (acct.InactiveCust.to_s + '--' + acct.Code.to_s)
         	      @customers.each do |c|
         	      	if c.Code == acct.Code
