@@ -6,6 +6,10 @@ class TestController < ApplicationController
 	  	counter = 0
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       @accounts = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
+      @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+      @customers.each do |c|
+      	@output << c.Name
+      end
       @accounts.each do |acct|
       	if acct.InactiveCust == 1
         	@output << (acct.InactiveCust.to_s + '--' + acct.Code.to_s)
