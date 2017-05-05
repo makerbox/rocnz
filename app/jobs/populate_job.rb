@@ -237,7 +237,8 @@ class PopulateJob
         counter += 1
         code = ce.Code.strip
         if ce.InactiveCust == 1
-          if account = Account.all.find_by(code: code) # if there is an attache inactive account already in the portal, we delete it and it's user
+          if Account.all.find_by(code: code)
+            account = Account.all.find_by(code: code) # if there is an attache inactive account already in the portal, we delete it and its user
             user = account.user
             account.destroy
             user.destroy
@@ -261,8 +262,9 @@ class PopulateJob
       end
       @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
       @customers.each do |c|
-        if Account.all.find_by(code: c.Code.strip)
-          account = Account.all.find_by(code: c.Code.strip)
+        code = c.Code.strip
+        if Account.all.find_by(code: code)
+          account = Account.all.find_by(code: code)
           compname = c.Name
           street = c.Street
           suburb = c.Suburb 
