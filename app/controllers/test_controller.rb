@@ -13,8 +13,8 @@ class TestController < ApplicationController
         	@output << (acct.InactiveCust.to_s + '--' + acct.Code.to_s)
     	    @customers.each do |c|
     	      	if c.Code == acct.Code
-    	      		if myacct = Account.all.find_by(code: c.Code.strip)
-  						@output << c.Name + myacct.company
+    	      		if myacct = Account.all.find_by(code: c.Code.strip).company
+  						@output << c.Name + myacct
   					end
   				end
  	 		end
