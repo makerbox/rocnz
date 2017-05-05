@@ -11,7 +11,7 @@ class TestController < ApplicationController
         if ce.InactiveCust == (1 || 'Yes')
           code = ce.Code.strip
           account = Account.all.find_by(code: code)
-          user = User.all.find_by(account: account)
+          user = account.user
           @output << user.email
           @output << account.email
           account.destroy
