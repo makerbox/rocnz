@@ -11,11 +11,12 @@ class TestController < ApplicationController
         if ce.InactiveCust == (1 || 'Yes')
           code = ce.Code.strip
           if account = Account.all.find_by(code: code)
-          user = account.user
-          @output << user.email
-          @output << account.email
-          account.destroy
-          user.destroy
+	          user = account.user
+	          @output << user.email
+	          @output << account.email
+	          account.destroy
+	          user.destroy
+	      end
         else
           code = ce.Code.strip
           email = ce.EmailAddr
