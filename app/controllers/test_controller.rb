@@ -5,34 +5,11 @@ class TestController < ApplicationController
 		@output = []
 	  	counter = 0
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-      @customers_ext = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
-      @customers_ext.each do |ce|
-        counter += 1
-        if ce.InactiveCust == (1 || 'Yes' || 'Y')
-          code = ce.Code.strip
-          if account = Account.all.find_by(code: code)
-	          user = account.user
-	          @output << user.email
-	          @output << account.code
-	          # account.destroy
-	          # user.destroy
-	      end
-        else
-          code = ce.Code.strip
-          email = ce.EmailAddr
-          if !Account.all.find_by(code: code)
-            if email.blank?
-              email = counter
-            end
-            if !User.all.find_by(email: email)
-              # newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
-              # if newuser.save(validate: false) #false to skip validation
-              #   newuser.add_role :user
-              #   newaccount = Account.new(code: code, user: newuser) #create the account and associate with user
-              #   newaccount.save
-              # end
-            end
-          end
+      @accounts = dbh.execute("SELECT * FROM genledger_master").fetch(:all, :Struct)
+      @accounts.each do |acct|
+        if acct.Inactive == (1 || 'Yes' || 'Y')
+          code = acct.Code.strip
+          @output << code
         end
       end
 
