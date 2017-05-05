@@ -4,6 +4,4 @@ require './config/environment'
 
 include Clockwork
 
-handler { |job| Delayed::Job.enqueue job }
-
-every(1.hours, 'PopulateJob.new.perform')
+every(30.minutes, 'PopulateJob.perform') { Delayed::Job.enqueue }
