@@ -5,23 +5,9 @@ class TestController < ApplicationController
 		@output = []
 	  	counter = 0
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-      @accounts = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
-      @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+      @products = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
-      @accounts.each do |acct|
-      	if acct.InactiveCust == 0
-        	@output << (acct.InactiveCust.to_s + '--' + acct.Code.to_s)
-    	    @customers.each do |c|
-    	      	if c.Code == acct.Code
-    	      		if Account.all.find_by(code: acct.Code.strip)
-    	      			myacct = Account.all.find_by(code: acct.Code.strip)
-  						@output << myacct.code
-  					end
-  				end
- 	 		end
-    	end
-      end
-
+      @output = Product.all
 
 
 
