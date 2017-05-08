@@ -16,8 +16,9 @@ def calc_qty_disc
   prod_code = @product.code
   price_cat = @product.pricecat
 
-  if Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip), "maxqty >= ?", {qty})
-    disco = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip), "maxqty >= ?", {qty})
+  if Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
+    disco = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
+    disco = disco.find_by("maxqty >= ?", qty)
     result = price - disco
   else
     result = price
