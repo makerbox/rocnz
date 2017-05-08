@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   get 'home/contact'
   get 'home/confirm'
 
-  get 'product/calc_qty_disc'
-  
+  get 'products/calc_qty_disc'
+
 resources :products do
   member do
     get 'add'
