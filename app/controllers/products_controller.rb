@@ -21,7 +21,7 @@ def calc_qty_disc
   else
     # result = qty
   end
-  @result = qty
+  puts qty
 end
 
   def index
