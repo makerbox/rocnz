@@ -26,6 +26,7 @@ $('#quantity_qty').change(function(){
 })
 
 function calc_qty_disc() {
+	console.log('test');
    $.ajax({
       url: '/calc_qty_disc',
       dataType: "json",
