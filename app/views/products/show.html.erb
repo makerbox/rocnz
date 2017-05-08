@@ -97,7 +97,7 @@ $('.form-control').change(function() {
       dataType: "json",
       type: "GET",
       data: { qty: $("#quantity_qty").val() },
-      success: function(result) { $("#price-display").text(result); }
+      success: function(result) { $("#price-display").html(result); }
       });
 });
 
