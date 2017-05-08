@@ -23,6 +23,7 @@ window.location.href = "?searchterm="+searchterm;
 
 $('#quantity_qty').change(function(){
 	calc_qty_disc();
+	console.log('changed');
 })
 
 function calc_qty_disc() {
