@@ -20,19 +20,3 @@ function searchme(){
 var searchterm = $('#searchfield').val();
 window.location.href = "?searchterm="+searchterm;
 }
-
-$('.form-control').change(function(){
-	calc_qty_disc();
-	console.log('changed');
-})
-
-function calc_qty_disc() {
-	console.log('test');
-   $.ajax({
-      url: '/calc_qty_disc',
-      dataType: "json",
-      type: "POST",
-      data: { qty: $("#quantity_qty").val() },
-      success: function(result) { $("#price-display").text(result); }
-      });
-}
