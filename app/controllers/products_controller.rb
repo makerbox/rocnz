@@ -5,7 +5,8 @@ class ProductsController < ApplicationController
   # GET /products.json
 
 def calc_qty_disc
-  @qty = params[:qty]
+  # qty = params[:qty]
+  qty = 5
   # if current_user.mimic
   #   u = current_user.mimic.user
   # else
@@ -21,7 +22,8 @@ def calc_qty_disc
   # else
   #   # result = qty
   # end
-    render js: "hi"
+  data = {qty: qty}.to_json 
+  return data
 end
 
   def index
