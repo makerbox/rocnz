@@ -22,8 +22,10 @@ def calc_qty_disc
   # else
   #   # result = qty
   # end
-  data = {qty: qty}.to_json 
-  return data
+ respond_to do |format|
+        format.html { qty: qty }
+        format.json { qty: qty }
+  end
 end
 
   def index
