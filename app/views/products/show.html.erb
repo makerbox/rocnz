@@ -91,14 +91,16 @@
 <script>
 
 $('.form-control').change(function() {
+  var route = <%= @product.id %>/calc_qty_disc;
    $.ajax({
-      url: '#{@product.id}/calc_qty_disc' ,
+      url: route ,
       dataType: "json",
       type: "GET",
       data: { qty: $("#quantity_qty").val() },
       success: function(result) {
         $("#price-display").html(result); 
-        console.log(result); }
+        console.log(result);
+        console.log(route); }
       });
 });
 
