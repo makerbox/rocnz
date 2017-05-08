@@ -92,7 +92,7 @@
 
 $('.form-control').change(function() {
    $.ajax({
-      url: <%= products_calc_qty_disc %>,
+      url: 'products/calc_qty_disc',
       dataType: "json",
       type: "GET",
       data: { qty: $("#quantity_qty").val() },
