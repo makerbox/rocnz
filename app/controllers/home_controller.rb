@@ -22,7 +22,7 @@ end
     # system "git stash"
     system "git pull"
     # system "bundle exec rake db:migrate"
-    @output = `rake routes`
+    # @output = `rake routes`
     # @output = `rake db:migrate`
     # system "bundle exec rake db:migrate"
     # system "rake db:migrate"
