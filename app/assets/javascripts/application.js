@@ -21,7 +21,7 @@ var searchterm = $('#searchfield').val();
 window.location.href = "?searchterm="+searchterm;
 }
 
-$('#quantity_qty').onChange(function(){
+$('#quantity_qty').change(function(){
 	calc_qty_disc();
 })
 
