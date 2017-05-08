@@ -98,7 +98,6 @@ $('.form-control').change(function() {
       type: "GET",
       data: { qty: $("#quantity_qty").val(), 
       price: <%= prodprice %>,
-      pricecat: <%= @product.pricecat %>,
       code: <%= @product.code %>,
       group: <%= @product.group %> },
       success: function(data) {
