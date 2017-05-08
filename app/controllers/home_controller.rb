@@ -21,6 +21,8 @@ end
     # @output = `rails g migration AddSortToAccount sort`
     # system "git stash"
     system "git pull"
+    system "bundle exec rake db:migrate"
+    system "bundle exec rake routes"
     # @output = `rake db:migrate`
     # system "bundle exec rake db:migrate"
     # system "rake db:migrate"
