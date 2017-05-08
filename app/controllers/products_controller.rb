@@ -21,7 +21,8 @@ def calc_qty_disc
   # else
   #   # result = qty
   # end
-  render :html => { @qty }
+  puts @qty
+  return @qty
 end
 
   def index
