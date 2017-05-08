@@ -91,7 +91,7 @@
 <script>
 
 $('.form-control').change(function() {
-  var route = <%= @product.id %>/calc_qty_disc;
+  var route = <%= @product.id %>+"/calc_qty_disc";
    $.ajax({
       url: route ,
       dataType: "json",
