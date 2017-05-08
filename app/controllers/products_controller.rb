@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
 
 def calc_qty_disc
   qty = params[:qty]
+  price = params[:qtyprice]
   if current_user.mimic
     u = current_user.mimic.user
   else
@@ -17,9 +18,9 @@ def calc_qty_disc
 
   if Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip), maxqty: (>= qty))
     disco = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip), maxqty: (>= qty))
-    result = qty
+    result = price - disco
   else
-    result = qty
+    result = price
   end
   respond_to do |format|
     format.json { render json: {result: result} }
