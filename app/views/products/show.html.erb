@@ -95,7 +95,7 @@ $('.form-control').change(function() {
    $.ajax({
       url: 'calc_qty_disc',
       dataType: "json",
-      type: "POST",
+      type: "GET",
       data: { qty: $("#quantity_qty").val() },
       success: function(result) { $("#price-display").text(result); }
       });
