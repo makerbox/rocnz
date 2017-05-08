@@ -21,9 +21,7 @@ def calc_qty_disc
   # else
   #   # result = qty
   # end
-    respond_to do |format|
-       format.js { @qty }
-    end
+  render :html => { @qty }
 end
 
   def index
