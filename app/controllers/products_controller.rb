@@ -18,14 +18,13 @@ def calc_qty_disc
   end
 
 
-  if Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)).find_by("maxqty >= ?", qty)
-    disco = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)).find_by("maxqty >= ?", qty)
-    result = price - disco
+  if Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
+    disco = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
+    result = disco
   else
     result = price
   end
 
-  result = price
   respond_to do |format|
     format.json { render json: {result: result} }
   end
