@@ -22,9 +22,8 @@ def calc_qty_disc
   # else
   #   # result = qty
   # end
- respond_to do |format|
-        format.html { qty: qty }
-        format.json { qty: qty }
+  respond_to do |format|
+    format.json { qty: qty }
   end
 end
 
