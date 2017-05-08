@@ -21,7 +21,7 @@ def calc_qty_disc
   else
     # result = qty
   end
-
+  format.html { result: qty }
 end
 
   def index
