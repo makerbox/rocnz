@@ -23,7 +23,7 @@ def calc_qty_disc
   #   # result = qty
   # end
   respond_to do |format|
-    format.json { qty: qty }
+    format.json { render json: qty }
   end
 end
 
