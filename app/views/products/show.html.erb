@@ -91,13 +91,12 @@
 <script>
 
 $('.form-control').change(function() {
-  console.log('test');
    $.ajax({
       url: '#{products_calc_qty_disc_path}',
       dataType: "json",
       type: "GET",
       data: { qty: $("#quantity_qty").val() },
-      success: function(result) { $("#price-display").html(result); }
+      success: function(result) { $("#price-display").html(result); console.log(result); }
       });
 });
 
