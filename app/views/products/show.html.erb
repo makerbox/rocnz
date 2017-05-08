@@ -96,7 +96,11 @@ $('.form-control').change(function() {
       url: route ,
       dataType: "json",
       type: "GET",
-      data: { qty: $("#quantity_qty").val(), qtyprice: <%= prodprice %> },
+      data: { qty: $("#quantity_qty").val(), 
+      price: <%= prodprice %>,
+      pricecat: <%= @product.pricecat %>,
+      code: <%= @product.code %>,
+      group: <%= @product.group %> },
       success: function(data) {
         $("#price-display").html(data.result); 
         console.log(data.result);

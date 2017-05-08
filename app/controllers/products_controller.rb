@@ -7,21 +7,23 @@ class ProductsController < ApplicationController
 def calc_qty_disc
   qty = params[:qty]
   price = params[:qtyprice]
+  prod_group = params[:group]
+  prod_code = params[:code]
+  price_cat = params[:pricecat]
+  
   if current_user.mimic
     u = current_user.mimic.user
   else
     u = current_user
   end
-  prod_group = @product.group
-  prod_code = @product.code
-  price_cat = @product.pricecat
 
-  # if disco = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)).find_by("maxqty >= ?", qty)
-  #   result = price - disco
-  # else
-  #   result = price
-  # end
-  
+
+  if disco = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)).find_by("maxqty >= ?", qty)
+    result = price - disco
+  else
+    result = price
+  end
+
   result = price
   respond_to do |format|
     format.json { render json: {result: result} }
