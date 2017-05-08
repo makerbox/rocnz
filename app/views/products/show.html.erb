@@ -94,7 +94,7 @@ $('.form-control').change(function() {
    $.ajax({
       url: '#{products_calc_qty_disc_path}',
       dataType: "json",
-      type: "POST",
+      type: "GET",
       data: { qty: $("#quantity_qty").val() },
       success: function(data) {
         $("#price-display").html(data); 
