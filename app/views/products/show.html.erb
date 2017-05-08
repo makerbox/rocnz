@@ -97,8 +97,8 @@ $('.form-control').change(function() {
       type: "GET",
       data: { qty: $("#quantity_qty").val() },
       success: function(data) {
-        $("#price-display").html(data); 
-        console.log(data); }
+        $("#price-display").html(data.qty); 
+        console.log(data.qty); }
       });
 });
 
