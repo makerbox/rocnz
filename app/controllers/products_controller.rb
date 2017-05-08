@@ -9,7 +9,8 @@ def calc_qty_disc
   price = params[:qtyprice]
   prod_group = params[:group]
   prod_code = params[:code]
-
+  price_cat = params[:pricecat]
+  
   if current_user.mimic
     u = current_user.mimic.user
   else
@@ -17,7 +18,7 @@ def calc_qty_disc
   end
 
 
-  if disco = Discount.all.find_by(product: (prod_group || prod_code), customer: (u.account.code.strip || u.account.discount.strip)).find_by("maxqty >= ?", qty)
+  if disco = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)).find_by("maxqty >= ?", qty)
     result = price - disco
   else
     result = price

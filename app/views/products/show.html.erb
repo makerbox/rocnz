@@ -97,9 +97,10 @@ $('.form-control').change(function() {
       dataType: "json",
       type: "GET",
       data: { qty: $("#quantity_qty").val(), 
-      price: <%= prodprice %>,
-      code: <%= @product.code %>,
-      group: <%= @product.group %> },
+      price: '<%= prodprice %>',
+      pricecat: '<%= @product.pricecat %>',
+      code: '<%= @product.code %>',
+      group: '<%= @product.group %>' },
       success: function(data) {
         $("#price-display").html(data.result); 
         console.log(data.result);
