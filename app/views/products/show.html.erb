@@ -96,10 +96,9 @@ $('.form-control').change(function() {
       dataType: "json",
       type: "GET",
       data: { qty: $("#quantity_qty").val() },
-      success: function(data) { 
-        var r = $.parseJSON(data);
-        $("#price-display").html(r); 
-        console.log(r); }
+      success: function(data) {
+        $("#price-display").html(data); 
+        console.log(data); }
       });
 });
 
