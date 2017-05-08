@@ -98,8 +98,8 @@ $('.form-control').change(function() {
       type: "GET",
       data: { qty: $("#quantity_qty").val() },
       success: function(result) {
-        $("#price-display").html(result); 
-        console.log(result);
+        $("#price-display").html(result.qty); 
+        console.log(result.qty);
         console.log(route); }
       });
 });
