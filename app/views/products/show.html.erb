@@ -42,7 +42,7 @@
                     <% when 6 %>
 		  		<% prodprice = @product.rrp %>
 		  <% end %>
-		  $<%= number_with_precision(prodprice, precision: 2) %>
+		  $<span id="price-display"><%= number_with_precision(prodprice, precision: 2) %></span>
 	  <% end %>
 
 	  <% if user_signed_in? %>
