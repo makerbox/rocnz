@@ -21,9 +21,9 @@ def calc_qty_disc
   # else
   #   # result = qty
   # end
-     render :json => {
-                            :qty => @qty
-                        }
+    respond_to do |format|
+        format.json { render qty: @qty }
+    end
 end
 
   def index
