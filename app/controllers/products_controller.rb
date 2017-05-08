@@ -21,7 +21,7 @@ def calc_qty_disc
   else
     # result = qty
   end
-  return qty
+  return qty.to_s
 end
 
   def index
