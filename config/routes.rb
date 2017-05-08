@@ -26,6 +26,7 @@ resources :products do
   member do
     get 'add'
     get 'remove'
+    get 'cal_qty_disc'
   end
 end
 
