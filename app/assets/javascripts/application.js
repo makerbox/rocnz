@@ -21,6 +21,10 @@ var searchterm = $('#searchfield').val();
 window.location.href = "?searchterm="+searchterm;
 }
 
+$('#quantity_qty').onChange(function(){
+	calc_qty_disc();
+})
+
 function calc_qty_disc() {
    $.ajax({
       url: '/calc_qty_disc',
