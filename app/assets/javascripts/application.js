@@ -20,3 +20,14 @@ function searchme(){
 var searchterm = $('#searchfield').val();
 window.location.href = "?searchterm="+searchterm;
 }
+
+function calc_qty_disc() {
+   $.ajax({
+      url: '/calc_qty_disc',
+      dataType: "json",
+      type: "POST",
+      data: { qty: $("#quantity_qty").val() },
+      success: function(result) { $("#price-display").text(result); }
+      }
+   });
+}
