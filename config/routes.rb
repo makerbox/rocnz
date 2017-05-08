@@ -22,12 +22,11 @@ Rails.application.routes.draw do
   get 'home/contact'
   get 'home/confirm'
 
-  get 'products/calc_qty_disc'
-
 resources :products do
   member do
     get 'add'
     get 'remove'
+    get 'calc_qty_disc'
   end
 end
 
