@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!
   # GET /products
   # GET /products.json
-def calc_qty_discount(qty)
+def calc_qty_disc(qty)
   if current_user.mimic
     u = current_user.mimic.user
   else
