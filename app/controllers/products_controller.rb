@@ -4,7 +4,8 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
 
-def calc_qty_disc(qty)
+def calc_qty_disc
+  qty = params[:qty]
   # if current_user.mimic
   #   u = current_user.mimic.user
   # else
