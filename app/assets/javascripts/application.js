@@ -32,6 +32,5 @@ function calc_qty_disc() {
       type: "POST",
       data: { qty: $("#quantity_qty").val() },
       success: function(result) { $("#price-display").text(result); }
-      }
-   });
+      });
 }
