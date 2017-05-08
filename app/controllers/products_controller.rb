@@ -25,6 +25,7 @@ def calc_qty_disc
   respond_to do |format|
     format.json { render json: {qty: qty} }
   end
+  @product.price = qty
 end
 
   def index
