@@ -16,8 +16,8 @@ class TestController < ApplicationController
 		    u = current_user
 		  end
 		  
-		  @result = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
-		  
+		  @result = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)).first
+
 		  # if discos.nil?
 		  #   @result = 'no discos'
 		  # else
