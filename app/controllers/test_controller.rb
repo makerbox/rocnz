@@ -5,7 +5,7 @@ class TestController < ApplicationController
 		@output = []
 	  	counter = 0
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-      @customers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
+      @prices = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
 
 	  	# Contact.all.find_by(code:'running').destroy

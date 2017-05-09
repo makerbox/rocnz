@@ -2,8 +2,9 @@
 <% Account.all.each do |o| %>
 <%= o.discount %>--
 <% end %>
-<% @customers.each do |cust| %>
-<%= cust.CostCentre %>
+<% @prices.each do |price| %>
+<%= price.CustomerType %><br>
+<%= price.Customer %>
     <hr>
 <% end %>
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %>
