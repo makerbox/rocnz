@@ -15,7 +15,7 @@ class TestController < ApplicationController
 		else
 			u = current_user
 		end
-		@discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip)).first.discount
+		@discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip))
 
 
 
