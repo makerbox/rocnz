@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
 
 def calc_qty_disc
   qty = params[:qty]
-  price = params[:qtyprice]
+  price = params[:price]
   prod_group = params[:group]
   prod_code = params[:code]
   # price_cat = params[:pricecat]
@@ -24,11 +24,11 @@ def calc_qty_disc
         #   result = 'not fixed'
         # end
   if discos.blank?
-    result = params[:qtyprice]
+    result = price
   else
     result = 'discos'
   end
-    
+
   respond_to do |format|
     format.json { render json: {result: result} }
   end
