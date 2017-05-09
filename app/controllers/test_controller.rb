@@ -6,10 +6,17 @@ class TestController < ApplicationController
 	  	counter = 0
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       @products = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
+		
+		prod_group = 'R'
+		prod_code = '3009100B'
+		price_cat = ''
+		if current_user.mimic
+			u = current_user.mimic.account.user
+		else
+			u = current_user
+		end
+		@discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip)).first.discount
 
-      Order.destroy_all
-      Quantity.destroy_all
-      
 
 
 
