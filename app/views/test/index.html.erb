@@ -4,7 +4,8 @@
 <% end %>
 <% @prices.each do |price| %>
 <%= price.discount %><br>
-<%= price.product %>
+<%= price.product %><br>
+<%= price.maxqty %>
     <hr>
 <% end %>
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %>
