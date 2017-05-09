@@ -24,7 +24,7 @@ def calc_qty_disc
     # else
     #   result = 'not fixed'
     # end
-    result = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip)).discount
+    result = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip)).first.discount
   else
     result = price
   end
