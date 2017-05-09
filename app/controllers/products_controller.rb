@@ -11,9 +11,9 @@ def calc_qty_disc
   prod_code = params[:code]
   price_cat = params[:pricecat]
   if (current_user.has_role? :admin)
-    result = price
-  else
     result = 10
+  else
+    result = price
   end
 
   respond_to do |format|
