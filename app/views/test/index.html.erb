@@ -3,8 +3,8 @@
 <%= o.discount %>--
 <% end %>
 <% @prices.each do |price| %>
-<%= price.CustomerType %><br>
-<%= price.Customer %>
+<%= price.discount %><br>
+<%= price.product %>
     <hr>
 <% end %>
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %>
