@@ -23,7 +23,6 @@ def calc_qty_disc
     else
       result = 'not fixed'
     end
-    result = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)).first
   else
     result = price
   end
