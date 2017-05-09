@@ -18,15 +18,15 @@ def calc_qty_disc
   end
   
   discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
-  if discos.blank?
-    result = price
-  else
-    discos.each do |disco|
+  discos.each do |disco|
         # if disco.disctype == 'fixedtype'
         #   result = 'fixed'
         # else
         #   result = 'not fixed'
         # end
+    if discos.blank?
+      result = price
+    else
       result = 'discos'
     end
   end
