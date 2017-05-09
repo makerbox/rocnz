@@ -16,8 +16,8 @@ def calc_qty_disc
   else
     u = current_user
   end
-  disco = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)).first
-  if disco != nil
+  disco = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
+  if disco != 'null'
     if disco.disctype == 'fixedtype'
       result = 'fixed'
     else
