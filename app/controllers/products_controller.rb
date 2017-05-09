@@ -18,7 +18,9 @@ def calc_qty_disc
   end
   
   discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
-  if discos
+  if discos.blank?
+    result = price
+  else
     discos.each do |disco|
         # if disco.disctype == 'fixedtype'
         #   result = 'fixed'
@@ -27,8 +29,6 @@ def calc_qty_disc
         # end
       result = 'discos'
     end
-  else
-    result = price
   end
   respond_to do |format|
     format.json { render json: {result: result} }
