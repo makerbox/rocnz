@@ -16,12 +16,8 @@ def calc_qty_disc
   else
     u = current_user
   end
-  if u.account.discount
-    udisc = u.account.discount.strip
-  else
-    udisc = nil
-  end
-  if Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || udisc))
+
+  if Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
     disco = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
     if disco.disctype == 'fixedtype'
       result = price - disco.discount
@@ -31,7 +27,7 @@ def calc_qty_disc
   else
     result = price
   end
-  
+
   respond_to do |format|
     format.json { render json: {result: result} }
   end
