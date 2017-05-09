@@ -24,7 +24,7 @@ def calc_qty_disc
     # else
     #   result = 'not fixed'
     # end
-    result =  disco.product.to_s
+    result =  disco.discount
   else
     result = price
   end
