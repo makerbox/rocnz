@@ -9,7 +9,7 @@ def calc_qty_disc
   price = params[:qtyprice]
   prod_group = params[:group]
   prod_code = params[:code]
-  price_cat = params[:pricecat]
+  # price_cat = params[:pricecat]
   if (current_user.has_role? :admin)
     result = 10
   else
