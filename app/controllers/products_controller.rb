@@ -17,16 +17,15 @@ def calc_qty_disc
     u = current_user
   end
   disco = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
-  if disco != 'null'
+  if !disco
+    result = price    
+  else
     if disco.disctype == 'fixedtype'
       result = 'fixed'
     else
       result = 'not fixed'
     end
-  else
-    result = price
   end
-  result = disco
 
   respond_to do |format|
     format.json { render json: {result: result} }
