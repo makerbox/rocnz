@@ -17,7 +17,7 @@ class TestController < ApplicationController
 		  end
 		  
 		  discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
-		  if discos.nil?
+		  if !discos.nil?
 		    discos.each do |disco|
 		        # if disco.disctype == 'fixedtype'
 		        #   result = 'fixed'
