@@ -90,5 +90,22 @@
 
 <script>
 
+$('.form-control').change(function() {
+  var route = <%= @product.id %>+"/calc_qty_disc";
+   $.ajax({
+      url: route ,
+      dataType: "json",
+      type: "GET",
+      data: { qty: $("#quantity_qty").val(), 
+      price: '<%= prodprice %>',
+      pricecat: '<%= @product.pricecat %>',
+      code: '<%= @product.code %>',
+      group: '<%= @product.group %>' },
+      success: function(data) {
+        $("#price-display").html(data.result); 
+        console.log(data.result);
+        console.log(route); }
+      });
+});
 
 </script>
