@@ -17,7 +17,7 @@ def calc_qty_disc
     u = current_user
   end
 
-result = Discount.all.first.discount
+result = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)).discount
 
 
   respond_to do |format|
