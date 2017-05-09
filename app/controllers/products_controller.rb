@@ -18,16 +18,16 @@ def calc_qty_disc
   end
 
   result = qty.to_s + price.to_s + prod_group.to_s + prod_code.to_s + u.account.code.to_s + u.account.discount.to_s
-  # if Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)).any?
-  #   # if disco.disctype == 'fixedtype'
-  #   #   result = 'fixed'
-  #   # else
-  #   #   result = 'not fixed'
-  #   # end
-  #   result = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)).first
-  # else
-  #   result = price
-  # end
+  if Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip)).any?
+    # if disco.disctype == 'fixedtype'
+    #   result = 'fixed'
+    # else
+    #   result = 'not fixed'
+    # end
+    result = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip)).first
+  else
+    result = price
+  end
 
   respond_to do |format|
     format.json { render json: {result: result} }
