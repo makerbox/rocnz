@@ -7,7 +7,9 @@ class TestController < ApplicationController
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       @products = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
-      @output = Discount.all
+      Order.destroy_all
+      Quantity.destroy_all
+      
 
 
 
