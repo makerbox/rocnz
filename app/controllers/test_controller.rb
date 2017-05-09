@@ -16,19 +16,20 @@ class TestController < ApplicationController
 		    u = current_user
 		  end
 		  
-		  discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
-		  if discos.nil?
-		    @result = 'no discos'
-		  else
-		    discos.each do |disco|
-		        # if disco.disctype == 'fixedtype'
-		        #   result = 'fixed'
-		        # else
-		        #   result = 'not fixed'
-		        # end
-		      @result = 'discos'
-		    end
-		  end
+		  @result = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
+
+		  # if discos.nil?
+		  #   @result = 'no discos'
+		  # else
+		  #   discos.each do |disco|
+		  #       # if disco.disctype == 'fixedtype'
+		  #       #   result = 'fixed'
+		  #       # else
+		  #       #   result = 'not fixed'
+		  #       # end
+		  #     @result = 'discos'
+		  #   end
+		  # end
 
 
 
