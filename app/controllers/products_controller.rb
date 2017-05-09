@@ -17,12 +17,8 @@ def calc_qty_disc
     u = current_user
   end
 
+result = Discount.all.first.discount
 
-  if Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
-    result = 1010
-  else
-    result = price
-  end
 
   respond_to do |format|
     format.json { render json: {result: result} }
