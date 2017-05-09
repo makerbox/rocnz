@@ -6,32 +6,7 @@ class TestController < ApplicationController
 	  	counter = 0
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       @products = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
-		
-		prod_group = 'R'
-		prod_code = '3009100B'
-		price_cat = ''
-		  if current_user.mimic
-		    u = current_user.mimic.account.user
-		  else
-		    u = current_user
-		  end
-		  
-		  @result = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)).first
-
-		  # if discos.nil?
-		  #   @result = 'no discos'
-		  # else
-		  #   discos.each do |disco|
-		  #       # if disco.disctype == 'fixedtype'
-		  #       #   result = 'fixed'
-		  #       # else
-		  #       #   result = 'not fixed'
-		  #       # end
-		  #     @result = 'discos'
-		  #   end
-		  # end
-
-
+		@discos = Discount.all
 
 
 
