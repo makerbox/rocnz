@@ -2,15 +2,8 @@
 <% Account.all.each do |o| %>
 <%= o.discount %>--
 <% end %>
-<% @discos.each do |o| %>
-	<br>CUSTOMER TYPE = <%= o.customertype %>
-    <br>PRODUCT TYPE = <%= o.producttype %>
-    <br>CUSTOMER = <%= o.customer %>
-    <br>PRODUCT = <%= o.product %>
-    <br>DISCOUT = <%= o.discount %>
-    <br>MAXQTY = <%= o.maxqty %>
-    <br>LEVEL = <%= o.level %>
-    <br>DISCTYPE = <%= o.disctype %>
+<% @customers.each do |cust| %>
+<%= cust.SpecialPriceCat %>
     <hr>
 <% end %>
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %>
