@@ -24,11 +24,11 @@ def calc_qty_disc
         #   result = 'not fixed'
         # end
   if discos.blank?
-    result = price
+    result = 'no disco'
   else
     result = 'discos'
   end
-    
+
   respond_to do |format|
     format.json { render json: {result: result} }
   end
