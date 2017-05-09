@@ -10,7 +10,7 @@ def calc_qty_disc
   prod_group = params[:group]
   prod_code = params[:code]
   price_cat = params[:pricecat]
-  if current_user.has_role? :admin
+  if (current_user.has_role? :admin)
     result = price
   else
     if current_user.mimic
