@@ -20,7 +20,7 @@ def calc_qty_disc
 
   if Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
     disco = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
-    result = disco.discount
+    result = 1010
   else
     result = price
   end
