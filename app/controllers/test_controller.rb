@@ -7,7 +7,6 @@ class TestController < ApplicationController
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       @prices = Discount.all.where(customer: 'SUN SHAC')
 
-
 	  	# Contact.all.find_by(code:'running').destroy
 	  	# Contact.all.find_by(code:'clock').destroy
 	  	# @output = Contact.all.where(code:'clock')

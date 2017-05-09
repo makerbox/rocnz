@@ -26,7 +26,7 @@ def calc_qty_disc
   if discos.blank?
     result = price
   else
-    result = 'discos'
+    result = price #should be discounted price
   end
 
   respond_to do |format|
