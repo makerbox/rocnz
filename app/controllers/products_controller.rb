@@ -18,12 +18,7 @@ def calc_qty_disc
   end
 
   if Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
-    disco = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)).first
-    if disco.disctype == 'fixedtype'
-      result = 'fixed'
-    else
-      result = 'not fixed'
-    end
+    result = 'discount found'
   else
     result = price
   end
