@@ -20,11 +20,9 @@ def calc_qty_disc
   if Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
     disco = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
     if disco.disctype == 'fixedtype'
-      disco.each do |d|
-        result << disco.discount
-      end
+      result = 'fixed'
     else
-      result = price - ((price / 100) * disco.discount)
+      result = 'not fixed'
     end
   else
     result = price
