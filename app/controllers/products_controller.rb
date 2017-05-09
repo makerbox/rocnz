@@ -24,15 +24,14 @@ def calc_qty_disc
         #   result = 'not fixed'
         # end
   if discos.blank?
-    result = 'no disco'
+    result = params[:qtyprice]
   else
     result = 'discos'
-    respond_to do |format|
-      format.json { render json: {result: result} }
-    end
   end
-
-
+    
+  respond_to do |format|
+    format.json { render json: {result: result} }
+  end
 end
 
   def index
