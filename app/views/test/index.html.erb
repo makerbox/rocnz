@@ -1,4 +1,4 @@
-[<%= Account.all.count %> vs <%= User.all.count %>]<br>
+[<%= Account.all.count %> vs <%= User.all.count %>]<br><%= current_user.mimic.account.discount %>
 <% @discos.each do |o| %>
 	<br>CUSTOMER TYPE = <%= o.customertype %>
     <br>PRODUCT TYPE = <%= o.producttype %>
