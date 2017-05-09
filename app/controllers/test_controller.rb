@@ -10,12 +10,25 @@ class TestController < ApplicationController
 		prod_group = 'R'
 		prod_code = '3009100B'
 		price_cat = ''
-		if current_user.mimic
-			u = current_user.mimic.account.user
-		else
-			u = current_user
-		end
-		@discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip))
+		  if current_user.mimic
+		    u = current_user.mimic.account.user
+		  else
+		    u = current_user
+		  end
+		  
+		  discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
+		  if discos
+		    discos.each do |disco|
+		        # if disco.disctype == 'fixedtype'
+		        #   result = 'fixed'
+		        # else
+		        #   result = 'not fixed'
+		        # end
+		      @result = 'discos'
+		    end
+		  else
+		    @result = 'no discos'
+		  end
 
 
 
