@@ -18,11 +18,11 @@ def calc_qty_disc
   end
 
   if Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
-    disco = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)).first
+    disco = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
     if disco.disctype == 'fixedtype'
-      result = price - disco.discount
+      result = price
     else
-      result = price - ((price / 100) * disco.discount)
+      result = price
     end
   else
     result = price
