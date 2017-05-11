@@ -2,8 +2,7 @@ class TestController < ApplicationController
 	skip_before_action :authenticate_user!
 	
 	def index
-		@output = []
-		  # Discount.destroy_all #wipe existing discounts in case of some deletions in Attache
+		          Discount.destroy_all #wipe existing discounts in case of some deletions in Attache
           dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
           discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
@@ -45,16 +44,37 @@ class TestController < ApplicationController
               end
             end
             if !prod.nil? && !cust.nil?
-              # Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty, disctype: disctype)
+              Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty, disctype: disctype)
             end
           end
 
           discounts.each do |d|
-          	@output << d.Customer
-          	@output << d.MaxQty1
-          	@output << d.MaxQty2
-          	@output << '-------'
-            if (d.LevelNum == 1)
+          	if d.LevelNum == 1
+          		max1()
+          	end
+          	if d.LevelNum == 2
+          		max1()
+          		max2()
+          	end
+          	if d.LevelNum == 3
+          		max1()
+          		max2()
+          		max3()
+          	end
+          	if d.LevelNum == 4
+          		max1()
+          		max2()
+          		max3()
+          		max4()
+          	end
+          	if d.LevelNum == 5
+          		max1()
+          		max2()
+          		max3()
+          		max4()
+          	end
+
+            def max1() 
               percentage = d.DiscPerc1
               fixed = d.Price1
               fixedprice = d.PriceCode1
@@ -62,7 +82,7 @@ class TestController < ApplicationController
               maxqty = d.MaxQty1
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum == 2) 
+            def max2() 
               percentage = d.DiscPerc2
               fixed = d.Price2
               fixedprice = d.PriceCode2
@@ -70,7 +90,7 @@ class TestController < ApplicationController
               maxqty = d.MaxQty2
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum == 3) 
+            def max3() 
               percentage = d.DiscPerc3
               fixed = d.Price3
               fixedprice = d.PriceCode3
@@ -78,7 +98,7 @@ class TestController < ApplicationController
               maxqty = d.MaxQty3
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum == 4) 
+            def max4() 
               percentage = d.DiscPerc4
               fixed = d.Price4
               fixedprice = d.PriceCode4
@@ -86,7 +106,7 @@ class TestController < ApplicationController
               maxqty = d.MaxQty4
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum == 5) 
+            def max5() 
               percentage = d.DiscPerc5
               fixed = d.Price5
               fixedprice = d.PriceCode5
@@ -94,7 +114,7 @@ class TestController < ApplicationController
               maxqty = d.MaxQty5
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum == 6) 
+            def max6() 
               percentage = d.DiscPerc6
               fixed = d.Price6
               fixedprice = d.PriceCode6
@@ -104,7 +124,8 @@ class TestController < ApplicationController
             end
           end
 
-          dbh.disconnect
+          dbh.disconnect 
+
 	  	# system "heroku pg:push development postgresql-round-86328 --app shrouded-waters-74068"
 	end
 end
