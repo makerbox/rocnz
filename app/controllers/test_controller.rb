@@ -2,7 +2,8 @@ class TestController < ApplicationController
 	skip_before_action :authenticate_user!
 	
 	def index
-		          Discount.destroy_all #wipe existing discounts in case of some deletions in Attache
+		@output = []
+		  Discount.destroy_all #wipe existing discounts in case of some deletions in Attache
           dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
           discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
@@ -49,6 +50,7 @@ class TestController < ApplicationController
           end
 
           discounts.each do |d|
+          	@output << d.LevelNum
             if (d.LevelNum == 1) 
               percentage = d.DiscPerc1
               fixed = d.Price1
