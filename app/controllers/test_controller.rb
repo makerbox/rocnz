@@ -112,8 +112,7 @@ class TestController < ApplicationController
             end
           end
 
-          dbh.disconnect 
-          @discos = Discount.all
+          dbh.disconnect
 	  	# system "heroku pg:push development postgresql-round-86328 --app shrouded-waters-74068"
 	end
 end
