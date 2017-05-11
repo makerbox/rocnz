@@ -50,6 +50,9 @@ class TestController < ApplicationController
           end
 
           discounts.each do |d|
+          	@output << '  >'
+          	@output << d.Customer
+          	@output << '<< customer'
             if (d.LevelNum == 1)
             		@output << d.Customer
               percentage = d.DiscPerc1
