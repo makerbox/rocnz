@@ -49,32 +49,7 @@ class TestController < ApplicationController
           end
 
           discounts.each do |d|
-          	if d.LevelNum == 1
-          		max1()
-          	end
-          	if d.LevelNum == 2
-          		max1()
-          		max2()
-          	end
-          	if d.LevelNum == 3
-          		max1()
-          		max2()
-          		max3()
-          	end
-          	if d.LevelNum == 4
-          		max1()
-          		max2()
-          		max3()
-          		max4()
-          	end
-          	if d.LevelNum == 5
-          		max1()
-          		max2()
-          		max3()
-          		max4()
-          	end
-
-            def max1() 
+            def max1 
               percentage = d.DiscPerc1
               fixed = d.Price1
               fixedprice = d.PriceCode1
@@ -82,7 +57,7 @@ class TestController < ApplicationController
               maxqty = d.MaxQty1
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            def max2() 
+            def max2 
               percentage = d.DiscPerc2
               fixed = d.Price2
               fixedprice = d.PriceCode2
@@ -90,7 +65,7 @@ class TestController < ApplicationController
               maxqty = d.MaxQty2
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            def max3() 
+            def max3 
               percentage = d.DiscPerc3
               fixed = d.Price3
               fixedprice = d.PriceCode3
@@ -98,7 +73,7 @@ class TestController < ApplicationController
               maxqty = d.MaxQty3
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            def max4() 
+            def max4 
               percentage = d.DiscPerc4
               fixed = d.Price4
               fixedprice = d.PriceCode4
@@ -106,7 +81,7 @@ class TestController < ApplicationController
               maxqty = d.MaxQty4
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            def max5() 
+            def max5 
               percentage = d.DiscPerc5
               fixed = d.Price5
               fixedprice = d.PriceCode5
@@ -114,7 +89,7 @@ class TestController < ApplicationController
               maxqty = d.MaxQty5
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            def max6() 
+            def max6 
               percentage = d.DiscPerc6
               fixed = d.Price6
               fixedprice = d.PriceCode6
@@ -122,6 +97,32 @@ class TestController < ApplicationController
               maxqty = d.MaxQty6
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
+
+            if d.LevelNum == 1
+          		max1
+          	end
+          	if d.LevelNum == 2
+          		max1
+          		max2
+          	end
+          	if d.LevelNum == 3
+          		max1
+          		max2
+          		max3
+          	end
+          	if d.LevelNum == 4
+          		max1
+          		max2
+          		max3
+          		max4
+          	end
+          	if d.LevelNum == 5
+          		max1
+          		max2
+          		max3
+          		max4
+          	end
+
           end
 
           dbh.disconnect 
