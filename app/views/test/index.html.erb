@@ -1,12 +1,11 @@
 [<%= Account.all.count %> vs <%= User.all.count %>]<br>
 <% @discos.each do |o| %>
-	<br>CUSTOMER TYPE = <%= o.CustomerType %>
-    <br>PRODUCT TYPE = <%= o.ProductType %>
-    <br>CUSTOMER = <%= o.Customer %>
-    <br>PRODUCT = <%= o.Product %>
-    <br>MAX1 = <%= o.MaxQty1 %>
-    <br>MAX2 = <%= o.MaxQty2 %>
-    <br>NUMBER LEVELS USED = <%= o.LevelNum %>
+	<br>CUSTOMER TYPE = <%= o.customertype %>
+    <br>PRODUCT TYPE = <%= o.producttype %>
+    <br>CUSTOMER = <%= o.customer %>
+    <br>PRODUCT = <%= o.product %>
+    <br>MAXQTY = <%= o.maxqty %>
+    <br>DISCTYPE = <%= o.disctype %>
     <hr>
 <% end %>
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %>

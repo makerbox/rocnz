@@ -144,7 +144,7 @@ class PopulateJob
           end
 
           discounts.each do |d|
-            if (d.PriceCode1 == 9) || (d.DiscCode1 == 9) 
+            if (d.LevelNum == 1) 
               percentage = d.DiscPerc1
               fixed = d.Price1
               fixedprice = d.PriceCode1
@@ -152,7 +152,7 @@ class PopulateJob
               maxqty = d.MaxQty1
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.PriceCode2 == 9) || (d.DiscCode2 == 9) 
+            if (d.LevelNum == 2) 
               percentage = d.DiscPerc2
               fixed = d.Price2
               fixedprice = d.PriceCode2
@@ -160,7 +160,7 @@ class PopulateJob
               maxqty = d.MaxQty2
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.PriceCode3 == 9) || (d.DiscCode3 == 9) 
+            if (d.LevelNum == 3) 
               percentage = d.DiscPerc3
               fixed = d.Price3
               fixedprice = d.PriceCode3
@@ -168,7 +168,7 @@ class PopulateJob
               maxqty = d.MaxQty3
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.PriceCode4 == 9) || (d.DiscCode4 == 9) 
+            if (d.LevelNum == 4) 
               percentage = d.DiscPerc4
               fixed = d.Price4
               fixedprice = d.PriceCode4
@@ -176,7 +176,7 @@ class PopulateJob
               maxqty = d.MaxQty4
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.PriceCode5 == 9) || (d.DiscCode5 == 9) 
+            if (d.LevelNum == 5) 
               percentage = d.DiscPerc5
               fixed = d.Price5
               fixedprice = d.PriceCode5
@@ -184,44 +184,12 @@ class PopulateJob
               maxqty = d.MaxQty5
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.PriceCode6 == 9) || (d.DiscCode6 == 9) 
+            if (d.LevelNum == 6) 
               percentage = d.DiscPerc6
               fixed = d.Price6
               fixedprice = d.PriceCode6
               level = 6
               maxqty = d.MaxQty6
-              disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
-            end
-            if (d.PriceCode7 == 9) || (d.DiscCode7 == 9) 
-              percentage = d.DiscPerc7
-              fixed = d.Price7
-              fixedprice = d.PriceCode7
-              level = 7
-              maxqty = d.MaxQty7
-              disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
-            end
-            if (d.PriceCode8 == 9) || (d.DiscCode8 == 9) 
-              percentage = d.DiscPerc8
-              fixed = d.Price8
-              fixedprice = d.PriceCode8
-              level = 8
-              maxqty = d.MaxQty8
-              disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
-            end
-            if (d.PriceCode9 == 9) || (d.DiscCode9 == 9) 
-              percentage = d.DiscPerc9
-              fixed = d.Price9
-              fixedprice = d.PriceCode9
-              level = 9
-              maxqty = d.MaxQty9
-              disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
-            end
-            if (d.PriceCode10 == 9) || (d.DiscCode10 == 9) 
-              percentage = d.DiscPerc10
-              fixed = d.Price10
-              fixedprice = d.PriceCode10
-              level = 10
-              maxqty = d.MaxQty10
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
           end
