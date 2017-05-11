@@ -50,8 +50,8 @@ class TestController < ApplicationController
           end
 
           discounts.each do |d|
-          	@output << d.LevelNum
-            if (d.LevelNum == 1) 
+            if (d.LevelNum == 1)
+            		@output << d.LevelNum
               percentage = d.DiscPerc1
               fixed = d.Price1
               fixedprice = d.PriceCode1
@@ -59,7 +59,8 @@ class TestController < ApplicationController
               maxqty = d.MaxQty1
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum == 2) 
+            if (d.LevelNum == 2)
+            	@output << d.LevelNum 
               percentage = d.DiscPerc2
               fixed = d.Price2
               fixedprice = d.PriceCode2
@@ -67,7 +68,8 @@ class TestController < ApplicationController
               maxqty = d.MaxQty2
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum == 3) 
+            if (d.LevelNum == 3)
+            	@output << d.LevelNum 
               percentage = d.DiscPerc3
               fixed = d.Price3
               fixedprice = d.PriceCode3
@@ -75,7 +77,8 @@ class TestController < ApplicationController
               maxqty = d.MaxQty3
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum == 4) 
+            if (d.LevelNum == 4)
+            	@output << d.LevelNum 
               percentage = d.DiscPerc4
               fixed = d.Price4
               fixedprice = d.PriceCode4
@@ -83,7 +86,8 @@ class TestController < ApplicationController
               maxqty = d.MaxQty4
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum == 5) 
+            if (d.LevelNum == 5)
+            	@output << d.LevelNum 
               percentage = d.DiscPerc5
               fixed = d.Price5
               fixedprice = d.PriceCode5
@@ -91,7 +95,8 @@ class TestController < ApplicationController
               maxqty = d.MaxQty5
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum == 6) 
+            if (d.LevelNum == 6)
+            	@output << d.LevelNum 
               percentage = d.DiscPerc6
               fixed = d.Price6
               fixedprice = d.PriceCode6
