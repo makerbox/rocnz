@@ -51,6 +51,9 @@ class TestController < ApplicationController
 
           discounts.each do |d|
           	@output << d.Customer
+          	@output << d.MaxQty1
+          	@output << d.MaxQty2
+          	@output << '-------'
             if (d.LevelNum == 1)
               percentage = d.DiscPerc1
               fixed = d.Price1
