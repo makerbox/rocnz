@@ -1,5 +1,11 @@
 [<%= Account.all.count %> vs <%= User.all.count %>]<br>
-<% @output.each do |o| %>
-<%= o %> - 
+<% @discos.each do |o| %>
+	<br>CUSTOMER TYPE = <%= o.customertype %>
+    <br>PRODUCT TYPE = <%= o.producttype %>
+    <br>CUSTOMER = <%= o.customer %>
+    <br>PRODUCT = <%= o.product %>
+    <br>MAXQTY = <%= o.maxqty %>
+    <br>DISCTYPE = <%= o.disctype %>
+    <hr>
 <% end %>
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %>
