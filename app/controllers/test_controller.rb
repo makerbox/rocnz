@@ -3,11 +3,12 @@ class TestController < ApplicationController
 	
 	def index
 		@output = []
-		          # Discount.destroy_all #wipe existing discounts in case of some deletions in Attache
+		          Discount.destroy_all #wipe existing discounts in case of some deletions in Attache
           dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
           discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
           def disco(percentage, fixed, fixedprice, level, maxqty, ctype, ptype, cust, prod)
+          	@output << 'disco'
             if fixedprice == 9 #if the discount is a fixed price
               disctype = 'fixedtype'
               discount = fixed
@@ -44,9 +45,10 @@ class TestController < ApplicationController
                 maxqty = 9999
               end
             end
-            if !prod.nil? && !cust.nil?
-              # Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty, disctype: disctype)
-            end
+            # if !prod.nil? && !cust.nil?
+              Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty, disctype: disctype)
+            # end
+
           end
 
           discounts.each do |d|
