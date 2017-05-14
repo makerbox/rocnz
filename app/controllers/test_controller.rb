@@ -46,9 +46,9 @@ class TestController < ApplicationController
                 maxqty = 9999
               end
             end
-            # if !prod.nil? && !cust.nil?
+            if !prod.nil? && !cust.nil?
               Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty, disctype: disctype)
-            # end
+            end
 
           end
 
