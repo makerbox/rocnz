@@ -3,7 +3,7 @@ class TestController < ApplicationController
 	
 	def index
 		@output = []
-		          Discount.destroy_all #wipe existing discounts in case of some deletions in Attache
+		          # Discount.destroy_all #wipe existing discounts in case of some deletions in Attache
           dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
           discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
@@ -47,7 +47,7 @@ class TestController < ApplicationController
               end
             end
             if !prod.nil? && !cust.nil?
-              Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty, disctype: disctype)
+              # Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty, disctype: disctype)
             end
 
           end
@@ -61,6 +61,8 @@ class TestController < ApplicationController
               fixedprice = d.PriceCode1
               level = 1
               maxqty = d.MaxQty1
+              @output << maxqty
+              @output << '->disco'
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
             if (d.LevelNum <= 2) 
@@ -69,6 +71,8 @@ class TestController < ApplicationController
               fixedprice = d.PriceCode2
               level = 2
               maxqty = d.MaxQty2
+              @output << maxqty
+              @output << '->disco'
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
             if (d.LevelNum <= 3) 
@@ -77,6 +81,8 @@ class TestController < ApplicationController
               fixedprice = d.PriceCode3
               level = 3
               maxqty = d.MaxQty3
+              @output << maxqty
+              @output << '->disco'
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
             if (d.LevelNum <= 4) 
@@ -85,6 +91,8 @@ class TestController < ApplicationController
               fixedprice = d.PriceCode4
               level = 4
               maxqty = d.MaxQty4
+              @output << maxqty
+              @output << '->disco'
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
             if (d.LevelNum <= 5) 
@@ -93,6 +101,8 @@ class TestController < ApplicationController
               fixedprice = d.PriceCode5
               level = 5
               maxqty = d.MaxQty5
+              @output << maxqty
+              @output << '->disco'
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
             if (d.LevelNum <= 6) 
@@ -101,6 +111,8 @@ class TestController < ApplicationController
               fixedprice = d.PriceCode6
               level = 6
               maxqty = d.MaxQty6
+              @output << maxqty
+              @output << '->disco'
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
           end
