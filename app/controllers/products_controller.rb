@@ -26,13 +26,14 @@ def calc_qty_disc
     end
   end
 
-  if @thedisco
-    result = price - @thedisco.discount
-    # need to also work for percentage discount
-  else
-    result = price #should be discounted price
-  end
-
+  # if @thedisco
+  #   result = price - @thedisco.discount
+  #   # need to also work for percentage discount
+  # else
+  #   result = price #should be discounted price
+  # end
+  result = price
+  
   respond_to do |format|
     format.json { render json: {result: result} }
   end
