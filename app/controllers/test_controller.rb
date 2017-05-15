@@ -10,6 +10,7 @@ class TestController < ApplicationController
           def disco(percentage, fixed, fixedprice, level, maxqty, ctype, ptype, cust, prod)
           	@output << 'disco'
           	@output << maxqty
+          	@output << '|||'
             if fixedprice == 9 #if the discount is a fixed price
               disctype = 'fixedtype'
               discount = fixed
