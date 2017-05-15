@@ -50,13 +50,13 @@ class TestController < ApplicationController
             if !prod.nil? && !cust.nil?
               # Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty, disctype: disctype)
             end
-
+            
           end
 
           discounts.each do |d|
           	@output << d.MaxQty1
           	@output << d.Customer
-            if (d.LevelNum <== 1) 
+            if (d.LevelNum <= 1) 
               percentage = d.DiscPerc1
               fixed = d.Price1
               fixedprice = d.PriceCode1
@@ -66,7 +66,7 @@ class TestController < ApplicationController
               @output << '->disco'
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum <== 2) 
+            if (d.LevelNum <= 2) 
               percentage = d.DiscPerc2
               fixed = d.Price2
               fixedprice = d.PriceCode2
@@ -76,7 +76,7 @@ class TestController < ApplicationController
               @output << '->disco'
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum <== 3) 
+            if (d.LevelNum <= 3) 
               percentage = d.DiscPerc3
               fixed = d.Price3
               fixedprice = d.PriceCode3
@@ -86,7 +86,7 @@ class TestController < ApplicationController
               @output << '->disco'
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum <== 4) 
+            if (d.LevelNum <= 4) 
               percentage = d.DiscPerc4
               fixed = d.Price4
               fixedprice = d.PriceCode4
@@ -96,7 +96,7 @@ class TestController < ApplicationController
               @output << '->disco'
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum <== 5) 
+            if (d.LevelNum <= 5) 
               percentage = d.DiscPerc5
               fixed = d.Price5
               fixedprice = d.PriceCode5
@@ -106,7 +106,7 @@ class TestController < ApplicationController
               @output << '->disco'
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum <== 6) 
+            if (d.LevelNum <= 6) 
               percentage = d.DiscPerc6
               fixed = d.Price6
               fixedprice = d.PriceCode6
