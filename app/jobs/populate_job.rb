@@ -97,7 +97,7 @@ class PopulateJob
       dbh.disconnect
 
       # ------------------------DISCOUNTS---------------------------------------------------------
-          Discount.destroy_all #wipe existing discounts in case of some deletions in Attache
+       Discount.destroy_all #wipe existing discounts in case of some deletions in Attache
           dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
           discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
@@ -141,10 +141,11 @@ class PopulateJob
             if !prod.nil? && !cust.nil?
               Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty, disctype: disctype)
             end
+
           end
 
           discounts.each do |d|
-            if (d.LevelNum == 1) 
+            if (d.LevelNum >= 1) 
               percentage = d.DiscPerc1
               fixed = d.Price1
               fixedprice = d.PriceCode1
@@ -152,7 +153,7 @@ class PopulateJob
               maxqty = d.MaxQty1
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum == 2) 
+            if (d.LevelNum >= 2) 
               percentage = d.DiscPerc2
               fixed = d.Price2
               fixedprice = d.PriceCode2
@@ -160,7 +161,7 @@ class PopulateJob
               maxqty = d.MaxQty2
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum == 3) 
+            if (d.LevelNum >= 3) 
               percentage = d.DiscPerc3
               fixed = d.Price3
               fixedprice = d.PriceCode3
@@ -168,7 +169,7 @@ class PopulateJob
               maxqty = d.MaxQty3
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum == 4) 
+            if (d.LevelNum >= 4) 
               percentage = d.DiscPerc4
               fixed = d.Price4
               fixedprice = d.PriceCode4
@@ -176,7 +177,7 @@ class PopulateJob
               maxqty = d.MaxQty4
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum == 5) 
+            if (d.LevelNum >= 5) 
               percentage = d.DiscPerc5
               fixed = d.Price5
               fixedprice = d.PriceCode5
@@ -184,7 +185,7 @@ class PopulateJob
               maxqty = d.MaxQty5
               disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
             end
-            if (d.LevelNum == 6) 
+            if (d.LevelNum >= 6) 
               percentage = d.DiscPerc6
               fixed = d.Price6
               fixedprice = d.PriceCode6
