@@ -6,7 +6,10 @@ class TestController < ApplicationController
           dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
           contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
           contacts.each do |contact|
-          	@results << account
+          	account = Account.all.find_by(code: contact.Code)
+          	if account
+          		@results << account.user
+          	end
           	@results << contact.Code
           	@results << contact.Active
           	if contact.Active
