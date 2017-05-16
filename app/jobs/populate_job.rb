@@ -246,19 +246,32 @@ class PopulateJob
           account.update_attributes(approved: 'approved', phone: phone, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
         end
       end
-      @contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
-      @contacts.each do |contact|
-        if (contact.Active == 1) && (!Contact.all.find_by(code: contact.Code.strip))
-          email = contact.EmailAddress
-          code = contact.Code
-          newcontact = Contact.new(email: email, code: code)
-          if thisaccount = Account.all.find_by(code: code)
-            thisaccount.user.update_attributes(email: email)
-            newcontact.save
+
+
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
+      contacts.each do |contact|
+        if contact.Active
+          account = Account.all.find_by(code: contact.Code)
+          if account
+            account.user.update_attributes(email: contact.EmailAddress)
           end
         end
       end
-      dbh.disconnect
+      dbh.disconnect 
+      # @contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
+      # @contacts.each do |contact|
+      #   if (contact.Active == 1) && (!Contact.all.find_by(code: contact.Code.strip))
+      #     email = contact.EmailAddress
+      #     code = contact.Code
+      #     newcontact = Contact.new(email: email, code: code)
+      #     if thisaccount = Account.all.find_by(code: code)
+      #       thisaccount.user.update_attributes(email: email)
+      #       newcontact.save
+      #     end
+      #   end
+      # end
+      # dbh.disconnect
 
       #-------------------------- CREATE ADMIN USER -------------------------------------
       if adminuser = User.all.find_by(email: 'web@roccloudy.com')
