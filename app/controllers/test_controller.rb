@@ -11,8 +11,12 @@ class TestController < ApplicationController
 				if account
 					if contact.EmailAddress
 						account.user.update_attributes(email: contact.EmailAddress)
+						@results << '>>new->'
+						@results << contact.EmailAddress
+						@results << account.code
+						@results << '<<'
 					else
-						@results << '>>'
+						@results << '>>taken->'
 						@results << account.user.email
 						@results << account.code
 						@results << '<<'
