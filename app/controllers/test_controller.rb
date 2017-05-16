@@ -8,7 +8,9 @@ class TestController < ApplicationController
           contacts.each do |contact|
           	account = Account.all.find_by(code: contact.Code)
           	if account
-          		@results << account.user
+          		@results << '**'
+          		@results << account.user.email
+          		@results << '**'
           	end
           	@results << contact.Code
           	@results << contact.Active
