@@ -7,7 +7,7 @@ class TestController < ApplicationController
           contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
           contacts.each do |contact|
           	account = Account.all.find_by(code: contact.Code)
-          	@results << account
+          	@results << account.code
           end
 
           dbh.disconnect 
