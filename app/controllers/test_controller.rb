@@ -8,7 +8,7 @@ class TestController < ApplicationController
 		contacts.each do |contact|
 			if contact.Active == 1
 				account = Account.all.find_by(code: contact.Code.strip)
-				if account.email
+				if !account.nil?
 						account.user.update_attributes!(email: contact.EmailAddress)
 						@results << '>>'
 						@results << account.user.email
