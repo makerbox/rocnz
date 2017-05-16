@@ -8,6 +8,8 @@ class TestController < ApplicationController
           contacts.each do |contact|
           	# account = Account.all.find_by(code: contact.Code)
           	@results << contact.Code
+          	@results << contact.Active
+          	@results << '||'
           end
 
           dbh.disconnect 
