@@ -9,6 +9,9 @@ class TestController < ApplicationController
           	# account = Account.all.find_by(code: contact.Code)
           	@results << contact.Code
           	@results << contact.Active
+          	if contact.Active
+          		@results << contact.EmailAddress
+          	end
           	@results << '||'
           end
 
