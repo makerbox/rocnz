@@ -254,7 +254,7 @@ class PopulateJob
         if contact.Active == 1
           account = Account.all.find_by(code: contact.Code.strip)
           if account
-            account.user.update_attributes(email: contact.EmailAddress)
+            account.user.update(email: contact.EmailAddress)
           end
         end
       end
