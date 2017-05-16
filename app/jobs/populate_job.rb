@@ -252,7 +252,7 @@ class PopulateJob
       contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
       contacts.each do |contact|
         if contact.Active
-          account = Account.all.find_by(code: contact.Code)
+          account = Account.all.find_by(code: contact.Code.strip)
           if account
             account.user.update_attributes(email: contact.EmailAddress)
           end
