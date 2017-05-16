@@ -11,11 +11,8 @@ class TestController < ApplicationController
 				if account
 					account.user.update_attributes(email: contact.EmailAddress)
 					@results << account.user.email
+					@results << account.code
 				end
-			else
-				@results << '**'
-				@results << contact.Code.strip
-				@results << '**'
 			end
 		end
 		dbh.disconnect 
