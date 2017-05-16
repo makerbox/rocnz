@@ -9,8 +9,7 @@ class TestController < ApplicationController
 			if contact.Active == 1
 				account = Account.all.find_by(code: contact.Code.strip)
 				if account
-					account.skip_reconfirmation!
-					if account.user.update(email: contact.EmailAddress)
+					if account.user.update_attributes(email: contact.EmailAddress)(validate: false) 
 						@results << account.user.email
 						@results << account.code
 					end
