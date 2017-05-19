@@ -3,7 +3,7 @@ class PopulateJob
  def perform
   Contact.create(code:'clock', email:'start')
     if Contact.find_by(code:'running', email:'running')
-      puts 'already running'
+      puts 'already running' #skips running again if already running
     else
       Contact.create(code:'running', email:'running')
 
@@ -263,7 +263,7 @@ class PopulateJob
 
 
 
-      
+
       # @contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
       # @contacts.each do |contact|
       #   if (contact.Active == 1) && (!Contact.all.find_by(code: contact.Code.strip))
