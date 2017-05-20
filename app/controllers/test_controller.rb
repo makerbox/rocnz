@@ -24,7 +24,7 @@ class TestController < ApplicationController
 			end
 		end
 		dbh.disconnect 
-		Contact.find_by(code:'running', email:'running').destroy
+		# Contact.find_by(code:'running', email:'running').destroy
 
 	  	# system "heroku pg:push development postgresql-round-86328 --app shrouded-waters-74068"
 	  end
