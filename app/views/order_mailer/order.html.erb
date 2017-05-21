@@ -12,7 +12,69 @@ Shipping to:<br>
 <%= @thisorder.user.account.suburb %><br>
 <%= @thisorder.user.account.company %><br>
 <hr>
+<table>
+<tr>
+<th></th>
+<th>Item No.</th>
+<th>Qty</th>
+<th>Description</th>
+<th>Price</th>
+<th>Subtotal</th>
+</tr>
 
+
+
+
+
+
+	<% @thisorder.quantities.each do |q| %>
+		<% if (current_user.has_role? :admin) && (!current_user.mimic.nil?) %>
+                      <% level = current_user.mimic.account.seller_level.to_i %>
+                      <% thisperson = current_user.mimic.account.user %>
+                    <% else %>
+                      <% level = current_user.account.seller_level.to_i %>
+                      <% thisperson = current_user %>
+                    <% end %>
+                    <% case level %>
+                      <% when 1 %>
+                        <% oldprice = q.product.price1 %>
+                      <% when 2 %>
+                        <% oldprice = q.product.price2 %>
+                      <% when 3 %>
+                        <% oldprice = q.product.price3 %>
+                      <% when 4 %>
+                        <% oldprice = q.product.price4 %>
+                      <% when 5 %>
+                        <% oldprice = q.product.price5 %>
+                      <% when 6 %>
+                        <% oldprice = q.product.rrp %>
+                    <% end %>
+                    <% case level %>
+                      <% when 1 %>
+                        <% prodprice = q.product.calc_discount(thisperson, q.product.price1, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+                      <% when 2 %>
+                        <% prodprice = q.product.calc_discount(thisperson, q.product.price2, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+                      <% when 3 %>
+                        <% prodprice = q.product.calc_discount(thisperson, q.product.price3, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+                      <% when 4 %>
+                        <% prodprice = q.product.calc_discount(thisperson, q.product.price4, q.product.group, q.product.code, q.product.pricecat), q.qty %>
+                      <% when 5 %>
+                        <% prodprice = q.product.calc_discount(thisperson, q.product.price5, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+                      <% when 6 %>
+                        <% prodprice = q.product.rrp %>
+                    <% end %>
+  	
+  	<% subtotal = (q.qty * prodprice).round(2) %>
+		<tr>
+		<td><img src=<%= cl_image_path(q.product.code.strip) %> height="50"></td>
+		<td><%= q.product.code %></td>
+		<td>QTY : <%= q.qty %></td>
+		<td><%= q.product.description %></td>
+		<td>$<%= number_with_precision(prodprice, precision: 2)%></td>
+		<td>$<%= subtotal %></td>
+		</tr>
+	<% end %>
+</table>
 <hr><b>TOTAL : $<%= @thisorder.total %></b>
 <hr><hr>
 <i>Please be advised this is an order confirmation only. Do not pay, an invoice will follow.</i>
