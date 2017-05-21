@@ -7,7 +7,7 @@ class TestController < ApplicationController
 		qty = 4
   price = 4.8
   prod_group = 'D'
-  prod_code = '633'
+  prod_code = '1829DM'
   # price_cat = params[:pricecat]
 
   if current_user.mimic
