@@ -11,6 +11,7 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 	end
 
 	discos = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || udisc))
+	
 	if 4 == 3
 		disco = discos.where('maxqty > ?', qty).first
 	    if disco.disctype == 'fixedtype'
