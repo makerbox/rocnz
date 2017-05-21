@@ -9,17 +9,7 @@ class TestController < ApplicationController
 			if contact.Active == 1
 				account = Account.all.find_by(code: contact.Code.strip)
 				if account
-					if account.user.update_attributes(email: contact.EmailAddress)
-						@results << '>>new->'
-						@results << contact.EmailAddress
-						@results << account.code
-						@results << '<<'
-					else
-						@results << '>>taken->'
-						@results << account.user.email
-						@results << account.code
-						@results << '<<'
-					end
+					account.user.update_attributes(email: contact.EmailAddress)
 				end
 			end
 		end
