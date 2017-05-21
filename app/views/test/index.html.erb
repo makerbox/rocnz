@@ -1,5 +1,6 @@
 [<%= Account.all.count %> vs <%= User.all.count %>]<br>
 <% @discounts.each do |d| %>
+	<%= d.Customer %>
 	<%= d.DiscPerc1 %>
 	<%= d.Price1 %>
 	<%= d.PriceCode1 %>
