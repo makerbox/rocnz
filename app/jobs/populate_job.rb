@@ -246,6 +246,7 @@ class PopulateJob
           account.update_attributes(approved: 'approved', phone: phone, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
         end
       end
+      dbh.disconnect 
 
       # --------------------- ADD EMAIL ADDRESSES ----------------------
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
