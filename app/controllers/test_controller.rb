@@ -3,19 +3,8 @@ class TestController < ApplicationController
 	
 	def index
 		@results = []
-		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-		contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
-		contacts.each do |contact|
-			if contact.Active == 1
-				account = Account.all.find_by(code: contact.Code.strip)
-				if account
-					account.user.update_attributes(email: contact.EmailAddress)
-				end
-			end
-		end
-		dbh.disconnect 
-		# Contact.find_by(code:'running', email:'running').destroy
-
+		
+		@results = Discount.all
 	  	# system "heroku pg:push development postgresql-round-86328 --app shrouded-waters-74068"
 	  end
 	end
