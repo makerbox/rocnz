@@ -9,7 +9,7 @@ def calc_qty_disc
   price = params[:price]
   prod_group = params[:group]
   prod_code = params[:code]
-  # price_cat = params[:pricecat]
+  price_cat = params[:pricecat]
 
   if current_user.mimic
     u = current_user.mimic.account.user
@@ -19,11 +19,12 @@ def calc_qty_disc
   
   if discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)) #get the matching discounts
     disco = discos.where('maxqty > ?', qty).first
-    if disco.disctype == 'fixedtype'
-      result = price - disco.discount
-    else
-      result = price - ((price / 100) * disco.discount)
-    end
+    result = disco.discount
+    # if disco.disctype == 'fixedtype'
+    #   result = price - disco.discount
+    # else
+    #   result = price - ((price / 100) * disco.discount)
+    # end
   else
     result = price
   end
