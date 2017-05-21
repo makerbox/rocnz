@@ -10,9 +10,8 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 		udisc = nil
 	end
 
-	discos = Discount.all.find_by(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || udisc))
 	
-	if 4 == 3
+	if discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || udisc))
 		disco = discos.where('maxqty > ?', qty).first
 	    if disco.disctype == 'fixedtype'
 	      result = price - disco.discount
