@@ -104,7 +104,7 @@ $('.form-control').change(function() {
       success: function(data) {
         $("#price-display").html(data.result); 
         console.log(data.result);
-        console.log(route); }
+        console.log('<%= @product.group %>.<%= @product.code %>'); }
       });
 });
 
