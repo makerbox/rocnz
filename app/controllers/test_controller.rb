@@ -4,7 +4,7 @@ class TestController < ApplicationController
 	def index
 		@results = []
 		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-          @discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
+          @discounts = Discount.all
 		
           dbh.disconnect
 	  	# system "heroku pg:push development postgresql-round-86328 --app shrouded-waters-74068"

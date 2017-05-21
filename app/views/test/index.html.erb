@@ -1,12 +1,11 @@
 [<%= Account.all.count %> vs <%= User.all.count %>]<br>
+
+
+
+
 <% @discounts.each do |d| %>
-	<%= d.Customer %>
-	<%= d.DiscPerc1 %>
-	<%= d.Price1 %>
-	<%= d.PriceCode1 %>
-	<%= d.DiscCode1 %>
-	<%= d.PriceAdd1 %>
-	<%= d.PriceReduce1 %>
-	<%= d.MaxQty1 %>
+ <%= d.customer %>
+ <%= d.maxqty %>
+ <%= d.disctype %>
 <% end %>
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %>
