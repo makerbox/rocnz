@@ -22,7 +22,7 @@ def calc_qty_disc
     if disco.disctype == 'fixedtype'
       result = 0
     else
-      result = 1
+      result = price - ((price / 100) * disco.discount)
     end
   else
     result = price
