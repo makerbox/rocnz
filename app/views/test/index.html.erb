@@ -1,5 +1,4 @@
 [<%= Account.all.count %> vs <%= User.all.count %>]<br>
-<% @results.each do |result| %>
-<%= result.maxqty %>
-<% end %>
+<%= @result %><br>
+<%= @tester %><br>
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %>
