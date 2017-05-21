@@ -18,7 +18,7 @@ class TestController < ApplicationController
   
   if discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)) #get the matching discounts
     discos.each do |disco| #loop through to find which maxqty applies
-      @result = number_with_precision(disco, precision: 2)
+      @result = number_with_precision(disco.discount, precision: 2)
       # if qty <= disco.maxqty
       #   @thedisco = disco #set @thedisco to the discount in which this qty fits
       # else
