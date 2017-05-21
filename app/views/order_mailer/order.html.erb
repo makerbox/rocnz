@@ -7,10 +7,19 @@
 <b>W</b> www.roccloudy.com | www.unityeyewear.com.au | www.polasports.com.au | www.locello.com.au
 </p>
 <hr><hr>
-Shipping to:<br>
-<%= @thisorder.user.account.street %><br>
-<%= @thisorder.user.account.suburb %><br>
-<%= @thisorder.user.account.company %><br>
+<table>
+<tr>
+<td><b>Customer</b></td><td><%= @thisorder.user.account.company %></td>
+</tr>
+<tr>
+<td><b>Cust No.</b></td><td><%= @thisorder.user.account.code %></td>
+</tr>
+<tr>
+<td><b>Address</b></td><td><%= @thisorder.user.account.street %>
+<%= @thisorder.user.account.suburb %>
+<%= @thisorder.user.account.company %></td>
+</tr>
+</table>
 <hr>
 <table>
 <tr>
@@ -27,12 +36,12 @@ Shipping to:<br>
 
 
 	<% @thisorder.quantities.each do |q| %>
-		<% if (current_user.has_role? :admin) && (!current_user.mimic.nil?) %>
-                      <% level = current_user.mimic.account.seller_level.to_i %>
-                      <% thisperson = current_user.mimic.account.user %>
+		<% if (@user.has_role? :admin) && (!@user.mimic.nil?) %>
+                      <% level = @user.mimic.account.seller_level.to_i %>
+                      <% thisperson = @user.mimic.account.user %>
                     <% else %>
-                      <% level = current_user.account.seller_level.to_i %>
-                      <% thisperson = current_user %>
+                      <% level = @user.account.seller_level.to_i %>
+                      <% thisperson = @user %>
                     <% end %>
                     <% case level %>
                       <% when 1 %>
