@@ -20,7 +20,7 @@ class TestController < ApplicationController
     discos.each do |disco| #loop through to find which maxqty applies
       # @result = number_with_precision(disco.discount, precision: 2)
       @result = disco
-      @tester = disco.discount
+      @tester = disco.maxqty
       # if qty <= disco.maxqty
       #   @thedisco = disco #set @thedisco to the discount in which this qty fits
       # else
