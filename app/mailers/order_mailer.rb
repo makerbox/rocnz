@@ -8,8 +8,8 @@ class OrderMailer < ApplicationMailer
 	# 	mail(to: 'wholesaleorder@roccloudy.com', subject: subject)
 	# end
 	def receipt(order)
-		# @thisorder = order
-		# @account = order.user.account
+		@thisorder = order
+		@account = order.user.account
 		mail(to: 'mattwerth@mattwerth.com', subject: 'Roc Cloudy order')
 	end
 	# def rep(order)
