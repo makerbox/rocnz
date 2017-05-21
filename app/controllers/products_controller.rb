@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
 
 def calc_qty_disc
   qty = params[:qty]
-  price = params[:price]
+  price = (params[:price]).to_f
   prod_group = params[:group]
   prod_code = params[:code]
   price_cat = params[:pricecat]
