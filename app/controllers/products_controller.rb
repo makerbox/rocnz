@@ -18,16 +18,13 @@ def calc_qty_disc
   end
   
   if discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)) #get the matching discounts
-    discos.where('maxqty > ?', qty)
-    result = disco.discount
+    disco = discos.where('maxqty > ?', qty).first
+    if disco.disctype == 'fixedtype'
+      result = price - disco.discount
+    else
+      result = price - ((price / 100) * disco.discount)
+    end
   else
-
-    # if @thedisco
-    #   result = price - @thedisco.discount
-    #   # need to also work for percentage discount
-    # else
-    #   result = price #should be discounted price
-    # end
     result = price
   end
 
