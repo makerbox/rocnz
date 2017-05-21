@@ -4,10 +4,11 @@ class OrderEmailJob
 
   # The perform method is in charge of our code execution when enqueued.
   def perform(order, user)
-  	  # OrderMailer.order(order).deliver_now
+  	  # OrderMailer.order(order, user).deliver_now
+  	  user = User.find_by(user)
   	  OrderMailer.receipt(order, user).deliver_now
   	  # if current_user.has_role? :admin
-  	  # 	OrderMailer.rep(order).deliver_now
+  	  # 	OrderMailer.rep(order, user).deliver_now
   	  # end
   end
 
