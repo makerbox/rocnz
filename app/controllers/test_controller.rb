@@ -3,40 +3,10 @@ class TestController < ApplicationController
 	
 	def index
 		@results = []
+		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+          @discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 		
-		qty = 4
-  price = 4.8
-  prod_group = 'D'
-  prod_code = '1829DM'
-  # price_cat = params[:pricecat]
-
-  if current_user.mimic
-    u = current_user.mimic.account.user
-  else
-    u = current_user
-  end
-  
-  if discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)) #get the matching discounts
-    discos.each do |disco| #loop through to find which maxqty applies
-      # @result = number_with_precision(disco.discount, precision: 2)
-      @result = disco
-      @tester = disco.maxqty
-      # if qty <= disco.maxqty
-      #   @thedisco = disco #set @thedisco to the discount in which this qty fits
-      # else
-      #   @thedisco = nil #otherwise jsut be nil if it doesn't fit or is above the top max qty
-      # end
-    end
-  else
-
-    # if @thedisco
-    #   result = price - @thedisco.discount
-    #   # need to also work for percentage discount
-    # else
-    #   result = price #should be discounted price
-    # end
-    @result = price
-  end
+          dbh.disconnect
 	  	# system "heroku pg:push development postgresql-round-86328 --app shrouded-waters-74068"
 	  end
 	end
