@@ -18,14 +18,8 @@ def calc_qty_disc
   end
   
   if discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip)) #get the matching discounts
-    discos.each do |disco| #loop through to find which maxqty applies
-      result = disco.discount
-      # if qty <= disco.maxqty
-      #   @thedisco = disco #set @thedisco to the discount in which this qty fits
-      # else
-      #   @thedisco = nil #otherwise jsut be nil if it doesn't fit or is above the top max qty
-      # end
-    end
+    discos.where('maxqty > ?', qty)
+    result = disco.discount
   else
 
     # if @thedisco
