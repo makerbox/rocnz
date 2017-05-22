@@ -1,5 +1,6 @@
 [<%= Account.all.count %> vs <%= User.all.count %>]<br>
-<% @orders.each do |o| %>
-<%= o.total %><br>
+GOOD = <%= @goodcount %> | BAD = <%= @badcount %>
+<% @results.each do |o| %>
+<%= o %><br>
 <% end %>
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %>
