@@ -6,9 +6,6 @@ class OrderEmailJob
   def perform(order)
   	  OrderMailer.order(order).deliver_now
   	  OrderMailer.receipt(order).deliver_now
-  	  if order.user.has_role? :admin
-  	  	OrderMailer.rep(order).deliver_now
-  	  end
   end
 
 end

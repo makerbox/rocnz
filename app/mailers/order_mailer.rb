@@ -28,17 +28,4 @@ class OrderMailer < ApplicationMailer
 		end
 		mail(to: 'mattwerth@mattwerth.com', subject: 'Roc Cloudy order')
 	end
-	def rep(order)
-		@thisorder = order
-		@account = order.user.account
-		user = order.user
-		if (user.has_role? :admin) && (!user.mimic.nil?)
-            @level = user.mimic.account.seller_level.to_i
-			@thisperson = user.mimic.account.user
-		else
-			@level = user.account.seller_level.to_i
-			@thisperson = user
-		end
-		mail(to: current_user.email, subject: 'Roc Cloudy order')
-	end
 end
