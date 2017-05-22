@@ -5,13 +5,13 @@ class TestController < ApplicationController
 		@goodcount = 0
 		@badcount = 0
 		@results = []
-		@orders = User.all
-		@orders.each do |o|
-			if o.email.include? '@'
+		@users = User.all
+		@users.each do |u|
+			if u.email.include? '@'
 				@goodcount = @goodcount + 1
 			else
 				@badcount = @badcount + 1
-				@result << o.account
+				@result << u.account
 			end
 		end
 		# OrderMailer.receipt(Order.all.last, current_user).deliver_now
