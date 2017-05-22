@@ -7,7 +7,7 @@ class TestController < ApplicationController
 		@results = []
 		@orders = User.all
 		@orders.each do |o|
-			if o.email.includes? '@'
+			if o.email.include? '@'
 				@goodcount = goodcount + 1
 			else
 				@badcount = badcount + 1
