@@ -11,7 +11,7 @@ class TestController < ApplicationController
 				@goodcount = @goodcount + 1
 			else
 				@badcount = @badcount + 1
-				@result << o.account.company
+				@result << o.account
 			end
 		end
 		# OrderMailer.receipt(Order.all.last, current_user).deliver_now
