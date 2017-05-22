@@ -1,3 +1,5 @@
 [<%= Account.all.count %> vs <%= User.all.count %>]<br>
-<%= @result %>
+<% @orders.each do |o| %>
+<%= o.total %><br>
+<% end %>
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %>

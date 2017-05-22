@@ -29,21 +29,8 @@
 <th>Price</th>
 <th>Subtotal</th>
 </tr>
-
-
-
-
-
-
 	<% @thisorder.quantities.each do |q| %>
-		<% if (@user.has_role? :admin) && (!@user.mimic.nil?) %>
-                      <% level = @user.mimic.account.seller_level.to_i %>
-                      <% thisperson = @user.mimic.account.user %>
-                    <% else %>
-                      <% level = @user.account.seller_level.to_i %>
-                      <% thisperson = @user %>
-                    <% end %>
-                    <% case level %>
+                    <% case @level %>
                       <% when 1 %>
                         <% oldprice = q.product.price1 %>
                       <% when 2 %>
@@ -57,17 +44,17 @@
                       <% when 6 %>
                         <% oldprice = q.product.rrp %>
                     <% end %>
-                    <% case level %>
+                    <% case @level %>
                       <% when 1 %>
-                        <% prodprice = q.product.calc_discount(thisperson, q.product.price1, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+                        <% prodprice = q.product.calc_discount(@thisperson, q.product.price1, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
                       <% when 2 %>
-                        <% prodprice = q.product.calc_discount(thisperson, q.product.price2, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+                        <% prodprice = q.product.calc_discount(@thisperson, q.product.price2, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
                       <% when 3 %>
-                        <% prodprice = q.product.calc_discount(thisperson, q.product.price3, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+                        <% prodprice = q.product.calc_discount(@thisperson, q.product.price3, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
                       <% when 4 %>
-                        <% prodprice = q.product.calc_discount(thisperson, q.product.price4, q.product.group, q.product.code, q.product.pricecat), q.qty %>
+                        <% prodprice = q.product.calc_discount(@thisperson, q.product.price4, q.product.group, q.product.code, q.product.pricecat), q.qty %>
                       <% when 5 %>
-                        <% prodprice = q.product.calc_discount(thisperson, q.product.price5, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+                        <% prodprice = q.product.calc_discount(@thisperson, q.product.price5, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
                       <% when 6 %>
                         <% prodprice = q.product.rrp %>
                     <% end %>
