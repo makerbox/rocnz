@@ -8,9 +8,9 @@ class TestController < ApplicationController
 		@orders = User.all
 		@orders.each do |o|
 			if o.email.include? '@'
-				@goodcount = goodcount + 1
+				@goodcount = @goodcount + 1
 			else
-				@badcount = badcount + 1
+				@badcount = @badcount + 1
 				@result << o.account.company
 			end
 		end
