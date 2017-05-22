@@ -8,15 +8,15 @@ class OrderMailer < ApplicationMailer
 	# 	subject = 'Roc Cloudy order ' + order.user.account.code.strip
 	# 	mail(to: 'wholesaleorder@roccloudy.com', subject: subject)
 	# end
-	def receipt(order)
+	def receipt(order, user)
 		@thisorder = order
 		@account = order.user.account
-		if (current_user.has_role? :admin) && (!current_user.mimic.nil?)
-            @level = current_user.mimic.account.seller_level.to_i
-			@thisperson = current_user.mimic.account.user
+		if (user.has_role? :admin) && (!user.mimic.nil?)
+            @level = user.mimic.account.seller_level.to_i
+			@thisperson = user.mimic.account.user
 		else
-			@level = current_user.account.seller_level.to_i
-			@thisperson = current_user
+			@level = user.account.seller_level.to_i
+			@thisperson = user
 		end
 		mail(to: 'mattwerth@mattwerth.com', subject: 'Roc Cloudy order')
 	end
