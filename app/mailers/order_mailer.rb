@@ -26,6 +26,6 @@ class OrderMailer < ApplicationMailer
 			@level = user.account.seller_level.to_i
 			@thisperson = user
 		end
-		mail(to: 'mattwerth@mattwerth.com', subject: 'Roc Cloudy order')
+		mail(to: order.user.email, subject: 'Roc Cloudy order')
 	end
 end
