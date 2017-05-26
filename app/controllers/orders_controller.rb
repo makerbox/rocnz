@@ -2,6 +2,11 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :sendorder]
 
 def add_to_order
+notes = params[:notes]
+result = @order.id
+  respond_to do |format|
+    format.json { render json: {result: result} }
+  end
 end
 
 
@@ -11,7 +16,7 @@ def sendorder
     newqty = oldqty - q.qty
     q.product.update(qty: newqty)
   end
-  @order.update(active: false, sent: DateTime.now, total: params[:total], notes: params[:notes]) # move order to pending and give it a total
+  @order.update(active: false, sent: DateTime.now, total: params[:total]) # move order to pending and give it a total
   
 
   
