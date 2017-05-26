@@ -8,7 +8,7 @@ def sendorder
     newqty = oldqty - q.qty
     q.product.update(qty: newqty)
   end
-  @order.update(active: false, sent: DateTime.now, total: params[:total]) # move order to pending and give it a total
+  @order.update(active: false, sent: DateTime.now, total: params[:total], notes: params[:notes]) # move order to pending and give it a total
   
 
   
@@ -157,6 +157,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:total, :user_id)
+      params.require(:order).permit(:total, :user_id, :notes, :cust_order_number, :order_number)
     end
 end
