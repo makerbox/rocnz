@@ -66,7 +66,8 @@
 <script>
 
 $('.form-control').change(function() {
-  var route = <%= @order.id %>+"/add_to_order";
+  var route = <%= add_to_order_order_path %>;
+  console.log(route);
    $.ajax({
       url: route ,
       dataType: "json",

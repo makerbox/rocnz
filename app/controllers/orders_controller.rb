@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
 def add_to_order
 notes = params[:notes]
 result = @order.id
+
   respond_to do |format|
     format.json { render json: {result: result} }
   end
