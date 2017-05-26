@@ -63,7 +63,7 @@
 		<tr>
 		<td><img src=<%= cl_image_path(q.product.code.strip) %> height="50"></td>
 		<td><%= q.product.code %></td>
-		<td>QTY : <%= q.qty %></td>
+		<td><%= q.qty %></td>
 		<td><%= q.product.description %></td>
 		<td>$<%= number_with_precision(prodprice, precision: 2)%></td>
 		<td>$<%= subtotal %></td>

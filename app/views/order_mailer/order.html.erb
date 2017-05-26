@@ -52,7 +52,7 @@
   	<% subtotal = (q.qty * prodprice).round(2) %>
 		<tr>
 		<td><%= q.product.code %></td>
-		<td>QTY : <%= q.qty %></td>
+		<td><%= q.qty %></td>
 		<td><%= q.product.description %></td>
 		<td>$<%= number_with_precision(prodprice, precision: 2)%></td>
 		<td>$<%= subtotal %></td>
@@ -60,6 +60,17 @@
 	<% end %>
 </table>
 <hr><b>TOTAL : $<%= @thisorder.total %></b>
-<hr><hr>
-<i>Please be advised this is an order confirmation only. Do not pay, an invoice will follow.</i>
-<hr><hr>
+<style>
+* {
+  font-family: 'Verdana';
+}
+body, p, i, b{
+  font-size:10px;
+}
+h1{
+  font-size:15px;
+}
+td{
+  margin-right:20px;
+}
+</style>
