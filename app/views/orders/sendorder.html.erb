@@ -1,4 +1,4 @@
-<%= simple_form_for(@order, :url => orderout_order_path) do |f| %>
+<%= simple_form_for(@order, action: "orderout") do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
