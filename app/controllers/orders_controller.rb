@@ -1,19 +1,14 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :sendorder, :orderout]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :sendorder]
 
 
 def sendorder
-
-end
-
-def orderout
-  notes = params[:notes]
   @order.quantities.each do |q| # change stock levels and calc order total
     oldqty = q.product.qty
     newqty = oldqty - q.qty
     q.product.update(qty: newqty)
   end
-  @order.update_attributes(active: false, sent: DateTime.now, total: params[:total], notes: notes) # move order to pending and give it a total
+  @order.update(active: false, sent: DateTime.now, total: params[:total]) # move order to pending and give it a total
   
   @account = @order.user.account
   OrderEmailJob.perform_async(@order)
@@ -111,6 +106,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:total, :user_id, :notes, :cust_order_number, :order_number)
+      params.require(:order).permit(:total, :user_id, :notes, :cust_order_number, :order_number, :delivery)
     end
 end

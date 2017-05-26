@@ -41,7 +41,6 @@ end
   resources :orders do
     member do
       get 'sendorder'
-      get 'orderout'
       get 'cart'
       get 'addto'
     end
