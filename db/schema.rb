@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403014205) do
+ActiveRecord::Schema.define(version: 20170526011606) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
@@ -84,13 +84,16 @@ ActiveRecord::Schema.define(version: 20170403014205) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.boolean  "active"
     t.datetime "sent"
     t.boolean  "approved"
     t.boolean  "complete"
     t.decimal  "total"
+    t.text     "notes"
+    t.string   "cust_order_number"
+    t.string   "order_number"
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
