@@ -1,4 +1,4 @@
-<%= simple_form_for(@order, url: orderout_order_path(@order), html: {method: "get"}) do |f| %>
+<%= simple_form_for(@order, html: {action: "orderout", method: "get"}) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -7,9 +7,6 @@
 notes:
     <%= f.text_field :notes %>
 
-  </div>
-
-  <div class="form-actions">
     <%= f.button :submit %>
   </div>
 <% end %>
