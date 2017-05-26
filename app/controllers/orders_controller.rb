@@ -7,12 +7,13 @@ def sendorder
 end
 
 def orderout
+  notes = params[:notes]
   @order.quantities.each do |q| # change stock levels and calc order total
     oldqty = q.product.qty
     newqty = oldqty - q.qty
     q.product.update(qty: newqty)
   end
-  @order.update(active: false, sent: DateTime.now, total: params[:total], notes: params[:notes]) # move order to pending and give it a total
+  @order.update(active: false, sent: DateTime.now, total: params[:total], notes: notes) # move order to pending and give it a total
   
   @account = @order.user.account
   OrderEmailJob.perform_async(@order)
