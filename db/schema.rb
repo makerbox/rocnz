@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170526011606) do
+ActiveRecord::Schema.define(version: 20170526033553) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 20170526011606) do
     t.date     "new_date"
     t.string   "pricecat"
     t.string   "fab"
+    t.boolean  "hidden"
   end
 
   create_table "quantities", force: :cascade do |t|

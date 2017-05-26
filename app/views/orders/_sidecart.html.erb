@@ -59,7 +59,7 @@
   <%= link_to 'please fill in your account details before placing an order', account_path(current_user.account), class: 'btn btn-info' %> <hr>
   <% else %>
 <%= text_field :notes, 'notes' %>
-  <%= link_to ' SEND ORDER', sendorder_order_path(@order, total: @order.TOTAL), class: 'fa fa-paper-plane btn btn-info' %><hr>
+  <%= link_to ' SEND ORDER', sendorder_order_path(@order, total: @order.total), class: 'fa fa-paper-plane btn btn-info' %><hr>
   <% end %>
   <%= link_to ' cancel', order_path(@order), method: :delete, class: 'fa fa-trash btn btn-danger' %>
 <% end %>
