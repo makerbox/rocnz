@@ -6,7 +6,7 @@
 <b>E</b> office@roccloudy.com<br>
 <b>W</b> www.roccloudy.com | www.unityeyewear.com.au | www.polasports.com.au | www.locello.com.au
 </p>
-<hr><hr>
+<hr>
 <table>
 <tr>
 <td><b>Customer</b></td><td><%= @thisorder.user.account.company %></td>
@@ -16,8 +16,7 @@
 </tr>
 <tr>
 <td><b>Address</b></td><td><%= @thisorder.user.account.street %>
-<%= @thisorder.user.account.suburb %>
-<%= @thisorder.user.account.company %></td>
+<%= @thisorder.user.account.suburb %></td>
 </tr>
 </table>
 <hr>
@@ -71,8 +70,16 @@
 		</tr>
 	<% end %>
 </table>
-<hr><b>TOTAL : $<%= @thisorder.total %></b>
-<hr><hr>
+<br><b>TOTAL : $<%= @thisorder.total %></b>
+<hr>
 <i>Please be advised this is an order confirmation only. Do not pay, an invoice will follow.</i><br>
 <b>Payment Options: Direct Deposit I Cheque I Credit Card. Credit Card Payment Fee-1.25% for VISA/MASTER CARD, 3.5% for AMX</b>
-<hr><hr>
+<hr>
+<style>
+body, p, i, b{
+  font-size:10px;
+}
+h1{
+  font-size:15px;
+}
+</style>
