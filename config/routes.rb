@@ -40,7 +40,6 @@ end
   
   resources :orders do
     member do
-      get 'add_to_order'
       get 'sendorder'
       get 'cart'
       get 'addto'

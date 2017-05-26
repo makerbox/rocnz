@@ -1,15 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :sendorder]
 
-def add_to_order
-notes = params[:notes]
-result = @order.id
-
-  respond_to do |format|
-    format.json { render json: {result: result} }
-  end
-end
-
 
 def sendorder
   @order.quantities.each do |q| # change stock levels and calc order total
