@@ -1,68 +1,21 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :sendorder]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :sendorder, :orderout]
 
 
 def sendorder
+
+end
+
+def orderout
   @order.quantities.each do |q| # change stock levels and calc order total
     oldqty = q.product.qty
     newqty = oldqty - q.qty
     q.product.update(qty: newqty)
   end
-  @order.update(active: false, sent: DateTime.now, total: params[:total]) # move order to pending and give it a total
+  @order.update(active: false, sent: DateTime.now, total: params[:total], notes: params[:notes]) # move order to pending and give it a total
   
-
-  
-
   @account = @order.user.account
   OrderEmailJob.perform_async(@order)
-
-  # if @account.company # start putting together printable order
-  #   company = @account.company
-  #   code = @account.code
-  # else
-  #   company = 'no company ' + @account.phone #if no company name, then show phone number instead
-  # end
-  # @print = "<h1>New order from Roc Cloudy Wholesale Portal</h1>
-  # [ordered at: #{Time.now.strftime('%d/%m/%Y || %r')}]"
-  # @print += "Company: " + company + " [#{code.to_s}]<hr>"
-  # @print += @account.street.to_s + ' | ' + @account.suburb.to_s + ' | ' + @account.phone.to_s + "<hr>
-  # <table><thead>
-  # <tr>
-  # <th>ITEM</th><th>PRICE</th><th>QTY</th><th>DESCRIPTION</th><th>SUBTOTAL</th>
-  # </tr>
-  # </thead>
-  # <tbody>"
-  # @order.quantities.each do |q|
-  #   product = Product.find_by(id: q.product_id)
-  #   if (current_user.has_role? :admin) && (!current_user.mimic.nil?) 
-  #   level = current_user.mimic.account.seller_level.to_i 
-  #   else 
-  #   level = current_user.account.seller_level.to_i 
-  #   end 
-  #   case level
-  #     when 1
-  #       @setprice = product.price1 / 100 * product.discount(current_user)
-  #     when 2
-  #       @setprice = product.price2 / 100 * product.discount(current_user)
-  #     when 3
-  #       @setprice = product.price3 / 100 * product.discount(current_user)
-  #     when 4
-  #       @setprice = product.price4 / 100 * product.discount(current_user)
-  #     when 5
-  #       @setprice = product.price5 / 100 * product.discount(current_user)
-  #     when 6
-  #       @setprice = product.rrp / 100 * product.discount(current_user)
-  #   end
-  #   @setprice = @setprice.round(2)
-  #   @subtotal = @setprice * q.qty
-  #   @print += "<tr>
-  #   <td>#{product.code.to_s}<td>$#{@setprice.to_s}</td><td>#{q.qty.to_s}</td><td>#{product.description.to_s}</td>
-  #   <td>#{@subtotal.to_s}</td></tr>"
-  # end
-  # @print += "</tbody></table>"
-  # @print += "<h2>total: $" + @order.total.to_s + "</h2>"
-  # @print += "<h2>+ GST: $" + (@order.total * 1.1).to_s + "</h2>"
-  # `printhtml.exe html="#{@print}"`
 
   if (current_user.has_role? :admin) && (current_user.mimic)
     current_user.mimic.destroy
