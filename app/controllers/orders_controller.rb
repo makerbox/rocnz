@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :sendorder]
 
+def add_to_order
+end
+
 
 def sendorder
   @order.quantities.each do |q| # change stock levels and calc order total
