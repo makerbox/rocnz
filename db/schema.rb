@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170526033553) do
+ActiveRecord::Schema.define(version: 20170526040550) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20170526033553) do
     t.text     "notes"
     t.string   "cust_order_number"
     t.string   "order_number"
+    t.string   "delivery_date"
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
