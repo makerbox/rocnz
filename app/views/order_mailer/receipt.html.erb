@@ -1,93 +1,119 @@
-<h1>ROC CLOUDY PTY LTD</h1>
-<p>
-8 Ralph Street, Alexandria  NSW  2015<br>
-<b>T</b> +61 2 9669 3636<br>
-<b>F</b> +61 2 9669 1118<br>
-<b>E</b> office@roccloudy.com<br>
-<b>W</b> www.roccloudy.com | www.unityeyewear.com.au | www.polasports.com.au | www.locello.com.au
-</p>
-<hr>
-<table>
-<tr>
-<td><b>Customer</b></td><td><%= @thisorder.user.account.company %></td>
-</tr>
-<tr>
-<td><b>Cust No.</b></td><td><%= @thisorder.user.account.code %></td>
-</tr>
-<tr>
-<td><b>Address</b></td><td><%= @thisorder.user.account.street %>
-<%= @thisorder.user.account.suburb %></td>
-</tr>
-</table>
-Notes: <%= @thisorder.notes %>
-<hr>
-<table>
-<tr>
-<th></th>
-<th>Item No.</th>
-<th>Qty</th>
-<th>Description</th>
-<th>Price</th>
-<th>Subtotal</th>
-</tr>
-	<% @thisorder.quantities.each do |q| %>
-                    <% case @level %>
-                      <% when 1 %>
-                        <% oldprice = q.product.price1 %>
-                      <% when 2 %>
-                        <% oldprice = q.product.price2 %>
-                      <% when 3 %>
-                        <% oldprice = q.product.price3 %>
-                      <% when 4 %>
-                        <% oldprice = q.product.price4 %>
-                      <% when 5 %>
-                        <% oldprice = q.product.price5 %>
-                      <% when 6 %>
-                        <% oldprice = q.product.rrp %>
-                    <% end %>
-                    <% case @level %>
-                      <% when 1 %>
-                        <% prodprice = q.product.calc_discount(@thisperson, q.product.price1, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
-                      <% when 2 %>
-                        <% prodprice = q.product.calc_discount(@thisperson, q.product.price2, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
-                      <% when 3 %>
-                        <% prodprice = q.product.calc_discount(@thisperson, q.product.price3, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
-                      <% when 4 %>
-                        <% prodprice = q.product.calc_discount(@thisperson, q.product.price4, q.product.group, q.product.code, q.product.pricecat), q.qty %>
-                      <% when 5 %>
-                        <% prodprice = q.product.calc_discount(@thisperson, q.product.price5, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
-                      <% when 6 %>
-                        <% prodprice = q.product.rrp %>
-                    <% end %>
-  	
-  	<% subtotal = (q.qty * prodprice).round(2) %>
-		<tr>
-		<td><img src=<%= cl_image_path(q.product.code.strip) %> height="50"></td>
-		<td><%= q.product.code %></td>
-		<td><%= q.qty %></td>
-		<td><%= q.product.description %></td>
-		<td>$<%= number_with_precision(prodprice, precision: 2)%></td>
-		<td>$<%= subtotal %></td>
-		</tr>
-	<% end %>
-</table>
-<br><b>TOTAL : $<%= @thisorder.total %></b>
-<hr>
-<i>Please be advised this is an order confirmation only. Do not pay, an invoice will follow.</i><br>
-<b>Payment Options: Direct Deposit I Cheque I Credit Card. Credit Card Payment Fee-1.25% for VISA/MASTER CARD, 3.5% for AMX</b>
-<hr>
 <style>
-* {
-  font-family: 'Verdana';
-}
-body, p, i, b, td{
-  font-size:10px;
-}
-h1{
-  font-size:15px;
-}
-td{
-  margin-right:30px;
-  padding-left:10px;
-}
+  * {
+    font-family: 'Verdana', sans-serif;
+  }
+  body, p, i, b, td{
+    font-size:10px;
+  }
+  h1{
+    font-size:15px;
+  }
+  td{
+    margin-right:30px;
+    padding-left:10px;
+  }
 </style>
+<table style="width:600px; text-align:center;" align="center" width="600">
+<tr>
+    <td style="text-align:left;" align="left">
+      <h1>ROC CLOUDY PTY LTD</h1>
+      <p>
+        8 Ralph Street, Alexandria  NSW  2015<br>
+        <b>T</b> +61 2 9669 3636<br>
+        <b>F</b> +61 2 9669 1118<br>
+        <b>E</b> office@roccloudy.com<br>
+        <b>W</b> www.roccloudy.com | www.unityeyewear.com.au | www.polasports.com.au | www.locello.com.au
+      </p>
+      <hr>
+      <table width="600" align="center" style="width:600px; text-align:center;">
+        <tr align="left" style="text-align:left;">
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif;"><b>Customer</b></td><td style="font-size:10px; font-family: 'Verdana', sans-serif;"><%= @thisorder.user.account.company %></td>
+        </tr>
+        <tr align="left" style="text-align:left;">
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif;"><b>Cust No.</b></td><td style="font-size:10px; font-family: 'Verdana', sans-serif;"><%= @thisorder.user.account.code %></td>
+        </tr>
+        <tr align="left" style="text-align:left;">
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif;"><b>Address</b></td><td style="font-size:10px; font-family: 'Verdana', sans-serif;"><%= @thisorder.user.account.street %>
+          <%= @thisorder.user.account.suburb %></td>
+        </tr>
+        <tr align="left" style="text-align:left;">
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+            Notes:
+          </td>
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+            <%= @thisorder.notes %>
+          </td>
+        </tr>
+      </table>
+      <hr>
+      <table width="600" align="center" style="width:600px; text-align:center;">
+        <tr align="left" style="text-align:left;">
+          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90"></th>
+          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90">Item No.</th>
+          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90">Qty</th>
+          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">Description</th>
+          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90">Price</th>
+          <th style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90" align="right">Subtotal</th>
+        </tr>
+        <% @thisorder.quantities.each do |q| %>
+        <% case @level %>
+        <% when 1 %>
+        <% oldprice = q.product.price1 %>
+        <% when 2 %>
+        <% oldprice = q.product.price2 %>
+        <% when 3 %>
+        <% oldprice = q.product.price3 %>
+        <% when 4 %>
+        <% oldprice = q.product.price4 %>
+        <% when 5 %>
+        <% oldprice = q.product.price5 %>
+        <% when 6 %>
+        <% oldprice = q.product.rrp %>
+        <% end %>
+        <% case @level %>
+        <% when 1 %>
+        <% prodprice = q.product.calc_discount(@thisperson, q.product.price1, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+        <% when 2 %>
+        <% prodprice = q.product.calc_discount(@thisperson, q.product.price2, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+        <% when 3 %>
+        <% prodprice = q.product.calc_discount(@thisperson, q.product.price3, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+        <% when 4 %>
+        <% prodprice = q.product.calc_discount(@thisperson, q.product.price4, q.product.group, q.product.code, q.product.pricecat), q.qty %>
+        <% when 5 %>
+        <% prodprice = q.product.calc_discount(@thisperson, q.product.price5, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+        <% when 6 %>
+        <% prodprice = q.product.rrp %>
+        <% end %>
+
+        <% subtotal = (q.qty * prodprice).round(2) %>
+        <tr align="left" style="text-align:left;">
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90"><img src=<%= cl_image_path(q.product.code.strip) %> height="50"></td>
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90"><%= q.product.code %></td>
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90"><%= q.qty %></td>
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150"><%= q.product.description %></td>
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90">$<%= number_with_precision(prodprice, precision: 2)%></td>
+          <td style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" align="right" width="90">$<%= subtotal %></td>
+        </tr>
+        <% end %>
+        <tr align="left" style="text-align:left;">
+          <td></td><td></td><td></td>
+          <td style="text-align:right;" align="right">
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">TOTAL :</b>
+          </td>
+          <td style="text-align:right;" align="right">
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= @thisorder.total %></b>
+          </td>
+        </tr>
+      </table>
+      <table width="600" align="center" style="width:600px; text-align:center;">
+        <tr><td>
+          <hr>
+          <i style="font-size:10px; font-family: 'Verdana', sans-serif;">Please be advised this is an order confirmation only. Do not pay, an invoice will follow.</i><br>
+          <b style="font-size:10px; font-family: 'Verdana', sans-serif;">Payment Options: Direct Deposit I Cheque I Credit Card. Credit Card Payment Fee-1.25% for VISA/MASTER CARD, 3.5% for AMX</b>
+          <hr>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
