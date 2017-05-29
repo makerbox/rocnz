@@ -1,6 +1,7 @@
 class PopulateJob
 	include SuckerPunch::Job
  def perform
+  Contact.destroy_all
   Contact.create(code:'clock', email:'start')
     if Contact.find_by(code:'running', email:'running')
       puts 'already running' #skips running again if already running
