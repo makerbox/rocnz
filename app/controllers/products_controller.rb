@@ -173,6 +173,13 @@ end
         @order = current_user.orders.where(active: true).last #for sidecart
       end #for sidecart
     end
+
+    if user_signed_in?
+      if !current_user.has_role? :admin #hide hidden products for customers
+        @products = @products.where(hidden: false)
+      end
+    end
+
   end
 
 end
