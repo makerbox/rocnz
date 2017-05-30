@@ -121,7 +121,6 @@ end
     else #if the user is not logged in, show everything (with no prices)
       if group == 'roc'
             @products = Product.where(group: ['C','J'])
-            @products = @products.where("qty > ?", 5)
             @categories = []
             @products.each do |p| # get a list of categories
               @categories << p.category
@@ -134,7 +133,6 @@ end
             end
       elsif group == 'polasports'
             @products = Product.where(group: ['L'])
-            @products = @products.where("qty > ?", 5)
             if params[:cat]
               @products = @products.where(group: params[:cat])
             end
@@ -143,7 +141,6 @@ end
             end
         elsif group == 'locello'
             @products = Product.where(group: ['LC'])
-            @products = @products.where("qty > ?", 5)
             if params[:cat]
               @products = @products.where(group: params[:cat])
             end
@@ -152,7 +149,6 @@ end
             end
         elsif group == 'unity'
             @products = Product.where(group: ['E', 'R', 'D', 'A'])
-            @products = @products.where("qty > ?", 20)
             if params[:cat]
               @products = @products.where(group: params[:cat])
             end
@@ -166,7 +162,11 @@ end
     if params[:filter] == 'new'
       @products = @products.where("new_date >= ?", Date.today - 30.days)
     end
-    @products = @products.where("qty > ?", 20)
+    if group == 'unity' #qty must be over 20 for unity
+      @products = @products.where("qty > ?", 20)
+    else #qty must be over 5 for other brands
+      @products = @products.where("qty > ?", 5)
+    end
     @products = @products.order(group: 'DESC').order(code: 'ASC')
     @totalproducts = @products.count
 
