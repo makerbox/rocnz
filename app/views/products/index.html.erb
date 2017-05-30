@@ -70,16 +70,18 @@
             <% end %> 
           
         <% end %>
-          <div class="hide-button">
-            <%= link_to hide_product_path(product) do %>
-              hide
-              <% if product.hidden %>
-                <div class="glyphicon glyphicon-ok-circle"></div> 
-              <% else %>
-                <div class="glyphicon glyphicon-unchecked"></div>
+          <% if current_user.has_role? :admin %>
+            <div class="hide-button">
+              <%= link_to hide_product_path(product) do %>
+                hide
+                <% if product.hidden %>
+                  <div class="glyphicon glyphicon-ok-circle"></div> 
+                <% else %>
+                  <div class="glyphicon glyphicon-unchecked"></div>
+                <% end %>
               <% end %>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
