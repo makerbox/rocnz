@@ -267,6 +267,7 @@ class PopulateJob
       #-------------------------- CREATE ADMIN USER -------------------------------------
       if adminuser = User.all.find_by(email: 'web@roccloudy.com')
         adminuser.add_role :admin
+        adminuser.remove_role :user
         if adminuser.account
           adminuser.account.update_attributes(approved: 'approved', sort: 'U/L/R/P')
         else
