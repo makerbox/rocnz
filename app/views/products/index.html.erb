@@ -63,7 +63,7 @@
                   <% end %>
                   <% if current_user.has_role? :admin %>
                     | [QTY: <%= product.qty %>] | [hide: <% if product.hidden %>
-                    <div class="glyphicon glyphicon-asterisk"></div> <% else %><div class="glyphicon glyphicon-asterisk"></div>
+                    <div class="glyphicon glyphicon-ok-circle"></div> <% else %><div class="glyphicon glyphicon-unchecked"></div>
                     <% end %>]
                   <% end %>
                 <% end %>
