@@ -120,7 +120,8 @@ end
       end
     else #if the user is not logged in, show everything (with no prices)
       if group == 'roc'
-            @products = Product.where(group: ['C','J']).where("qty > ?", 5)
+            @products = Product.where(group: ['C','J'])
+            @products = @products.where("qty > ?", 5)
             @categories = []
             @products.each do |p| # get a list of categories
               @categories << p.category
@@ -132,7 +133,8 @@ end
               @products = @products.where(category: params[:filter])
             end
       elsif group == 'polasports'
-            @products = Product.where(group: ['L']).where("qty > ?", 5)
+            @products = Product.where(group: ['L'])
+            @products = @products.where("qty > ?", 5)
             if params[:cat]
               @products = @products.where(group: params[:cat])
             end
@@ -140,7 +142,8 @@ end
               @products = @products.where(category: params[:filter])
             end
         elsif group == 'locello'
-            @products = Product.where(group: ['LC']).where("qty > ?", 5)
+            @products = Product.where(group: ['LC'])
+            @products = @products.where("qty > ?", 5)
             if params[:cat]
               @products = @products.where(group: params[:cat])
             end
@@ -148,7 +151,8 @@ end
               @products = @products.where(category: params[:filter])
             end
         elsif group == 'unity'
-            @products = Product.where(group: ['E', 'R', 'D', 'A']).where("qty > ?", 20)
+            @products = Product.where(group: ['E', 'R', 'D', 'A'])
+            @products = @products.where("qty > ?", 20)
             if params[:cat]
               @products = @products.where(group: params[:cat])
             end
