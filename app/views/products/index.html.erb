@@ -62,8 +62,8 @@
                     $<%= number_with_precision(prodprice, precision: 2) %>
                   <% end %>
                   <% if current_user.has_role? :admin %>
-                    | [QTY: <%= product.qty %>] | [hidden: <% if product.hidden %>
-                    hidden <% else %> visible
+                    | [QTY: <%= product.qty %>] | [hide: <% if product.hidden %>
+                    <i class="fa fa-check"></i> <% else %><i class="fa fa-circle-open"></i>
                     <% end %>]
                   <% end %>
                 <% end %>
