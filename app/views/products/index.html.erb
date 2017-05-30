@@ -63,7 +63,7 @@
                   <% end %>
                   <% if current_user.has_role? :admin %>
                     | [QTY: <%= product.qty %>] | [hide: <% if product.hidden %>
-                    <i class="fa fa-check"></i> <% else %><i class="fa fa-circle-open"></i>
+                    <i class="fa fa-circle-closed"></i> <% else %><i class="fa fa-circle-open"></i>
                     <% end %>]
                   <% end %>
                 <% end %>
