@@ -264,23 +264,6 @@ class PopulateJob
       dbh.disconnect 
 
 
-
-
-
-      # @contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
-      # @contacts.each do |contact|
-      #   if (contact.Active == 1) && (!Contact.all.find_by(code: contact.Code.strip))
-      #     email = contact.EmailAddress
-      #     code = contact.Code
-      #     newcontact = Contact.new(email: email, code: code)
-      #     if thisaccount = Account.all.find_by(code: code)
-      #       thisaccount.user.update_attributes(email: email)
-      #       newcontact.save
-      #     end
-      #   end
-      # end
-      # dbh.disconnect
-
       #-------------------------- CREATE ADMIN USER -------------------------------------
       if adminuser = User.all.find_by(email: 'web@roccloudy.com')
         adminuser.add_role :admin

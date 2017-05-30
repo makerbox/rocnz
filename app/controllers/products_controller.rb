@@ -48,18 +48,6 @@ end
     filter = params[:filter]
     if user_signed_in?
       if current_user.account.sort # check that they have a sort before trying to use include? statements
-        # if current_user.account.sort.include? 'R'
-        #   availgroups = availgroups << 'C  '
-        # end
-        # if current_user.account.sort.include? 'P'
-        #   availgroups = availgroups << 'L  '
-        # end
-        # if current_user.account.sort.include? 'L'
-        #   availgroups = availgroups << 'LC  '
-        # end
-        # if current_user.account.sort.include? 'U'
-        #   availgroups = availgroups << 'E  ' << 'R  ' << 'D  ' << 'A  '
-        # end
         if group == 'roc'
           if (current_user.account.sort.include? 'R') || (current_user.has_role? :admin)
             @products = Product.where(group: ['C','J'])
@@ -193,7 +181,6 @@ end
         @products = @products.where(hidden: false)
       end
     end
-
   end
 
 end
