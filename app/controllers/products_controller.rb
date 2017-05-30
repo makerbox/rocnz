@@ -3,6 +3,9 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!
   # GET /products
   # GET /products.json
+  
+def hide
+end
 
 def calc_qty_disc
   qty = params[:qty]

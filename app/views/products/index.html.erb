@@ -70,12 +70,17 @@
             <% end %> 
           
         <% end %>
-        <div class="hide-button">
-        hide <% if product.hidden %>
-                    <div class="glyphicon glyphicon-ok-circle"></div> <% else %><div class="glyphicon glyphicon-unchecked"></div>
-                    <% end %>
-                    </div>
+          <div class="hide-button">
+            <% link_to hide_products_path(product), do %>
+              hide
+              <% if product.hidden %>
+                <div class="glyphicon glyphicon-ok-circle"></div> 
+              <% else %>
+                <div class="glyphicon glyphicon-unchecked"></div>
+              <% end %>
+            <% end %>
           </div>
+        </div>
       <% end %>
     </div>
   </div>
