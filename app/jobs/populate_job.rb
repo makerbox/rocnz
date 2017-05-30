@@ -281,9 +281,6 @@ class PopulateJob
       # end
       # dbh.disconnect
 
-      #-------------------------- MAKE ALL USERS CUSTOMER ROLE -------------------------
-      User.all.add_role :customer
-      
       #-------------------------- CREATE ADMIN USER -------------------------------------
       if adminuser = User.all.find_by(email: 'web@roccloudy.com')
         adminuser.add_role :admin
