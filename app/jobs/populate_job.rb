@@ -38,7 +38,7 @@ class PopulateJob
                   Product.all.find_by(code: code).destroy
                 end
               else
-                newproduct = Product.new(pricecat: pricecat, group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
+                newproduct = Product.new(pricecat: pricecat, group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty, hidden: false)
                 filename = "E:\\Attache\\Attache\\Roc\\Images\\Product\\" + code + ".jpg"
                 if File.exist?(filename)
                   Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
