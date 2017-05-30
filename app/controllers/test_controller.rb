@@ -17,7 +17,7 @@ class TestController < ApplicationController
 
 		@products = Product.all
 		@products.each do |prod|
-			prod.update_attributes(hidden: false)
+			# prod.update_attributes(hidden: false)
 		end
 		# OrderMailer.receipt(Order.all.last, current_user).deliver_now
 		# @result = `heroku db:push [postgres://bpupvrcqomwfwk:55tz1h8GUNGOyWVTkWFjAttzY7@ec2-54-225-244-221.compute-1.amazonaws.com:5432/de53vgd0mccdbt]`
