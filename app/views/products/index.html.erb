@@ -62,15 +62,16 @@
                     $<%= number_with_precision(prodprice, precision: 2) %>
                   <% end %>
                   <% if current_user.has_role? :admin %>
-                    | [QTY: <%= product.qty %>] | [hide: <% if product.hidden %>
-                    <div class="glyphicon glyphicon-ok-circle"></div> <% else %><div class="glyphicon glyphicon-unchecked"></div>
-                    <% end %>]
+                    | [QTY: <%= product.qty %>]
                   <% end %>
                 <% end %>
               <% end %>
             <% end %> 
           </div>
         <% end %>
+        hide <% if product.hidden %>
+                    <div class="glyphicon glyphicon-ok-circle"></div> <% else %><div class="glyphicon glyphicon-unchecked"></div>
+                    <% end %>
       <% end %>
     </div>
   </div>
