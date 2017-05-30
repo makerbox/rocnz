@@ -3,8 +3,14 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!
   # GET /products
   # GET /products.json
-  
-def hide
+
+def hide(product)
+  if product.hidden
+    product.update_attributes(hidden: false)
+  else
+    product.update_attributes(hidden: true)
+  end
+  redirect_to :back
 end
 
 def calc_qty_disc
