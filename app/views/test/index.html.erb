@@ -1,5 +1,5 @@
 [<%= Account.all.count %> vs <%= User.all.count %>]<br>
-<% @roles.each do |r| %>
-<%= r.name %>
+<% @users.each do |u| %>
+<%= u.email %>
 <% end %>
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %>
