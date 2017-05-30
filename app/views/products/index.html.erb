@@ -8,8 +8,9 @@
         </div>
       </div>
       <% @products.each do |product| %>
+      <div class="product">
         <%= link_to (product) do %>
-          <div class="product">
+          
             <%= cl_image_tag(product.code.strip) %>
             <br>
             <%= product.code %> | <%= product.description %><br>
@@ -67,11 +68,12 @@
                 <% end %>
               <% end %>
             <% end %> 
-          </div>
-        <% end %><br>
+          
+        <% end %>
         hide <% if product.hidden %>
                     <div class="glyphicon glyphicon-ok-circle"></div> <% else %><div class="glyphicon glyphicon-unchecked"></div>
                     <% end %>
+          </div>
       <% end %>
     </div>
   </div>
