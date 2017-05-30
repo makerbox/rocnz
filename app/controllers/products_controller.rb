@@ -4,7 +4,8 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
 
-def hide(product)
+def hide
+  product = Product.all.find_by(id: params[:id])
   if product.hidden
     product.update_attributes(hidden: false)
   else
