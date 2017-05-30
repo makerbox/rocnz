@@ -166,6 +166,7 @@ end
     if params[:filter] == 'new'
       @products = @products.where("new_date >= ?", Date.today - 30.days)
     end
+    @products = @products.where("qty > ?", 20)
     @products = @products.order(group: 'DESC').order(code: 'ASC')
     @totalproducts = @products.count
 
