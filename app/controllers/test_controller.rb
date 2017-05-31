@@ -14,7 +14,7 @@ class TestController < ApplicationController
 		# 		@results << u.account
 		# 	end
 		# end
-
+		@results = []
       # --------------------- ADD EMAIL ADDRESSES ----------------------
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
@@ -22,8 +22,10 @@ class TestController < ApplicationController
         if contact.Active == 1
           if account = Account.all.find_by(code: contact.Code.strip)
             if !User.all.find_by(email: contact.EmailAddress)
-            	@results = contact.EmailAddress
-              # account.user.update_attributes(email: contact.EmailAddress)
+            	@results << contact.EmailAddress
+            	@results << account.user.email
+            	email = contact.EmailAddress
+              account.user.update_attributes(email: email)
             end
           end
         end
