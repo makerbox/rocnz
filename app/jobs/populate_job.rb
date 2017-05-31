@@ -230,6 +230,10 @@ class PopulateJob
           end
         end
       end
+      dbh.disconnect 
+
+      
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
       @customers.each do |c|
         code = c.Code.strip
