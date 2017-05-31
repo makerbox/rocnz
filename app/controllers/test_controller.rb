@@ -21,9 +21,9 @@ class TestController < ApplicationController
       contacts.each do |contact|
         if contact.Active == 1
           if account = Account.all.find_by(code: contact.Code.strip)
-            # if !User.all.find_by(email: contact.EmailAddress)
-            #   account.user.update_attribute(email: contact.EmailAddress)
-            # end
+            if !User.all.find_by(email: contact.EmailAddress)
+              account.user.update_attribute(email: contact.EmailAddress)
+            end
           end
         end
       end
