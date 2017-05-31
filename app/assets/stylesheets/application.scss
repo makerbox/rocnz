@@ -122,8 +122,9 @@ body {
 .navbar-default .navbar-nav>li>a:hover{
  box-shadow: .1em .1em 1em #CCC;
  }
-a:visited{
-	color:inherit;
+
+btn:visited{
+	color:#FFF;
 }
 a:hover, .homeoverlay:hover{
 	color:#000;
@@ -245,6 +246,7 @@ td{
 .btn {
 	border: none;
 	margin:5px;
+	text-shadow:none;
 }
 .btn:hover{
 	background:#00CC00;
