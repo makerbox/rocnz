@@ -44,6 +44,30 @@
             <%= @thisorder.notes %>
           </td>
         </tr>
+        <tr align="left" style="text-align:left;">
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+            Customer order number:
+          </td>
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+            <%= @thisorder.cust_order_number %>
+          </td>
+        </tr>
+        <tr align="left" style="text-align:left;">
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+            Roc Cloudy order number:
+          </td>
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+            <%= @thisorder.order_number %>
+          </td>
+        </tr>
+                <tr align="left" style="text-align:left;">
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+            Requested delivery date:
+          </td>
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+            <%= @thisorder.delivery_date %>
+          </td>
+        </tr>
       </table>
       <hr>
       <table width="600" align="center" style="width:600px; text-align:center;">

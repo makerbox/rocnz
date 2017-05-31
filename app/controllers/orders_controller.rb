@@ -62,6 +62,11 @@ end
   # POST /orders.json
   def create
     @order = Order.new(order_params)
+    if current_user.has_role? :admin
+      @order.order_number = current_user.account.code + Order.all.count.to_s
+    else
+      @order.order_number = Order.all.count.to_s
+    end
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
