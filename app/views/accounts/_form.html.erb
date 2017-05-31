@@ -14,7 +14,7 @@
     <%= f.input :state %>
     <%= f.input :country %>
     <%= f.input :phone %>
-    <%= f.collection_check_boxes :brands, [['Roc', 'Roc'] ,['Locello', 'Locello']], :first, :last, label: 'Which brands are you interested in?' %>
+    <%= f.input :brands, label: 'Which brands are you interested in?' %>
     <%= f.input :contact, label: 'contact name' %>
     <%= f.input :website %>
 
