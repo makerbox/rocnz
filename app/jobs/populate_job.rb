@@ -232,7 +232,7 @@ class PopulateJob
       end
       dbh.disconnect 
 
-      
+
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
       @customers.each do |c|
@@ -242,13 +242,15 @@ class PopulateJob
           compname = c.Name
           street = c.Street
           suburb = c.Suburb 
+          state = c.State
+          country = c.Country
           postcode = c.Postcode 
           phone = c.Phone 
           sort = c.Sort 
           discount = c.SpecialPriceCat 
           seller_level = c.PriceCat
           rep = c.SalesRep
-          account.update_attributes(approved: 'approved', phone: phone, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
+          account.update_attributes(approved: 'approved', phone: phone, street: street, state: state, country: country, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
         end
       end
       dbh.disconnect 
