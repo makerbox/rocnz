@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :sendorder]
 
-
 def sendorder
   @order.quantities.each do |q| # change stock levels and calc order total
     oldqty = q.product.qty
@@ -79,7 +78,7 @@ end
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
