@@ -281,22 +281,46 @@ class PopulateJob
       end
 
       #-------------------------- CREATE REP ACCOUNTS -----------------------------------
-      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-      @reps = dbh.execute("SELECT * FROM sales_reps_extn").fetch(:all, :Struct)
-      @reps.each do |rep|
-        if rep.Inactive == 'N'
-          code = rep.Code
-          if email = rep.EmailAddress
-            repuser = User.new(email: email, password: 'cloudy_rep_123', password_confirmation: 'cloudy_rep_123')
-            if repuser.save(validate: false)
-              repaccount = Account.new(code: code, user: repuser)
-              repaccount.save
-              repuser.add_role :admin
-            end
+      def createrep(repemail, repcode)
+        if repuser = User.all.find_by(email: repemail)
+          repuser.add_role :admin
+          repuser.remove_role :user
+          if repuser.account
+            repuser.account.update_attributes(approved: 'approved', sort: 'U/L/R/P')
+          else
+            Account.create(code: repcode, company: 'Roc', user: repuser, sort: 'U/L/R/P')
           end
+        else
+          repuser = User.new(email: repemail, password:'cloudy_16', password_confirmation: 'cloudy_16')
+          repuser.add_role :admin
+          repuser.save(validate: false)
+          Account.create(code: repcode, company: 'Roc', user: repuser, sort: 'U/L/R/P')
         end
       end
-      dbh.disconnect
+
+      createrep('nsw@roccloudy.com', 'REPNSW')
+      createrep('vic@roccloudy.com', 'REPVIC')
+      createrep('qld1@roccloudy.com', 'REPQLD1')
+      createrep('qld2@roccloudy.com', 'REPQLD2')
+      createrep('nz@roccloudy.com', 'REPNZ')
+      createrep('office@roccloudy.com', 'ADMINOFFICE')
+
+      # dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      # @reps = dbh.execute("SELECT * FROM sales_reps_extn").fetch(:all, :Struct)
+      # @reps.each do |rep|
+      #   if rep.Inactive == 'N'
+      #     code = rep.Code
+      #     if email = rep.EmailAddress
+      #       repuser = User.new(email: email, password: 'cloudy_rep_123', password_confirmation: 'cloudy_rep_123')
+      #       if repuser.save(validate: false)
+      #         repaccount = Account.new(code: code, user: repuser)
+      #         repaccount.save
+      #         repuser.add_role :admin
+      #       end
+      #     end
+      #   end
+      # end
+      # dbh.disconnect
 
       # ------------------------META DATA--------------------------------------------------------------
 
