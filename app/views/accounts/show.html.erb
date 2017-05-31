@@ -37,9 +37,7 @@
 <% if !@account.approved? %>
 <p>
   <strong>Interested in:</strong>
-  <% @account.brands.each do |brand| %>
-  <%= brand %>
-  <% end %>
+  <%= @account.brands %>
 </p>
 <% end %>
 
