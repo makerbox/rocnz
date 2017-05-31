@@ -58,9 +58,9 @@
   <% if (current_user.account.company.blank? || current_user.account.phone.blank?) && (!current_user.has_role? :admin) %>
   <%= link_to 'please fill in your account details before placing an order', account_path(current_user.account), class: 'btn btn-info' %> <hr>
   <% else %>
-
-  <% if @order.notes %>
-    Notes:  <%= !@order.notes.blank? %>
+  <hr>
+  <% if !@order.notes.blank? %>
+    Notes:  <%= @order.notes %>
     <%= link_to ' ', edit_order_path(@order), class: 'fa fa-pencil btn btn-warning' %><br>
   <% else %>
     <%= link_to ' ADD NOTES', edit_order_path(@order), class: 'fa fa-pencil btn btn-warning' %><br>
