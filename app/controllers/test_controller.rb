@@ -15,12 +15,6 @@ class TestController < ApplicationController
 		# 	end
 		# end
 
-		@results = []
-		dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-		@customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-      @customers.each do |c|
-      	@results << c.Street
-      end
       def createrep(repemail, repcode)
         if repuser = User.all.find_by(email: repemail)
           repuser.add_role :admin
