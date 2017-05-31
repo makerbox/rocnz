@@ -15,7 +15,7 @@
     <%= f.input :country %>
     <%= f.input :phone %>
     <%= f.label 'Which brands are you interested in?' %>
-    <%= f.input :brands, as: :check_boxes, collection: [ "Roc", "Locello", "Polasports", "Unity"] %>
+    <%= f.input :brands, as: :check_boxes, collection: [ ["Roc", 'Roc'], "Locello", "Polasports", "Unity"] %>
     <%= f.input :contact, label: 'contact name' %>
     <%= f.input :website %>
 
