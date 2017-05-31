@@ -1,3 +1,8 @@
 [<%= Account.all.count %> vs <%= User.all.count %>]<br>
 <%= @results %>
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %>
+<%  if Contact.find_by(code:'running', email:'running') %>
+	RUNNING SEED
+	<% else %>
+	SEED COMPLETE
+	<% end %>
