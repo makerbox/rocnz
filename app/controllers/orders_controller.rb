@@ -78,7 +78,7 @@ end
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to :back, notice: 'Order was successfully updated.' }
+        format.html { redirect_to @order.quantities.last.products.last, notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
