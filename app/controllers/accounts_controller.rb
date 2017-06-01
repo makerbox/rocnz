@@ -11,7 +11,7 @@ class AccountsController < ApplicationController
 
 def orderas
   account = Account.find_by(id: params[:account])
-  if account.code == 'ADMIN'
+  if account.code == ('ADMIN' || 'REPNSW' || 'REPVIC' || 'REPQLD1' || 'REPQLD2' || 'REPNZ' || 'ADMINOFFICE')
     current_user.mimic.destroy #if they choose to order as themselves, just wipe it clean
   else
     if current_user.mimic
@@ -48,9 +48,9 @@ end
     if params[:search]
       @accounts = @accounts.where(code: params[:search])
     end
-    if current_user.email != 'web@roccloudy.com'
-      @accounts = @accounts.where(rep: current_user.account.code)
-    end
+    # if current_user.email != 'web@roccloudy.com'
+    #   @accounts = @accounts.where(rep: current_user.account.code)
+    # end
     @accounts = @accounts.paginate(:page => params[:page], :per_page => 20)
   end
 
