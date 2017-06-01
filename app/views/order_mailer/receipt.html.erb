@@ -70,7 +70,7 @@
           <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" width="50"></th>
           <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:40px;" width="40">Item No.</th>
           <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:30px;" width="30">Qty</th>
-          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:300px;" width="300">Description</th>
+          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:380px;" width="380">Description</th>
           <th style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" width="50" align="right">Price</th>
           <th style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" width="50" align="right">Subtotal</th>
         </tr>
@@ -109,7 +109,7 @@
           <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" width="50"><img src=<%= cl_image_path(q.product.code.strip) %> height="30"></td>
           <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:40px;" width="40"><%= q.product.code %></td>
           <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:30px;" width="30"><%= q.qty %></td>
-          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:300px;" width="300"><%= q.product.description %></td>
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:380px;" width="380"><%= q.product.description %></td>
           <td style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" align="right" width="50">$<%= number_with_precision(prodprice, precision: 2)%></td>
           <td style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" align="right" width="50">$<%= subtotal %></td>
         </tr>
