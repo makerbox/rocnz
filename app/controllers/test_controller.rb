@@ -15,11 +15,7 @@ class TestController < ApplicationController
 		# 	end
 		# end
 		@results = []
-		unset = Account.all.where(seller_level: nil)
-		unset.each do |acct|
-			@results << 'found'
-			acct.update_attributes(seller_level: '1')
-		end
+
       # # --------------------- ADD EMAIL ADDRESSES ----------------------
       # dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       # contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)

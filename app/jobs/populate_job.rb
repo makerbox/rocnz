@@ -269,6 +269,13 @@ class PopulateJob
       end
       dbh.disconnect 
 
+      #------------------------- SET DEFAULT SELLER LEVEL ---------------------
+      unset = Account.all.where(seller_level: nil)
+      unset.each do |acct|
+        @results << 'found'
+        acct.update_attributes(seller_level: '1')
+      end
+
 
       #-------------------------- CREATE ADMIN USER -------------------------------------
       if adminuser = User.all.find_by(email: 'web@roccloudy.com')
