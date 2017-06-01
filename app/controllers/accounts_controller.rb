@@ -48,6 +48,16 @@ end
     if params[:search]
       @accounts = @accounts.where(code: params[:search])
     end
+    case current_user.account.code
+      when 'REPNSW'
+        @accounts = @accounts.where(state: 'NSW')
+      when 'REPVIC'
+        @accounts = @accounts.where(state: 'VIC')
+      when 'REPQLD1'
+        @accounts = @accounts.where(state: 'QLD')
+      when 'REPQLD2'
+        @accounts = @accounts.where(state: 'QLD')
+    end
     # if current_user.email != 'web@roccloudy.com'
     #   @accounts = @accounts.where(rep: current_user.account.code)
     # end
