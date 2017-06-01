@@ -120,7 +120,7 @@
             <b style="font-size:12px; font-family: 'Verdana', sans-serif;">SUBTOTAL :</b>
           </td>
           <td style="text-align:right;" align="right">
-            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= @thisorder.total %></b>
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= (@thisorder.total).round(2) %></b>
           </td>
         </tr>
                 <tr align="left" style="text-align:left;">
@@ -129,7 +129,7 @@
             <b style="font-size:12px; font-family: 'Verdana', sans-serif;">GST :</b>
           </td>
           <td style="text-align:right;" align="right">
-            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= @thisorder.total * 0.1 %></b>
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= (@thisorder.total * 0.1).round(2) %></b>
           </td>
         </tr>
 
@@ -139,7 +139,7 @@
             <b style="font-size:12px; font-family: 'Verdana', sans-serif;">TOTAL :</b>
           </td>
           <td style="text-align:right;" align="right">
-            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= @thisorder.total + (@thisorder.total * 0.1) %></b>
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= (@thisorder.total + (@thisorder.total * 0.1).round(2)) %></b>
           </td>
         </tr>
 
