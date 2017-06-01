@@ -10,10 +10,10 @@ class AccountsController < ApplicationController
   end
 
 def orderas
-  account = Account.find_by(id: params[:account])
-  if account.code == 'ADMIN'
+  if params[:account] == 'clear'
     current_user.mimic.destroy #if they choose to order as themselves, just wipe it clean
   else
+    account = Account.find_by(id: params[:account])
     if current_user.mimic
       current_user.mimic.update(account: account) #if they are already mimicing, then just update
     else
