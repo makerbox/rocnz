@@ -69,14 +69,17 @@ end
   def show
     if current_user.has_role? :admin
       account = Account.find(params[:id])
-      @pendingorders = Order.where(user: account.user, active: false, approved: false, complete: false).limit(5)
-      @approvedorders = Order.where(user:account.user, active:false, approved: true, complete: false).limit(5)
-      @sentorders = Order.where(user:account.user, active:false, approved: true, complete: true).limit(5)
+      @pendingorders = Order.where(user: account.user, active: false, approved: false, complete: false)
+      @approvedorders = Order.where(user:account.user, active:false, approved: true, complete: false)
+      @sentorders = Order.where(user:account.user, active:false, approved: true, complete: true)
     else
-      @pendingorders = Order.where(user: current_user, active: false, approved: false, complete: false).limit(5)
-      @approvedorders = Order.where(user:current_user, active:false, approved: true, complete: false).limit(5)
-      @sentorders = Order.where(user:current_user, active:false, approved: true, complete: true).limit(5)
+      @pendingorders = Order.where(user: current_user, active: false, approved: false, complete: false)
+      @approvedorders = Order.where(user:current_user, active:false, approved: true, complete: false)
+      @sentorders = Order.where(user:current_user, active:false, approved: true, complete: true)
     end
+    @pendingorders = @pendingorders.order(created_at: :asc).limit(5)
+    @approvedorders = @approvedorders.order(created_at: :asc).limit(5)
+    @sentorders = @sentorders.order(created_at: :asc).limit(5)
     # @sentorders = @sentorders.paginate(:page => params[:page], :per_page => 20)
   end
 
