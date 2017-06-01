@@ -7,7 +7,8 @@ def sendorder
     newqty = oldqty - q.qty
     q.product.update(qty: newqty)
   end
-  @order.update(active: false, sent: DateTime.now, total: params[:total]) # move order to pending and give it a total
+  orderno = Order.count + 1
+  @order.update(active: false, sent: DateTime.now, total: params[:total], order_number: orderno) # move order to pending and give it a total
   
   @account = @order.user.account
   OrderEmailJob.perform_async(@order)
