@@ -9,7 +9,7 @@ class PopulateJob
       Contact.create(code:'running', email:'running')
 
 
-      dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
 
       # -------------------------GET PRODUCTS AND CREATE / UPDATE PRODUCT RECORDS------------------------
