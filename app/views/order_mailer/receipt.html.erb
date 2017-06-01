@@ -123,12 +123,32 @@
             <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= @thisorder.total %></b>
           </td>
         </tr>
+                <tr align="left" style="text-align:left;">
+          <td></td><td></td><td></td>
+          <td style="text-align:right;" align="right">
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">GST :</b>
+          </td>
+          <td style="text-align:right;" align="right">
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= @thisorder.total * 0.1 %></b>
+          </td>
+        </tr>
+
+        <tr align="left" style="text-align:left;">
+          <td></td><td></td><td></td>
+          <td style="text-align:right;" align="right">
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">TOTAL + GST :</b>
+          </td>
+          <td style="text-align:right;" align="right">
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= @thisorder.total + (@thisorder.total * 0.1) %></b>
+          </td>
+        </tr>
+
       </table>
       <table width="600" align="center" style="width:600px; text-align:center;">
         <tr><td>
           <hr>
-          <i style="font-size:10px; font-family: 'Verdana', sans-serif;">Please be advised this is an order confirmation only. Do not pay, an invoice will follow.</i><br>
-          <b style="font-size:10px; font-family: 'Verdana', sans-serif;">Payment Options: Direct Deposit I Cheque I Credit Card. Credit Card Payment Fee-1.25% for VISA/MASTER CARD, 3.5% for AMX</b>
+          <i style="font-size:6px; font-family: 'Verdana', sans-serif;">Please be advised this is an order confirmation only. Do not pay, an invoice will follow.</i><br>
+          <i style="font-size:6px; font-family: 'Verdana', sans-serif;">Payment Options: Direct Deposit | Cheque | Credit Card. Credit Card Payment Fee-1.25% for VISA/MASTER CARD, 3.5% for AMX</i>
           <hr>
         </td>
       </tr>
