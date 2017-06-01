@@ -106,13 +106,32 @@
     <td style="font-size: 10px; width:50px; text-align:right; font-family: 'Verdana', sans-serif;" width="50" align="right">$<%= subtotal %></td>
   </tr>
   <% end %>
-  <tr>
-    <td></td><td></td><td></td>
-    <td style="text-align:right;" align="right">
-      <b style="font-size:12px; font-family: 'Verdana', sans-serif;">TOTAL :</b>
-    </td>
-    <td style="text-align:right;" align="right">
-      <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= @thisorder.total %></b>
-    </td>
-  </tr>
+        <tr align="left" style="text-align:left;">
+          <td></td><td></td><td></td>
+          <td style="text-align:right;" align="right">
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">SUBTOTAL :</b>
+          </td>
+          <td style="text-align:right;" align="right">
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= @thisorder.total %></b>
+          </td>
+        </tr>
+                <tr align="left" style="text-align:left;">
+          <td></td><td></td><td></td>
+          <td style="text-align:right;" align="right">
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">GST :</b>
+          </td>
+          <td style="text-align:right;" align="right">
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= @thisorder.total * 0.1 %></b>
+          </td>
+        </tr>
+
+        <tr align="left" style="text-align:left;">
+          <td></td><td></td><td></td>
+          <td style="text-align:right;" align="right">
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">TOTAL :</b>
+          </td>
+          <td style="text-align:right;" align="right">
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= @thisorder.total + (@thisorder.total * 0.1) %></b>
+          </td>
+        </tr>
 </table>
