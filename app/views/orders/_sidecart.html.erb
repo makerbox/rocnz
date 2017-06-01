@@ -67,7 +67,7 @@
   <% end %>
 
   <% if @order.delivery_date %>
-  <%= link_to @order.delivery_date, edit_order_path(@order), class: 'fa fa-calendar btn btn-warning' %>
+    <%= link_to @order.delivery_date, edit_order_path(@order), class: 'fa fa-calendar btn btn-warning' %><br>
     <%= link_to ' SEND ORDER', sendorder_order_path(@order, total: @order.total), class: 'fa fa-paper-plane btn btn-info' %>
   <% else %>
     <%= link_to ' DELIVERY DATE', edit_order_path(@order), class: 'fa fa-calendar btn btn-warning' %> 
