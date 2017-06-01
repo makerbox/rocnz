@@ -11,7 +11,7 @@ class AccountsController < ApplicationController
 
 def orderas
   account = Account.find_by(id: params[:account])
-  if account.code == ('ADMIN' || 'REPNSW' || 'REPVIC' || 'REPQLD1' || 'REPQLD2' || 'REPNZ' || 'ADMINOFFICE')
+  if User.all.find_by(account: account).has_role? :admin
     current_user.mimic.destroy #if they choose to order as themselves, just wipe it clean
   else
     if current_user.mimic
