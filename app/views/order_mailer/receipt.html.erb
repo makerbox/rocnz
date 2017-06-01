@@ -71,12 +71,12 @@
       <hr>
       <table width="600" align="center" style="width:600px; text-align:center;">
         <tr align="left" style="text-align:left;">
-          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90"></th>
-          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90">Item No.</th>
-          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90">Qty</th>
-          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">Description</th>
-          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90">Price</th>
-          <th style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90" align="right">Subtotal</th>
+          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" width="50"></th>
+          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:40px;" width="40">Item No.</th>
+          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:30px;" width="30">Qty</th>
+          <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:300px;" width="300">Description</th>
+          <th style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" width="50" align="right">Price</th>
+          <th style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" width="50" align="right">Subtotal</th>
         </tr>
         <% @thisorder.quantities.each do |q| %>
         <% case @level %>
@@ -110,12 +110,12 @@
 
         <% subtotal = (q.qty * prodprice).round(2) %>
         <tr align="left" style="text-align:left;">
-          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90"><img src=<%= cl_image_path(q.product.code.strip) %> height="50"></td>
-          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90"><%= q.product.code %></td>
-          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90"><%= q.qty %></td>
-          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150"><%= q.product.description %></td>
-          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" width="90">$<%= number_with_precision(prodprice, precision: 2)%></td>
-          <td style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:90px;" align="right" width="90">$<%= subtotal %></td>
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" width="50"><img src=<%= cl_image_path(q.product.code.strip) %> height="30"></td>
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:40px;" width="40"><%= q.product.code %></td>
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:30px;" width="30"><%= q.qty %></td>
+          <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:300px;" width="300"><%= q.product.description %></td>
+          <td style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" align="right" width="50">$<%= number_with_precision(prodprice, precision: 2)%></td>
+          <td style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" align="right" width="50">$<%= subtotal %></td>
         </tr>
         <% end %>
         <tr align="left" style="text-align:left;">
