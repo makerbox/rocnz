@@ -13,14 +13,14 @@
     padding-left:10px;
   }
 </style>
-<table style="font-family: 'Verdana', sans-serif; font-size: 10px; width:600px; text-align:center;" width="600" align="center">
-  <tr>
+<table style="font-family: 'Verdana', sans-serif; font-size: 10px; width:600px; text-align:left;" width="600" align="left">
+  <tr align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif;">
     <td><b>Customer</b></td><td><%= @thisorder.user.account.company %></td>
   </tr>
-  <tr>
+  <tr align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif;">
     <td><b>Cust No.</b></td><td><%= @thisorder.user.account.code %></td>
   </tr>
-  <tr>
+  <tr align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif;">
     <td><b>Address</b></td><td><%= @thisorder.user.account.street %>
     <%= @thisorder.user.account.suburb %></td>
   </tr>
@@ -34,6 +34,14 @@
   </tr>
   <tr align="left" style="text-align:left;">
     <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+      Order number:
+    </td>
+    <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+      <%= @thisorder.order_number %>
+    </td>
+  </tr>
+  <tr align="left" style="text-align:left;">
+    <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
       Customer order number:
     </td>
     <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
@@ -42,15 +50,7 @@
   </tr>
   <tr align="left" style="text-align:left;">
     <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
-      Roc Cloudy order number:
-    </td>
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
-      <%= @thisorder.order_number %>
-    </td>
-  </tr>
-  <tr align="left" style="text-align:left;">
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
-      Requested delivery date:
+      Delivery date:
     </td>
     <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
       <%= @thisorder.delivery_date %>
@@ -59,11 +59,11 @@
 </table>
 
 <hr>
-<table style="font-family: 'Verdana', sans-serif; font-size: 10px; width:600px; text-align:center;" width="600" align="center">
+<table style="font-family: 'Verdana', sans-serif; font-size: 10px; width:600px; text-align:left;" width="600" align="left">
   <tr style="font-family: 'Verdana', sans-serif; font-size: 10px; width:600px;" width="600">
     <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:100px;" width="100">Item No.</th>
-    <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:100px;" width="100">Qty</th>
-    <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">Description</th>
+    <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" width="50">Qty</th>
+    <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:200px;" width="200">Description</th>
     <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:100px;" width="100">Price</th>
     <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px; text-align:right;" width="150" align="right">Subtotal</th>
   </tr>
@@ -100,10 +100,10 @@
   <% subtotal = (q.qty * prodprice).round(2) %>
   <tr>
     <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:100px;" width="100"><%= q.product.code %></td>
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:100px;" width="100"><%= q.qty %></td>
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:100px;" width="150"><%= q.product.description %></td>
+    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" width="50"><%= q.qty %></td>
+    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:200px;" width="200"><%= q.product.description %></td>
     <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:100px;" width="100">$<%= number_with_precision(prodprice, precision: 2)%></td>
-    <td style="font-size: 10px; width:100px; text-align:right; font-family: 'Verdana', sans-serif;" width="150" align="right">$<%= subtotal %></td>
+    <td style="font-size: 10px; width:150px; text-align:right; font-family: 'Verdana', sans-serif;" width="150" align="right">$<%= subtotal %></td>
   </tr>
   <% end %>
   <tr>
