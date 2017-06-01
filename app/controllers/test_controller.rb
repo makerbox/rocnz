@@ -15,20 +15,25 @@ class TestController < ApplicationController
 		# 	end
 		# end
 		@results = []
-      # --------------------- ADD EMAIL ADDRESSES ----------------------
-      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-      contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
-      contacts.each do |contact|
-        if contact.Active == 1
-          if account = Account.all.find_by(code: contact.Code.strip)
-            if !User.all.find_by(email: contact.EmailAddress)
-            	email = contact.EmailAddress
-              account.user.update_attributes(email: email)
-            end
-          end
-        end
-      end
-      dbh.disconnect 
+		unset = Account.all.where(seller_level: nil)
+		unset.each do |acct|
+			@results << 'found'
+			acct.update_attributes(seller_level: '1')
+		end
+      # # --------------------- ADD EMAIL ADDRESSES ----------------------
+      # dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      # contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
+      # contacts.each do |contact|
+      #   if contact.Active == 1
+      #     if account = Account.all.find_by(code: contact.Code.strip)
+      #       if !User.all.find_by(email: contact.EmailAddress)
+      #       	email = contact.EmailAddress
+      #         account.user.update_attributes(email: email)
+      #       end
+      #     end
+      #   end
+      # end
+      # dbh.disconnect 
 
 		# OrderMailer.receipt(Order.all.last, current_user).deliver_now
 		# @result = `heroku db:push [postgres://bpupvrcqomwfwk:55tz1h8GUNGOyWVTkWFjAttzY7@ec2-54-225-244-221.compute-1.amazonaws.com:5432/de53vgd0mccdbt]`
