@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
 
 #   check if user is admin - if not send them back home --- set which actions up top in the before_action
   def securitycheck
-    if !current_user.has_role? :admin
+    if !((current_user.has_role? :admin) || (current_user.has_role? :rep))
       redirect_to home_index_path
     end
   end
@@ -67,7 +67,7 @@ end
   # GET /accounts/1
   # GET /accounts/1.json
   def show
-    if current_user.has_role? :admin
+    if (current_user.has_role? :admin) || (current_user.hasrole? :rep)
       account = Account.find(params[:id])
       @pendingorders = Order.where(user: account.user, active: false, approved: false, complete: false)
       @approvedorders = Order.where(user:account.user, active:false, approved: true, complete: false)

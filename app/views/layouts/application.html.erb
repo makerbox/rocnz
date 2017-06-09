@@ -51,7 +51,7 @@
         <% end %>
         <% if user_signed_in? %>
 
-        <% if (current_user.has_role? :admin) && (current_user.mimic) %>
+        <% if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic) %>
         <div id="mimic">
           <% if !current_user.mimic.account.nil? %>
             ORDERING FOR: 
@@ -114,7 +114,7 @@
 
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
-            <% if current_user.has_role? :admin %>
+            <% if (current_user.has_role? :admin) || (current_user.has_role? :rep) %>
             <li><%= link_to 'Customers', accounts_path %></li>
             <% else %>
             <% if current_user.approved? %>

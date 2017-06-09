@@ -49,7 +49,7 @@ end
     if user_signed_in?
       if current_user.account.sort # check that they have a sort before trying to use include? statements
         if group == 'roc'
-          if (current_user.account.sort.include? 'R') || (current_user.has_role? :admin)
+          if (current_user.account.sort.include? 'R') || ((current_user.has_role? :admin) || (current_user.has_role? :rep)) 
             @products = Product.where(group: ['C','J'])
             @categories = []
             @products.each do |p| # get a list of categories
@@ -65,7 +65,7 @@ end
             redirect_to home_index_path
           end
         elsif group == 'polasports'
-          if (current_user.account.sort.include? 'P') || (current_user.has_role? :admin)
+          if (current_user.account.sort.include? 'P') || ((current_user.has_role? :admin) || (current_user.has_role? :rep))
             @products = Product.where(group: ['L'])
             if params[:cat]
               @products = @products.where(group: params[:cat])
@@ -77,7 +77,7 @@ end
             redirect_to home_index_path
           end
         elsif group == 'locello'
-          if (current_user.account.sort.include? 'L') || (current_user.has_role? :admin)
+          if (current_user.account.sort.include? 'L') || ((current_user.has_role? :admin) || (current_user.has_role? :rep))
             @products = Product.where(group: ['LC'])
             if params[:cat]
               @products = @products.where(group: params[:cat])
@@ -89,7 +89,7 @@ end
             redirect_to home_index_path
           end
         elsif group == 'unity'
-          if (current_user.account.sort.include? 'U') || (current_user.has_role? :admin)
+          if (current_user.account.sort.include? 'U') || ((current_user.has_role? :admin) || (current_user.has_role? :rep))
             @products = Product.where(group: ['E', 'R', 'D', 'A'])
             if params[:cat]
               @products = @products.where(group: params[:cat])
@@ -169,7 +169,7 @@ end
     @totalproducts = @products.count
 
     if user_signed_in?
-      if (current_user.has_role? :admin) && (current_user.mimic) #for sidecart
+      if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic) #for sidecart
         @order = current_user.mimic.account.user.orders.where(active: true).last #for sidecart
       else #for sidecart
         @order = current_user.orders.where(active: true).last #for sidecart
@@ -189,7 +189,7 @@ end
   # GET /products/1.json
   def show
     if user_signed_in?
-      if (current_user.has_role? :admin) && (current_user.mimic)
+      if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic)
         @order = current_user.mimic.account.user.orders.where(active:true).last
       else
         @order = current_user.orders.where(active: true).last

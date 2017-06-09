@@ -13,7 +13,7 @@ def sendorder
   @account = @order.user.account
   OrderEmailJob.perform_async(@order)
 
-  if (current_user.has_role? :admin) && (current_user.mimic)
+  if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic)
     current_user.mimic.destroy
   end
 
@@ -63,7 +63,7 @@ end
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-    if current_user.has_role? :admin
+    if (current_user.has_role? :admin) || (current_user.has_role? :rep)
       @order.order_number = current_user.account.code + Order.all.count.to_s
     else
       @order.order_number = Order.all.count.to_s

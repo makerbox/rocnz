@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   end
 
   def checksort(user)
-    if user.has_role? :admin
+    if (user.has_role? :admin) || (user.has_role? :rep)
       if user.mimic
         output = user.mimic.account.sort
       else

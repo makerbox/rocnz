@@ -10,7 +10,7 @@
   	</div>
   <%= po.product.code %>
   	<% end %>
-  		<% if (current_user.has_role? :admin) && (!current_user.mimic.nil?) %>
+  		<% if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?) %>
                       <% level = current_user.mimic.account.seller_level.to_i %>
                       <% thisperson = current_user.mimic.account.user %>
                     <% else %>
@@ -55,7 +55,7 @@
   <% end %>
   <hr>
   TOTAL (excl. freight & GST) = $<%= number_with_precision(@order.total, precision: 2) %>
-  <% if (current_user.account.company.blank? || current_user.account.phone.blank?) && (!current_user.has_role? :admin) %>
+  <% if (current_user.account.company.blank? || current_user.account.phone.blank?) && !((current_user.has_role? :admin) || (current_user.has_role? :rep)) %>
   <%= link_to 'please fill in your account details before placing an order', account_path(current_user.account), class: 'btn btn-info' %> <hr>
   <% else %>
   <hr>
