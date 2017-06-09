@@ -5,4 +5,9 @@ class AdminMailer < ApplicationMailer
 		@account = account
 		mail(to: email, subject: 'Pending Approval - RocCloudy')
 	end
+
+	def account_change_request(email, account)
+		@account = account
+		mail(to: email, subject: 'Please moderate user account')
+	end
 end
