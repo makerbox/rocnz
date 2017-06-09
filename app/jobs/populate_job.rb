@@ -296,7 +296,7 @@ class PopulateJob
       #-------------------------- CREATE REP ACCOUNTS -----------------------------------
       def createrep(repemail, repcode)
         if repuser = User.all.find_by(email: repemail)
-          repuser.add_role :arep
+          repuser.add_role :rep
           repuser.remove_role :user
           if repuser.account
             repuser.account.update_attributes(approved: 'approved', sort: 'U/L/R/P')
