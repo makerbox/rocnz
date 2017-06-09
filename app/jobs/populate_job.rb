@@ -278,20 +278,25 @@ class PopulateJob
 
 
       #-------------------------- CREATE ADMIN USER -------------------------------------
-      if adminuser = User.all.find_by(email: 'web@roccloudy.com')
-        adminuser.add_role :admin
-        adminuser.remove_role :user
-        if adminuser.account
-          adminuser.account.update_attributes(approved: 'approved', sort: 'U/L/R/P')
+
+      def createadmin(adminemail, admincode)
+        if adminuser = User.all.find_by(email: adminemail)
+          adminuser.add_role :admin
+          adminuser.remove_role :user
+          if adminuser.account
+            adminuser.account.update_attributes(approved: 'approved', sort: 'U/L/R/P')
+          else
+            Account.create(code: admincode, company: 'Roc', user: adminuser, sort: 'U/L/R/P')
+          end
         else
-          Account.create(code: 'ADMIN', company: 'Roc', user: adminuser, sort: 'U/L/R/P')
+          adminuser = User.new(email: adminemail, password:'cloudy_16', password_confirmation: 'cloudy_16')
+          adminuser.add_role :admin
+          adminuser.save(validate: false)
+          Account.create(code: admincode, company: 'Roc', user: adminuser, sort: 'U/L/R/P')
         end
-      else
-        adminuser = User.new(email: 'web@roccloudy.com', password:'cloudy_16', password_confirmation: 'cloudy_16')
-        adminuser.add_role :admin
-        adminuser.save(validate: false)
-        Account.create(code: 'ADMIN', company: 'Roc', user: adminuser, sort: 'U/L/R/P')
       end
+      createadmin('web@roccloudy.com', 'ADMIN')
+      createadmin('office@roccloudy.com', 'OFFICE')
 
       #-------------------------- CREATE REP ACCOUNTS -----------------------------------
       def createrep(repemail, repcode)

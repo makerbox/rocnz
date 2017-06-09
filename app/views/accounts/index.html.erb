@@ -44,22 +44,29 @@ Search: <input id="searchfield" type="text"><span class="btn btn-info" onclick="
             <i class="fa fa-exclamation-triangle"></i>
           <% end %>
           Approved
-          <%= link_to unapprove_account_path(account), class: 'btn btn-danger' do %>
-            <i class="fa fa-thumbs-o-down">
-          </i> Unapprove
+          <% if current_user.has_role? :admin %>
+            <%= link_to unapprove_account_path(account), class: 'btn btn-danger' do %>
+              <i class="fa fa-thumbs-o-down">
+            </i> Unapprove
+            <% end %>
           <% end %>
         </td>
         <% else %>
         <td>Approved
-          <%= link_to unapprove_account_path(account), class: 'btn btn-danger' do %>
-          <i class="fa fa-thumbs-o-down"></i> Unapprove
+          <% if current_user.has_role? :admin %>
+            <%= link_to unapprove_account_path(account), class: 'btn btn-danger' do %>
+            <i class="fa fa-thumbs-o-down"></i> Unapprove
+            <% end %>
           <% end %>
         </td>
         <% end %>
         <% else %>
-        <td>Not approved<%= link_to approve_account_path(account), class: 'btn btn-info' do %>
-          <i class="fa fa-thumbs-o-up"></i> Approve
+        <td>Not approved
+        <% if current_user.has_role? :admin %>
+          <%= link_to approve_account_path(account), class: 'btn btn-info' do %>
+            <i class="fa fa-thumbs-o-up"></i> Approve
           <% end %>
+        <% end %>
         </td>
         <% end %>
         <td>
