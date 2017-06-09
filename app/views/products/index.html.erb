@@ -70,7 +70,7 @@
             <% end %> 
           
         <% end %>
-          <% if (current_user.has_role? :admin) || (current_user.has_role? :rep) %>
+          <% if (current_user.has_role? :admin) %>
             <div class="hide-button">
               <%= link_to hide_product_path(product) do %>
                 hide
