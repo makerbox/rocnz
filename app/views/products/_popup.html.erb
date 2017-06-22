@@ -24,14 +24,13 @@
                     <% when 6 %>
 		  		<% prodprice = @thisproduct.rrp %>
 		  <% end %>
-		  $<span id="price-display"><%= number_with_precision(prodprice, precision: 2) %></span>
 	  <% end %>
 
 	  <% if user_signed_in? %>
 		  <% if current_user.account || (((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?)) %>
 			  <% if current_user.account.approved == 'approved' || (((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?)) %>
 				  	<%= simple_form_for(@quantity) do |f| %>
-				  		<%= f.input :qty, input_html: {value: f.object.qty || '1'} %>
+				  		<%= f.hidden_field :qty, input_html: {value: f.object.qty || '1'} %>
 				  		<% if @order %>
 				  			<%= f.hidden_field :order_id, value: @order.id %>
 				  			<%= f.hidden_field :thisgroup, value: @thisproduct.group %>
