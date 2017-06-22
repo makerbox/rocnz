@@ -182,7 +182,14 @@ end
       end
     end
   end
-
+  if user_signed_in?
+      if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic)
+        @order = current_user.mimic.account.user.orders.where(active:true).last
+      else
+        @order = current_user.orders.where(active: true).last
+      end
+      @quantity = Quantity.new
+  end
 end
 
   # GET /products/1
