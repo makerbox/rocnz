@@ -82,8 +82,10 @@
               <% end %>
             </div>
           <% end %>
-          <% @product = product %>
-          <%= render 'products/popup' %>
+          <div class="orderbox">
+            <% @product = product %>
+            <%= render 'products/popup' %>
+          </div>
         </div>
       <% end %>
     </div>
