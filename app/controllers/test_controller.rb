@@ -16,7 +16,7 @@ class TestController < ApplicationController
 		# end
 		@results = []
 
-      Order.desctroy_all
+      Order.destroy_all
       Quantity.destroy_all
 
 		# OrderMailer.receipt(Order.all.last, current_user).deliver_now
