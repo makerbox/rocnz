@@ -16,11 +16,11 @@ class TestController < ApplicationController
 		# end
 		@results = []
 
-
+		@result = `postgres --v`
 
 
 		# WORKING!!!!!!!!!!!!!!!!!!
-		@result = `heroku pg:push development postgresql-crystalline-39951 --app young-island-86511`
+		# @result = `heroku pg:push development postgresql-crystalline-39951 --app young-island-86511`
       
 
 
