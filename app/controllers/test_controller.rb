@@ -15,7 +15,17 @@ class TestController < ApplicationController
 		# 	end
 		# end
 		@results = []
-		@result = `heroku pg:push default postgresql-crystalline-39951 --app young-island-86511`
+
+
+
+
+		# WORKING!!!!!!!!!!!!!!!!!!
+		# @result = `heroku pg:push default postgresql-crystalline-39951 --app young-island-86511`
+      
+
+
+
+
       # Order.destroy_all
       # Quantity.destroy_all
 
