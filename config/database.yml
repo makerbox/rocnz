@@ -23,14 +23,12 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
-
-# production: 
-#   adapter: sqlite3
-#   port: 3000
-#   pool: 5
-#   timeout: 5000
-#   host: "http://roccloudy.com"
-#   database: "development"
+  adapter: postgresql
+  encoding: utf8
+  database: 'd85oi10u6l6dvt'
+  username: 'raqlglfcahxhpw'
+  password: '619d2e9bd5fd064cf7fc000b88554568e52506645afb4043dc746a42891a8ec8'
+  host: 'ec2-54-221-220-82.compute-1.amazonaws.com' # something like ec2-xxx-xx-xxx-xxxx.compute-1.amazonaws.com
+  sslmode: require
+  #rails s -e production (runs in production mode)
   
