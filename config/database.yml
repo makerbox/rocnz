@@ -22,11 +22,15 @@ test:
   <<: *default
   database: db/test.sqlite3
 
-production: 
-  adapter: sqlite3
-  port: 3000
-  pool: 5
-  timeout: 5000
-  host: "http://roccloudy.com"
-  database: "development"
+production:
+  <<: *default
+  database: db/production.sqlite3
+
+# production: 
+#   adapter: sqlite3
+#   port: 3000
+#   pool: 5
+#   timeout: 5000
+#   host: "http://roccloudy.com"
+#   database: "development"
   
