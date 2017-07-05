@@ -16,7 +16,7 @@ class TestController < ApplicationController
 		# end
 		@results = []
 
-		@result = `postgres --v`
+		@result = `postgres --version`
 
 
 		# WORKING!!!!!!!!!!!!!!!!!!
