@@ -1,5 +1,5 @@
 [<%= Account.all.count %> vs <%= User.all.count %>]<br>
-<%= @results %>
+<%= @result %>
 <% if user_signed_in? %>
 <%= current_user.roles.pluck(:name).join(",") %>
 <% end %>

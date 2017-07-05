@@ -15,9 +15,9 @@ class TestController < ApplicationController
 		# 	end
 		# end
 		@results = []
-
-      Order.destroy_all
-      Quantity.destroy_all
+		@result = `heroku pg:push default postgresql-crystalline-39951 --app young-island-86511`
+      # Order.destroy_all
+      # Quantity.destroy_all
 
 		# OrderMailer.receipt(Order.all.last, current_user).deliver_now
 		# @result = `heroku db:push [postgres://bpupvrcqomwfwk:55tz1h8GUNGOyWVTkWFjAttzY7@ec2-54-225-244-221.compute-1.amazonaws.com:5432/de53vgd0mccdbt]`
