@@ -15,8 +15,11 @@ class TestController < ApplicationController
 		# 	end
 		# end
 		@results = []
+		@result = ''
 
-		@result = `heroku pg:reset postgresql-crystalline-39951 --app young-island-86511 --confirm young-island-86511`
+		# heroku addons:detach postgresql-crystalline-39951 --app young-island-86511
+		# heroku config:add DATABASE_URL=sqlite3://root:xyz@218.214.73.21:3200/db/development.sqlite3
+		# @result = `taps server postgresql-crystalline-39951 --app young-island-86511 db db`
 
 
 		# WORKING!!!!!!!!!!!!!!!!!!
