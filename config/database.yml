@@ -6,25 +6,25 @@
 #
 
 
-# default: &default
-#   adapter: postgresql
-#   encoding: utf8
-#   database: 'd85oi10u6l6dvt'
-#   username: 'raqlglfcahxhpw'
-#   password: '619d2e9bd5fd064cf7fc000b88554568e52506645afb4043dc746a42891a8ec8'
-#   host: 'ec2-54-221-220-82.compute-1.amazonaws.com'
-#   sslmode: require
-
 default: &default
-  adapter: sqlite3
-  host: 218.214.73.21
-  port: 3200
-  pool: 5
-  timeout: 5000
+  adapter: postgresql
+  encoding: utf8
+  database: 'd85oi10u6l6dvt'
+  username: 'raqlglfcahxhpw'
+  password: '619d2e9bd5fd064cf7fc000b88554568e52506645afb4043dc746a42891a8ec8'
+  host: 'ec2-54-221-220-82.compute-1.amazonaws.com'
+  sslmode: require
+
+# default: &default
+#   adapter: sqlite3
+#   host: 218.214.73.21
+#   port: 3200
+#   pool: 5
+#   timeout: 5000
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  # database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -44,4 +44,6 @@ production:
 #   timeout: 5000
 #   host: "http://roccloudy.com"
 #   database: "development"
-  
+  remote:
+    <<: *default
+    database: db/remote.sqlite3
