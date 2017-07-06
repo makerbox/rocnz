@@ -16,7 +16,7 @@ class TestController < ApplicationController
 		# end
 		@results = []
 
-		@result = `heroku pg:push main postgresql-crystalline-39951 --app young-island-86511`
+		@result = `heroku pg:reset postgresql-crystalline-39951 --app young-island-86511 --confirm young-island-86511`
 
 
 		# WORKING!!!!!!!!!!!!!!!!!!
