@@ -17,15 +17,15 @@ class TestController < ApplicationController
 		@results = []
 		@result = ''
 
-		# heroku addons:detach postgresql-crystalline-39951 --app young-island-86511
-		# heroku config:add DATABASE_URL=sqlite3://root:xyz@218.214.73.21:3200/db/development.sqlite3
-		# @result = `taps server postgresql-crystalline-39951 --app young-island-86511 db db`
+		      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
 
-		# WORKING!!!!!!!!!!!!!!!!!!
-		# run this in separate function first! -> `heroku pg:reset postgresql-crystalline-39951 --app young-island-86511 --confirm young-island-86511`
-		# @result = `heroku pg:push main postgresql-crystalline-39951 --app young-island-86511`
-      
+      # -------------------------GET PRODUCTS AND CREATE / UPDATE PRODUCT RECORDS------------------------
+      @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
+          @products.each do |p|
+          	@results << p.Code
+          end
+      dbh.disconnect
 
 
 
