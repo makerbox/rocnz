@@ -16,7 +16,7 @@ class TestController < ApplicationController
 		# end
 		@results = []
 
-		@result = `postgres --version`
+		@result = `heroku pg:push main postgresql-crystalline-39951 --app young-island-86511`
 
 
 		# WORKING!!!!!!!!!!!!!!!!!!
