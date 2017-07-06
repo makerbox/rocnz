@@ -20,7 +20,8 @@ class TestController < ApplicationController
 
 
 		# WORKING!!!!!!!!!!!!!!!!!!
-		# @result = `heroku pg:push development postgresql-crystalline-39951 --app young-island-86511`
+		# run this in separate function first! -> `heroku pg:reset postgresql-crystalline-39951 --app young-island-86511 --confirm young-island-86511`
+		# @result = `heroku pg:push main postgresql-crystalline-39951 --app young-island-86511`
       
 
 
