@@ -55,7 +55,7 @@
                             <% when 5 %>
                               <% prodprice = @product.price5 %>
                             <% when 6 %>
-                      <% prodprice = @product.rrp %>
+                              <% prodprice = @product.rrp %>
                     <% end %>
                   <% end %>
 		  $<span id="price-display"><%= number_with_precision(prodprice, precision: 2) %></span>
