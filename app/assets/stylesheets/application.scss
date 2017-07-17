@@ -324,3 +324,9 @@ max-width:100%;
 }
 
 
+.simple_form.new_quantity{
+	display:flex;
+}
+.simple_form.new_quantity .form-control.numeric.integer.optional{
+	width:4em;
+}
