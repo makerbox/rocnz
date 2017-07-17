@@ -56,7 +56,7 @@
                       <% prodprice = product.rrp %>
                   <% end %>
                   <% if product.allow_disc == false %>
-                    <% prodprice = oldprice %><%= prodprice %>
+                    <% prodprice = oldprice %>
                   <% end %>
                   <% if oldprice > prodprice %>
                     <span style="text-decoration: line-through;">$<%= oldprice %></span>
