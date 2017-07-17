@@ -55,7 +55,7 @@
                     <% when 6 %>
                       <% prodprice = product.rrp %>
                   <% end %>
-                  <% if product.allow_disc == false %>
+                  <% if product.allow_disc == 0 %>
                     <% prodprice = product.rrp %>
                   <% end %>
                   <% if oldprice > prodprice %>
@@ -64,11 +64,7 @@
                   <% if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic.nil?) && (!current_user.account.seller_level) %>
                     <br>[RRP: $<%= product.rrp %>]<br>
                   <% else %>
-                    <% if product.allow_disc == false %>
-                      $<%= number_with_precision(prodprice, precision: 2) %>
-                    <% else %>
-                      $<%= number_with_precision(product.rrp, precision: 2) %>
-                    <% end %>
+                    $<%= number_with_precision(prodprice, precision: 2) %>
                   <% end %>
                   <% if (current_user.has_role? :admin) || (current_user.has_role? :rep) %>
                     | [QTY: <%= product.qty %>]

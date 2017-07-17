@@ -24,7 +24,7 @@
                     <% when 6 %>
 		  				<% prodprice = @thisproduct.rrp %>
 		  			<% end %>
-		  			<% if @thisproduct.allow_disc == false %>
+		  			<% if @thisproduct.allow_disc == 0 %>
         				<% prodprice = @thisproduct.rrp %>
       				<% end %>
 	  <% end %>
