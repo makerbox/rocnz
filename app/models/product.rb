@@ -24,9 +24,11 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 		else
 			result = price
 		end
-
-		return result
+	else
+		result = price
 	end
+	
+	return result
 end
 
 
