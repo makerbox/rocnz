@@ -1,8 +1,9 @@
-[<%= Account.all.count %> vs <%= User.all.count %>]<br>
-<%= @result %>
-<% @results.each do |result| %>
-<%= result %><br>
+<% @discounts.each do |d| %>
+<%= d.code %> = = = <%= d.discount %><br>
 <% end %>
+
+
+
 <% if user_signed_in? %>
 <%= current_user.roles.pluck(:name).join(",") %>
 <% end %>
