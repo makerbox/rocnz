@@ -1,12 +1,10 @@
 <% @discounts.each do |d| %>
-<%= d.code %> = = = <%= d.discount %><br>
+<%= d.product %> = <%= d.customer %> = = <%= d.discount %><br>
 <% end %>
 
 
 
-<% if user_signed_in? %>
-<%= current_user.roles.pluck(:name).join(",") %>
-<% end %>
+
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %>
 <%  if Contact.find_by(code:'running', email:'running') %>
 	RUNNING SEED
