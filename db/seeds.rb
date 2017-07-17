@@ -18,11 +18,16 @@ Contact.create(code:'running', email:'running')
               price5 = p.SalesPrice5
               rrp = p.SalesPrice6
               qty = p.QtyInStock
+              if p.AllowDisc == 1
+                allow_disc = true
+              else
+                allow_disc = false
+              end
               group = p.ProductGroup.to_s.strip
               pricecat = p.PriceCat.to_s.strip
               # # needs category
-              if !Product.all.where(code: code).blank?
-                Product.all.find_by(code: code).update_attributes(pricecat: pricecat, group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
+              if Product.all.where(code: code).exists?
+                Product.all.find_by(code: code).update_attributes(allow_disc: allow_disc, pricecat: pricecat, group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
                 filename = "E:\\Attache\\Attache\\Roc\\Images\\Product\\" + code + ".jpg"
                 if File.exist?(filename)
                   # Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
@@ -31,7 +36,7 @@ Contact.create(code:'running', email:'running')
                   Product.all.find_by(code: code).destroy
                 end
               else
-                newproduct = Product.new(pricecat: pricecat, group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty, hidden: false)
+                newproduct = Product.new(allow_disc: allow_disc, pricecat: pricecat, group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty, hidden: false)
                 filename = "E:\\Attache\\Attache\\Roc\\Images\\Product\\" + code + ".jpg"
                 if File.exist?(filename)
                   Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
