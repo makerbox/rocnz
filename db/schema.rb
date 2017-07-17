@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531004056) do
+ActiveRecord::Schema.define(version: 20170717020810) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
@@ -35,7 +38,7 @@ ActiveRecord::Schema.define(version: 20170531004056) do
     t.string   "brands"
   end
 
-  add_index "accounts", ["user_id"], name: "index_accounts_on_user_id"
+  add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.string   "code"
@@ -58,7 +61,7 @@ ActiveRecord::Schema.define(version: 20170531004056) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "discounts", force: :cascade do |t|
     t.string   "customertype"
@@ -80,8 +83,8 @@ ActiveRecord::Schema.define(version: 20170531004056) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "mimics", ["account_id"], name: "index_mimics_on_account_id"
-  add_index "mimics", ["user_id"], name: "index_mimics_on_user_id"
+  add_index "mimics", ["account_id"], name: "index_mimics_on_account_id", using: :btree
+  add_index "mimics", ["user_id"], name: "index_mimics_on_user_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
@@ -98,7 +101,7 @@ ActiveRecord::Schema.define(version: 20170531004056) do
     t.string   "delivery_date"
   end
 
-  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.string   "name"
@@ -121,6 +124,7 @@ ActiveRecord::Schema.define(version: 20170531004056) do
     t.string   "pricecat"
     t.string   "fab"
     t.boolean  "hidden"
+    t.boolean  "allow_disc"
   end
 
   create_table "quantities", force: :cascade do |t|
@@ -131,8 +135,8 @@ ActiveRecord::Schema.define(version: 20170531004056) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "quantities", ["order_id"], name: "index_quantities_on_order_id"
-  add_index "quantities", ["product_id"], name: "index_quantities_on_product_id"
+  add_index "quantities", ["order_id"], name: "index_quantities_on_order_id", using: :btree
+  add_index "quantities", ["product_id"], name: "index_quantities_on_product_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -142,8 +146,8 @@ ActiveRecord::Schema.define(version: 20170531004056) do
     t.datetime "updated_at"
   end
 
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-  add_index "roles", ["name"], name: "index_roles_on_name"
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "transactions", force: :cascade do |t|
     t.string   "prodcode"
@@ -174,14 +178,20 @@ ActiveRecord::Schema.define(version: 20170531004056) do
     t.boolean  "approved"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
   end
 
-  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  add_foreign_key "accounts", "users"
+  add_foreign_key "mimics", "accounts"
+  add_foreign_key "mimics", "users"
+  add_foreign_key "orders", "users"
+  add_foreign_key "quantities", "orders"
+  add_foreign_key "quantities", "products"
 end
