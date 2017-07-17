@@ -55,7 +55,7 @@
                     <% when 6 %>
                       <% prodprice = product.rrp %>
                   <% end %>
-                  <% if product.allow_disc == 0 %>
+                  <% if product.allow_disc == false %>
                     <% prodprice = product.rrp %>
                   <% end %>
                   <% if oldprice > prodprice %>
