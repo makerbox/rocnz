@@ -67,7 +67,7 @@ end
   # GET /accounts/1
   # GET /accounts/1.json
   def show
-    if (current_user.has_role? :admin) || (current_user.hasrole? :rep)
+    if (current_user.has_role? :admin) || (current_user.has_role? :rep)
       account = Account.find(params[:id])
       @pendingorders = Order.where(user: account.user, active: false, approved: false, complete: false)
       @approvedorders = Order.where(user:account.user, active:false, approved: true, complete: false)
