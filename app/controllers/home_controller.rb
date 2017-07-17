@@ -19,7 +19,7 @@ end
   def pull
     # system "runas /noprofile /user:Administrator rake db:migrate"
     # @output = `rails g migration AddSortToAccount sort`
-    # system "git stash"
+    system "git stash"
     system "git pull"
     # system "bundle exec rake db:migrate"
     # @output = `rake routes`

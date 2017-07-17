@@ -1,185 +1,345 @@
+Contact.create(code:'clock', email:'start')
+    if Contact.find_by(code:'running', email:'running')
+      puts 'already running' #skips running again if already running
+    else
+      Contact.create(code:'running', email:'running')
 
 
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
 
-# #REALLY NEED TO MAKE THIS NEATER AND MORE EFFICIENT - BUILD METHODS AND DRY UP CODE
+      # -------------------------GET PRODUCTS AND CREATE / UPDATE PRODUCT RECORDS------------------------
+      @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
+          @products.each do |p|
+            if p.Inactive == 0
+              code = p.Code.strip
+              description = p.Description.to_s.strip
+              price1 = p.SalesPrice1
+              price2 = p.SalesPrice2
+              price3 = p.SalesPrice3
+              price4 = p.SalesPrice4
+              price5 = p.SalesPrice5
+              rrp = p.SalesPrice6
+              qty = p.QtyInStock
+              group = p.ProductGroup.to_s.strip
+              pricecat = p.PriceCat.to_s.strip
+              # # needs category
+              if !Product.all.where(code: code).blank?
+                Product.all.find_by(code: code).update_attributes(pricecat: pricecat, group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
+                filename = "E:\\Attache\\Attache\\Roc\\Images\\Product\\" + code + ".jpg"
+                if File.exist?(filename)
+                  # Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
+                  # stop from overloading transformations
+                else
+                  Product.all.find_by(code: code).destroy
+                end
+              else
+                newproduct = Product.new(pricecat: pricecat, group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty, hidden: false)
+                filename = "E:\\Attache\\Attache\\Roc\\Images\\Product\\" + code + ".jpg"
+                if File.exist?(filename)
+                  Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
+                  # stop from overloading transformations
+                  newproduct.save
+                end
+                
+              end
+            end
+          end
+
+          dbh.disconnect
+
+      #-------------------------UPDATE PRODUCTS WITH CATEGORIES -------------------------------------
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
+      @categories = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
+      @categories.each do |cat|
+            if cat.CostCentre #if the prodmastext record has a category, then let's do it
+              categorycode = cat.Code.strip
+              if Product.find_by(code: categorycode) #if the product exists, let's give it the category (some products without images have no dice)
+                Product.find_by(code: categorycode).update_attributes(category: cat.CostCentre.strip)
+              end
+            end
+          end
+          dbh.disconnect
+
+      # ------------------------GET DATES AND UPDATE THE PRODUCTS WITH new_date FIELD-----------------------
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+
+      @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+
+      @datedata.each do |d|
+        code = d.Code.strip
+        if Product.find_by(code: code)
+          Product.find_by(code: code).update_attributes(new_date: d.DateFld)
+        end
+      end
+
+      dbh.disconnect
+
+      # ------------------------GET FABS, CONNECT THEM, AND UPDATE THE PRODUCTS-----------------------
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+
+      @fabdata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+      fab = ''
+      @fabdata.each do |d|
+        code = d.Code.strip
+        if Product.find_by(code: code)
+          if !d.TextFld.blank?
+            fab = d.TextFld.strip
+            Product.find_by(code: code).update_attributes(fab: fab)
+          end
+        end
+      end
+
+      dbh.disconnect
+
+      # ------------------------DISCOUNTS---------------------------------------------------------
+       Discount.destroy_all #wipe existing discounts in case of some deletions in Attache
+          dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+          discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
+
+          def disco(percentage, fixed, fixedprice, level, maxqty, ctype, ptype, cust, prod)
+            if fixedprice == 9 #if the discount is a fixed price
+              disctype = 'fixedtype'
+              discount = fixed
+              if ctype == 10
+                customertype = 'code_fixed'
+              else
+                customertype = 'group_fixed'
+              end
+              if ptype == 10
+                producttype = 'code_fixed'
+              elsif ptype == 30
+                producttype = 'group_fixed'
+              else
+                producttype = 'cat_fixed'
+              end
+            else
+              disctype = 'percentagetype'
+              discount = percentage
+              if ctype == 10
+                customertype = 'code_percent'
+              else
+                customertype = 'group_percent'
+              end
+              if ptype == 10
+                producttype = 'code_percent'
+              elsif ptype == 30
+                producttype = 'group_percent'
+              else
+                producttype = 'cat_percent'
+              end
+            end
+            if maxqty #sometimes there is no qty
+              if maxqty >= 10000 #sometimes it's way too big to store as an integer
+                maxqty = 9999
+              end
+            end
+            if !prod.nil? && !cust.nil?
+              Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty, disctype: disctype)
+            end
+
+          end
+
+          discounts.each do |d|
+            if (d.LevelNum >= 1) 
+              percentage = d.DiscPerc1
+              fixed = d.Price1
+              fixedprice = d.PriceCode1
+              level = 1
+              maxqty = d.MaxQty1
+              disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
+            end
+            if (d.LevelNum >= 2) 
+              percentage = d.DiscPerc2
+              fixed = d.Price2
+              fixedprice = d.PriceCode2
+              level = 2
+              maxqty = d.MaxQty2
+              disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
+            end
+            if (d.LevelNum >= 3) 
+              percentage = d.DiscPerc3
+              fixed = d.Price3
+              fixedprice = d.PriceCode3
+              level = 3
+              maxqty = d.MaxQty3
+              disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
+            end
+            if (d.LevelNum >= 4) 
+              percentage = d.DiscPerc4
+              fixed = d.Price4
+              fixedprice = d.PriceCode4
+              level = 4
+              maxqty = d.MaxQty4
+              disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
+            end
+            if (d.LevelNum >= 5) 
+              percentage = d.DiscPerc5
+              fixed = d.Price5
+              fixedprice = d.PriceCode5
+              level = 5
+              maxqty = d.MaxQty5
+              disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
+            end
+            if (d.LevelNum >= 6) 
+              percentage = d.DiscPerc6
+              fixed = d.Price6
+              fixedprice = d.PriceCode6
+              level = 6
+              maxqty = d.MaxQty6
+              disco(percentage, fixed, fixedprice, level, maxqty, d.CustomerType, d.ProductType, d.Customer, d.Product)
+            end
+          end
+
+          dbh.disconnect 
+
+      # -------------------------GET CUSTOMERS AND ADD / UPDATE THE DB----------------------------------
+
+      counter = 0
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      @customers_ext = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
+      @customers_ext.each do |ce|
+        counter += 1
+        code = ce.Code.strip
+        if ce.InactiveCust == 1
+          if Account.all.find_by(code: code)
+            account = Account.all.find_by(code: code) # if there is an attache inactive account already in the portal, we delete it and its user
+            user = account.user
+            account.destroy
+            user.destroy
+          end
+        else
+          email = ce.EmailAddr
+          if !Account.all.find_by(code: code)
+            if email.blank?
+              email = counter
+            end
+            if !User.all.find_by(email: email)
+              newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
+              if newuser.save(validate: false) #false to skip validation
+                newuser.add_role :user
+                newaccount = Account.new(code: code, user: newuser) #create the account and associate with user
+                newaccount.save
+              end
+            end
+          end
+        end
+      end
+      dbh.disconnect 
 
 
-# @notice = []; # creating variable to store array of notices that will display after running
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+      @customers.each do |c|
+        code = c.Code.strip
+        if Account.all.find_by(code: code)
+          account = Account.all.find_by(code: code)
+          compname = c.Name
+          street = c.Street
+          suburb = c.Suburb 
+          state = c.Territory
+          postcode = c.Postcode 
+          phone = c.Phone 
+          sort = c.Sort 
+          discount = c.SpecialPriceCat 
+          seller_level = c.PriceCat
+          rep = c.SalesRep
+          account.update_attributes(approved: 'approved', phone: phone, street: street, state: state, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
+        end
+      end
+      dbh.disconnect 
+
+      # --------------------- ADD EMAIL ADDRESSES ----------------------
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
+      contacts.each do |contact|
+        if contact.Active == 1
+          if account = Account.all.find_by(code: contact.Code.strip)
+            if !User.all.find_by(email: contact.EmailAddress)
+              email = contact.EmailAddress
+              account.user.update_attributes(email: email)
+            end
+          end
+        end
+      end
+      dbh.disconnect 
+
+      #------------------------- SET DEFAULT SELLER LEVEL ---------------------
+      unset = Account.all.where(seller_level: nil)
+      unset.each do |acct|
+        @results << 'found'
+        acct.update_attributes(seller_level: '1')
+      end
 
 
+      #-------------------------- CREATE ADMIN USER -------------------------------------
 
-# # ensure there is an admin account
-# adminuser = User.find_by(email: "web@roccloudy.com")
-# if !adminuser
-# admin = User.create(email: "web@roccloudy.com", password: "cloudy_16", password_confirmation: "cloudy_16")
-# adminaccount = Account.create(user: admin)
-# adminaccount.update(sort:'U L P R')
-# else
-# 	if !adminuser.has_role? :admin
-# 		adminuser.add_role :admin
-# 		adminaccount = adminuser.account
-# 		adminaccount.update(sort:'U L P R')
-# 	end
-# end
+      def createadmin(adminemail, admincode)
+        if adminuser = User.all.find_by(email: adminemail)
+          adminuser.add_role :admin
+          adminuser.remove_role :user
+          if adminuser.account
+            adminuser.account.update_attributes(approved: 'approved', sort: 'U/L/R/P')
+          else
+            Account.create(code: admincode, company: 'Roc', user: adminuser, sort: 'U/L/R/P')
+          end
+        else
+          adminuser = User.new(email: adminemail, password:'cloudy_16', password_confirmation: 'cloudy_16')
+          adminuser.add_role :admin
+          adminuser.save(validate: false)
+          Account.create(code: admincode, company: 'Roc', user: adminuser, sort: 'U/L/R/P')
+        end
+      end
+      createadmin('web@roccloudy.com', 'ADMIN')
+      createadmin('office@roccloudy.com', 'OFFICE')
 
-# # ----------------------------------
+      #-------------------------- CREATE REP ACCOUNTS -----------------------------------
+      def createrep(repemail, repcode)
+        if repuser = User.all.find_by(email: repemail)
+          repuser.add_role :rep
+          repuser.remove_role :user
+          if repuser.account
+            repuser.account.update_attributes(approved: 'approved', sort: 'U/L/R/P')
+          else
+            Account.create(code: repcode, company: 'Roc', user: repuser, sort: 'U/L/R/P')
+          end
+        else
+          repuser = User.new(email: repemail, password:'cloudy_16', password_confirmation: 'cloudy_16')
+          repuser.add_role :rep
+          repuser.save(validate: false)
+          Account.create(code: repcode, company: 'Roc', user: repuser, sort: 'U/L/R/P')
+        end
+      end
 
-# # get data out of attache and into sql
-# require 'rdbi-driver-odbc'
+      createrep('nsw@roccloudy.com', 'REPNSW')
+      createrep('vic@roccloudy.com', 'REPVIC')
+      createrep('qld1@roccloudy.com', 'REPQLD1')
+      createrep('qld2@roccloudy.com', 'REPQLD2')
+      createrep('nz@roccloudy.com', 'REPNZ')
+      createrep('office@roccloudy.com', 'ADMINOFFICE')
 
-dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      # dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      # @reps = dbh.execute("SELECT * FROM sales_reps_extn").fetch(:all, :Struct)
+      # @reps.each do |rep|
+      #   if rep.Inactive == 'N'
+      #     code = rep.Code
+      #     if email = rep.EmailAddress
+      #       repuser = User.new(email: email, password: 'cloudy_rep_123', password_confirmation: 'cloudy_rep_123')
+      #       if repuser.save(validate: false)
+      #         repaccount = Account.new(code: code, user: repuser)
+      #         repaccount.save
+      #         repuser.add_role :admin
+      #       end
+      #     end
+      #   end
+      # end
+      # dbh.disconnect
 
-customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
-activecustomers = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
-contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
-discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
+      # ------------------------META DATA--------------------------------------------------------------
 
-discounts.each do |d|
-	percent = d.DiscPerc1 + d.DiscPerc2 + d.DiscPerc3 + d.DiscPerc4
-	if percent > 0 # check there is an actual discount to apply
-		if d.CustomerType == 10 # affect discounts for customer codes
-			if d.ProductType == 10 # affect discounts for product codes
-				if Discount.find_by(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-					puts 'exists'
-				else
-					Discount.create(customertype: 'code', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-				end
-			elsif d.ProductType == 30 # affect discounts for product groups
-				if Discount.find_by(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-					puts 'exists'
-				else
-					Discount.create(customertype: 'code', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-				end
-			end
-		elsif d.CustomerType == 30 # affect discounts for customer groups
-			if d.ProductType == 10 # affect discounts for product codes
-				if Discount.find_by(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-					puts 'exists'
-				else
-					Discount.create(customertype: 'group', producttype: 'code', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-				end
-			elsif d.ProductType == 30 # affect discounts for product groups
-				if Discount.find_by(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent) # does it exist already?
-					puts 'exists'
-				else
-					Discount.create(customertype: 'group', producttype: 'group', customer: d.Customer.strip, product: d.Product.strip, discount: percent)
-				end
-			end
-		end
-	end
-end
-
-
-
-
-Product.each do |prod|
-	trans = Transaction.where(prodcode: prod.code, custcode: 'ROC CLOU').first
-	prod.update(new_date: trans.date)
-end
-
-
-
-
-
-
-
-
-
-
-
-
-
-# contacts.each do |contact| # populate a model of contact email addresses - had to be done to make the data searchable
-# 	if Contact.find_by(code: contact.Code)
-# 		puts "contact exists skipping"
-# 	else
-# 		Contact.create(code: contact.Code, email: contact.EmailAddress)
-# 	end
-# end
-
-# inactive = 0 #use this to count inactive customers
-# counter = 0 #use this counter to generate an email address for some users in the loop below
-# #create accounts and users for active customers only if they don't exist already
-# activecustomers.each do |activecustomer|
-# 	@contact = Contact.find_by(code: activecustomer.Code)
-# 	if @contact # if there is a contact email address for this customer code, then use it
-# 		if @contact.email
-# 			email = @contact.email
-# 		else
-# 			counter = counter + 1
-# 			email = counter.to_s + "@wholesaleportal.com"
-# 		end
-# 	else #otherwise use the counter to generate an email address
-# 		counter = counter + 1
-# 		email = counter.to_s + "@wholesaleportal.com"
-# 	end
-# 	if Account.find_by(code: activecustomer.Code) #if there is already an account, skip it
-# 		puts "account exists - skipping to next one"
-# 	elsif activecustomer.InactiveCust == 0 #otherwise check if it is active
-# 		newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal") #create the user
-# 		if newuser.save
-# 			newuser.add_role :user
-# 			newaccount = Account.new(code: activecustomer.Code, user: newuser) #create the account and associate with user
-# 			newaccount.save
-# 		else
-# 			puts newuser.email #if user wasn't created - show me the culprit
-# 			if User.find_by(email: newuser.email) #if is was a duplicate, let's do it again, but with the counter for the email address
-# 				puts "--DUPLICATE--USING COUNTER"
-# 				counter = counter + 1
-# 				email = counter.to_s + newuser.email
-# 				newuser = User.new(email: email, password: "roccloudyportal", password_confirmation: "roccloudyportal")
-# 				newuser.save
-# 				newuser.add_role :user
-# 				newaccount = Account.new(code: activecustomer.Code, user: newuser)
-# 				newaccount.save		
-# 			end
-# 		end
-
-# 	else #if the account doesn't exist, but it's inactive, then skip creation
-# 		inactive = inactive + 1
-# 	end
-# end
-#update accounts with full details
-customers.each do |customer| #use the data from customers to fill in the blanks in Accounts
-	account = Account.find_by(code: customer.Code)
-	discount = ''
-	if account
-		if customer.SpecialPriceCat
-			discount = customer.SpecialPriceCat.strip
-			puts discount
-		else
-			discount = nil
-		end
-		account.update(approved: 'approved', company: customer.Name, street: customer.Street, suburb: customer.Suburb, postcode: customer.Postcode, phone: customer.Phone, contact: customer.Contact, seller_level: customer.PriceCat, sort: customer.Sort, discount: discount)
-	end
-end
-
-# #output a little bit of result data to the console - for debugging only
-# puts "."
-# print "products: "
-# puts Product.count
-# print "user keys: "
-# puts User.count
-# print "admin user: "
-# User.all.each do |t|
-# 	if t.has_role? :admin
-# 		puts t.email
-# 	end
-# end
-# print "accounts: "
-# puts Account.count
-# print "approved accounts:"
-# puts Account.where(approved: "approved").count
-# print "unapproved accounts:"
-# puts Account.where(approved: nil).count
-# print "inactive customers:"
-# puts inactive
-
-dbh.disconnect
-
-ActiveRecord::Base.connection.execute("BEGIN TRANSACTION; END;")
-
-
-
-
+      Contact.where(code:'running').each do |del|
+        del.destroy
+      end
+      Contact.create(code:'clock', email:'end')
+    end #end if running check
