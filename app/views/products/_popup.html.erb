@@ -25,7 +25,20 @@
 		  				<% prodprice = @thisproduct.rrp %>
 		  			<% end %>
 		  			<% if @thisproduct.allow_disc == false %>
-        				<% prodprice = @thisproduct.rrp %>
+        				<% case level %>
+		                    <% when 1 %>
+		                      <% prodprice = @thisproduct.price1 %>
+		                    <% when 2 %>
+		                      <% prodprice = @thisproduct.price2 %>
+		                    <% when 3 %>
+		                      <% prodprice = @thisproduct.price3 %>
+		                    <% when 4 %>
+		                      <% prodprice = @thisproduct.price4 %>
+		                    <% when 5 %>
+		                      <% prodprice = @thisproduct.price5 %>
+		                    <% when 6 %>
+				  				<% prodprice = @thisproduct.rrp %>
+				  			<% end %>
       				<% end %>
 	  <% end %>
 
