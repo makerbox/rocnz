@@ -4,9 +4,9 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable
-  has_one :account
-  has_one :mimic
-  has_many :orders
+  has_one :account,  dependent: :destroy 
+  has_one :mimic,  dependent: :destroy 
+  has_many :orders,  dependent: :destroy 
   
   after_create :assign_default_role
 

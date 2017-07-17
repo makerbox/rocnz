@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-has_many :quantities
+has_many :quantities,  dependent: :destroy 
 has_many :orders, through: :quantities
 
 def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
