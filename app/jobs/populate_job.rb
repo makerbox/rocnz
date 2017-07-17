@@ -36,7 +36,11 @@ class PopulateJob
               price5 = p.SalesPrice5
               rrp = p.SalesPrice6
               qty = p.QtyInStock
-              allow_disc = p.AllowDisc
+              if p.AllowDisc == 1
+                allow_disc = true
+              else
+                allow_disc = false
+              end
               group = p.ProductGroup.to_s.strip
               pricecat = p.PriceCat.to_s.strip
               # # needs category
