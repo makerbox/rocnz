@@ -10,22 +10,23 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 		udisc = nil
 	end
 
-	
-	if discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || udisc))
-		if disco = discos.where('maxqty > ?', qty).first
-		    if disco.disctype == 'fixedtype'
-		      result = disco.discount
-		    else
-		      result = price - ((price / 100) * disco.discount)
-		    end
+	if Product.all.find_by(code: prod_code).allow_disc == true
+		if discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || udisc))
+			if disco = discos.where('maxqty > ?', qty).first
+			    if disco.disctype == 'fixedtype'
+			      result = disco.discount
+			    else
+			      result = price - ((price / 100) * disco.discount)
+			    end
+			else
+				result = price
+			end
 		else
 			result = price
 		end
-	else
-		result = price
-	end
 
-	return result
+		return result
+	end
 end
 
 
