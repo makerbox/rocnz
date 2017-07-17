@@ -12,9 +12,10 @@
         <%= link_to (product) do %>
           
             <%= cl_image_tag(product.code.strip) %>
-            <br>
-            <%= product.code %> | <%= product.description %><br>
-
+            
+            <div class="product-index-text">
+              <%= product.code %> | <%= product.description %>
+            </div>
             <% if user_signed_in? %>
               <% if current_user.account || ((current_user.has_role? :admin) || (current_user.has_role? :rep)) %>
                 <% if (current_user.account.approved == 'approved') || (((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?)) %>
