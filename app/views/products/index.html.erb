@@ -55,11 +55,12 @@
                     <% when 6 %>
                       <% prodprice = product.rrp %>
                   <% end %>
-                  <% if product.allow_disc == false %>
-                  false
-                    <% prodprice = product.rrp %>
+                  <% if product.allow_disc == true %>
+                  true
+                    
                     <% else %>
-                    true
+                    <% prodprice = product.rrp %>
+                    false
                   <% end %>
                   <% if oldprice > prodprice %>
                     <span style="text-decoration: line-through;">$<%= oldprice %></span>
