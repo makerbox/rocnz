@@ -1,8 +1,5 @@
 Contact.create(code:'clock', email:'start')
-    if Contact.find_by(code:'running', email:'running')
-      puts 'already running' #skips running again if already running
-    else
-      Contact.create(code:'running', email:'running')
+Contact.create(code:'running', email:'running')
 
 
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
@@ -342,4 +339,4 @@ Contact.create(code:'clock', email:'start')
         del.destroy
       end
       Contact.create(code:'clock', email:'end')
-    end #end if running check
+   
