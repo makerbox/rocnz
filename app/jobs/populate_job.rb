@@ -2,7 +2,7 @@ class PopulateJob
 	include SuckerPunch::Job
  def perform
   # wipe everything clean
-  # Contact.destroy_all
+  Contact.destroy_all
   # User.destroy_all
   # Account.destroy_all
   # Product.destroy_all
