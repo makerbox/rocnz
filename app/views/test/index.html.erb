@@ -1,6 +1,9 @@
 <% @discounts.each do |d| %>
 <%= d.product %> = <%= d.customer %> = = <%= d.discount %><br>
 <% end %>
+<% @products.each do |p| %>
+<%= p.code %>
+<% end %>
 <%= Product.all.count %>952
 
 
