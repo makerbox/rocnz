@@ -22,8 +22,11 @@
                     <% when 5 %>
                       <% prodprice = @thisproduct.calc_discount(thisperson, @thisproduct.price5, @thisproduct.group, @thisproduct.code, @thisproduct.pricecat, 1) %>
                     <% when 6 %>
-		  		<% prodprice = @thisproduct.rrp %>
-		  <% end %>
+		  				<% prodprice = @thisproduct.rrp %>
+		  			<% end %>
+		  			<% if @product.allow_disc == false %>
+        				<% prodprice = @product.rrp %>
+      				<% end %>
 	  <% end %>
 
 	  <% if user_signed_in? %>

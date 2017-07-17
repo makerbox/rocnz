@@ -40,8 +40,11 @@
                     <% when 5 %>
                       <% prodprice = @product.calc_discount(thisperson, @product.price5, @product.group, @product.code, @product.pricecat, 1) %>
                     <% when 6 %>
-		  		<% prodprice = @product.rrp %>
-		  <% end %>
+		  		            <% prodprice = @product.rrp %>
+            		  <% end %>
+                  <% if @product.allow_disc == false %>
+                    <% prodprice = @product.rrp %>
+                  <% end %>
 		  $<span id="price-display"><%= number_with_precision(prodprice, precision: 2) %></span>
 	  <% end %>
 
