@@ -16,11 +16,11 @@ class TestController < ApplicationController
 		# end
 		@results = []
 		@result = ''
+    @discounts = []
 
-
-    dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-    @discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
-    dbh.disconnect
+    # dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+    # @discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
+    # dbh.disconnect
 
   end
 end
