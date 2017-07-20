@@ -67,11 +67,11 @@
   <% end %>
 
   <% if @order.delivery_date %>
-    <%= link_to @order.delivery_date, edit_order_path(@order), class: 'fa fa-calendar btn btn-warning' %><br>
-    <%= link_to ' SEND ORDER', sendorder_order_path(@order, total: @order.total), class: 'fa fa-paper-plane btn btn-info' %>
+    <%= link_to @order.delivery_date, edit_order_path(@order), class: 'fa fa-calendar btn btn-warning' %><br> 
   <% else %>
     <%= link_to ' DELIVERY DATE', edit_order_path(@order), class: 'fa fa-calendar btn btn-warning' %> 
   <% end %>
+  <%= link_to ' SEND ORDER', sendorder_order_path(@order, total: @order.total), class: 'fa fa-paper-plane btn btn-info' %>
   <hr>
   <% end %>
   <%= link_to ' cancel', order_path(@order), method: :delete, class: 'fa fa-trash btn btn-danger' %>
