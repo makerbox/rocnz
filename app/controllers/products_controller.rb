@@ -177,7 +177,7 @@ end
     end
 
     if user_signed_in?
-      if current_user.has_role? :user #hide hidden products for customers
+      if (current_user.has_role? :user) || (current_user.has_role? :rep) #hide hidden products for customers
         @products = @products.where(hidden: false)
       end
     end
