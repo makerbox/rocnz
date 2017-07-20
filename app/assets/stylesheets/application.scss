@@ -231,7 +231,6 @@ padding-top:4em;
 
 .table .btn {
 	color: #FFF !important;
-	max-height:2.5em;
 }
 th{
 	text-align:center;
@@ -335,4 +334,7 @@ max-width:100%;
 }
 .simple_form.new_quantity .form-control.numeric.integer.optional{
 	width:4em;
+}
+.simple_form.new_quantity .btn{
+	max-height:2.5em;
 }
