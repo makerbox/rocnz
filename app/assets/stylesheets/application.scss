@@ -334,6 +334,7 @@ max-width:100%;
   display: -ms-flexbox;  /* TWEENER - IE 10 */
   display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
   display: flex;   
+  align-items:center;
 }
 .simple_form.new_quantity .form-control.numeric.integer.optional{
 	width:4em;
