@@ -65,35 +65,35 @@
       #     dbh.disconnect
 
       # ------------------------GET DATES AND UPDATE THE PRODUCTS WITH new_date FIELD-----------------------
-      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      # dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
-      @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+      # @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
 
-      @datedata.each do |d|
-        code = d.Code.strip
-        if Product.find_by(code: code)
-          Product.find_by(code: code).update_attributes(new_date: d.DateFld)
-        end
-      end
+      # @datedata.each do |d|
+      #   code = d.Code.strip
+      #   if Product.find_by(code: code)
+      #     Product.find_by(code: code).update_attributes(new_date: d.DateFld)
+      #   end
+      # end
 
-      dbh.disconnect
+      # dbh.disconnect
 
       # ------------------------GET FABS, CONNECT THEM, AND UPDATE THE PRODUCTS-----------------------
-      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      # dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
-      @fabdata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
-      fab = ''
-      @fabdata.each do |d|
-        code = d.Code.strip
-        if Product.find_by(code: code)
-          if !d.TextFld.blank?
-            fab = d.TextFld.strip
-            Product.find_by(code: code).update_attributes(fab: fab)
-          end
-        end
-      end
+      # @fabdata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
+      # fab = ''
+      # @fabdata.each do |d|
+      #   code = d.Code.strip
+      #   if Product.find_by(code: code)
+      #     if !d.TextFld.blank?
+      #       fab = d.TextFld.strip
+      #       Product.find_by(code: code).update_attributes(fab: fab)
+      #     end
+      #   end
+      # end
 
-      dbh.disconnect
+      # dbh.disconnect
 
       # ------------------------DISCOUNTS---------------------------------------------------------
        Discount.destroy_all #wipe existing discounts in case of some deletions in Attache
@@ -138,6 +138,9 @@
               end
             end
             if !prod.nil? && !cust.nil?
+              puts 'DISCOUNT------------------------------'
+              puts customer
+              puts discount
               Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty, disctype: disctype)
             end
 
