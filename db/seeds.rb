@@ -1,7 +1,7 @@
 # Contact.create(code:'clock', email:'start')
 # Contact.create(code:'running', email:'running')
 
-
+      puts 'RUNNING SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEED'
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
 
