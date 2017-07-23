@@ -139,7 +139,7 @@
             end
             if !prod.nil? && !cust.nil?
               puts 'DISCOUNT------------------------------'
-              puts customer
+              puts cust.strip
               puts discount
               Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty, disctype: disctype)
             end
