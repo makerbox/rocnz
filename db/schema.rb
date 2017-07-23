@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717020810) do
+ActiveRecord::Schema.define(version: 20170723233439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(version: 20170717020810) do
     t.string   "producttype"
     t.string   "customer"
     t.string   "product"
-    t.integer  "discount"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "maxqty"
@@ -194,4 +193,6 @@ ActiveRecord::Schema.define(version: 20170717020810) do
   add_foreign_key "orders", "users"
   add_foreign_key "quantities", "orders"
   add_foreign_key "quantities", "products"
+  add_foreign_key "users_roles", "roles", name: "users_roles_role_id_fk"
+  add_foreign_key "users_roles", "users", name: "users_roles_user_id_fk"
 end
