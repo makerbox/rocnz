@@ -140,6 +140,7 @@
             if !prod.nil? && !cust.nil?
               puts 'DISCOUNT------------------------------'
               puts cust.strip
+              discount = number_with_precision(discount, precision: 2)
               puts discount
               Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty, disctype: disctype)
             end
