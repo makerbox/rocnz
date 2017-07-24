@@ -70,7 +70,9 @@ class TestController < ApplicationController
        	# @results << disco.disctype
        	# @results << '-------------------------'
               if discos = Discount.all.where(product: (disco.group || disco.code || disco.pricecat), customer: (current_user.account.code.strip || current_user.account.discount.strip))
-                     @results << discos.where('maxqty > ?', 1).first.discount 
+                     if disco = discos.where('maxqty > ?', 1).first
+                            @results << disco.discount 
+                     end
               end
        end
        #      	@results << cust.strip
