@@ -3,10 +3,7 @@ has_many :quantities,  dependent: :destroy
 has_many :orders, through: :quantities
 
 def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
-	if !qty
-		qty = 1
-	end
-	
+
 	if u.account.discount
 		udisc = u.account.discount.strip
 	else
