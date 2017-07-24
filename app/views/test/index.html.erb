@@ -1,5 +1,7 @@
-<%= current_user.mimic.account.user %>
-<%= current_user.mimic %>
+<% if current_user.mimic %>
+	<%= current_user.mimic.account.user %>
+	<%= current_user.mimic %>
+<% end %>
 <% Discount.each do |d| %>
 <%= d.maxqty %><br>
 <% end %>
