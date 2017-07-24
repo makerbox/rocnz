@@ -60,8 +60,8 @@ class TestController < ApplicationController
        #        end
        #      end
        #      if !prod.nil? && !cust.nil?
-       Product.all.each do |disco|
-       	@results << disco.pricecat
+       # Product.all.each do |disco|
+       	# @results << disco.pricecat
        	# @results << '+'
        	# @results << disco.product
        	# @results << '='
@@ -69,12 +69,8 @@ class TestController < ApplicationController
        	# @results << '----'
        	# @results << disco.disctype
        	# @results << '-------------------------'
-              if discos = Discount.all.where(product: (disco.group || disco.code || disco.pricecat), customer: (current_user.account.code.strip || current_user.account.discount.strip))
-                     if disco = discos.where('maxqty > ?', 1).first
-                            @results << disco.discount 
-                     end
-              end
-       end
+              
+       # end
        #      	@results << cust.strip
        #      	@results << '='
        #      	@results << discount
