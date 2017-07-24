@@ -60,15 +60,15 @@ class TestController < ApplicationController
        #        end
        #      end
        #      if !prod.nil? && !cust.nil?
-       Discount.all.each do |disco|
-       	@results << disco.customer
-       	@results << '+'
-       	@results << disco.product
-       	@results << '='
-       	@results << disco.discount
-       	@results << '----'
-       	@results << disco.disctype
-       	@results << '-------------------------'
+       Product.all.each do |disco|
+       	@results << disco.pricecat
+       	# @results << '+'
+       	# @results << disco.product
+       	# @results << '='
+       	# @results << disco.discount
+       	# @results << '----'
+       	# @results << disco.disctype
+       	# @results << '-------------------------'
        end
        #      	@results << cust.strip
        #      	@results << '='
