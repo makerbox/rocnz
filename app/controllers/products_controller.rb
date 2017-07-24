@@ -15,7 +15,11 @@ def hide
 end
 
 def calc_qty_disc
-  qty = params[:qty]
+  if params[:qty]
+    qty = params[:qty]
+  else
+    qty = 1
+  end
   price = (params[:price]).to_f
   prod_group = params[:group]
   prod_code = params[:code]
