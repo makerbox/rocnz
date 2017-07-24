@@ -1,9 +1,6 @@
-<% @results.each do |r| %>
-<%= r %><br>
-<% end %>
-<% Product.all.each do |prod| %>
-	<%= prod.calc_discount(current_user, prod.price1, prod.group, prod.code, prod.pricecat, 1) %>
-<% end %>
+<%= current_user.mimic.account.user %>
+<%= current_user.mimic %>
+
 <%= Product.all.count %>952
 
 
