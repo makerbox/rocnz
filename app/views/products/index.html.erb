@@ -68,7 +68,7 @@
                   <% end %>
                   <% if (current_user.has_role? :admin) || (current_user.has_role? :rep) %>
                     | [QTY: <%= product.qty %>]
-                  <% end %> | special:<%= product.pricecat %>
+                  <% end %> | special:<%= product.pricecat %> cat:<%= product.category %>
                 <% end %>
               <% end %>
             <% end %> 
