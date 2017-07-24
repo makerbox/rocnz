@@ -9,7 +9,7 @@
       @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
           @products.each do |p|
             if p.Inactive == 0
-              puts p.PriceCat
+              puts p.PriceCat.to_s.strip
 
               # code = p.Code.strip
               # description = p.Description.to_s.strip
