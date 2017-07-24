@@ -62,6 +62,8 @@ class TestController < ApplicationController
        #      if !prod.nil? && !cust.nil?
        Discount.all.each do |disco|
        	@results << disco.customer
+       	@results << '+'
+       	@results << disco.product
        	@results << '='
        	@results << disco.discount
        	@results << '----'
