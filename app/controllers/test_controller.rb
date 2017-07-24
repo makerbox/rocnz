@@ -64,7 +64,9 @@ class TestController < ApplicationController
        	@results << disco.customer
        	@results << '='
        	@results << disco.discount
-       	@results << '-----------------------------'
+       	@results << '----'
+       	@results << disco.disctype
+       	@results << '-------------------------'
        end
        #      	@results << cust.strip
        #      	@results << '='
