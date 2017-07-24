@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170723233439) do
+ActiveRecord::Schema.define(version: 20170724025031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20170723233439) do
     t.integer  "maxqty"
     t.integer  "level"
     t.string   "disctype"
+    t.float    "discount"
   end
 
   create_table "mimics", force: :cascade do |t|
