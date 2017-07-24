@@ -69,7 +69,9 @@ class TestController < ApplicationController
        	# @results << '----'
        	# @results << disco.disctype
        	# @results << '-------------------------'
-              @results << Discount.all.find_by(product: (disco.group || disco.code || disco.pricecat), customer: (current_user.account.code.strip || current_user.account.discount.strip))
+              if Discount.all.find_by(product: (disco.group || disco.code || disco.pricecat), customer: (current_user.account.code.strip || current_user.account.discount.strip))
+                     @results << Discount.all.find_by(product: (disco.group || disco.code || disco.pricecat), customer: (current_user.account.code.strip || current_user.account.discount.strip)).discount 
+              end
        end
        #      	@results << cust.strip
        #      	@results << '='
