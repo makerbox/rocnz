@@ -38,7 +38,7 @@ end
   def index    
     if params[:searchterm]
       searchterm = params[:searchterm]
-      @accounts = Account.where('company LIKE ? OR code LIKE ?', "%#{searchterm}%", "%#{searchterm}%")
+      @accounts = Account.where('lower(company) LIKE ? OR lower(code) LIKE ?', "%#{searchterm.downcase}%", "%#{searchterm.downcase}%")
     else
       @accounts = Account.all.order(approved: :asc, created_at: :desc)
     end
