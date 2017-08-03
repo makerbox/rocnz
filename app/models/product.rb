@@ -18,7 +18,11 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 	else
 		result = 2
 	end
-
+	if u.account.code
+		result = 4
+	else
+		result = 5
+	end
 	return result
 end
 
