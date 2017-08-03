@@ -8,24 +8,11 @@ class TestController < ApplicationController
 dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
       @customers.each do |c|
-        code = c.Code.strip
-        if Account.all.find_by(code: code)
-          account = Account.all.find_by(code: code)
-          compname = c.Name
-          street = c.Street
-          suburb = c.Suburb 
-          state = c.Territory
-          postcode = c.Postcode 
-          phone = c.Phone 
-          sort = c.Sort 
-          discount = c.SpecialPriceCat 
+          @results << c.PriceCat
+          @results << '-cat-----'
           @results << c.Name
-          @results << '------'
+          @results << '-name-----'
           @results << c.SpecialPriceCat
-          seller_level = c.PriceCat
-          rep = c.SalesRep
-          account.update_attributes(approved: 'approved', phone: phone, street: street, state: state, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
-        end
       end
       dbh.disconnect 
 
