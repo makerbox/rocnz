@@ -19,7 +19,9 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
           phone = c.Phone 
           sort = c.Sort 
           discount = c.SpecialPriceCat 
-          @results << discount
+          @results << c.Name
+          @results << '------'
+          @results << c.SpecialPriceCat
           seller_level = c.PriceCat
           rep = c.SalesRep
           account.update_attributes(approved: 'approved', phone: phone, street: street, state: state, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
