@@ -1,6 +1,8 @@
 LAST DISCOUNT ADDED:<%= Discount.all.last.created_at %><br>
 LAST PRODUCT ADDED:<%= Product.all.last.created_at %><hr>
-<%= Discount.all.where(product: ('prod_group' || 'prod_code' || 'PM'), customer: (current_user.mimic.account.code.strip || current_user.mimic.account.discount.strip)).first.discount %>
+<%= current_user.mimic.account.code.strip %>
+<%= current_user.mimic.account.discount.strip %>
+<%= Discount.all.where(product: ('prod_group' || 'prod_code' || 'PM'), customer: (current_user.mimic.account.code.strip || current_user.mimic.account.discount.strip)).first %>
 <% Discount.all.each do |d| %>
 <%= d.customer %> -- <%= d.discount %> -- <%= d.disctype %> -- <%= d.product %> -- <%= d.maxqty %><br>
 <% end %>
