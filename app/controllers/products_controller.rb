@@ -21,7 +21,7 @@ def calc_qty_disc
   price_cat = params[:pricecat]
 
   if current_user.mimic
-    u = current_user.mimic.account.user
+    u = current_user.mimic
   else
     u = current_user
   end
