@@ -21,8 +21,9 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 		else
 			result = price
 		end
-			puts 'discounts---------------------'
-	puts discos.first
+			puts '!!!!!    discounts---------------------'
+	puts discos.count
+	puts 'END discounts    ---------------------!!!!!!!'
 	else
 		result = price
 	end
