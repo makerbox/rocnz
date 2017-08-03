@@ -84,8 +84,8 @@ config.action_mailer.smtp_settings = {
   port: 465,
   authentication: "plain",
   enable_starttls_auto: true,
-  user_name: "web@roccloudy.com",
-  password: "Roc@web123!",
+  user_name: ENV["MAIL_USER"],
+  password: ENV["MAIL_PASS"],
   tls: true
 }
 end
