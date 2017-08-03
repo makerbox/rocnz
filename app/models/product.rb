@@ -22,7 +22,7 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 			result = price
 		end
 			puts 'discounts---------------------'
-	puts discos
+	puts discos.first
 	else
 		result = price
 	end
