@@ -65,7 +65,7 @@
           end
           dbh.disconnect
 
-      ------------------------GET DATES AND UPDATE THE PRODUCTS WITH new_date FIELD-----------------------
+      #------------------------GET DATES AND UPDATE THE PRODUCTS WITH new_date FIELD-----------------------
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
       @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
