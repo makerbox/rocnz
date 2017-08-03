@@ -1,4 +1,4 @@
-<%= @results %><br>
+<%= @results.discount %><br>
 LAST DISCOUNT ADDED:<%= Discount.all.last.created_at %><br>
 LAST PRODUCT ADDED:<%= Product.all.last.created_at %><hr>
 <%= current_user.mimic.account.code %>|
