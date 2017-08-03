@@ -15,7 +15,6 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 		if disco = discos.where('maxqty > ?', qty).first
 		    if disco.disctype == 'fixedtype'
 		      result =  disco.discount
-		      result = 11111
 		    else
 		      result = price - ((price / 100) * disco.discount)
 		    end
