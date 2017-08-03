@@ -13,10 +13,10 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 		      result = price - ((price / 100) * disco.discount)
 		    end
 		else
-			result = price
+			result = 1
 		end
 	else
-		result = price
+		result = 2
 	end
 
 	return result
