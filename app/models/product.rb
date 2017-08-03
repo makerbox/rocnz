@@ -14,12 +14,16 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 		      result = price - ((price / 100) * disco.discount)
 		    end
 		else
-			result = 1
+			result = price
 		end
+	else
+		result = price
+	end
+	if price_cat == 'PM'
+		result = 1
 	else
 		result = 2
 	end
-	result = Discount.all.where(product: 'PM', customer: 'JOHN LUK').first.discount
 	return result
 end
 
