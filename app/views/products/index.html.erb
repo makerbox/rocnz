@@ -40,7 +40,7 @@
                     <% when 6 %>
                       <% oldprice = product.rrp %>
                   <% end %>
-                  <%= product.pricecat %>
+                  '<%= product.pricecat %>'
                   <% case level %>
                     <% when 1 %>
                       <% prodprice = product.calc_discount(thisperson, product.price1, product.group, product.code, product.pricecat, 1) %>
