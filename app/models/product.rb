@@ -4,7 +4,7 @@ has_many :orders, through: :quantities
 
 def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 
-	if Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code || u.account.discount))
+	if Discount.all.where(product: (prod_group || prod_code || price_cat), customer: ('JOHN LUK' || u.account.discount))
 		discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code || u.account.discount))
 		if discos.where('maxqty >= ?', qty).first
 			disco = discos.where('maxqty >= ?', qty).first
