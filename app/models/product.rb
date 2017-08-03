@@ -4,14 +4,8 @@ has_many :orders, through: :quantities
 
 def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 
-	if u.mimic
-		thisaccount = u.mimic.account
-	else
-		thisaccount = u.account
-	end
-
 	
-	if discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (thisaccount.code.strip || thisaccount.discount))
+	if discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code || u.account.discount))
 		if disco = discos.where('maxqty >= ?', qty).first
 		    if disco.disctype == 'fixedtype'
 		      result =  disco.discount
