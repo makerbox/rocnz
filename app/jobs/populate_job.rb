@@ -189,7 +189,7 @@ class PopulateJob
       Contact.create(code:'running', email:'running')
 
 
-      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
 
       # -------------------------GET PRODUCTS AND CREATE / UPDATE PRODUCT RECORDS------------------------
@@ -212,6 +212,7 @@ class PopulateJob
               end
               group = p.ProductGroup.to_s.strip
               pricecat = p.PriceCat.to_s.strip
+              puts pricecat
               # # needs category
               if Product.all.where(code: code).exists?
                 Product.all.find_by(code: code).update_attributes(allow_disc: allow_disc, pricecat: pricecat, group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
@@ -251,7 +252,7 @@ class PopulateJob
           end
           dbh.disconnect
 
-      # ------------------------GET DATES AND UPDATE THE PRODUCTS WITH new_date FIELD-----------------------
+      #------------------------GET DATES AND UPDATE THE PRODUCTS WITH new_date FIELD-----------------------
       dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
 
       @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
@@ -325,6 +326,10 @@ class PopulateJob
               end
             end
             if !prod.nil? && !cust.nil?
+              puts 'DISCOUNT------------------------------'
+              puts cust.strip
+              discount = sprintf("%.2f", discount)
+              puts discount
               Discount.create(customertype: customertype, producttype: producttype, customer: cust.strip, product: prod.strip, discount: discount, level: level, maxqty: maxqty, disctype: disctype)
             end
 
@@ -508,29 +513,14 @@ class PopulateJob
       createrep('nz@roccloudy.com', 'REPNZ')
       createrep('office@roccloudy.com', 'ADMINOFFICE')
 
-      # dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-      # @reps = dbh.execute("SELECT * FROM sales_reps_extn").fetch(:all, :Struct)
-      # @reps.each do |rep|
-      #   if rep.Inactive == 'N'
-      #     code = rep.Code
-      #     if email = rep.EmailAddress
-      #       repuser = User.new(email: email, password: 'cloudy_rep_123', password_confirmation: 'cloudy_rep_123')
-      #       if repuser.save(validate: false)
-      #         repaccount = Account.new(code: code, user: repuser)
-      #         repaccount.save
-      #         repuser.add_role :admin
-      #       end
-      #     end
-      #   end
-      # end
-      # dbh.disconnect
+
 
       # ------------------------META DATA--------------------------------------------------------------
 
       Contact.where(code:'running').each do |del|
         del.destroy
       end
-      Contact.create(code:'clock', email:'end')
+
     end #end if running check
 end #end perform
 
