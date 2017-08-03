@@ -1,4 +1,6 @@
-<%= Product.all.count %>952
+<% Discount.all.each do |d| %>
+<%= d.customer %>
+<% end %>
 
 
 
