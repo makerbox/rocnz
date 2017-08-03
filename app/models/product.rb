@@ -19,7 +19,7 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 	else
 		result = 2
 	end
-	result = Discount.all.where(product: price_cat, customer: 'JOHN LUK').first.discount
+	result = Discount.all.where(product: price_cat.to_s, customer: 'JOHN LUK').first.discount
 	return result
 end
 
