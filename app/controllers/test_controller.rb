@@ -2,19 +2,30 @@ class TestController < ApplicationController
 	skip_before_action :authenticate_user!
 	
 	def index
+       end
+       def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 
-    @results = []
+       if u.account.discount
+              udisc = u.account.discount.strip
+       else
+              udisc = nil
+       end
 
-dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
-      @customers = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
-      @customers.each do |c|
-          @results << c.CustomerType
-          @results << '<------>'
-          @results << c.Customer
-          @results << '------||'
-      end
-      dbh.disconnect 
+       
+       if discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
+              if disco = discos.where('maxqty > ?', qty).first
+                  if disco.disctype == 'fixedtype'
+                    result =  price - disco.discount
+                  else
+                    result = price - ((price / 100) * disco.discount)
+                  end
+              else
+                     result = price
+              end
+       else
+              result = price
+       end
 
-
+       return result
 end
 end
