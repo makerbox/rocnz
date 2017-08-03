@@ -1,5 +1,5 @@
-<% Product.all.each do |p| %>
-<%= p.code %> = <%= p.pricecat %> - <%= p.group %><br>
+<% Discount.all.each do |d| %>
+<%= d.customer %> -- <%= d.discount %> -- <%= d.disctype %> -- <%= d.product %><br>
 <% end %>
 
 
