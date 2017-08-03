@@ -11,7 +11,8 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 	end
 
 
-	if discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
+	discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code.strip || u.account.discount.strip))
+	if discos.count >=1
 		if disco = discos.where('maxqty >= ?', qty).first
 		    if disco.disctype == 'fixedtype'
 		      result =  disco.discount
