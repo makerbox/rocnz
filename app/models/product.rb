@@ -12,7 +12,7 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 		puts '--------------------------------------------'
 		puts '--------------------------------------------'
 		puts '--------------------------------------------'
-		puts discos.all.where('maxqty >= ?', qty).first	
+		puts discos.all.where('maxqty >= ?', qty).first.discount	
 		    if disco.disctype == 'fixedtype'
 		      result =  disco.discount
 		    else
