@@ -9,6 +9,9 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 		# discos = (Discount.all.where(product: price_cat , customer: u.account.code)) || (Discount.all.where(product: prod_code , customer: u.account.code)) || (Discount.all.where(product: prod_group , customer: u.account.code)) || (Discount.all.where(product: price_cat , customer: u.account.discount)) || (Discount.all.where(product: prod_code , customer: u.account.discount)) || (Discount.all.where(product: prod_group , customer: u.account.discount))
 	if discos = Discount.all.where('product = ? OR product = ? OR product = ?', price_cat , prod_code , prod_group).where('customer = ? OR customer = ?', u.account.code, u.account.discount)
 		if disco = discos.all.where('maxqty >= ?', qty).first
+		puts '--------------------------------------------'
+		puts '--------------------------------------------'
+		puts '--------------------------------------------'
 		puts discos.all.where('maxqty >= ?', qty)	
 		    if disco.disctype == 'fixedtype'
 		      result =  disco.discount
