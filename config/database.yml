@@ -9,10 +9,10 @@
 default: &default
   adapter: postgresql
   encoding: utf8
-  database: 'd85oi10u6l6dvt'
-  username: 'raqlglfcahxhpw'
-  password: '619d2e9bd5fd064cf7fc000b88554568e52506645afb4043dc746a42891a8ec8'
-  host: 'ec2-54-221-220-82.compute-1.amazonaws.com'
+  database: 'd4reb12ti5kf2j'
+  username: 'pxanpgqclwzjlo'
+  password: '21690cba4fe35f418a092cea64760d3e5df8c3d0f568c490523b0ebe15b203ad'
+  host: 'ec2-107-21-109-15.compute-1.amazonaws.com'
   sslmode: require
 #THIS WAS WORKING 6/7 - possibly Heroku change the database credentials every so often?
 
