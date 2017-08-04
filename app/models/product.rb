@@ -12,7 +12,7 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 		    if disco.disctype == 'fixedtype'
 		      result =  disco.discount
 		    else
-		      result = price - ((price / 100) * disco.discount)
+		      result = 1
 		    end
 		else
 			result = price
