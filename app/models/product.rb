@@ -21,15 +21,16 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 	else
 		result = price
 	end
+		if discos = Discount.all.where(product: price_cat, customer: u.account.code)
+		result = 3
+	end
 	if discos = Discount.all.where(product: prod_group, customer: u.account.code)
 		result = 1
 	end
 	if discos = Discount.all.where(product: prod_code, customer: u.account.code)
 		result = 2
 	end
-	if discos = Discount.all.where(product: price_cat, customer: u.account.code)
-		result = 3
-	end
+
 	return result
 end
 
