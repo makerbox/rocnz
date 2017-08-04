@@ -27,7 +27,7 @@ def calc_qty_disc
   end
   
   if discos = Discount.all.where('product = ? OR product = ? OR product = ?', price_cat , prod_code , prod_group).where('customer = ? OR customer = ?', u.account.code, u.account.discount) #get the matching discounts
-    disco = discos.where('maxqty <= ?', qty).first
+    disco = discos.where('maxqty >= ?', qty).last
     if disco.disctype == 'fixedtype'
       result = disco.discount
     else
