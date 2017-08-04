@@ -19,7 +19,8 @@ def calc_qty_disc
   prod_group = params[:group]
   prod_code = params[:code]
   price_cat = params[:pricecat]
-
+  qty = params[:qty]
+  
   if current_user.mimic
     u = current_user.mimic
   else
