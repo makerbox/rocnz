@@ -4,10 +4,10 @@ has_many :orders, through: :quantities
 
 def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 	
-	if discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code || u.account.discount))
+	# if discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code || u.account.discount))
 		# FOR SOME REASON CHANGING THE ORDER OF THE 'price_cat || prod_code || prod_group' WORKS? THIS COULD MEAN SOMETHING ELSE IS WRONG
 		# discos = (Discount.all.where(product: price_cat , customer: u.account.code)) || (Discount.all.where(product: prod_code , customer: u.account.code)) || (Discount.all.where(product: prod_group , customer: u.account.code)) || (Discount.all.where(product: price_cat , customer: u.account.discount)) || (Discount.all.where(product: prod_code , customer: u.account.discount)) || (Discount.all.where(product: prod_group , customer: u.account.discount))
-
+	if discos = Discount.all.where('product = ? OR product = ? OR product = ?', prod_group , prod_code , price_cat).where(customer: (u.account.code || u.account.discount))
 		if discos.where('maxqty >= ?', qty).first
 			disco = discos.where('maxqty >= ?', qty).first
 		    if disco.disctype == 'fixedtype'
@@ -20,15 +20,6 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 		end
 	else
 		result = price
-	end
-		if !Discount.all.where(product: price_cat, customer: u.account.code).nil?
-		result = 3
-	end
-	if !Discount.all.where(product: prod_group, customer: u.account.code).nil?
-		result = 1
-	end
-	if !Discount.all.where(product: prod_code, customer: u.account.code).nil?
-		result = 2
 	end
 
 	return result
