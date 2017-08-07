@@ -11,3 +11,9 @@
 .btn.btn-success{
 	margin-top:.7em;
 }
+@media screen and (max-device-width:767px) , (max-width:767px){
+	.product{
+	width:100%;
+	}
+
+}
