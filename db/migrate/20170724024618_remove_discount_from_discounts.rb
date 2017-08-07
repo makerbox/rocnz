@@ -1,5 +1,5 @@
-class RemoveDiscountFromDiscounts < ActiveRecord::Migration
+class RemoveDiscountFromDiscount < ActiveRecord::Migration
   def change
-    remove_column :discounts, :discount, :decimal
+    remove_column :discount, :discount, :decimal
   end
 end

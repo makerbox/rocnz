@@ -1,5 +1,5 @@
-class AddDiscountToDiscounts < ActiveRecord::Migration
+class AddDiscountToDiscount < ActiveRecord::Migration
   def change
-    add_column :discounts, :discount, :float
+    add_column :discount, :discount, :float
   end
 end
