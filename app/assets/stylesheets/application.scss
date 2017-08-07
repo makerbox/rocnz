@@ -319,7 +319,14 @@ max-width:100%;
 
 @media screen and (max-device-width:800px){
 .cart{
-	display:none;
+	position:absolute;
+	top:10em;
+}
+.productlist{
+	width:50vw;
+}
+.product{
+	width:49%;
 }
 	.mycontainer{
 	padding:0 1em 0 1em;
