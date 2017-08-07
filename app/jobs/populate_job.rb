@@ -189,7 +189,7 @@ class PopulateJob
       Contact.create(code:'running', email:'running')
 
 
-     dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+     dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
 
 
       # -------------------------GET PRODUCTS AND CREATE / UPDATE PRODUCT RECORDS------------------------
@@ -239,7 +239,7 @@ class PopulateJob
           dbh.disconnect
 
       #-------------------------UPDATE PRODUCTS WITH CATEGORIES -------------------------------------
-      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
       @products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
       @categories = dbh.execute("SELECT * FROM prodmastext").fetch(:all, :Struct)
       @categories.each do |cat|
@@ -253,7 +253,7 @@ class PopulateJob
           dbh.disconnect
 
       #------------------------GET DATES AND UPDATE THE PRODUCTS WITH new_date FIELD-----------------------
-      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
 
       @datedata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
 
@@ -267,7 +267,7 @@ class PopulateJob
       dbh.disconnect
 
       # ------------------------GET FABS, CONNECT THEM, AND UPDATE THE PRODUCTS-----------------------
-      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
 
       @fabdata = dbh.execute("SELECT * FROM produdefdata").fetch(:all, :Struct)
       fab = ''
@@ -285,7 +285,7 @@ class PopulateJob
 
       # ------------------------DISCOUNTS---------------------------------------------------------
        Discount.destroy_all #wipe existing discounts in case of some deletions in Attache
-          dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+          dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
           discounts = dbh.execute("SELECT * FROM product_special_prices").fetch(:all, :Struct)
 
           def disco(percentage, fixed, fixedprice, level, maxqty, ctype, ptype, cust, prod)
@@ -391,7 +391,7 @@ class PopulateJob
       # -------------------------GET CUSTOMERS AND ADD / UPDATE THE DB----------------------------------
 
       counter = 0
-      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
       @customers_ext = dbh.execute("SELECT * FROM customer_mastext").fetch(:all, :Struct)
       @customers_ext.each do |ce|
         counter += 1
@@ -423,7 +423,7 @@ class PopulateJob
       dbh.disconnect 
 
 
-      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
       @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
       @customers.each do |c|
         code = c.Code.strip
@@ -445,7 +445,7 @@ class PopulateJob
       dbh.disconnect 
 
       # --------------------- ADD EMAIL ADDRESSES ----------------------
-      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
       contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
       contacts.each do |contact|
         if contact.Active == 1
