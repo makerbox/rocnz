@@ -18,7 +18,7 @@
 <% if user_signed_in? %>
 	<% polasports = products_path(title: 'Polasports Sunglasses', group: 'polasports') %>
 <% else %>
-	<% roc = home_polasports_path %>
+	<% polasports = home_polasports_path %>
 <% end %>
 <%= link_to polasports, class: 'homeoverlay'  do %>
 <!-- <img src='http://res.cloudinary.com/roc-cloudy/image/upload/v1480980887/polasports_backless_jhozlk.png'> -->
