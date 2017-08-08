@@ -4,7 +4,7 @@
 <div class="center">
 <div class="homecontainer">
 <div class='homeimg' style="background-image: url('http://res.cloudinary.com/ddmbp4xnw/image/upload/v1502067804/Roc_Sunglasses_qeerf5.jpg');">
-<% if user_signed_in? %>
+<% if (user_signed_in?) && (current_user.account) && (current_user.account.sort) && (current_user.checksort(current_user).include? 'R') %>
 	<% roc = products_path(title: 'Roc Sunglasses', group: 'roc', cat: 'C') %>
 <% else %>
 	<% roc = home_roc_path %>
