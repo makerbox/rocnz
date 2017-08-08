@@ -15,7 +15,7 @@
 </div>
 
 <div class='homeimg' style="background-image:url('http://res.cloudinary.com/ddmbp4xnw/image/upload/v1501734012/Polasports_-_Print_guuisk.jpg');">
-<% if user_signed_in? %>
+<% if (user_signed_in?) && (current_user.account) && (current_user.account.sort) && (current_user.checksort(current_user).include? 'P') %>
 	<% polasports = products_path(title: 'Polasports Sunglasses', group: 'polasports') %>
 <% else %>
 	<% polasports = home_polasports_path %>
@@ -26,7 +26,7 @@
 </div>
 
 <div class='homeimg' style="background-image:url('http://res.cloudinary.com/ddmbp4xnw/image/upload/v1501734012/Locello_-_Print_plobj1.jpg');">
-<% if user_signed_in? %>
+<% if (user_signed_in?) && (current_user.account) && (current_user.account.sort) && (current_user.checksort(current_user).include? 'L') %>
 	<% locello = products_path(title: 'Locello Sunglasses', group: 'locello') %>
 <% else %>
 	<% locello = home_locello_path %>
@@ -37,7 +37,7 @@
 </div>
 
 <div class='homeimg' style="background-image:url('http://res.cloudinary.com/ddmbp4xnw/image/upload/v1501734012/Unity_Sunglasses_-_Print_n45gtw.jpg');">
-<% if user_signed_in? %>
+<% if (user_signed_in?) && (current_user.account) && (current_user.account.sort) && (current_user.checksort(current_user).include? 'U') %>
 	<% unity = products_path(title: 'Unity Sunglasses', group: 'unity', cat: ['E','D']) %>
 <% else %>
 	<% unity = home_unity_path %>
