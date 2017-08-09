@@ -77,9 +77,9 @@ end
       @approvedorders = Order.where(user:current_user, active:false, approved: true, complete: false)
       @sentorders = Order.where(user:current_user, active:false, approved: true, complete: true)
     end
-    @pendingorders = @pendingorders.order(created_at: :asc).limit(5)
-    @approvedorders = @approvedorders.order(created_at: :asc).limit(5)
-    @sentorders = @sentorders.order(created_at: :asc).limit(5)
+    @pendingorders = @pendingorders.order(created_at: :desc).limit(5)
+    @approvedorders = @approvedorders.order(created_at: :desc).limit(5)
+    @sentorders = @sentorders.order(created_at: :desc).limit(5)
     # @sentorders = @sentorders.paginate(:page => params[:page], :per_page => 20)
   end
 
