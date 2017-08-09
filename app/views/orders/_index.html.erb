@@ -3,7 +3,7 @@
 	<ul>
 	<% @pendingorders.each do |o| %>
 		<%= link_to o do %>
-			<li><%= o.sent.strftime("%d/%m/%y | %I:%M:%S %p") %></li>
+			<li><%= o.sent.strftime("%d/%m/%y | %H:%M %p") %></li>
 		<% end %>
 	<% end %>
 	</ul>
