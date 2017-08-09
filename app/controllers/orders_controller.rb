@@ -8,7 +8,8 @@ class OrdersController < ApplicationController
     q.product.update(qty: newqty)
   end
   orderno = 'w' + (Order.count + 1).to_s
-  @order.update(active: false, sent: DateTime.now, total: params[:total], order_number: orderno) # move order to pending and give it a total
+  sent = DateTime.now
+  @order.update(active: false, sent: sent, total: params[:total], order_number: orderno) # move order to pending and give it a total
   
   @account = @order.user.account
   OrderEmailJob.perform_async(@order)
