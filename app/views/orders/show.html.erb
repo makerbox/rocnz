@@ -1,78 +1,144 @@
 <span id="notice"><%= notice %></span>
 <% if @order %>
-<% @order.total = 0 %>
-  <% if @order.quantities.any? %>
-  <% @order.quantities.each do |po| %>
-  <div class="po">
-  	<%= link_to product_path(Product.find_by(code: po.product.code)) do %>
-  	<div class="product-thumbnail">
-  	<%= cl_image_tag(po.product.code.strip) %>
-  	</div>
-  <%= po.product.code %>
-  	<% end %>
-  		<% if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?) %>
-                      <% level = current_user.mimic.account.seller_level.to_i %>
-                      <% thisperson = current_user.mimic.account.user %>
-                    <% else %>
-                      <% level = current_user.account.seller_level.to_i %>
-                      <% thisperson = current_user %>
-                    <% end %>
-                    <% case level %>
-                      <% when 1 %>
-                        <% oldprice = po.product.price1 %>
-                      <% when 2 %>
-                        <% oldprice = po.product.price2 %>
-                      <% when 3 %>
-                        <% oldprice = po.product.price3 %>
-                      <% when 4 %>
-                        <% oldprice = po.product.price4 %>
-                      <% when 5 %>
-                        <% oldprice = po.product.price5 %>
-                      <% when 6 %>
-                        <% oldprice = po.product.rrp %>
-                    <% end %>
-                    <% case level %>
-                      <% when 1 %>
-                        <% prodprice = po.product.calc_discount(thisperson, po.product.price1, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
-                      <% when 2 %>
-                        <% prodprice = po.product.calc_discount(thisperson, po.product.price2, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
-                      <% when 3 %>
-                        <% prodprice = po.product.calc_discount(thisperson, po.product.price3, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
-                      <% when 4 %>
-                        <% prodprice = po.product.calc_discount(thisperson, po.product.price4, po.product.group, po.product.code, po.product.pricecat), po.qty %>
-                      <% when 5 %>
-                        <% prodprice = po.product.calc_discount(thisperson, po.product.price5, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
-                      <% when 6 %>
-                        <% prodprice = po.product.rrp %>
-                    <% end %>
-  	$<%= number_with_precision(prodprice, precision: 2)%>
-  	<% subtotal = (po.qty * prodprice).round(2) %>
-  	<div class="qty"> x <%= po.qty %></div> ------- $<%= number_with_precision(subtotal, precision: 2) %>
-  	<% @order.total = @order.total + subtotal %>
+<% if @showbuttons = 'noshow' %>
+  <% @order.total = 0 %>
+    <% if @order.quantities.any? %>
+    <% @order.quantities.each do |po| %>
+    <div class="po">
+      <%= link_to product_path(Product.find_by(code: po.product.code)) do %>
+      <div class="product-thumbnail">
+      <%= cl_image_tag(po.product.code.strip) %>
+      </div>
+    <%= po.product.code %>
+      <% end %>
+        <% if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?) %>
+                        <% level = current_user.mimic.account.seller_level.to_i %>
+                        <% thisperson = current_user.mimic.account.user %>
+                      <% else %>
+                        <% level = current_user.account.seller_level.to_i %>
+                        <% thisperson = current_user %>
+                      <% end %>
+                      <% case level %>
+                        <% when 1 %>
+                          <% oldprice = po.product.price1 %>
+                        <% when 2 %>
+                          <% oldprice = po.product.price2 %>
+                        <% when 3 %>
+                          <% oldprice = po.product.price3 %>
+                        <% when 4 %>
+                          <% oldprice = po.product.price4 %>
+                        <% when 5 %>
+                          <% oldprice = po.product.price5 %>
+                        <% when 6 %>
+                          <% oldprice = po.product.rrp %>
+                      <% end %>
+                      <% case level %>
+                        <% when 1 %>
+                          <% prodprice = po.product.calc_discount(thisperson, po.product.price1, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
+                        <% when 2 %>
+                          <% prodprice = po.product.calc_discount(thisperson, po.product.price2, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
+                        <% when 3 %>
+                          <% prodprice = po.product.calc_discount(thisperson, po.product.price3, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
+                        <% when 4 %>
+                          <% prodprice = po.product.calc_discount(thisperson, po.product.price4, po.product.group, po.product.code, po.product.pricecat), po.qty %>
+                        <% when 5 %>
+                          <% prodprice = po.product.calc_discount(thisperson, po.product.price5, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
+                        <% when 6 %>
+                          <% prodprice = po.product.rrp %>
+                      <% end %>
+      $<%= number_with_precision(prodprice, precision: 2)%>
+      <% subtotal = (po.qty * prodprice).round(2) %>
+      <div class="qty"> x <%= po.qty %></div> ------- $<%= number_with_precision(subtotal, precision: 2) %>
+      <% @order.total = @order.total + subtotal %>
+</div>
+    <% end %>
+    <% end %>
+    <hr>
+    TOTAL (excl. freight & GST) = $<%= number_with_precision(@order.total, precision: 2) %>
+    
+    <hr>
+    <% if !@order.notes.blank? %>
+      Notes:  <%= @order.notes %><br>
+    <% end %>
 
-  <%= link_to 'remove', remove_product_path(id: po.id), class: 'btn btn-warning remove-btn' %></div>
-  <% end %>
-  <% end %>
-  <hr>
-  TOTAL (excl. freight & GST) = $<%= number_with_precision(@order.total, precision: 2) %>
-  <% if (current_user.account.company.blank? || current_user.account.phone.blank?) && !((current_user.has_role? :admin) || (current_user.has_role? :rep)) %>
-  <%= link_to 'please fill in your account details before placing an order', account_path(current_user.account), class: 'btn btn-info' %> <hr>
-  <% else %>
-  <hr>
-  <% if !@order.notes.blank? %>
-    Notes:  <%= @order.notes %>
-    <%= link_to ' ', edit_order_path(@order), class: 'fa fa-pencil btn btn-warning' %><br>
-  <% else %>
-    <%= link_to ' ADD NOTES', edit_order_path(@order), class: 'fa fa-pencil btn btn-warning' %><br>
-  <% end %>
+    <% if @order.delivery_date %>
+      DELIVERY BY <%=  @order.delivery_date %><br> 
+    <% end %>
+<% else %>
+  <% @order.total = 0 %>
+    <% if @order.quantities.any? %>
+    <% @order.quantities.each do |po| %>
+    <div class="po">
+    	<%= link_to product_path(Product.find_by(code: po.product.code)) do %>
+    	<div class="product-thumbnail">
+    	<%= cl_image_tag(po.product.code.strip) %>
+    	</div>
+    <%= po.product.code %>
+    	<% end %>
+    		<% if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?) %>
+                        <% level = current_user.mimic.account.seller_level.to_i %>
+                        <% thisperson = current_user.mimic.account.user %>
+                      <% else %>
+                        <% level = current_user.account.seller_level.to_i %>
+                        <% thisperson = current_user %>
+                      <% end %>
+                      <% case level %>
+                        <% when 1 %>
+                          <% oldprice = po.product.price1 %>
+                        <% when 2 %>
+                          <% oldprice = po.product.price2 %>
+                        <% when 3 %>
+                          <% oldprice = po.product.price3 %>
+                        <% when 4 %>
+                          <% oldprice = po.product.price4 %>
+                        <% when 5 %>
+                          <% oldprice = po.product.price5 %>
+                        <% when 6 %>
+                          <% oldprice = po.product.rrp %>
+                      <% end %>
+                      <% case level %>
+                        <% when 1 %>
+                          <% prodprice = po.product.calc_discount(thisperson, po.product.price1, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
+                        <% when 2 %>
+                          <% prodprice = po.product.calc_discount(thisperson, po.product.price2, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
+                        <% when 3 %>
+                          <% prodprice = po.product.calc_discount(thisperson, po.product.price3, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
+                        <% when 4 %>
+                          <% prodprice = po.product.calc_discount(thisperson, po.product.price4, po.product.group, po.product.code, po.product.pricecat), po.qty %>
+                        <% when 5 %>
+                          <% prodprice = po.product.calc_discount(thisperson, po.product.price5, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
+                        <% when 6 %>
+                          <% prodprice = po.product.rrp %>
+                      <% end %>
+    	$<%= number_with_precision(prodprice, precision: 2)%>
+    	<% subtotal = (po.qty * prodprice).round(2) %>
+    	<div class="qty"> x <%= po.qty %></div> ------- $<%= number_with_precision(subtotal, precision: 2) %>
+    	<% @order.total = @order.total + subtotal %>
 
-  <% if @order.delivery_date %>
-    <%= link_to @order.delivery_date, edit_order_path(@order), class: 'fa fa-calendar btn btn-warning' %><br> 
-  <% else %>
-    <%= link_to ' DELIVERY DATE', edit_order_path(@order), class: 'fa fa-calendar btn btn-warning' %> 
+    <%= link_to 'remove', remove_product_path(id: po.id), class: 'btn btn-warning remove-btn' %></div>
+    <% end %>
+    <% end %>
+    <hr>
+    TOTAL (excl. freight & GST) = $<%= number_with_precision(@order.total, precision: 2) %>
+    <% if (current_user.account.company.blank? || current_user.account.phone.blank?) && !((current_user.has_role? :admin) || (current_user.has_role? :rep)) %>
+    <%= link_to 'please fill in your account details before placing an order', account_path(current_user.account), class: 'btn btn-info' %> <hr>
+    <% else %>
+    <hr>
+    <% if !@order.notes.blank? %>
+      Notes:  <%= @order.notes %>
+      <%= link_to ' ', edit_order_path(@order), class: 'fa fa-pencil btn btn-warning' %><br>
+    <% else %>
+      <%= link_to ' ADD NOTES', edit_order_path(@order), class: 'fa fa-pencil btn btn-warning' %><br>
+    <% end %>
+
+    <% if @order.delivery_date %>
+      <%= link_to @order.delivery_date, edit_order_path(@order), class: 'fa fa-calendar btn btn-warning' %><br> 
+    <% else %>
+      <%= link_to ' DELIVERY DATE', edit_order_path(@order), class: 'fa fa-calendar btn btn-warning' %> 
+    <% end %>
+    <%= link_to ' SEND ORDER', sendorder_order_path(@order, total: @order.total), class: 'fa fa-paper-plane btn btn-info' %>
+    <hr>
+    <% end %>
+    <%= link_to ' cancel', order_path(@order), method: :delete, class: 'fa fa-trash btn btn-danger' %>
   <% end %>
-  <%= link_to ' SEND ORDER', sendorder_order_path(@order, total: @order.total), class: 'fa fa-paper-plane btn btn-info' %>
-  <hr>
-  <% end %>
-  <%= link_to ' cancel', order_path(@order), method: :delete, class: 'fa fa-trash btn btn-danger' %>
 <% end %>
