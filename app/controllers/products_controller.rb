@@ -146,7 +146,7 @@ end
               @products = @products.where(category: params[:filter])
             end
         elsif group == 'unity'
-            @products = Product.where(group: ['E', 'R', 'D', 'A'])
+            @products = Product.where(group: ['E', 'R', 'D', 'A', 'Z'])
             if params[:cat]
               @products = @products.where(group: params[:cat])
             end
