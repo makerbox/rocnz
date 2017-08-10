@@ -319,6 +319,9 @@ max-width:100%;
 }
 
 @media screen and (max-device-width:800px){
+.navbar-right{
+	float:right;
+}
 .cart{
 	position:absolute;
 	top:10em;
