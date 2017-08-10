@@ -323,7 +323,10 @@ max-width:100%;
 	float:right;
 }
 #productlist{
-	width:100vw;
+	width:90vw !important;
+}
+.product{
+	width:100% !important;
 }
 .cart{
 	display:none;

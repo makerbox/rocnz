@@ -9,7 +9,6 @@ class OrdersController < ApplicationController
   end
   orderno = 'w' + (Order.count + 1).to_s
   sent = DateTime.now
-  
   @order.update(active: false, sent: sent, total: params[:total], order_number: orderno) # move order to pending and give it a total
   
   @account = @order.user.account
@@ -59,7 +58,11 @@ end
     end
     if params[:id]
       @order = Order.find(params[:id])
-      @showbuttons = 'noshow'
+      if params[:showcart]
+        @showbuttons = 'show'
+      else
+        @showbuttons = 'noshow'
+      end
     end
   end
 
