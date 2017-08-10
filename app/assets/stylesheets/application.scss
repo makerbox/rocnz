@@ -318,10 +318,16 @@ max-width:100%;
 }
 }
 
-@media screen and (max-device-width:800px){
-.navbar-right{
+@media screen and (max-device-width:767px) , (max-width:767px){
+	.navbar-right{
 	float:right;
 }
+#productlist{
+	width:100vw;
+}
+}
+@media screen and (max-device-width:800px){
+
 .cart{
 	position:absolute;
 	top:10em;
