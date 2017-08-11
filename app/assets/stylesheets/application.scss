@@ -327,7 +327,12 @@ max-width:100%;
 }
 .mobile-cart-btn{
 	display:inline-block;
+    padding: 1em;
+    border: 1px solid #CCC;
+    margin: 1em;
+    border-radius: 1em;
 }
+
 #productlist{
 	width:90vw !important;
 }
