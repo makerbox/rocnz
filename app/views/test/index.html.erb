@@ -1,5 +1,8 @@
 LAST DISCOUNT UPLOADED AT <%= @lastdiscount.created_at %>
-
+<% Account.all.each do |acct| %>
+<%= acct.rep %>
+<br>
+<% end %>
 
 
 <%= link_to 'PULL', home_pull_path, class: 'btn btn-info' %>

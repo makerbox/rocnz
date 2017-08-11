@@ -50,13 +50,13 @@ end
     end
     case current_user.account.code
       when 'REPNSW'
-        @accounts = @accounts.where(state: 'NSW')
+        @accounts = @accounts.where('rep = ? OR rep = ?', 'GT', 'GTS')
       when 'REPVIC'
-        @accounts = @accounts.where(state: 'VIC')
+        @accounts = @accounts.where('rep = ?', 'AG')
       when 'REPQLD1'
-        @accounts = @accounts.where(state: 'QLD')
+        @accounts = @accounts.where('rep = ? OR rep = ?', 'SG', 'SGW')
       when 'REPQLD2'
-        @accounts = @accounts.where(state: 'QLD')
+        @accounts = @accounts.where('rep = ? OR rep = ? OR rep = ?', 'SK', 'SKT', 'SKN')
     end
     # if current_user.email != 'web@roccloudy.com'
     #   @accounts = @accounts.where(rep: current_user.account.code)
