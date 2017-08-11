@@ -32,15 +32,11 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="../">
-          <img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479963402/RocCloudy_axxjva.jpg"><div class='tinytext'> 
-          <% if Contact.find_by(code:'running', email:'running') %>
-          <span style="color:red;">
-          <% else %>
-          <span style="color:green;">
-          <% end %>
-          .
-          </span></div>
+          <img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479963402/RocCloudy_axxjva.jpg">
         </a>
+        <% if current_user.orders.any? && current_user.orders.last.active == true %>
+            <%= link_to 'View Cart', order_path(current_user.orders.where(active: true).last, showcart: 'show'), class: 'mobile-cart-btn' %>
+            <% end %> 
 
       </div>
 
