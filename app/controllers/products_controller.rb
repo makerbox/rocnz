@@ -160,11 +160,11 @@ end
     if params[:filter] == 'new'
       @products = @products.where("new_date >= ?", Date.today - 30.days)
     end
-    if group == 'unity' #qty must be over 20 for unity
-      @products = @products.where("qty > ?", 20)
-    else #qty must be over 5 for other brands
-      @products = @products.where("qty > ?", 5)
-    end
+    # if group == 'unity' #qty must be over 20 for unity
+      # @products = @products.where("qty > ?", 20)
+    # else #qty must be over 5 for other brands
+      # @products = @products.where("qty > ?", 5)
+    # end
     @products = @products.order(group: 'DESC').order(code: 'ASC')
     @totalproducts = @products.count
 
