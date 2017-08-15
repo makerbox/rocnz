@@ -18,7 +18,7 @@
               price5 = p.SalesPrice5
               rrp = p.SalesPrice6
               qty = p.QtyInStock
-              qty = qty - p.QtyReserved
+              qty = qty - p.QtyReserve
               if p.AllowDisc == 1
                 allow_disc = true
               else
