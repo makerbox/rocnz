@@ -7,7 +7,7 @@
     <div class="po">
       <%= link_to product_path(Product.find_by(code: po.product.code)) do %>
       <div class="product-thumbnail">
-      <%= cl_image_tag(po.product.code.strip) %>
+      <%= cl_image_tag(po.product.code.strip + ".jpg") %>
       </div>
     <%= po.product.code %>
       <% end %>
@@ -71,7 +71,7 @@
     <div class="po">
       <%= link_to product_path(Product.find_by(code: po.product.code)) do %>
       <div class="product-thumbnail">
-      <%= cl_image_tag(po.product.code.strip) %>
+      <%= cl_image_tag(po.product.code.strip + ".jpg") %>
       </div>
     <%= po.product.code %>
       <% end %>

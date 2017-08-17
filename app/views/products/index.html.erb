@@ -11,7 +11,7 @@
       <div class="product">
         <%= link_to (product) do %>
           
-            <%= cl_image_tag(product.code.strip) %>
+            <%= cl_image_tag(product.code.strip + ".jpg") %>
             
             <div class="product-index-text">
               <%= product.code %> | <%= product.description %>
