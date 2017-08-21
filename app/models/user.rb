@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	rolify
+  rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -10,8 +10,14 @@ class User < ActiveRecord::Base
   
   after_create :assign_default_role
 
+  after_update :send_change_email
+
   def assign_default_role
-  		add_role(:user)
+      add_role(:user)
+  end
+
+  def send_change_email
+    AdminMailer.account_change_request('web@roccloudy.com', User.all.find_by(id: id).account).deliver_now
   end
 
   def checksort(user)
