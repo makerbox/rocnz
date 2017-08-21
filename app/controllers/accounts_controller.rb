@@ -127,7 +127,7 @@ end
   def update
     respond_to do |format|
       if @account.update(account_params)
-        AdminMailer.account_change_request('web@roccloudy.com', @account).deliver_now
+        AdminMailer.account_change_request('office@roccloudy.com', @account).deliver_now
         format.html { redirect_to accounts_path, notice: 'Account was successfully updated.' }
         format.json { render :show, status: :ok, location: @account }
       else
