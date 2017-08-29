@@ -62,7 +62,7 @@ class QuantitiesController < ApplicationController
   def update
     respond_to do |format|
       if @quantity.update(quantity_params)
-        format.html { redirect_to @quantity, notice: 'Quantity was successfully updated.' }
+        format.html { redirect_to products_path(cat: @quantity.product.group, :anchor => @quantity.product.code), notice: 'Quantity was successfully updated.' }
         format.json { render :show, status: :ok, location: @quantity }
       else
         format.html { render :edit }
