@@ -110,7 +110,7 @@ end
 
     respond_to do |format|
       if @account.save
-        EmailJob.perform_async('cheryl@roccloudy.com', @account) #email admin with notification
+        EmailJob.perform_async('office@roccloudy.com', @account) #email admin with notification
         UserEmailJob.perform_async(@account.user.email) #email the user with a receipt
 
         format.html { redirect_to @account, notice: 'Account was successfully created.' }
@@ -127,7 +127,7 @@ end
   def update
     respond_to do |format|
       if @account.update(account_params)
-        AdminMailer.account_change_request('cheryl@roccloudy.com', @account).deliver_now
+        AdminMailer.account_change_request('office@roccloudy.com', @account).deliver_now
         format.html { redirect_to accounts_path, notice: 'Account was successfully updated.' }
         format.json { render :show, status: :ok, location: @account }
       else
