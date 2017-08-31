@@ -5,7 +5,7 @@
   <% @order.quantities.each do |po| %>
   <% if @order.quantities.where(product: po.product).count > 1 %>
   <div class="po warning">
-  Item already in cart<hr>
+  Item already in cart<br>
   <% else %>
   <div class="po">
   <% end %>
