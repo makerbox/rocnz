@@ -3,7 +3,12 @@
 <% @order.total = 0 %>
   <% if @order.quantities.any? %>
   <% @order.quantities.each do |po| %>
+  <% if @order.quantities.where(product: po.product).count > 1 %>
+  <div class="po warning">
+  Item already in cart
+  <% else %>
   <div class="po">
+  <% end %>
   	<%= link_to product_path(Product.find_by(code: po.product.code)) do %>
   	<div class="product-thumbnail">
   	<%= cl_image_tag(po.product.code.strip + ".jpg") %>
