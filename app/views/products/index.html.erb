@@ -8,7 +8,11 @@
         </div>
       </div>
       <% @products.each do |product| %>
-      <div class="product">
+            <% if product.hidden %>
+        <div class="product highlighted-hidden" id="<%= product.code %>">
+      <% else %>
+        <div class="product" id="<%= product.code %>">
+      <% end %>
         <%= link_to (product) do %>
           
             <%= cl_image_tag(product.code.strip + ".jpg") %>
