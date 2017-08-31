@@ -190,6 +190,9 @@ end
       end
       @quantity = Quantity.new
   end
+  if searchterm = params[:searchterm]
+      @products = @products.where('lower(code) LIKE ? OR lower(description) LIKE ?', "%#{searchterm.downcase}%", "%#{searchterm.downcase}%")
+  end
 end
 
   # GET /products/1
