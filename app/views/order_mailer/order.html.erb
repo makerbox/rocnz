@@ -67,7 +67,7 @@
     <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px; text-align:right;" width="50" align="right">Price</th>
     <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px; text-align:right;" width="50" align="right">Subtotal</th>
   </tr>
-  <% @thisorder.quantities.each do |q| %>
+  <% @thisorder.quantities.order(brand: 'ASC').each do |q| %>
   <% case @level %>
   <% when 1 %>
   <% oldprice = q.product.price1 %>
