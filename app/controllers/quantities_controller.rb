@@ -25,6 +25,7 @@ class QuantitiesController < ApplicationController
   # POST /quantities.json
   def create
     @quantity = Quantity.new(quantity_params)
+    @quantity.brand = @quantity.product.group
     if @quantity.order == nil
     #if there is not active order to add this to, we will just make one
     if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic)

@@ -2,7 +2,7 @@
 <% if @order %>
 <% @order.total = 0 %>
   <% if @order.quantities.any? %>
-  <% @order.quantities.each do |po| %>
+  <% @order.quantities.order(brand: 'ASC').each do |po| %>
   <% if @order.quantities.where(product: po.product).count > 1 %>
   <div class="po warning">
   Item already in cart<br>
