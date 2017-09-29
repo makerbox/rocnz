@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
   has_many :products, through: :quantities
   
   def kfi
-  	path = "/kfigen/" + self.id + self.user.account.company + ".txt"
+  	path = "/kfigen/" + self.id.to_s + self.user.account.company + ".txt"
   	content = "this is a test for the kfi file generator"
   	File.open(path, "w+") do |f|
   		f.write(content)
