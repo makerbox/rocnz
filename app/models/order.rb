@@ -4,7 +4,7 @@ class Order < ActiveRecord::Base
   has_many :products, through: :quantities
   
   def create_kfi(self)
-  	puts "path etc"
+  	
   end
 
 end
