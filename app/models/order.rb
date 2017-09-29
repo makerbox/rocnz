@@ -3,7 +3,7 @@ class Order < ActiveRecord::Base
   has_many :quantities,  dependent: :destroy 
   has_many :products, through: :quantities
   
-  def create_kfi(self)
+  def kfi()
   	
   end
 
