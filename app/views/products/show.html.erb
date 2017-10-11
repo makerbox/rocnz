@@ -90,7 +90,7 @@
         <%= render 'orders/sidecart' %>
       </p>
     </div>
-  <% elsif ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?) && (current_user.mimic.account.user.orders.any?) && (current_user.mimic.account.user.orders.last.active == true) %>
+  <% elsif ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && current_user.mimic && ((current_user.mimic.account.user.orders.any?) && (current_user.mimic.account.user.orders.last.active == true)) %>
     <div class="col-md-3 cart">
       <p>
         <i class="fa fa-shopping-cart fa-2x"></i>
