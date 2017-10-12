@@ -4,11 +4,11 @@ class Order < ActiveRecord::Base
   has_many :products, through: :quantities
   
   def kfi
-  	# path = self.id.to_s + self.user.account.company + ".txt"
-  	# content = "this is a test for the kfi file generator"
-  	# File.open(path, "w+") do |f|
-  	# 	f.write(content)
-  	# end
+  	path = "E:\\Attache\\Attache\\Roc\\KFIDATA\\Orders\\" + self.id.to_s + self.user.account.company + ".txt"
+  	content = "this is a test for the kfi file generator"
+  	File.open(path, "w+") do |f|
+  		f.write(content)
+  	end
   end
 
 end
