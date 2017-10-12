@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
     current_user.mimic.destroy
   end
 
-  redirect_to "http://218.214.78.21:3000/orders/#{@order.id}/kfime"
+  redirect_to "http://218.214.73.21:3000/orders/#{@order.id}/kfime"
 end
 
 def kfime
