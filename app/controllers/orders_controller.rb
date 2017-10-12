@@ -18,9 +18,13 @@ class OrdersController < ApplicationController
     current_user.mimic.destroy
   end
 
-  redirect_to home_confirm_path
+  redirect_to "http://218.214.78.21:3000/orders/kfime"
 end
 
+def kfime
+  Order.all.last.kfi
+  redirect_to "http://roccloudy.com/home/confirm"
+end
 # def cart #if there aren't any active orders, then create one
 #   product = Product.find_by(id: params[:product])
 #   order = Order.create(user: current_user, active: true)
