@@ -5,7 +5,7 @@ class Order < ActiveRecord::Base
   
   def kfi
   	path = "E:\\Attache\\Attache\\Roc\\KFIDATA\\Orders\\" + self.id.to_s + self.user.account.company + ".txt"
-  	content = "this is a test for the kfi file generator"
+  	content = 'this is a test for the kfi file generator --- "#{self.user.account.company}"'
   	File.open(path, "w+") do |f|
   		f.write(content)
   	end
