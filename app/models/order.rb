@@ -5,10 +5,16 @@ class Order < ActiveRecord::Base
   
   def kfi
   	filename = self.id.to_s + self.user.account.company
-  	path = "E:\\Attache\\Attache\\Roc\\KFIDATA\\Orders\\" + filename + ".kfi"
-  	content = 'this is a test for the kfi file generator --- 
-  	"#{self.user.account.company}","","","","","","","#{filename}","","#{self.order_number.to_s}","","","",""
-  	'
+  	path = "E:\\Attache\\Attache\\Rocnz\\KFIDATA\\Orders\\" + filename + ".kfi"
+  	items = ''
+  	self.quantities.each do |q|
+  		product = q.product.code.to_s
+  		qty = q.qty.to_s
+  		items = items + '"'+product+'","'+qty+'","","","",""/r/n'
+  	end
+  	notes = self.notes
+  	content = '"'+self.user.account.company+'","","","","","","","'+filename+'","","'+self.order_number.to_s+'","","","",""
+  	\r\n'+items+'<F9><F4><DOWN><DOWN><DOWN><DOWN><ENTER>,"","","'+notes+'","","","","","","","","","","","","",""'
   	File.open(path, "w+") do |f|
   		f.write(content)
   	end
