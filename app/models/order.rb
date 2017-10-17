@@ -5,7 +5,7 @@ class Order < ActiveRecord::Base
   
   def kfi
   	filename = self.id.to_s + self.user.account.company
-  	path = "E:\\Attache\\Attache\\Roc\\KFIDATA\\Orders\\" + filename + ".kfi"
+  	path = "E:\\Attache\\Attache\\ROCNZ\\KFIDATA\\Orders\\" + filename + ".kfi"
   	items = ''
   	self.quantities.each do |q|
   		product = q.product.code.to_s
