@@ -14,18 +14,19 @@
   }
 </style>
 <table style="font-family: 'Verdana', sans-serif; font-size: 10px; width:600px; text-align:left;" width="600" align="left">
+  <table style="font-family: 'Verdana', sans-serif; font-size: 10px; width:600px; text-align:left;" width="600" align="left">
   <tr align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif;">
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:400px;" width="400"><b>Customer</b></td><td><%= @thisorder.user.account.company %></td>
+    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150"><b>Customer</b></td><td><%= @thisorder.user.account.company %></td>
   </tr>
   <tr align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif;">
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:400px;" width="400"><b>Cust No.</b></td><td><%= @thisorder.user.account.code %></td>
+    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150"><b>Cust No.</b></td><td><%= @thisorder.user.account.code %></td>
   </tr>
   <tr align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif;">
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:400px;" width="400"><b>Address</b></td><td><%= @thisorder.user.account.street %>
+    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150"><b>Address</b></td><td><%= @thisorder.user.account.street %>
     <%= @thisorder.user.account.suburb %></td>
   </tr>
   <tr align="left" style="text-align:left;">
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:400px;" width="400">
+    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
       Notes:
     </td>
     <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
@@ -33,7 +34,7 @@
     </td>
   </tr>
   <tr align="left" style="text-align:left;">
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:400px;" width="400">
+    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
       Order number:
     </td>
     <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
@@ -41,7 +42,7 @@
     </td>
   </tr>
   <tr align="left" style="text-align:left;">
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:400px;" width="400">
+    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
       Customer order number:
     </td>
     <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
@@ -49,14 +50,15 @@
     </td>
   </tr>
   <tr align="left" style="text-align:left;">
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:400px;" width="400">
+    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
       Delivery date:
     </td>
     <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
       <%= @thisorder.delivery_date %>
     </td>
   </tr>
-
+</table>
+<table style="font-family: 'Verdana', sans-serif; font-size: 10px; width:600px; text-align:left;" width="600" align="left">
   <tr style="font-family: 'Verdana', sans-serif; font-size: 10px; width:600px;" width="600">
     <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:40px;" width="40">Item No.</th>
     <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:30px;" width="30">Qty</th>
