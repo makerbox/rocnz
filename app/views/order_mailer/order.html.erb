@@ -1,142 +1,135 @@
 <style>
-  * {
-    font-family: 'Verdana', sans-serif;
-  }
-  body, p, i, b, td{
-    font-size:10px;
-  }
-  h1{
-    font-size:15px;
-  }
-  td{
-    margin-right:30px;
-    padding-left:10px;
-  }
+* {
+  font-family: 'Verdana', sans-serif;
+}
+body, p, i, b, td{
+  font-size:10px;
+}
+h1{
+  font-size:15px;
+}
+td{
+  margin-right:30px;
+  padding-left:10px;
+}
 </style>
 <table style="width:600px; text-align:center;" align="center" width="600">
   <tbody>
-<tr>
-<td>
-  <table style="width:600px; text-align:center;" align="center" width="600">
-    <tbody>
-  <tr align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif;">
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150"><b>Customer</b></td><td><%= @thisorder.user.account.company %></td>
-  </tr>
-  <tr align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif;">
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150"><b>Cust No.</b></td><td><%= @thisorder.user.account.code %></td>
-  </tr>
-  <tr align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif;">
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150"><b>Address</b></td><td><%= @thisorder.user.account.street %>
-    <%= @thisorder.user.account.suburb %></td>
-  </tr>
-  <tr align="left" style="text-align:left;">
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
-      Notes:
-    </td>
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
-      <%= @thisorder.notes %>
-    </td>
-  </tr>
-  <tr align="left" style="text-align:left;">
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
-      Order number:
-    </td>
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
-      <%= @thisorder.order_number %>
-    </td>
-  </tr>
-  <tr align="left" style="text-align:left;">
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
-      Customer order number:
-    </td>
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
-      <%= @thisorder.cust_order_number %>
-    </td>
-  </tr>
-  <tr align="left" style="text-align:left;">
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
-      Delivery date:
-    </td>
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
-      <%= @thisorder.delivery_date %>
-    </td>
-  </tr>
-</tbody></table></td></tr>
-<tr><td>
-  <table style="font-family: 'Verdana', sans-serif; font-size: 10px; width:600px; text-align:left;" width="600" align="left"><tbody>
-  <tr style="font-family: 'Verdana', sans-serif; font-size: 10px; width:600px;" width="600">
-    <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:40px;" width="40">Item No.</th>
-    <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:30px;" width="30">Qty</th>
-    <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:380px;" width="380">Description</th>
-    <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px; text-align:right;" width="50" align="right">Price</th>
-    <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px; text-align:right;" width="50" align="right">Subtotal</th>
-  </tr>
-  <% @thisorder.quantities.order(brand: 'ASC').each do |q| %>
-  <% case @level %>
-  <% when 1 %>
-  <% oldprice = q.product.price1 %>
-  <% when 2 %>
-  <% oldprice = q.product.price2 %>
-  <% when 3 %>
-  <% oldprice = q.product.price3 %>
-  <% when 4 %>
-  <% oldprice = q.product.price4 %>
-  <% when 5 %>
-  <% oldprice = q.product.price5 %>
-  <% when 6 %>
-  <% oldprice = q.product.rrp %>
-  <% end %>
-  <% case @level %>
-  <% when 1 %>
-  <% prodprice = q.product.calc_discount(@thisperson, q.product.price1, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
-  <% when 2 %>
-  <% prodprice = q.product.calc_discount(@thisperson, q.product.price2, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
-  <% when 3 %>
-  <% prodprice = q.product.calc_discount(@thisperson, q.product.price3, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
-  <% when 4 %>
-  <% prodprice = q.product.calc_discount(@thisperson, q.product.price4, q.product.group, q.product.code, q.product.pricecat), q.qty %>
-  <% when 5 %>
-  <% prodprice = q.product.calc_discount(@thisperson, q.product.price5, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
-  <% when 6 %>
-  <% prodprice = q.product.rrp %>
-  <% end %>
-  
-  <% subtotal = (q.qty * prodprice).round(2) %>
-  <tr>
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:40px;" width="40"><%= q.product.code %></td>
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:30px;" width="30"><%= q.qty %></td>
-    <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:380px;" width="380"><%= q.product.description %></td>
-    <td style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" width="50" align="right">$<%= number_with_precision(prodprice, precision: 2)%></td>
-    <td style="font-size: 10px; width:50px; text-align:right; font-family: 'Verdana', sans-serif;" width="50" align="right">$<%= subtotal %></td>
-  </tr>
-  <% end %>
-        <tr align="left" style="text-align:left;">
-          <td></td><td></td><td></td>
-          <td style="text-align:right;" align="right">
-            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">SUBTOTAL :</b>
-          </td>
-          <td style="text-align:right;" align="right">
-            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= (@thisorder.total).round(2) %></b>
-          </td>
-        </tr>
-                <tr align="left" style="text-align:left;">
-          <td></td><td></td><td></td>
-          <td style="text-align:right;" align="right">
-            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">GST :</b>
-          </td>
-          <td style="text-align:right;" align="right">
-            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= (@thisorder.total * 0.1).round(2) %></b>
-          </td>
-        </tr>
+    <tr align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif;">
+      <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150"><b>Customer</b></td><td><%= @thisorder.user.account.company %></td>
+    </tr>
+    <tr align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif;">
+      <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150"><b>Cust No.</b></td><td><%= @thisorder.user.account.code %></td>
+    </tr>
+    <tr align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif;">
+      <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150"><b>Address</b></td><td><%= @thisorder.user.account.street %>
+        <%= @thisorder.user.account.suburb %></td>
+      </tr>
+      <tr align="left" style="text-align:left;">
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
+          Notes:
+        </td>
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+          <%= @thisorder.notes %>
+        </td>
+      </tr>
+      <tr align="left" style="text-align:left;">
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
+          Order number:
+        </td>
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+          <%= @thisorder.order_number %>
+        </td>
+      </tr>
+      <tr align="left" style="text-align:left;">
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
+          Customer order number:
+        </td>
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+          <%= @thisorder.cust_order_number %>
+        </td>
+      </tr>
+      <tr align="left" style="text-align:left;">
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
+          Delivery date:
+        </td>
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+          <%= @thisorder.delivery_date %>
+        </td>
+      </tr>
+      <tr style="font-family: 'Verdana', sans-serif; font-size: 10px; width:600px;" width="600">
+        <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:40px;" width="40">Item No.</th>
+        <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:30px;" width="30">Qty</th>
+        <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:380px;" width="380">Description</th>
+        <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px; text-align:right;" width="50" align="right">Price</th>
+        <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px; text-align:right;" width="50" align="right">Subtotal</th>
+      </tr>
+      <% @thisorder.quantities.order(brand: 'ASC').each do |q| %>
+      <% case @level %>
+      <% when 1 %>
+      <% oldprice = q.product.price1 %>
+      <% when 2 %>
+      <% oldprice = q.product.price2 %>
+      <% when 3 %>
+      <% oldprice = q.product.price3 %>
+      <% when 4 %>
+      <% oldprice = q.product.price4 %>
+      <% when 5 %>
+      <% oldprice = q.product.price5 %>
+      <% when 6 %>
+      <% oldprice = q.product.rrp %>
+      <% end %>
+      <% case @level %>
+      <% when 1 %>
+      <% prodprice = q.product.calc_discount(@thisperson, q.product.price1, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+      <% when 2 %>
+      <% prodprice = q.product.calc_discount(@thisperson, q.product.price2, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+      <% when 3 %>
+      <% prodprice = q.product.calc_discount(@thisperson, q.product.price3, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+      <% when 4 %>
+      <% prodprice = q.product.calc_discount(@thisperson, q.product.price4, q.product.group, q.product.code, q.product.pricecat), q.qty %>
+      <% when 5 %>
+      <% prodprice = q.product.calc_discount(@thisperson, q.product.price5, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+      <% when 6 %>
+      <% prodprice = q.product.rrp %>
+      <% end %>
 
-        <tr align="left" style="text-align:left;">
-          <td></td><td></td><td></td>
-          <td style="text-align:right;" align="right">
-            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">TOTAL :</b>
-          </td>
-          <td style="text-align:right;" align="right">
-            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= (@thisorder.total + (@thisorder.total * 0.1).round(2)) %></b>
-          </td>
-        </tr></tbody>
-</table>
-</td></tr></tbody></table>
+      <% subtotal = (q.qty * prodprice).round(2) %>
+      <tr>
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:40px;" width="40"><%= q.product.code %></td>
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:30px;" width="30"><%= q.qty %></td>
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:380px;" width="380"><%= q.product.description %></td>
+        <td style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" width="50" align="right">$<%= number_with_precision(prodprice, precision: 2)%></td>
+        <td style="font-size: 10px; width:50px; text-align:right; font-family: 'Verdana', sans-serif;" width="50" align="right">$<%= subtotal %></td>
+      </tr>
+      <% end %>
+      <tr align="left" style="text-align:left;">
+        <td></td><td></td><td></td>
+        <td style="text-align:right;" align="right">
+          <b style="font-size:12px; font-family: 'Verdana', sans-serif;">SUBTOTAL :</b>
+        </td>
+        <td style="text-align:right;" align="right">
+          <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= (@thisorder.total).round(2) %></b>
+        </td>
+      </tr>
+      <tr align="left" style="text-align:left;">
+        <td></td><td></td><td></td>
+        <td style="text-align:right;" align="right">
+          <b style="font-size:12px; font-family: 'Verdana', sans-serif;">GST :</b>
+        </td>
+        <td style="text-align:right;" align="right">
+          <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= (@thisorder.total * 0.1).round(2) %></b>
+        </td>
+      </tr>
+
+      <tr align="left" style="text-align:left;">
+        <td></td><td></td><td></td>
+        <td style="text-align:right;" align="right">
+          <b style="font-size:12px; font-family: 'Verdana', sans-serif;">TOTAL :</b>
+        </td>
+        <td style="text-align:right;" align="right">
+          <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= (@thisorder.total + (@thisorder.total * 0.1).round(2)) %></b>
+        </td>
+      </tr>
+    </tbody>
+  </table>
