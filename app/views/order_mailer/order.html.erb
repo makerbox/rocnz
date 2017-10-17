@@ -73,45 +73,7 @@ h1{
         <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px; text-align:right;" width="50" align="right">Price</th>
         <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px; text-align:right;" width="50" align="right">Subtotal</th>
       </tr>
-      <% @thisorder.quantities.order(brand: 'ASC').each do |q| %>
-      <% case @level %>
-      <% when 1 %>
-      <% oldprice = q.product.price1 %>
-      <% when 2 %>
-      <% oldprice = q.product.price2 %>
-      <% when 3 %>
-      <% oldprice = q.product.price3 %>
-      <% when 4 %>
-      <% oldprice = q.product.price4 %>
-      <% when 5 %>
-      <% oldprice = q.product.price5 %>
-      <% when 6 %>
-      <% oldprice = q.product.rrp %>
-      <% end %>
-      <% case @level %>
-      <% when 1 %>
-      <% prodprice = q.product.calc_discount(@thisperson, q.product.price1, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
-      <% when 2 %>
-      <% prodprice = q.product.calc_discount(@thisperson, q.product.price2, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
-      <% when 3 %>
-      <% prodprice = q.product.calc_discount(@thisperson, q.product.price3, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
-      <% when 4 %>
-      <% prodprice = q.product.calc_discount(@thisperson, q.product.price4, q.product.group, q.product.code, q.product.pricecat), q.qty %>
-      <% when 5 %>
-      <% prodprice = q.product.calc_discount(@thisperson, q.product.price5, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
-      <% when 6 %>
-      <% prodprice = q.product.rrp %>
-      <% end %>
 
-      <% subtotal = (q.qty * prodprice).round(2) %>
-      <tr>
-        <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:40px;" width="40"><%= q.product.code %></td>
-        <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:30px;" width="30"><%= q.qty %></td>
-        <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:380px;" width="380"><%= q.product.description %></td>
-        <td style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:50px;" width="50" align="right">$<%= number_with_precision(prodprice, precision: 2)%></td>
-        <td style="font-size: 10px; width:50px; text-align:right; font-family: 'Verdana', sans-serif;" width="50" align="right">$<%= subtotal %></td>
-      </tr>
-      <% end %>
       <tr align="left" style="text-align:left;">
         <td></td><td></td><td></td>
         <td style="text-align:right;" align="right">
