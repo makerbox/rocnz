@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :sendorder]
-
+  skip_before_action :authenticate_user!, only: [:kfime]
   def sendorder
   @order.quantities.each do |q| # change stock levels and calc order total
     oldqty = q.product.qty
