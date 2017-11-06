@@ -7,6 +7,8 @@ class TestController < ApplicationController
 		@products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
         @products.each do |p|
         	results << p.Inactive
+        	results << p.Code
+        	results << '-----------'
         end
 	end
 
