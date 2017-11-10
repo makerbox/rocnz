@@ -6,13 +6,15 @@ class TestController < ApplicationController
 		dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
 		@products = dbh.execute("SELECT * FROM product_master").fetch(:all, :Struct)
 
-@results = []
-@products.each do |p|
-	@results << p.Code
-	@results << '= inactive?'
-	@results << p.Inactive
-	@results << '............'
-	end
+		@results = []
+		@products.each do |p|
+			if p.Inactive == 0
+				@results << p.Code
+				@results << '= inactive?'
+				@results << p.Inactive
+				@results << '............'
+			end
+		end
 
 
 		dbh.disconnect
