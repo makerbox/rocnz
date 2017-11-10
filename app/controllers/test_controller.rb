@@ -10,7 +10,7 @@ class TestController < ApplicationController
 @products.each do |p|
 	@results << p.Code
 	@results << '= inactive?'
-	@results << p.inactive
+	@results << p.Inactive
 	@results << '............'
 	end
 
