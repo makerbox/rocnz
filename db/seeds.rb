@@ -47,6 +47,10 @@
                 end
                 
               end
+            else
+              #destroy inactive
+              code = p.Code.strip
+              Product.all.find_by(code: code).destroy
             end
           end
 
