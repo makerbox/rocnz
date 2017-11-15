@@ -50,7 +50,9 @@
             else
               #destroy inactive
               code = p.Code.strip
-              Product.all.find_by(code: code).destroy
+              if thisprod = Product.all.find_by(cod: code)
+                thisprod.destroy
+              end
             end
           end
 
