@@ -10,15 +10,15 @@ class User < ActiveRecord::Base
   
   after_create :assign_default_role
 
-  after_update :send_change_email
+   # after_update :send_change_email
 
   def assign_default_role
       add_role(:user)
   end
 
-  def send_change_email
-    AdminMailer.account_change_request('office@roccloudy.com', User.all.find_by(id: id).account).deliver_now
-  end
+  # def send_change_email
+    # AdminMailer.account_change_request('office@roccloudy.com', User.all.find_by(id: id).account).deliver_now
+  # end
 
   def checksort(user)
     if (user.has_role? :admin) || (user.has_role? :rep)
