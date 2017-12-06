@@ -224,7 +224,7 @@
             user.destroy
           end
         else
-          email = ce.EmailAddr
+          email = ce.EmailAddr.strip
           if !Account.all.find_by(code: code)
             if email.blank?
               email = counter
