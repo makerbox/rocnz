@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
     newqty = oldqty - q.qty
     q.product.update(qty: newqty)
   end
-  orderno = 'W' + (Order.count + 1).to_s
+  orderno = 'W' + (@order.id).to_s
   sent = DateTime.now
   @order.update(active: false, sent: sent, total: params[:total], order_number: orderno) # move order to pending and give it a total
   
