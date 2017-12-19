@@ -68,7 +68,6 @@ Account is pending approval.
 <%= link_to 'Edit account details', edit_account_path(@account), class: 'btn btn-default' %>
   <% if current_user.has_role? :admin %>
     <%= link_to 'Order for this customer', orderas_account_path(account: @account.id), class: 'btn btn-info' %>
-    <%= link_to 'delete user', destroy_user_account_path(account: @account.id), class: 'btn btn-danger' %>
   <% end %>
 <% end %>
 </div>

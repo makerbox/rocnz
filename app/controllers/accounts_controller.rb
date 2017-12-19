@@ -3,8 +3,8 @@ class AccountsController < ApplicationController
   before_action :securitycheck, only: [:index, :approve, :unapprove, :destroy]
 
   def destroy_user
-    @account = Account.find(params[:account])
-    @account.user.destroy
+    @user = User.find(params[:user])
+    @user.destroy
     redirect_to accounts_path
   end
 
@@ -68,6 +68,8 @@ end
     #   @accounts = @accounts.where(rep: current_user.account.code)
     # end
     @accounts = @accounts.paginate(:page => params[:page], :per_page => 20)
+
+    @blank_accounts = User.all.where(approved: false)
   end
 
   # GET /accounts/1
@@ -115,6 +117,7 @@ end
     end 
     if Account.where("code LIKE CONCAT('%',?,'%')", @account.company.upcase[0..5]).count >= 2
         @alert = Account.where("code LIKE CONCAT('%',?,'%')", @account.code).first
+        current_user.update(approved: false)
         redirect_to warning_exists_path
     else
       respond_to do |format|

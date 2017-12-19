@@ -80,3 +80,10 @@ Search: <input id="searchfield" type="text"><span class="btn btn-info" onclick="
     </tbody>
   </table>
   <%= will_paginate @accounts %>
+
+
+  <hr>
+  <p><b>Users with no account</b></p>
+  <% @blank_accounts.each do |u| %>
+    <%= u.email %><%= link_to 'delete user', destroy_user_account_path(id: 1, user: u.id), class: 'btn btn-danger' %><br>
+  <% end %>
