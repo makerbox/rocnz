@@ -107,17 +107,21 @@ end
         i += 1
       end
     end 
+    if Account.where("code LIKE CONCAT('%',?,'%')", @account.company.upcase[0..5]).count >= 2
+        @alert = Account.where("code LIKE CONCAT('%',?,'%')", @account.code).first
+        redirect_to warning_exists_path
+    else
+      respond_to do |format|
+        if @account.save
+          EmailJob.perform_async('cheryl@roccloudy.com', @account) #email admin with notification
+          UserEmailJob.perform_async(@account.user.email) #email the user with a receipt
 
-    respond_to do |format|
-      if @account.save
-        EmailJob.perform_async('cheryl@roccloudy.com', @account) #email admin with notification
-        UserEmailJob.perform_async(@account.user.email) #email the user with a receipt
-
-        format.html { redirect_to @account, notice: 'Account was successfully created.' }
-        format.json { render :show, status: :created, location: @account }
-      else
-        format.html { render :new }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
+          format.html { redirect_to @account, notice: 'Account was successfully created.' }
+          format.json { render :show, status: :created, location: @account }
+        else
+          format.html { render :new }
+          format.json { render json: @account.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

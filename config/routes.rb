@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'warning/exists'
+
   get 'test/index'
 
   resources :discounts
