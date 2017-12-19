@@ -2,6 +2,12 @@ class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy, :approve, :unapprove]
   before_action :securitycheck, only: [:index, :approve, :unapprove, :destroy]
 
+  def destroy_user
+    @account = Account.find(params[:account])
+    @account.user.destroy
+    redirect_to accounts_path
+  end
+
 #   check if user is admin - if not send them back home --- set which actions up top in the before_action
   def securitycheck
     if !((current_user.has_role? :admin) || (current_user.has_role? :rep))
