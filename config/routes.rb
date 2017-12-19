@@ -38,6 +38,7 @@ end
       get 'approve'
       get 'unapprove'
       get 'orderas'
+      get 'destroy_user'
     end
   end
   
