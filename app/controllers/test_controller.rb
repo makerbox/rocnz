@@ -20,7 +20,7 @@ class TestController < ApplicationController
           seller_level = c.PriceCat
           rep = c.SalesRep
           account.update_attributes(approved: 'approved', phone: phone, street: street, state: state, suburb: suburb, postcode: postcode, sort: sort, company: compname, rep: rep, seller_level: seller_level, discount: discount)
-        @results << sort + '-----' + compname
+        @results << sort << '-----' << compname
         end
       end
       dbh.disconnect 
