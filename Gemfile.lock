@@ -136,8 +136,8 @@ GEM
     odbc-rails (1.4)
       activerecord (>= 1.15)
     orm_adapter (0.5.0)
-    pg (1.0.0)
-    pg (1.0.0-x86-mingw32)
+    pg (0.21.0)
+    pg (0.21.0-x86-mingw32)
     rack (1.6.8)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -286,7 +286,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   odbc-rails
-  pg
+  pg (< 1.0)
   rails (= 4.2.1)
   rails_12factor
   rdbi-driver-odbc

@@ -50,7 +50,7 @@ gem 'ruby-odbc', group: :development
 gem 'odbc-rails', group: :development
 gem 'rdbi-driver-odbc', group: :development
 
-gem 'pg'
+gem "pg", "< 1.0"
 gem 'rails_12factor'
 
 
