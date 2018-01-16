@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
+# gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
 gem 'wdm', group: :development
 
 # fixes up foreign key error
