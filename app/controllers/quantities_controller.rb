@@ -49,10 +49,10 @@ class QuantitiesController < ApplicationController
     end
     respond_to do |format|
       if @quantity.save
-        format.html { redirect_to products_path(cat: @quantity.product.group, group: group), notice: 'Successfully added to order.' }
+        format.html { redirect_to products_path(cat: @quantity.product.group, group: group, :anchor => @quantity.product.code), notice: 'Successfully added to order.' }
         format.json { render :show, status: :created, location: @quantity }
       else
-        format.html { render :new }
+        format.html { redirect_to products_path(cat: @quantity.product.group, group: group, :anchor => @quantity.product.code), notice: 'Please enter a qty of at least 1.'}
         format.json { render json: @quantity.errors, status: :unprocessable_entity }
       end
     end
@@ -61,7 +61,7 @@ class QuantitiesController < ApplicationController
   # PATCH/PUT /quantities/1
   # PATCH/PUT /quantities/1.json
   def update
-        case @quantity.product.group
+    case @quantity.product.group
       when 'C' || 'J'
         group = 'roc'
       when 'L'
