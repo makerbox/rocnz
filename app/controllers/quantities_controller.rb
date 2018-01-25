@@ -33,6 +33,9 @@ class QuantitiesController < ApplicationController
     else
       @order = Order.create(user: current_user, active: true, approved: false, complete: false)
     end
+      #update the order to have an order number based on it's ID
+      order_num = 'W' + @order.id.to_s
+      @order.update(order_number: order_num)
       #and then add it to the new order
       @quantity.order = @order
     end
