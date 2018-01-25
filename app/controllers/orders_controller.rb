@@ -48,7 +48,7 @@ def index
   # this stuff is for the main index that only admin can see
   if user_signed_in?
     if (current_user.has_role? :admin)
-      @orders = Order.all
+      @orders = Order.all.order(created_at: :desc)
       @orders = @orders.paginate(:page => params[:page], :per_page => 20)
     else
       redirect_to home_index_path
