@@ -1,1 +1,24 @@
-index.html.erb
+<table class="table table-striped">
+	<tr>
+		<th>Date</th>
+		<th>Order No.</th>
+		<th>Company</th>
+		<th>Status</th>
+		<th></th>
+	</tr>
+	<% @orders.each do |order| %>	
+		<tr>
+			<td><%= order.created_at %></td>
+			<td><%= order.order_number %></td>
+			<td><%= order.user.account.company %></td>
+			<td><% if !order.sent %>
+					<span style="color:grey">unsent</span>
+				<% else %>
+					<span style="color:green;">sent</span>
+				<% end %></td>
+			<td><%= link_to order_path(order) do %>VIEW ORDER<% end %></td>
+		</tr>
+		
+	<% end %>
+</table>
+<%= will_paginate @orders %>
