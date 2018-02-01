@@ -2,23 +2,34 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :sendorder]
   skip_before_action :authenticate_user!, only: [:kfime]
   def sendorder
-  @order.quantities.each do |q| # change stock levels and calc order total
-    oldqty = q.product.qty
-    newqty = oldqty - q.qty
-    q.product.update(qty: newqty)
-  end
-  sent = DateTime.now
-  @order.update(active: false, sent: sent, total: params[:total]) # move order to pending and give it a total
-  
-  @account = @order.user.account
-  OrderEmailJob.perform_async(@order)
+    # collate duplicate products
+    unique_products = @order.products.uniq
+    unique_products.each do |q|
+      these_quantities = @order.quantities.where(product_id: q.id)
+      newqty = these_quantities.sum(:qty)
+      original = these_quantities.first
+      original.update(qty: newqty)
+      these_quantities.all.where.not(id: original.id).destroy_all
+    end
 
-  if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic)
-    current_user.mimic.destroy
-  end
+    @order.quantities.each do |q| # change stock levels and calc order total
+      oldqty = q.product.qty
+      newqty = oldqty - q.qty
+      q.product.update(qty: newqty)
+    end
+    sent = DateTime.now
+    @order.update(active: false, sent: sent, total: params[:total]) # move order to pending and give it a total
+    
+    @account = @order.user.account
+    OrderEmailJob.perform_async(@order)
 
-  redirect_to "http://218.214.73.21:3000/orders/#{@order.id}/kfime"
-end
+    if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic)
+      current_user.mimic.destroy
+    end
+
+    # redirect_to "http://218.214.73.21:3000/orders/#{@order.id}/kfime"
+    redirect_to "http://nz.roccloudy.com/home/confirm"
+  end
 
 def kfime
   Order.all.last.kfi
