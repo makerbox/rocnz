@@ -1,144 +1,161 @@
 <span id="notice"><%= notice %></span>
-<% if @order %>
-<% if @showbuttons == 'noshow' %>
-  <% @order.total = 0 %>
-    <% if @order.quantities.any? %>
-    <% @order.quantities.each do |po| %>
-    <div class="po">
-      <%= link_to product_path(Product.find_by(code: po.product.code)) do %>
-      <div class="product-thumbnail">
-      <%= cl_image_tag(po.product.code.strip + ".jpg") %>
-      </div>
-    <%= po.product.code %>
-      <% end %>
-        <% if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?) %>
-                        <% level = current_user.mimic.account.seller_level.to_i %>
-                        <% thisperson = current_user.mimic.account.user %>
-                      <% else %>
-                        <% level = current_user.account.seller_level.to_i %>
-                        <% thisperson = current_user %>
-                      <% end %>
-                      <% case level %>
-                        <% when 1 %>
-                          <% oldprice = po.product.price1 %>
-                        <% when 2 %>
-                          <% oldprice = po.product.price2 %>
-                        <% when 3 %>
-                          <% oldprice = po.product.price3 %>
-                        <% when 4 %>
-                          <% oldprice = po.product.price4 %>
-                        <% when 5 %>
-                          <% oldprice = po.product.price5 %>
-                        <% when 6 %>
-                          <% oldprice = po.product.rrp %>
-                      <% end %>
-                      <% case level %>
-                        <% when 1 %>
-                          <% prodprice = po.product.calc_discount(thisperson, po.product.price1, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
-                        <% when 2 %>
-                          <% prodprice = po.product.calc_discount(thisperson, po.product.price2, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
-                        <% when 3 %>
-                          <% prodprice = po.product.calc_discount(thisperson, po.product.price3, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
-                        <% when 4 %>
-                          <% prodprice = po.product.calc_discount(thisperson, po.product.price4, po.product.group, po.product.code, po.product.pricecat), po.qty %>
-                        <% when 5 %>
-                          <% prodprice = po.product.calc_discount(thisperson, po.product.price5, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
-                        <% when 6 %>
-                          <% prodprice = po.product.rrp %>
-                      <% end %>
-      $<%= number_with_precision(prodprice, precision: 2)%>
-      <% subtotal = (po.qty * prodprice).round(2) %>
-      <div class="qty"> x <%= po.qty %></div> ------- $<%= number_with_precision(subtotal, precision: 2) %>
-      <% @order.total = @order.total + subtotal %>
-</div>
-    <% end %>
-    <% end %>
-    <hr>
-    TOTAL (excl. freight & GST) = $<%= number_with_precision(@order.total, precision: 2) %>
+<a onclick="window.print();" style="cursor:pointer;">Print this page</a>
+
     
-    <hr>
-    <% if !@order.notes.blank? %>
-      Notes:  <%= @order.notes %><br>
-    <% end %>
+<style>
+* {
+  font-family: 'Verdana', sans-serif;
+}
+body, p, i, b, td{
+  font-size:10px;
+}
+h1{
+  font-size:15px;
+}
 
-    <% if @order.delivery_date %>
-      DELIVERY BY <%=  @order.delivery_date %><br> 
-    <% end %>
-<% else %>
-  <% @order.total = 0 %>
-    <% if @order.quantities.any? %>
-    <% @order.quantities.each do |po| %>
-    <div class="po">
-      <%= link_to product_path(Product.find_by(code: po.product.code)) do %>
-      <div class="product-thumbnail">
-      <%= cl_image_tag(po.product.code.strip + ".jpg") %>
-      </div>
-    <%= po.product.code %>
+</style>
+<table style="width:600px; text-align:center;" align="center" width="600">
+  <tbody>
+    <tr style="font-family: 'Verdana', sans-serif; font-size: 10px; width:600px;" width="600">
+      <td>
+<table style="width:600px; text-align:center;" align="center" width="600">
+  <tbody>
+    <tr align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif;">
+      <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150"><b>Customer</b></td><td><%= @order.user.account.company %></td>
+    </tr>
+    <tr align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif;">
+      <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150"><b>Cust No.</b></td><td><%= @order.user.account.code %></td>
+    </tr>
+    <tr align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif;">
+      <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150"><b>Address</b></td><td><%= @order.user.account.street %>
+        <%= @order.user.account.suburb %> <%= @order.user.account.postcode %></td>
+      </tr>
+      <tr align="left" style="text-align:left;">
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
+          Notes:
+        </td>
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+          <%= @order.notes %>
+        </td>
+      </tr>
+      <tr align="left" style="text-align:left;">
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
+          Order number:
+        </td>
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+          <%= @order.order_number %>
+        </td>
+      </tr>
+      <tr align="left" style="text-align:left;">
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
+          Customer order number:
+        </td>
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+          <%= @order.cust_order_number %>
+        </td>
+      </tr>
+      <tr align="left" style="text-align:left;">
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:150px;" width="150">
+          Delivery date:
+        </td>
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif;">
+          <%= @order.delivery_date %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</td>
+</tr>
+<tr style="font-family: 'Verdana', sans-serif; font-size: 10px; width:600px;" width="600">
+  <td>
+  <table style="width:600px; text-align:center;" align="center" width="600">
+    <tbody>
+      <tr style="font-family: 'Verdana', sans-serif; font-size: 10px; width:600px;" width="600">
+        <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:40px;" width="40">Item No.</th>
+        <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:30px;" width="30">Qty</th>
+        <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:380px;" width="380">Description</th>
+        <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px; text-align:right;" width="50" align="right">Price</th>
+        <th style="font-size:10px; font-family: 'Verdana', sans-serif; width:50px; text-align:right;" width="50" align="right">Subtotal</th>
+      </tr>
+      <% @order.quantities.order(brand: 'ASC').each do |q| %>
+      <% case @order.user.account.seller_level.to_i %>
+      <% when 1 %>
+      <% oldprice = q.product.price1 %>
+      <% when 2 %>
+      <% oldprice = q.product.price2 %>
+      <% when 3 %>
+      <% oldprice = q.product.price3 %>
+      <% when 4 %>
+      <% oldprice = q.product.price4 %>
+      <% when 5 %>
+      <% oldprice = q.product.price5 %>
+      <% when 6 %>
+      <% oldprice = q.product.rrp %>
       <% end %>
-        <% if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?) %>
-                        <% level = current_user.mimic.account.seller_level.to_i %>
-                        <% thisperson = current_user.mimic.account.user %>
-                      <% else %>
-                        <% level = current_user.account.seller_level.to_i %>
-                        <% thisperson = current_user %>
-                      <% end %>
-                      <% case level %>
-                        <% when 1 %>
-                          <% oldprice = po.product.price1 %>
-                        <% when 2 %>
-                          <% oldprice = po.product.price2 %>
-                        <% when 3 %>
-                          <% oldprice = po.product.price3 %>
-                        <% when 4 %>
-                          <% oldprice = po.product.price4 %>
-                        <% when 5 %>
-                          <% oldprice = po.product.price5 %>
-                        <% when 6 %>
-                          <% oldprice = po.product.rrp %>
-                      <% end %>
-                      <% case level %>
-                        <% when 1 %>
-                          <% prodprice = po.product.calc_discount(thisperson, po.product.price1, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
-                        <% when 2 %>
-                          <% prodprice = po.product.calc_discount(thisperson, po.product.price2, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
-                        <% when 3 %>
-                          <% prodprice = po.product.calc_discount(thisperson, po.product.price3, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
-                        <% when 4 %>
-                          <% prodprice = po.product.calc_discount(thisperson, po.product.price4, po.product.group, po.product.code, po.product.pricecat), po.qty %>
-                        <% when 5 %>
-                          <% prodprice = po.product.calc_discount(thisperson, po.product.price5, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
-                        <% when 6 %>
-                          <% prodprice = po.product.rrp %>
-                      <% end %>
-      $<%= number_with_precision(prodprice, precision: 2)%>
-      <% subtotal = (po.qty * prodprice).round(2) %>
-      <div class="qty"> x <%= po.qty %></div> ------- $<%= number_with_precision(subtotal, precision: 2) %>
-      <% @order.total = @order.total + subtotal %>
+      <% case @order.user.account.seller_level.to_i %>
+      <% when 1 %>
+      <% prodprice = q.product.calc_discount(@order.user, q.product.price1, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+      <% when 2 %>
+      <% prodprice = q.product.calc_discount(@order.user, q.product.price2, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+      <% when 3 %>
+      <% prodprice = q.product.calc_discount(@order.user, q.product.price3, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+      <% when 4 %>
+      <% prodprice = q.product.calc_discount(@order.user, q.product.price4, q.product.group, q.product.code, q.product.pricecat), q.qty %>
+      <% when 5 %>
+      <% prodprice = q.product.calc_discount(@order.user, q.product.price5, q.product.group, q.product.code, q.product.pricecat, q.qty) %>
+      <% when 6 %>
+      <% prodprice = q.product.rrp %>
+      <% end %>
 
-    <%= link_to 'remove', remove_product_path(id: po.id), class: 'btn btn-warning remove-btn' %></div>
-    <% end %>
-    <% end %>
-    <hr>
-    TOTAL (excl. freight & GST) = $<%= number_with_precision(@order.total, precision: 2) %>
-    <% if (current_user.account.company.blank? || current_user.account.phone.blank?) && !((current_user.has_role? :admin) || (current_user.has_role? :rep)) %>
-    <%= link_to 'please fill in your account details before placing an order', account_path(current_user.account), class: 'btn btn-info' %> <hr>
-    <% else %>
-    <hr>
-    <% if !@order.notes.blank? %>
-      Notes:  <%= @order.notes %>
-      <%= link_to ' ', edit_order_path(@order), class: 'fa fa-pencil btn btn-warning' %><br>
-    <% else %>
-      <%= link_to ' ADD NOTES', edit_order_path(@order), class: 'fa fa-pencil btn btn-warning' %><br>
-    <% end %>
+      <% subtotal = (q.qty * prodprice).round(2) %>
+      <tr>
+        <td align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif; width:40px;" width="40"><%= q.product.code %></td>
+        <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:30px;" width="30"><%= q.qty %></td>
+        <td style="text-align:left;font-size:10px; font-family: 'Verdana', sans-serif; width:390px;" width="390"><%= q.product.description %></td>
+        <td style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:40px;" width="40" align="right">$<%= number_with_precision(prodprice, precision: 2)%></td>
+        <td style="font-size: 10px; width:50px; text-align:right; font-family: 'Verdana', sans-serif;" width="50" align="right">$<%= subtotal %></td>
+      </tr>
+      <% end %>
+      <tr align="left" style="text-align:left;">
+          <td></td><td></td><td></td>
+          <td style="text-align:right;" align="right">
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;">QTY :</b>
+          </td>
+          <td style="text-align:right;" align="right">
+            <b style="font-size:12px; font-family: 'Verdana', sans-serif;"><%= @order.quantities.all.sum(:qty) %></b>
+          </td>
+        </tr>
+      <tr align="left" style="text-align:left;">
+        <td></td><td></td><td></td>
+        <td style="text-align:right;" align="right">
+          <b style="font-size:12px; font-family: 'Verdana', sans-serif;">SUBTOTAL :</b>
+        </td>
+        <td style="text-align:right;" align="right">
+          <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= (@order.total).round(2) %></b>
+        </td>
+      </tr>
+      <tr align="left" style="text-align:left;">
+        <td></td><td></td><td></td>
+        <td style="text-align:right;" align="right">
+          <b style="font-size:12px; font-family: 'Verdana', sans-serif;">GST :</b>
+        </td>
+        <td style="text-align:right;" align="right">
+          <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= (@order.total * 0.1).round(2) %></b>
+        </td>
+      </tr>
 
-    <% if @order.delivery_date %>
-      <%= link_to @order.delivery_date, edit_order_path(@order), class: 'fa fa-calendar btn btn-warning' %><br> 
-    <% else %>
-      <%= link_to ' DELIVERY DATE', edit_order_path(@order), class: 'fa fa-calendar btn btn-warning' %> 
-    <% end %>
-    <%= link_to ' SEND ORDER', sendorder_order_path(@order, total: @order.total), class: 'fa fa-paper-plane btn btn-info' %>
-    <hr>
-    <% end %>
-    <%= link_to ' cancel', order_path(@order), method: :delete, class: 'fa fa-trash btn btn-danger' %>
-  <% end %>
-<% end %>
+      <tr align="left" style="text-align:left;">
+        <td></td><td></td><td></td>
+        <td style="text-align:right;" align="right">
+          <b style="font-size:12px; font-family: 'Verdana', sans-serif;">TOTAL :</b>
+        </td>
+        <td style="text-align:right;" align="right">
+          <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= (@order.total + (@order.total * 0.1).round(2)) %></b>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</td>
+</tr>
+</tbody>
+</table>
