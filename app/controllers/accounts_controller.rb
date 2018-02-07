@@ -77,6 +77,7 @@ end
   def show
     if (current_user.has_role? :admin) || (current_user.has_role? :rep)
       account = Account.find(params[:id])
+
       @pendingorders = Order.where(user: account.user, active: false, approved: false, complete: false)
       @approvedorders = Order.where(user:account.user, active:false, approved: true, complete: false)
       @sentorders = Order.where(user:account.user, active:false, approved: true, complete: true)
@@ -106,6 +107,7 @@ end
     @account = Account.new(account_params)
     @account.user = current_user
     @account.code = @account.company.upcase[0..5]
+    @account.sort = @account.sort.upcase
     i = 1
     until !Account.find_by(code: @account.code)
       newcode = @account.code + i.to_s
@@ -140,6 +142,7 @@ end
   def update
     respond_to do |format|
       if @account.update(account_params)
+        @account.update(sort: @account.sort.upcase)
         AdminMailer.account_change_request('office@roccloudy.com', @account).deliver_now
         format.html { redirect_to accounts_path, notice: 'Account was successfully updated.' }
         format.json { render :show, status: :ok, location: @account }
