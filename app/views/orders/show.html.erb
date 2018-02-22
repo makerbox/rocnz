@@ -125,13 +125,16 @@ h1{
             <b style="font-size:12px; font-family: 'Verdana', sans-serif;"><%= @order.quantities.all.sum(:qty) %></b>
           </td>
         </tr>
+      <% if @order.total %>
       <tr align="left" style="text-align:left;">
         <td></td><td></td><td></td>
         <td style="text-align:right;" align="right">
           <b style="font-size:12px; font-family: 'Verdana', sans-serif;">SUBTOTAL :</b>
         </td>
         <td style="text-align:right;" align="right">
-          <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= (@order.total).round(2) %></b>
+          <b style="font-size:12px; font-family: 'Verdana', sans-serif;">
+            $<%= (@order.total).round(2) %>
+          </b>
         </td>
       </tr>
       <tr align="left" style="text-align:left;">
@@ -153,9 +156,22 @@ h1{
           <b style="font-size:12px; font-family: 'Verdana', sans-serif;">$<%= (@order.total + (@order.total * 0.1).round(2)) %></b>
         </td>
       </tr>
+      <% end %>
     </tbody>
   </table>
 </td>
 </tr>
 </tbody>
 </table>
+
+<% if @showbuttons == 'show' %>
+<div class="col-md-3 cart" id="cart" style="width:100%; display:block; left:0; border-radius:0;">
+        <p>
+          <i class="fa fa-shopping-cart fa-2x"></i>
+        </p>
+        <hr>
+        <p>
+          <%= render 'orders/sidecart' %>
+        </p>
+      </div>
+      <% end %>

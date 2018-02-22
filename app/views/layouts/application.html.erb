@@ -35,8 +35,8 @@
           <img src="http://res.cloudinary.com/roc-cloudy/image/upload/v1479963402/RocCloudy_axxjva.jpg">
         <% end %>
         <% if user_signed_in? && current_user.orders.any? && current_user.orders.last.active == true %>
-            <!--a href="#cart" class="mobile-cart-btn">View Cart</a-->
-        <% end %> 
+            <%= link_to 'View Cart', order_path(current_user.orders.where(active: true).last, showcart: 'show'), class: 'mobile-cart-btn' %>
+            <% end %> 
 
       </div>
 
@@ -130,6 +130,7 @@
             <% end %>
             <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
             <% if current_user.orders.any? && current_user.orders.last.active == true %>
+            <li><%= link_to 'View Cart', order_path(current_user.orders.where(active: true).last, showcart: 'show') %></li>
             <% end %> 
 
 
