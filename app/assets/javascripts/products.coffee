@@ -3,5 +3,5 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  $("a[data-remote]").on "ajax:success", (e, data, status, xhr) ->
+  $("a[data-remote]").on "ajax:send", (e, data, status, xhr) ->
     $(this).closest('.qty').css('display','none')
