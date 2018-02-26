@@ -1,1 +1,3 @@
-remove_product.js.erb
+$('.remove-btn').bind('ajax:success', function() {
+   $(this).closest('.qty').fadeOut();
+});
