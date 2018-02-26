@@ -42,7 +42,7 @@ class Order < ActiveRecord::Base
     firstline = '"'+self.user.account.company+'","","","","","","","'+filename+'","","'+Date.today.strftime('%d%m%Y').to_s+'","","","",""
     '
     lastline = '<F9><F4><DOWN><DOWN><DOWN><DOWN><ENTER>,"","","'+notes1+'","","'+notes2+'","","","","","","","","","","",""'
-      puts(firstline)
+      print(firstline)
       items.each do |i|
         puts(i)
       end
