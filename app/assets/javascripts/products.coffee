@@ -4,4 +4,4 @@
 
 $ ->
   $("a[data-remote]").on "ajax:send", (e, data, status, xhr) ->
-    $(this).closest('.qty').css('display','none')
+    $(this).parent().css('display','none')
