@@ -2,6 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$ ->
-  $("a[data-remote]").on "ajax:success", (e, data, status, xhr) ->
-    alert "The article was deleted."
+$('.remove-btn').bind('ajax:success', function() {
+   $(this).closest('.qty').fadeOut();
+});
