@@ -16,7 +16,7 @@ Search: <input id="searchfield" type="text"><span class="btn btn-info" onclick="
       <% end %>
         <%= link_to (product) do %>
           
-            <!-- cl_image_tag(product.code.strip + ".jpg") -->
+            <%= cl_image_tag(product.code.strip + ".jpg") %>
             
             <div class="product-index-text">
               <%= product.code %> | <%= product.description %>
