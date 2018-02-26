@@ -55,7 +55,7 @@
   	<div class="qty"> x <%= po.qty %><%= link_to '', edit_quantity_path(po), class: 'fa fa-pencil' %></div> ------- $<%= number_with_precision(subtotal, precision: 2) %>
   	<% @order.total = @order.total + subtotal %>
 
-  <%= link_to 'remove', remove_product_path(id: po.id), class: 'btn btn-warning remove-btn' %></div>
+  <%= link_to 'remove', remove_product_path(id: po.id), remote:tru,  class: 'btn btn-warning remove-btn' %></div>
   <% end %>
   <% end %>
   <hr>
