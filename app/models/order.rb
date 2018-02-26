@@ -44,7 +44,7 @@ class Order < ActiveRecord::Base
     lastline = '<F9><F4><DOWN><DOWN><DOWN><DOWN><ENTER>,"","","'+notes1+'","","'+notes2+'","","","","","","","","","","",""'
       print(firstline)
       items.each do |i|
-        puts(i)
+        print(i)
       end
       puts(lastline)
   end
