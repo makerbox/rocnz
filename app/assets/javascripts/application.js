@@ -24,3 +24,7 @@ function searchprod(){
 var searchterm = $('#searchfield').val();
 window.location.href = window.location.href+"&searchterm="+searchterm;
 }
+
+$('.remove-btn').bind('ajax:success', function() {
+   $(this).closest('.qty').fadeOut();
+});
