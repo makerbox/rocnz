@@ -24,3 +24,8 @@ function searchprod(){
 var searchterm = $('#searchfield').val();
 window.location.href = window.location.href+"&searchterm="+searchterm;
 }
+
+$("a[data-remote]").click(function(){
+	$(this).closest('.qty').css('display','none')
+})
+    
