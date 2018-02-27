@@ -39,12 +39,11 @@ class Order < ActiveRecord::Base
     notes1 = self.notes[0,60].to_s
     len = self.notes.length
     notes2 = self.notes[60,len].to_s
-    firstline = '"'+self.user.account.company+'","","","","","","","'+filename+'","","'+Date.today.strftime('%d%m%Y').to_s+'","","","",""
-    '
+    firstline = '"'+self.user.account.company+'","","","","","","","'+filename+'","","'+Date.today.strftime('%d%m%Y').to_s+'","","","",""'
     lastline = '<F9><F4><DOWN><DOWN><DOWN><DOWN><ENTER>,"","","'+notes1+'","","'+notes2+'","","","","","","","","","","",""'
-      print(firstline)
+      puts(firstline)
       items.each do |i|
-        print(i)
+        puts(i)
       end
       puts(lastline)
   end
