@@ -52,7 +52,7 @@
                     <% end %>
   	$<%= number_with_precision(prodprice, precision: 2)%>
   	<% subtotal = (po.qty * prodprice).round(2) %>
-  	<div class="qty"> x <%= po.qty %><%= link_to '', edit_quantity_path(po), class: 'fa fa-pencil' %></div> ------- $<%= number_with_precision(subtotal, precision: 2) %>
+  	<div class="qty"> x <%= po.qty %> <%= link_to '', edit_quantity_path(po), class: 'fa fa-pencil-alt' %></div> ------- $<%= number_with_precision(subtotal, precision: 2) %>
   	<% @order.total = @order.total + subtotal %>
 
   <%= link_to 'remove', remove_product_path(id: po.id), remote:true, class: 'btn btn-warning remove-btn' %></div>
@@ -67,9 +67,9 @@
   <hr>
   <% if !@order.notes.blank? %>
     Notes:  <%= @order.notes %>
-    <%= link_to ' ', edit_order_path(@order), class: 'fa fa-pencil btn btn-warning' %><br>
+    <%= link_to ' ', edit_order_path(@order), class: 'fa fa-pencil-alt btn btn-warning' %><br>
   <% else %>
-    <%= link_to ' ADD NOTES', edit_order_path(@order), class: 'fa fa-pencil btn btn-warning' %><br>
+    <%= link_to ' ADD NOTES', edit_order_path(@order), class: 'fa fa-pencil-alt btn btn-warning' %><br>
   <% end %>
 
   <% if @order.delivery_date %>
