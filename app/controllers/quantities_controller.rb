@@ -41,13 +41,13 @@ class QuantitiesController < ApplicationController
     end
 
     case @quantity.product.group
-      when 'C' || 'J'
+      when 'C' , 'J'
         group = 'roc'
       when 'L'
         group = 'polasports'
       when 'LC'
         group = 'locello'
-      when 'E' || 'R' || 'D' || 'A'
+      when 'E' , 'R' , 'D' , 'A'
         group = 'unity'
     end
     respond_to do |format|
@@ -65,13 +65,13 @@ class QuantitiesController < ApplicationController
   # PATCH/PUT /quantities/1.json
   def update
     case @quantity.product.group
-      when 'C' || 'J'
+      when 'C' , 'J'
         group = 'roc'
       when 'L'
         group = 'polasports'
       when 'LC'
         group = 'locello'
-      when 'E' || 'R' || 'D' || 'A'
+      when 'E' , 'R' , 'D' , 'A'
         group = 'unity'
     end
     respond_to do |format|
