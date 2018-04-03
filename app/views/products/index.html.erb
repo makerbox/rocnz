@@ -9,119 +9,122 @@ Search: <input id="searchfield" type="text"><span class="btn btn-info" onclick="
         </div>
       </div>
       <% @products.each do |product| %>
-            <% if product.hidden %>
-        <div class="product highlighted-hidden" id="<%= product.code %>">
-      <% else %>
+      <% if product.hidden %>
+      <div class="product highlighted-hidden" id="<%= product.code %>">
+        <% else %>
         <div class="product" id="<%= product.code %>">
-      <% end %>
-        <%= link_to (product) do %>
+          <% end %>
+          <%= link_to (product) do %>
           
-            <%= cl_image_tag(product.code.strip + ".jpg") %>
-            
-            <div class="product-index-text">
-              <%= product.code %> | <%= product.description %>
-            </div>
-            <% if user_signed_in? %>
-              <% if current_user.account || ((current_user.has_role? :admin) || (current_user.has_role? :rep)) %>
-                <% if (current_user.account.approved == 'approved') || (((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?)) %>
-                  <% if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?) %>
-                    <% level = current_user.mimic.account.seller_level.to_i %>
-                    <% thisperson = current_user.mimic.account.user %>
-                  <% else %>
-                    <% level = current_user.account.seller_level.to_i %>
-                    <% thisperson = current_user %>
-                  <% end %>
-                  <% case level %>
-                    <% when 1 %>
-                      <% oldprice = product.price1 %>
-                    <% when 2 %>
-                      <% oldprice = product.price2 %>
-                    <% when 3 %>
-                      <% oldprice = product.price3 %>
-                    <% when 4 %>
-                      <% oldprice = product.price4 %>
-                    <% when 5 %>
-                      <% oldprice = product.price5 %>
-                    <% when 6 %>
-                      <% oldprice = product.rrp %>
-                  <% end %>
-                  <% case level %>
-                    <% when 1 %>
-                      <% prodprice = product.calc_discount(thisperson, product.price1, product.group, product.code, product.pricecat, 1) %>
-                    <% when 2 %>
-                      <% prodprice = product.calc_discount(thisperson, product.price2, product.group, product.code, product.pricecat, 1) %>
-                    <% when 3 %>
-                      <% prodprice = product.calc_discount(thisperson, product.price3, product.group, product.code, product.pricecat, 1) %>
-                    <% when 4 %>
-                      <% prodprice = product.calc_discount(thisperson, product.price4, product.group, product.code, product.pricecat, 1) %>
-                    <% when 5 %>
-                      <% prodprice = product.calc_discount(thisperson, product.price5, product.group, product.code, product.pricecat, 1) %>
-                    <% when 6 %>
-                      <% prodprice = product.rrp %>
-                  <% end %>
-                  <% if product.allow_disc == false %>
-                    <% prodprice = oldprice %>
-                  <% end %>
-                  <% if oldprice > prodprice %>
-                    <span style="text-decoration: line-through;">$<%= oldprice %></span>
-                  <% end %>
-                  
-                  <% if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic.nil?) && (!current_user.account.seller_level) %>
-                    <br>[RRP: $<%= product.rrp %>]<br>
-                  <% else %>
-                    $<%= number_with_precision(prodprice, precision: 2) %>
-                  <% end %>
-                  <% if (current_user.has_role? :admin) || (current_user.has_role? :rep) %>
-                    | [QTY: <%= product.qty %>]
-                  <% end %>
-                <% end %>
-              <% end %>
-            <% end %> 
+          <%= cl_image_tag(product.code.strip + ".jpg", :quality=>"auto", :fetch_format=>:auto) %>
+
+          <div class="product-index-text">
+            <%= product.code %> | <%= product.description %>
+          </div>
+          <% if user_signed_in? %>
+          <% if current_user.account || ((current_user.has_role? :admin) || (current_user.has_role? :rep)) %>
+          <% if (current_user.account.approved == 'approved') || (((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?)) %>
+          <% if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?) %>
+          <% level = current_user.mimic.account.seller_level.to_i %>
+          <% thisperson = current_user.mimic.account.user %>
+          <% else %>
+          <% level = current_user.account.seller_level.to_i %>
+          <% thisperson = current_user %>
+          <% end %>
+          <% case level %>
+          <% when 1 %>
+          <% oldprice = product.price1 %>
+          <% when 2 %>
+          <% oldprice = product.price2 %>
+          <% when 3 %>
+          <% oldprice = product.price3 %>
+          <% when 4 %>
+          <% oldprice = product.price4 %>
+          <% when 5 %>
+          <% oldprice = product.price5 %>
+          <% when 6 %>
+          <% oldprice = product.rrp %>
+          <% end %>
+          <% case level %>
+          <% when 1 %>
+          <% prodprice = product.calc_discount(thisperson, product.price1, product.group, product.code, product.pricecat, 1) %>
+          <% when 2 %>
+          <% prodprice = product.calc_discount(thisperson, product.price2, product.group, product.code, product.pricecat, 1) %>
+          <% when 3 %>
+          <% prodprice = product.calc_discount(thisperson, product.price3, product.group, product.code, product.pricecat, 1) %>
+          <% when 4 %>
+          <% prodprice = product.calc_discount(thisperson, product.price4, product.group, product.code, product.pricecat, 1) %>
+          <% when 5 %>
+          <% prodprice = product.calc_discount(thisperson, product.price5, product.group, product.code, product.pricecat, 1) %>
+          <% when 6 %>
+          <% prodprice = product.rrp %>
+          <% end %>
+          <% if product.allow_disc == false %>
+          <% prodprice = oldprice %>
+          <% end %>
+          <% if oldprice > prodprice %>
+          <span style="text-decoration: line-through;">$<%= oldprice %></span>
+          <% end %>
+          <% if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic.nil?) && (!current_user.account.seller_level) %>
+          <br>[RRP: $<%= product.rrp %>]<br>
+          <% else %>
+          $<%= number_with_precision(prodprice, precision: 2) %>
+          <% end %>
+          <% if (current_user.has_role? :admin) || (current_user.has_role? :rep) %>
+          | [QTY: <%= product.qty %>]
+          <% end %>
+          <% end %>
+          <% end %>
+          <% end %> 
           
           <% end %>
           <% if (current_user.has_role? :admin) %>
-            <div class="hide-button">
-              <%= link_to hide_product_path(product) do %>
-                hide
-                <% if product.hidden %>
-                  <div class="glyphicon glyphicon-ok-circle"></div> 
-                <% else %>
-                  <div class="glyphicon glyphicon-unchecked"></div>
-                <% end %>
-              <% end %>
-            </div>
+          <div class="hide-button">
+            <%= link_to hide_product_path(product) do %>
+            hide
+            <% if product.hidden %>
+            <div class="glyphicon glyphicon-ok-circle"></div> 
+            <% else %>
+            <div class="glyphicon glyphicon-unchecked"></div>
+            <% end %>
+            <% end %>
+          </div>
           <% end %>
           <div class="orderbox">
             <% @thisproduct = product %>
             <%= render 'products/popup' %>
-            </div>
           </div>
         </div>
+      </div>
       <% end %>
     </div>
   </div>
-  <% if user_signed_in? %>
+  <div class="col-md-3 cart" id="cart">
+    <div id="cart-container">
+    <% if user_signed_in? %>
     <% if (current_user.orders.any?) && (current_user.orders.where(active: true).any?) %>
-      <div class="col-md-3 cart">
-        <p>
-          <i class="fa fa-shopping-cart fa-2x"></i>
-        </p>
-        <hr>
-        <p>
-          <%= render 'orders/sidecart' %>
-        </p>
-      </div>
+
+    <p>
+      <i class="fa fa-shopping-cart fa-2x"></i>
+    </p>
+    <hr>
+    <p>
+      <%= render 'orders/sidecart' %>
+    </p>
+
     <% elsif ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && current_user.mimic && ((current_user.mimic.account.user.orders.any?) && (current_user.mimic.account.user.orders.where(active: true).any?)) %>
-      <div class="col-md-3 cart">
-        <p>
-          <i class="fa fa-shopping-cart fa-2x"></i>
-        </p>
-        <hr>
-        <p>
-          <%= render 'orders/sidecart' %>
-        </p>
-      </div>
+
+    <p>
+      <i class="fa fa-shopping-cart fa-2x"></i>
+    </p>
+    <hr>
+    <p>
+      <%= render 'orders/sidecart' %>
+    </p>
+
     <% end %>
-  <% end %>
+    <% end %>
+  </div>
+  </div>
 </div>
 

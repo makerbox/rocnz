@@ -11,6 +11,9 @@
 .btn.btn-success{
 	margin-top:.7em;
 }
+.add-to-cart{
+	transition:opacity 1s;
+}
 @media screen and (max-device-width:767px) , (max-width:767px){
 	.product{
 	width:100%;

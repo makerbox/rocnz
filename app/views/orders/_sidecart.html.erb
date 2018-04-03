@@ -1,7 +1,11 @@
-<span id="notice"><%= notice %></span>
+
+  <span id="notice"><%= notice %></span>
 <% if @order %>
 <% @order.total = 0 %>
   <% if @order.quantities.any? %>
+
+  <!-- GIVE EACH NEW QUANTITY A BRAND NAME ON CREATION, THEN YOU CAN DO .order(brand...etc -->
+  
   <% @order.quantities.order(brand: 'ASC').each do |po| %>
   <% if @order.quantities.where(product: po.product).count > 1 %>
   <div class="po warning">
@@ -9,13 +13,13 @@
   <% else %>
   <div class="po">
   <% end %>
-  	<%= link_to product_path(Product.find_by(code: po.product.code)) do %>
-  	<div class="product-thumbnail">
-  	<%= cl_image_tag(po.product.code.strip + ".jpg") %>
-  	</div>
+    <%= link_to product_path(Product.find_by(code: po.product.code)) do %>
+    <div class="product-thumbnail">
+    <%= cl_image_tag(po.product.code.strip + ".jpg") %>
+    </div>
   <%= po.product.code %>
-  	<% end %>
-  		<% if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?) %>
+    <% end %>
+      <% if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?) %>
                       <% level = current_user.mimic.account.seller_level.to_i %>
                       <% thisperson = current_user.mimic.account.user %>
                     <% else %>
@@ -25,42 +29,36 @@
                     <% case level %>
                       <% when 1 %>
                         <% oldprice = po.product.price1 %>
-                      <% when 2 %>
-                        <% oldprice = po.product.price2 %>
-                      <% when 3 %>
-                        <% oldprice = po.product.price3 %>
-                      <% when 4 %>
-                        <% oldprice = po.product.price4 %>
-                      <% when 5 %>
-                        <% oldprice = po.product.price5 %>
-                      <% when 6 %>
-                        <% oldprice = po.product.rrp %>
-                    <% end %>
-                    <% case level %>
-                      <% when 1 %>
                         <% prodprice = po.product.calc_discount(thisperson, po.product.price1, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
                       <% when 2 %>
+                        <% oldprice = po.product.price2 %>
                         <% prodprice = po.product.calc_discount(thisperson, po.product.price2, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
                       <% when 3 %>
+                        <% oldprice = po.product.price3 %>
                         <% prodprice = po.product.calc_discount(thisperson, po.product.price3, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
                       <% when 4 %>
+                        <% oldprice = po.product.price4 %>
                         <% prodprice = po.product.calc_discount(thisperson, po.product.price4, po.product.group, po.product.code, po.product.pricecat), po.qty %>
                       <% when 5 %>
+                        <% oldprice = po.product.price5 %>
                         <% prodprice = po.product.calc_discount(thisperson, po.product.price5, po.product.group, po.product.code, po.product.pricecat, po.qty) %>
                       <% when 6 %>
+                        <% oldprice = po.product.rrp %>
                         <% prodprice = po.product.rrp %>
                     <% end %>
-  	$<%= number_with_precision(prodprice, precision: 2)%>
-  	<% subtotal = (po.qty * prodprice).round(2) %>
-  	<div class="qty"> x <%= po.qty %> <%= link_to '', edit_quantity_path(po), class: 'fa fa-pencil-alt' %></div> ------- $<%= number_with_precision(subtotal, precision: 2) %>
-  	<% @order.total = @order.total + subtotal %>
+                    
+    $<%= number_with_precision(prodprice, precision: 2)%>
+    <% subtotal = (po.qty * prodprice).round(2) %>
+    <div class="qty"> x <%= po.qty %> <%= link_to '', edit_quantity_path(po), class: 'fa fa-pencil-alt' %></div> ------- $<%= number_with_precision(subtotal, precision: 2) %>
+    <% @order.total = @order.total + subtotal %>
 
-  <%= link_to 'remove', remove_product_path(id: po.id), remote:true, class: 'btn btn-warning remove-btn' %></div>
+  <%= link_to 'remove', remove_product_path(id: po.id), remote:true, data: {"qty": po.qty, "price": prodprice, "disable-with": "removing..."}, class: 'btn btn-warning remove-btn', :onclick => "removeMe(this)" %></div>
+
   <% end %>
   <% end %>
   <hr>
-  TOTAL QTY = <%= @order.quantities.all.sum(:qty) %><br>
-  TOTAL (excl. freight & GST) = $<%= number_with_precision(@order.total, precision: 2) %>
+  TOTAL QTY = <div id="totalqty" class="totals"><%= @order.quantities.all.sum(:qty) %></div><br>
+  TOTAL (excl. freight & GST) = $<div id="totalprice" class="totals"><%= number_with_precision(@order.total, precision: 2) %></div>
   <% if (current_user.account.company.blank? || current_user.account.phone.blank?) && !((current_user.has_role? :admin) || (current_user.has_role? :rep)) %>
   <%= link_to 'please fill in your account details before placing an order', account_path(current_user.account), class: 'btn btn-info' %> <hr>
   <% else %>
