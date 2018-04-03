@@ -125,6 +125,7 @@ body {
 .navbar-default .navbar-nav>li>a:hover{
  box-shadow: .1em .1em 1em #CCC;
  }
+
 .btn:visited{
 	color:#FFF;
 }
@@ -397,4 +398,9 @@ max-width:100%;
 }
 .btn-default{
 	color:#000 !Important;
+}
+
+.totals{
+	display:inline-block;
+	font-weight:bold;
 }
