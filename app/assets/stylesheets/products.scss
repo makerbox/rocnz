@@ -13,6 +13,7 @@
 }
 .add-to-cart{
 	transition:opacity 1s;
+	-webkit-transition:opacity 1s;
 }
 @media screen and (max-device-width:767px) , (max-width:767px){
 	.product{
