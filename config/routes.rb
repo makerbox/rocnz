@@ -49,6 +49,7 @@ end
       get 'cart'
       get 'addto'
       get 'kfime'
+      get 'cancel_order'
     end
   end
   

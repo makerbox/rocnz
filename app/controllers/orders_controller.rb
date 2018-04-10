@@ -141,6 +141,11 @@ end
       format.json { head :no_content }
     end
   end
+  
+  def cancel_order
+    Order.find(params[:id]).quantities.all.destroy_all
+    redirect_to home_index_path
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
