@@ -6,8 +6,8 @@ class TestController < ApplicationController
       @customers = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
       @customers.each do |c|
         code = c.Code.strip
-        if Account.all.find_by(code: code)
-          account = Account.all.find_by(code: code)
+        if account = Account.all.find_by(code: code)
+          # account = Account.all.find_by(code: code)
           @results << account.code
           account.update(dispute: c.InDispute)
         end
