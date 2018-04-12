@@ -11,7 +11,7 @@ Search: <input id="searchfield" type="text"><span class="btn btn-info" onclick="
       <th>contact</th>
       <th>email</th>
       <th>View acct.</th>
-      <th>*</th>
+      <th></th>
       <th>Order</th>
     </tr>
   </thead>
@@ -69,7 +69,10 @@ Search: <input id="searchfield" type="text"><span class="btn btn-info" onclick="
         <% end %>
         </td>
         <% end %>
-        <td>
+        <td>*
+          <% if account.dispute %>
+            In dispute
+          <% end %>
           <%= link_to orderas_account_path(account, account: account), class: 'btn btn-info' do %>
           <i class="fa fa-shopping-cart"></i>
           <% end %>
