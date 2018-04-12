@@ -8,8 +8,8 @@ class TestController < ApplicationController
         code = c.Code.strip
         if account = Account.all.find_by(code: code)
           # account = Account.all.find_by(code: code)
-          @results << account.code
-          account.update(dispute: c.InDispute)
+          # @results << account.code
+          # account.update(dispute: c.InDispute)
         end
       end
 	end
