@@ -53,7 +53,7 @@
             ORDERING FOR: 
             <%= current_user.mimic.account.company %>
             <% account = current_user.account %>
-            <% if account.dispute %>
+            <% if current_user.mimic.account.dispute %>
             <b>Credit on hold</b>
             <% end %>
             <%= link_to orderas_account_path(account, account: 'clear'), class: 'btn btn-danger' do %>
