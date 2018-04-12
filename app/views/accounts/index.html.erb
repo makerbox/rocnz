@@ -18,6 +18,7 @@ Search: <input id="searchfield" type="text"><span class="btn btn-info" onclick="
 
   <tbody>
     <% @accounts.each do |account| %>
+    <% if account.dispute == true %>in dispute<br><% end %>
     <% if account.approved != 'approved' %>
     <tr style="background:yellow;">
       <% else %>
