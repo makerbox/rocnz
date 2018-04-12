@@ -42,9 +42,6 @@ Search: <input id="searchfield" type="text"><span class="btn btn-info" onclick="
         <td>
           <%= link_to edit_account_path(account), class: 'btn btn-warning', title: 'seller level required' do %>
             <i class="fa fa-exclamation-triangle"></i>
-          <% end %>*
-          <% if account.dispute %>
-            In dispute
           <% end %>
           Approved 
           <% if (current_user.has_role? :admin) || (current_user.has_role? :rep) %>
