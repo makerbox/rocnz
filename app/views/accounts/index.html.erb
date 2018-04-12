@@ -32,7 +32,9 @@ Search: <input id="searchfield" type="text"><span class="btn btn-info" onclick="
         <% else %>
         <td>no user assoc.</td>
         <% end %>
-        <td>
+        <td><% if account.dispute %>
+          Credit on hold
+        <% end %>
           <%= link_to account_path(account) do %>
             <i class='fa fa-eye'></i>
           <% end %>
@@ -66,9 +68,6 @@ Search: <input id="searchfield" type="text"><span class="btn btn-info" onclick="
           <%= link_to approve_account_path(account), class: 'btn btn-info' do %>
             <i class="fa fa-thumbs-o-up"></i> Approve
           <% end %>
-        <% end %>
-        <% if account.dispute %>
-          Credit on hold
         <% end %>
         </td>
         <% end %>
