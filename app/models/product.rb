@@ -2,6 +2,10 @@ class Product < ActiveRecord::Base
 has_many :quantities,  dependent: :destroy 
 has_many :orders, through: :quantities
 
+def self.all_cached
+  Rails.cache.fetch('Product.all') { all.to_a }
+end
+
 def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 	
 	# if discos = Discount.all.where(product: (prod_group || prod_code || price_cat), customer: (u.account.code || u.account.discount))
@@ -22,7 +26,7 @@ def calc_discount(u, price, prod_group, prod_code, price_cat, qty)
 		result = price
 	end
 
-	return result
+	return result.to_d.round(2)
 end
 
 

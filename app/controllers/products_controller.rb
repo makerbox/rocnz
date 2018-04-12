@@ -20,13 +20,13 @@ def calc_qty_disc
   prod_code = params[:code]
   price_cat = params[:pricecat]
   qty = params[:qty]
-  
+
   if current_user.mimic
     u = current_user.mimic
   else
     u = current_user
   end
-  
+
   if discos = Discount.all.where('(product = ? AND (producttype = ? OR producttype = ?)) OR (product = ? AND (producttype = ? OR producttype = ?)) OR (product = ? AND (producttype = ? OR producttype = ?))', price_cat, 'cat_fixed', 'cat_percent' , prod_code , 'code_fixed', 'code_percent', prod_group, 'group_fixed', 'group_percent').where('customer = ? OR customer = ?', u.account.code, u.account.discount)
     disco = discos.all.where('maxqty >= ?', qty).first
     if disco.disctype == 'fixedtype'
@@ -38,7 +38,7 @@ def calc_qty_disc
     result = price
   end
   respond_to do |format|
-    format.json { render json: {result: result} }
+    format.json { render json: {result: result.to_d.round(2)} }
   end
 end
 

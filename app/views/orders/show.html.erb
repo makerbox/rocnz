@@ -107,13 +107,13 @@ h1{
       <% prodprice = q.product.rrp %>
       <% end %>
 
-      <% subtotal = (q.qty * prodprice).round(2) %>
+      <% subtotal = (q.qty * prodprice) %>
       <tr>
         <td align="left" style="text-align:left; font-size:10px; font-family: 'Verdana', sans-serif; width:40px;" width="40"><%= q.product.code %></td>
         <td style="font-size:10px; font-family: 'Verdana', sans-serif; width:30px;" width="30"><%= q.qty %></td>
         <td style="text-align:left;font-size:10px; font-family: 'Verdana', sans-serif; width:390px;" width="390"><%= q.product.description %></td>
         <td style="text-align:right; font-size:10px; font-family: 'Verdana', sans-serif; width:40px;" width="40" align="right">$<%= number_with_precision(prodprice, precision: 2)%></td>
-        <td style="font-size: 10px; width:50px; text-align:right; font-family: 'Verdana', sans-serif;" width="50" align="right">$<%= subtotal %></td>
+        <td style="font-size: 10px; width:50px; text-align:right; font-family: 'Verdana', sans-serif;" width="50" align="right">$<%= number_with_precision(subtotal, precision: 2) %></td>
       </tr>
       <% end %>
       <tr align="left" style="text-align:left;">

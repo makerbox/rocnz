@@ -53,39 +53,36 @@ end
 
   # GET /orders
   # GET /orders.json
-def index
-  # partial is being rendered in Account view, so moved to Account controller
-  # this stuff is for the main index that only admin can see
-  if user_signed_in?
-    if (current_user.has_role? :admin)
-      @orders = Order.all.order(created_at: :desc)
-      @orders = @orders.paginate(:page => params[:page], :per_page => 20)
+  def index
+    # partial is being rendered in Account view, so moved to Account controller
+    # this stuff is for the main index that only admin can see
+    if user_signed_in?
+      if (current_user.has_role? :admin)
+        @orders = Order.all.order(created_at: :desc)
+        @orders = @orders.paginate(:page => params[:page], :per_page => 20)
+      else
+        redirect_to home_index_path
+      end
     else
       redirect_to home_index_path
     end
-  else
-    redirect_to home_index_path
   end
-end
 
   # GET /orders/1
   # GET /orders/1.json
   def show
     @sellerlevel = @order.user.account.seller_level
-    if user_signed_in?
-      if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic) #for sidecart
-        @order = current_user.mimic.account.user.orders.where(active: true).last #for sidecart
-      else #for sidecart
-        @order = current_user.orders.where(active: true).last #for sidecart
-      end #for sidecart
-    end
-    if params[:id]
-      @order = Order.find(params[:id])
-      if params[:showcart] == 'show'
+    # if user_signed_in?
+    #   if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic) #for sidecart
+    #     @order = current_user.mimic.account.user.orders.where(active: true).last #for sidecart
+    #   else #for sidecart
+    #     @order = current_user.orders.where(active: true).last #for sidecart
+    #   end #for sidecart
+    # end
+    if params[:showcart] == 'show'
         @showbuttons = 'show'
       else
         @showbuttons = 'noshow'
-      end
     end
   end
 
@@ -102,11 +99,12 @@ end
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-    if (current_user.has_role? :admin) || (current_user.has_role? :rep)
-      @order.order_number = current_user.account.code + Order.all.count.to_s
-    else
-      @order.order_number = Order.all.count.to_s
-    end
+
+    # if (current_user.has_role? :admin) || (current_user.has_role? :rep)
+    #   @order.order_number = current_user.account.code + Order.all.count.to_s
+    # else
+    #   @order.order_number = Order.all.count.to_s
+    # end
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
@@ -141,7 +139,7 @@ end
       format.json { head :no_content }
     end
   end
-  
+
   def cancel_order
     Order.find(params[:id]).quantities.all.destroy_all
     redirect_to home_index_path
