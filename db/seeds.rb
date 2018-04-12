@@ -248,12 +248,10 @@
       @customers.each do |c|
         code = c.Code.strip
         if Account.all.find_by(code: code)
-          if c.InDispute == 1
-            dispute = true
-          else
-            dispute = false
-          end
           account = Account.all.find_by(code: code)
+          if c.InDispute == 1
+            account.update(dispute: true)
+          end
           compname = c.Name
           street = c.Street
           suburb = c.Suburb 
