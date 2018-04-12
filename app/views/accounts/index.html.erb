@@ -67,12 +67,12 @@ Search: <input id="searchfield" type="text"><span class="btn btn-info" onclick="
             <i class="fa fa-thumbs-o-up"></i> Approve
           <% end %>
         <% end %>
+        <% if account.dispute %>
+          Credit on hold
+        <% end %>
         </td>
         <% end %>
-        <td>*
-          <% if account.dispute %>
-            In dispute
-          <% end %>
+        <td>
           <%= link_to orderas_account_path(account, account: account), class: 'btn btn-info' do %>
           <i class="fa fa-shopping-cart"></i>
           <% end %>
