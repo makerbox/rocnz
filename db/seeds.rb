@@ -355,7 +355,8 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
 
 
 
-
+# ---------------destroy all old quantities ---------------
+Quantity.all.where('created_at >= ?', (Date.today - 30.days)).destroy
       # ------------------------META DATA--------------------------------------------------------------
 
       
