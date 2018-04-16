@@ -70,6 +70,7 @@
 							'opacity':0,
 							'pointer-events':'none'
 						});
+				$('#cart').html('ADDING... <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
 				var route = "/products/<%= @thisproduct.id %>/add_product_to_cart";
 				$.ajax({
 					url: route,
@@ -79,19 +80,13 @@
 					product: '<%= @thisproduct.id %>',
 					order_id: $("#<%= @thisproduct.code %> #quantity_order_id").val() },
 					success: function(data) {
-						console.log('done');
-						$('#<%= @thisproduct.code %> .add-to-cart').css({
-							'opacity':1,
-							'pointer-events':'auto'
+						var locationString = location.href + ' #cart';
+						$('#cart').load(locationString, function(){
+							$('#<%= @thisproduct.code %> .add-to-cart').css({
+								'opacity':1,
+								'pointer-events':'auto'
+							});
 						});
-						if ($("#cart p").length){
-							$('#cart p:nth-of-type(2)').after(data.result);
-							$('#totalqty').load(location.href + ' #totalqty');
-							$('#totalprice').load(location.href + ' #totalprice');
-						}else{
-							var locationString = location.href + ' #cart-container';
-							$('#cart').load(locationString);
-						};
 					}
 				});
 			});

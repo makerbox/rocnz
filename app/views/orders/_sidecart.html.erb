@@ -75,7 +75,7 @@
   <% else %>
     <%= link_to ' DELIVERY DATE', edit_order_path(@order), class: 'fa fa-calendar btn btn-warning' %> 
   <% end %>
-  <%= link_to ' SEND ORDER', sendorder_order_path(@order, total: @order.total), class: 'fa fa-paper-plane btn btn-info' %>
+  <%= link_to ' SEND ORDER', sendorder_order_path(@order, total: @order.total), class: 'fa fa-paper-plane btn btn-info', id: 'sendorder' %>
   <hr>
   <% end %>
   <%= link_to ' cancel', cancel_order_order_path(@order), class: 'fa fa-trash btn btn-danger' %>
