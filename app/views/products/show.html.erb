@@ -81,6 +81,10 @@
 </div>
 <% if user_signed_in? %>
   <% if (current_user.orders.any?) && (current_user.orders.last.active == true) %>
+   <div class="scrollcontainer">
+    <div class="scrollarrow fa fa-arrow-up"></div>
+    <div class="scrollarrow fa fa-arrow-down"></div>
+  </div>
   <div class="col-md-3 cart" id="cart">
       <p>
         <i class="fa fa-shopping-cart fa-2x"></i>
@@ -91,6 +95,10 @@
       </p>
     </div>
   <% elsif ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && current_user.mimic && ((current_user.mimic.account.user.orders.any?) && (current_user.mimic.account.user.orders.last.active == true)) %>
+   <div class="scrollcontainer">
+    <div class="scrollarrow fa fa-arrow-up"></div>
+    <div class="scrollarrow fa fa-arrow-down"></div>
+  </div>
     <div class="col-md-3 cart" id="cart">
       <p>
         <i class="fa fa-shopping-cart fa-2x"></i>

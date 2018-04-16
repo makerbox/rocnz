@@ -290,27 +290,49 @@ max-width:100%;
     border-left: .25em solid #ccc;
     border-right: 0 solid #ccc;
     border-top: .25em solid #ccc;
-    border-bottom: 1em solid #ccc;
-    border-radius: 7em 0 0 7em;
+    border-bottom: .25em solid #ccc;
+    border-radius: 2em 0 0 2em;
     text-align:right;
     position:fixed;
     height:80vh;
     overflow-y:scroll;
     -webkit-overflow-scrolling: touch;
     right:0;
+    bottom:1em;
     padding:0;
+    padding-right:1em;
     z-index:999;
 }
-
+.scrollcontainer{
+	position:fixed;
+	right:0;
+	bottom:1em;
+	display:flex;
+	flex-direction:column;
+	width:1em;
+	justify-content:space-between;
+	z-index:1000;
+	padding-top:1em;
+	padding-bottom:1em;
+}
+.scrollarrow{
+display:none;
+	z-index:1000;
+	transition:all 1s;
+	-webkit-transition:all 1s;
+}
+.scrollarrow.fa-arrow-up{
+	padding-bottom:1em;
+}
 ::-webkit-scrollbar{
 	-webkit-appearance:none;
-	width:7px;
-	height:7px;
+	width:1em;
+	height:1em;
 }
 ::-webkit-scrollbar-thumb{
-	border-radius:4px;
-	background-color: rgba(0,0,0,.5);
-	-webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+	border-radius:1em;
+	background-color: rgba(0,0,0,.25);
+	-webkit-box-shadow: 0 0 1px rgba(255,255,255,.25);
 }
 
 .lds-ellipsis {

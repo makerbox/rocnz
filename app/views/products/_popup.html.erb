@@ -61,6 +61,14 @@
 	<script>
 		$('.add-to-cart').css('display','none');
 		$(document).ready(function(){
+			var cartHeight = $('#cart').height();
+			$('.scrollcontainer').css('height',cartHeight + 'px');
+							var innerCartHeight = $('#cart-container').height();
+							if(innerCartHeight > cartHeight){
+								$('.scrollarrow').css('display','block');
+							}else{
+								$('.scrollarrow').css('display','none');
+							};
 			$('.add-to-cart').css('display','inline-block');
 		}); //this keeps the user from adding items until the cart is loaded
 		$('#<%= @thisproduct.code %> .add-to-cart').click(
@@ -70,7 +78,7 @@
 							'opacity':0,
 							'pointer-events':'none'
 						});
-				$('#cart').html('ADDING... <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+				$('#cart-container').html('ADDING... <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
 				var route = "/products/<%= @thisproduct.id %>/add_product_to_cart";
 				$.ajax({
 					url: route,
@@ -80,12 +88,19 @@
 					product: '<%= @thisproduct.id %>',
 					order_id: $("#<%= @thisproduct.code %> #quantity_order_id").val() },
 					success: function(data) {
-						var locationString = location.href + ' #cart';
-						$('#cart').load(locationString, function(){
+						var locationString = location.href + ' #cart-container';
+						$('#cart-container').load(locationString, function(){
 							$('#<%= @thisproduct.code %> .add-to-cart').css({
 								'opacity':1,
 								'pointer-events':'auto'
 							});
+							var cartHeight = $('#cart').height();
+							var innerCartHeight = $('#cart-container').height();
+							if(innerCartHeight > cartHeight){
+								$('.scrollarrow').css('display','block');
+							}else{
+								$('.scrollarrow').css('display','none');
+							};
 						});
 					}
 				});
