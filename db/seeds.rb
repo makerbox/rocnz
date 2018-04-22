@@ -285,14 +285,17 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
       dbh.disconnect 
 
       # --------------------- ADD EMAIL ADDRESSES ----------------------
-      dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
       contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
       contacts.each do |contact|
         if contact.Active == 1
           if account = Account.all.find_by(code: contact.Code.strip)
             if !User.all.find_by(email: contact.EmailAddress)
-              email = contact.EmailAddress
-              account.user.update_attributes(email: email)
+              if email = contact.EmailAddress
+                thisuser = account.user
+                thisuser.email = email
+                thisuser.save(validate: false)
+              end
             end
           end
         end
