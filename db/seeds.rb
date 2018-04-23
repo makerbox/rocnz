@@ -293,7 +293,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
             if !User.all.find_by(email: contact.EmailAddress)
               if email = contact.EmailAddress
                 thisuser = account.user
-                thisuser.email = email
+                thisuser.email = email.strip
                 thisuser.save(validate: false)
               end
             end
