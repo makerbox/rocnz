@@ -28,16 +28,21 @@ class QuantitiesController < ApplicationController
     @quantity.brand = @quantity.product.group
     if @quantity.order == nil
     #if there is not active order to add this to, we will just make one
-    if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic)
-      @order = Order.create(user: current_user.mimic.account.user, active: true, approved: false, complete: false)
-    else
-      @order = Order.create(user: current_user, active: true, approved: false, complete: false)
-    end
+      if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic)
+        @order = Order.create(user: current_user.mimic.account.user, active: true, approved: false, complete: false)
+      else
+        @order = Order.create(user: current_user, active: true, approved: false, complete: false)
+      end
       #update the order to have an order number based on it's ID
       order_num = 'W' + @order.id.to_s
       @order.update(order_number: order_num)
       #and then add it to the new order
       @quantity.order = @order
+    else
+      if @quantity.order.order_number == nil
+        order_num = 'W' + @order.id.to_s
+        @quantity.order.update(order_number: order_num)
+      end
     end
 
     case @quantity.product.group
