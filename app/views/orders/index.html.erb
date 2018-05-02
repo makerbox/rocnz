@@ -8,7 +8,7 @@
 	</tr>
 	<% @orders.each do |order| %>	
 		<tr>
-			<td><%= order.created_at %></td>
+			<td><%= order.sent %></td>
 			<td><%= order.order_number %></td>
 			<td><%= order.user.account.company %></td>
 			<td><% if !order.sent %>
