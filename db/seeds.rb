@@ -285,7 +285,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
       dbh.disconnect 
 
       # --------------------- ADD EMAIL ADDRESSES ----------------------
-      dbh = RDBI.connect :ODBC, :db => "wholesaleportal"
+      dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
       contacts = dbh.execute("SELECT * FROM contact_details_file").fetch(:all, :Struct)
       contacts.each do |contact|
         if contact.Active == 1
@@ -355,7 +355,15 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
       createrep('nz@roccloudy.com', 'REPNZ')
       createrep('office@roccloudy.com', 'ADMINOFFICE')
 
-
+# ----------------update credit report for each account -------------
+  dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
+  customer = dbh.execute("SELECT * FROM customer_master").fetch(:all, :Struct)
+  customer.each do |t|
+    if account = Account.find_by(code: t.Code)
+      account.update(current: t.CurrentBal, days30: t.Period1Bal, days60: t.Period2Bal, days90: t.Period3Bal)
+    end
+  end
+  dbh.disconnect 
 
 
 # ---------------destroy all old quantities ---------------
