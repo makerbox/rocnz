@@ -361,7 +361,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
 # ---------------destroy all old quantities ---------------
 # Quantity.all.where('created_at >= ?', (Date.today - 30.days)).destroy
 # ---------------destroy all old, unsent orders ---------------
-Order.all.where(sent: nil).where('created_at >= ?', (Date.today - 30.days)).destroy
+Order.all.where(sent: nil).where('created_at >= ?', (Date.today - 30.days)).destroy_all
       # ------------------------META DATA--------------------------------------------------------------
 
       
