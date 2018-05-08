@@ -239,7 +239,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
         when '6'
           payterms =  ce.TermsDays.to_s + 'Days after Month end'
         end
-        email = ce.EmailAddr
+        email = ce.EmailAddr.downcase
         if !Account.all.find_by(code: code)
           if email.blank?
             email = counter
@@ -290,8 +290,9 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
       contacts.each do |contact|
         if contact.Active == 1
           if account = Account.all.find_by(code: contact.Code.strip)
-            if !User.all.find_by(email: contact.EmailAddress)
-              if email = contact.EmailAddress
+            if email = contact.EmailAddress
+              email = email.strip.downcase
+              if !User.all.find_by(email: email)
                 thisuser = account.user
                 thisuser.email = email.strip
                 thisuser.save(validate: false)
