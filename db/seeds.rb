@@ -239,7 +239,9 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
         when '6'
           payterms =  ce.TermsDays.to_s + 'Days after Month end'
         end
-        email = ce.EmailAddr.downcase
+        if !ce.EmailAddr.blank?
+          email = ce.EmailAddr.downcase
+        end
         if !Account.all.find_by(code: code)
           if email.blank?
             email = counter
