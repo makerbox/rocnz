@@ -27,7 +27,7 @@ class QuantitiesController < ApplicationController
     @quantity = Quantity.new(quantity_params)
     @quantity.brand = @quantity.product.group
     if @quantity.order == nil
-    #if there is not active order to add this to, we will just make one
+      #if there is not active order to add this to, we will just make one
       if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic)
         @order = Order.create(user: current_user.mimic.account.user, active: true, approved: false, complete: false)
       else
@@ -108,6 +108,6 @@ class QuantitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def quantity_params
-      params.require(:quantity).permit(:qty, :product_id, :order_id)
+      params.require(:quantity).permit(:qty, :product_id, :order_id, :price)
     end
 end

@@ -88,6 +88,7 @@
 					type: "GET",
 					data: { qty: $("#<%= @thisproduct.code %> .quantity_qty .form-control").val(),
 					product: '<%= @thisproduct.id %>',
+					price: '<%= prodprice %>',
 					order_id: $("#quantity_order_id").val() },
 					success: function(data) {
 						console.log(data.result);

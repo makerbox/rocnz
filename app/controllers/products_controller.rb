@@ -4,43 +4,43 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
 
-def hide
-  product = Product.all.find_by(id: params[:id])
-  if product.hidden
-    product.update_attributes(hidden: false)
-  else
-    product.update_attributes(hidden: true)
-  end
-  redirect_to :back
-end
-
-def calc_qty_disc
-  price = (params[:price]).to_f
-  prod_group = params[:group]
-  prod_code = params[:code]
-  price_cat = params[:pricecat]
-  qty = params[:qty]
-
-  if current_user.mimic
-    u = current_user.mimic
-  else
-    u = current_user
-  end
-
-  if discos = Discount.all.where('(product = ? AND (producttype = ? OR producttype = ?)) OR (product = ? AND (producttype = ? OR producttype = ?)) OR (product = ? AND (producttype = ? OR producttype = ?))', price_cat, 'cat_fixed', 'cat_percent' , prod_code , 'code_fixed', 'code_percent', prod_group, 'group_fixed', 'group_percent').where('customer = ? OR customer = ?', u.account.code, u.account.discount)
-    disco = discos.all.where('maxqty >= ?', qty).first
-    if disco.disctype == 'fixedtype'
-      result = disco.discount
+  def hide
+    product = Product.all.find_by(id: params[:id])
+    if product.hidden
+      product.update_attributes(hidden: false)
     else
-      result = price - ((price / 100) * disco.discount)
+      product.update_attributes(hidden: true)
     end
-  else
-    result = price
+    redirect_to :back
   end
-  respond_to do |format|
-    format.json { render json: {result: result.to_d.round(2)} }
+
+  def calc_qty_disc
+    price = (params[:price]).to_f
+    prod_group = params[:group]
+    prod_code = params[:code]
+    price_cat = params[:pricecat]
+    qty = params[:qty]
+
+    if current_user.mimic
+      u = current_user.mimic
+    else
+      u = current_user
+    end
+
+    if discos = Discount.all.where('(product = ? AND (producttype = ? OR producttype = ?)) OR (product = ? AND (producttype = ? OR producttype = ?)) OR (product = ? AND (producttype = ? OR producttype = ?))', price_cat, 'cat_fixed', 'cat_percent' , prod_code , 'code_fixed', 'code_percent', prod_group, 'group_fixed', 'group_percent').where('customer = ? OR customer = ?', u.account.code, u.account.discount)
+      disco = discos.all.where('maxqty >= ?', qty).first
+      if disco.disctype == 'fixedtype'
+        result = disco.discount
+      else
+        result = price - ((price / 100) * disco.discount)
+      end
+    else
+      result = price
+    end
+    respond_to do |format|
+      format.json { render json: {result: result.to_d.round(2)} }
+    end
   end
-end
 
   def index
     availgroups = [] #create empty array to store the groups available to the current user
@@ -118,8 +118,8 @@ end
       end
     else #if the user is not logged in, show everything (with no prices)
       if group == 'roc'
-            @products = Product.where(group: ['C','J'])
-            @categories = []
+        @products = Product.where(group: ['C','J'])
+        @categories = []
             @products.each do |p| # get a list of categories
               @categories << p.category
             end
@@ -129,7 +129,7 @@ end
             if (params[:filter]) && (params[:filter] != 'new')
               @products = @products.where(category: params[:filter])
             end
-      elsif group == 'polasports'
+          elsif group == 'polasports'
             @products = Product.where(group: ['L'])
             if params[:cat]
               @products = @products.where(group: params[:cat])
@@ -137,7 +137,7 @@ end
             if (params[:filter]) && (params[:filter] != 'new')
               @products = @products.where(category: params[:filter])
             end
-        elsif group == 'locello'
+          elsif group == 'locello'
             @products = Product.where(group: ['LC'])
             if params[:cat]
               @products = @products.where(group: params[:cat])
@@ -145,7 +145,7 @@ end
             if (params[:filter]) && (params[:filter] != 'new')
               @products = @products.where(category: params[:filter])
             end
-        elsif group == 'unity'
+          elsif group == 'unity'
             @products = Product.where(group: ['E', 'R', 'D', 'A', 'Z'])
             if params[:cat]
               @products = @products.where(group: params[:cat])
@@ -153,13 +153,13 @@ end
             if (params[:filter]) && (params[:filter] != 'new')
               @products = @products.where(category: params[:filter])
             end
+          end
         end
-    end
 
-  if @products
-    if params[:filter] == 'new'
-      @products = @products.where("new_date >= ?", Date.today - 30.days)
-    end
+        if @products
+          if params[:filter] == 'new'
+            @products = @products.where("new_date >= ?", Date.today - 30.days)
+          end
     # if group == 'unity' #qty must be over 20 for unity
       # @products = @products.where("qty > ?", 20)
     # else #qty must be over 5 for other brands
@@ -183,15 +183,15 @@ end
     end
   end
   if user_signed_in?
-      if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic)
-        @order = current_user.mimic.account.user.orders.where(active:true).last
-      else
-        @order = current_user.orders.where(active: true).last
-      end
-      @quantity = Quantity.new
+    if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (current_user.mimic)
+      @order = current_user.mimic.account.user.orders.where(active:true).last
+    else
+      @order = current_user.orders.where(active: true).last
+    end
+    @quantity = Quantity.new
   end
   if searchterm = params[:searchterm]
-      @products = @products.where('lower(code) LIKE ? OR lower(description) LIKE ?', "%#{searchterm.downcase}%", "%#{searchterm.downcase}%")
+    @products = @products.where('lower(code) LIKE ? OR lower(description) LIKE ?', "%#{searchterm.downcase}%", "%#{searchterm.downcase}%")
   end
 end
 
@@ -221,18 +221,19 @@ end
   # end
 
   #remove product from order
-def remove
-  @quantity = Quantity.find_by(id: params[:id])
-  @quantity.destroy
-  redirect_to :back
-end
+  def remove
+    @quantity = Quantity.find_by(id: params[:id])
+    @quantity.destroy
+    redirect_to :back
+  end
 
 #add product to cart (used for popup ajax)
 def add_product_to_cart
   qty = params[:qty]
   product_id = params[:product]
+  prodprice = params[:price]
   order_id = params[:order_id]
-  @newquantity = Quantity.new(qty: qty, product_id: product_id, order_id: order_id)
+  @newquantity = Quantity.new(qty: qty, product_id: product_id, order_id: order_id, price: prodprice)
   @newquantity.brand = @newquantity.product.group
   if @newquantity.order == nil
     #if there is not active order to add this to, we will just make one
@@ -246,74 +247,11 @@ def add_product_to_cart
     @order.update(order_number: order_num)
     #and then add it to the new order
     @newquantity.order_id = @order.id
-    htmlstring = '<div id="orderid" value="'+@order.id.to_s+'"></div>'
   else
     @order = Order.find(order_id)
-    htmlstring = ''
   end
 
-  case @newquantity.product.group
-  when 'C' , 'J'
-    group = 'roc'
-  when 'L'
-    group = 'polasports'
-  when 'LC'
-    group = 'locello'
-  when 'E' , 'R' , 'D' , 'A'
-    group = 'unity'
-  end
   if @newquantity.save
-    thisproduct = Product.find(product_id)
-    #get quantity data (price etc)
-    if @newquantity.order.quantities.where(product: thisproduct).count > 1
-      htmlstring += '<div class="po warning">Item already in cart<br>'
-    else
-     htmlstring += '<div class="po test">'
-    end
-     htmlstring += '<a href="/products/' + product_id.to_s + '"><div class="product-thumbnail">'
-     htmlstring += '<img src="http://res.cloudinary.com/ddmbp4xnw/image/upload/'+thisproduct.code.to_s+'.jpg">'
-     htmlstring += '</div>'+thisproduct.code.to_s
-     htmlstring += '</a>'
-     if ((current_user.has_role? :admin) || (current_user.has_role? :rep)) && (!current_user.mimic.nil?)
-      level = current_user.mimic.account.seller_level.to_i
-      thisperson = current_user.mimic.account.user
-    else
-      level = current_user.account.seller_level.to_i
-      thisperson = current_user
-    end
-    case level
-    when 1
-      oldprice = thisproduct.price1
-      prodprice = thisproduct.calc_discount(thisperson, thisproduct.price1, thisproduct.group, thisproduct.code, thisproduct.pricecat, qty)
-    when 2
-      oldprice = thisproduct.price2
-      prodprice = thisproduct.calc_discount(thisperson, thisproduct.price2, thisproduct.group, thisproduct.code, thisproduct.pricecat, qty)
-    when 3
-      oldprice = thisproduct.price3
-      prodprice = thisproduct.calc_discount(thisperson, thisproduct.price3, thisproduct.group, thisproduct.code, thisproduct.pricecat, qty)
-    when 4
-      oldprice = thisproduct.price4
-      prodprice = thisproduct.calc_discount(thisperson, thisproduct.price4, thisproduct.group, thisproduct.code, thisproduct.pricecat), qty
-    when 5
-      oldprice = thisproduct.price5
-      prodprice = thisproduct.calc_discount(thisperson, thisproduct.price5, thisproduct.group, thisproduct.code, thisproduct.pricecat, qty)
-    when 6
-      oldprice = thisproduct.rrp
-      prodprice = thisproduct.rrp
-    end
-
-    htmlstring += '$'
-    htmlstring += prodprice.to_s
-    # htmlstring += number_with_precision(prodprice, precision: 2)
-    subtotal = qty.to_i * prodprice
-
-    htmlstring += '<div class="qty"> x '
-    htmlstring += qty
-    htmlstring += '<a href="' + edit_quantity_path(@newquantity.id) + '" class="fa fa-pencil-alt"></a>'
-    htmlstring += '</div> ------- $'+subtotal.to_s
-    htmlstring += '<a data-qty="'+qty+'" data-price="'+prodprice.to_s+'" data-disable-with="removing..." class="btn btn-warning remove-btn" data-remote="true" href="/products/' + @newquantity.id.to_s + '/remove" onclick="removeMe(this)">remove</a>' 
-    htmlstring += '</div>'
-
     respond_to do |format|
       format.json { render json: {result: @order.id} }
     end

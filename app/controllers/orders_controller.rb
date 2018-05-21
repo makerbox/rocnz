@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :sendorder]
   skip_before_action :authenticate_user!, only: [:kfime]
   def sendorder
-    # collate duplicate products
+     # collate duplicate products
     unique_products = @order.products.uniq
     unique_products.each do |q|
       these_quantities = @order.quantities.where(product_id: q.id)
@@ -11,14 +11,15 @@ class OrdersController < ApplicationController
       original.update(qty: newqty)
       these_quantities.all.where.not(id: original.id).destroy_all
     end
-
+    total = 0
     @order.quantities.each do |q| # change stock levels and calc order total
       oldqty = q.product.qty
       newqty = oldqty - q.qty
       q.product.update(qty: newqty)
+      total = total + (q.qty * q.price)
     end
     sent = DateTime.now
-    @order.update(active: false, sent: sent, total: params[:total]) # move order to pending and give it a total
+    @order.update(active: false, sent: sent, total: total) # move order to pending and give it a total
     
     @account = @order.user.account
     OrderEmailJob.perform_async(@order)
