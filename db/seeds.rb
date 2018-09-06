@@ -2,7 +2,7 @@
 # Contact.create(code:'running', email:'running')
 
 puts 'RUNNING SEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEED'
-dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
+dbh = RDBI.connect :ODBC, :db => "WHOLESALEPORTALNZ"
 
 
       # -------------------------GET PRODUCTS AND CREATE / UPDATE PRODUCT RECORDS------------------------
@@ -30,7 +30,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
               # # needs category
               if Product.all.where(code: code).exists?
                 Product.all.find_by(code: code).update_attributes(allow_disc: allow_disc, pricecat: pricecat, group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty)
-                filename = "E:\\Attache\\Attache\\Roc\\Images\\Product\\" + code + ".jpg"
+                filename = "E:\\Attache\\AttacheBI\\Resources\\ROC\\Images\\product\\1\\" + code + ".jpg"
                 if File.exist?(filename)
                   # Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
                   # stop from overloading transformations
@@ -39,7 +39,7 @@ dbh = RDBI.connect :ODBC, :db => "wholesaleportalnz"
                 end
               else
                 newproduct = Product.new(allow_disc: allow_disc, pricecat: pricecat, group: group, code: code, description: description, price1: price1, price2: price2, price3: price3, price4: price4, price5: price5, rrp: rrp, qty: qty, hidden: false)
-                filename = "E:\\Attache\\Attache\\Roc\\Images\\Product\\" + code + ".jpg"
+                filename = "E:\\Attache\\AttacheBI\\Resources\\ROC\\Images\\product\\1\\" + code + ".jpg"
                 if File.exist?(filename)
                   Cloudinary::Uploader.upload(filename, :public_id => code, :overwrite => true)
                   # stop from overloading transformations
